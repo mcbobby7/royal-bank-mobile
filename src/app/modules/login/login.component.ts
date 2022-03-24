@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  @Input() buttonAction;
+  loading = false;
   show = false;
   signinForm = new FormGroup({
     username: new FormControl(''),
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
 
   // login method
   login() {
-    const { email, password } = this.loginForm.value;
+    this.loading = true;
     const data = {
       AuthMode: 'Bearer',
       Username: this.loginForm.value.email,
@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
     };
     this.auth.post(data, 'UserManager.UserService.Login').subscribe(
       (res: any) => {
+        this.loading = false;
         if (res.data.responseCode === '00') {
           this.toast.success('Login was successfull', 'Success');
           this.data = res.data;

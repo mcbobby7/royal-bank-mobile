@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from '../core/templates/signup/signup.component';
 import { WelcomeComponent } from '../modules/welcome/welcome.component';
 import { ChooseSigninComponent } from '../modules/choose-signin/choose-signin.component';
+import { LoaderComponent } from './loader/loader.component';
 
 const components = [
   LoginComponent,
@@ -17,6 +18,7 @@ const components = [
   SignupComponent,
   WelcomeComponent,
   ChooseSigninComponent,
+  LoaderComponent,
 ];
 
 const materialModules = [RouterModule];
