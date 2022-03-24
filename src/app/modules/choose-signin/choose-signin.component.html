@@ -1,0 +1,41 @@
+<ion-content class="content">
+  <section class="row">
+    <!-- <ion-thumbnail>
+      <ion-img [src]="source" class="img"></ion-img>
+    </ion-thumbnail> -->
+  </section>
+  <section class="central-image" style="height: 100px">
+    <ion-img [src]="source1" class="img"></ion-img>
+  </section>
+
+  <section class="central-image" style="height: 200px">
+    <ion-img [src]="imageSrc" class="img"></ion-img>
+  </section>
+
+  <section class="central-image" style="height: 100px">
+    <ion-img [src]="source" class="img"></ion-img>
+  </section>
+
+  <section style="text-align: center">
+    <section class="row">
+      <p class="sub-title">Get a bank account in less than 5 minutes</p>
+    </section>
+  </section>
+
+  <section
+    style="display: flex; flex-direction: column; align-content: space-between"
+  >
+    <ion-button class="btn" expand="block" (click)="create()">
+      Create Account
+    </ion-button>
+
+    <ion-button
+      class="btn2"
+      expand="block"
+      style="margin-top: 1rem"
+      (click)="sign()"
+    >
+      Sign In
+    </ion-button>
+  </section>
+</ion-content>
