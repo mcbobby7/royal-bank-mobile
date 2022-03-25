@@ -1,0 +1,169 @@
+<ion-content>
+  <section class="row">
+    <h3>Create Account</h3>
+  </section>
+
+  <section>
+    <div style="background-color: #F8F8F8; border-radius: 8px; padding: 10px;">
+        <p style="text-align: left;"><span style="font-weight: 800; margin-right: 5px;">First Name:</span>Kelvin</p>
+        <p style="text-align: left;"><span style="font-weight: 800; margin-right: 5px;">First Name:</span>Kelvin</p>
+        <p style="text-align: left;"><span style="font-weight: 800; margin-right: 5px;">First Name:</span>Kelvin</p>
+        <p style="text-align: left;"><span style="font-weight: 800; margin-right: 5px;">First Name:</span>Kelvin</p>
+        <p style="text-align: left;"><span style="font-weight: 800; margin-right: 5px;">First Name:</span>Kelvin</p>
+        <p style="text-align: left;"><span style="font-weight: 800; margin-right: 5px;">First Name:</span>Kelvin</p>
+    </div>
+  </section>
+
+  <section class="row">
+    <ion-card style="background: #E0FEEA; border-radius: 8px; margin: 10px 4px;">
+      <ion-card-content style="display: flex; flex-direction: row; justify-content: space-around; background: #FFF5D2; border-radius: 8px;">
+        <span style="text-align: justify; font-size: 12px; color: #25214F;">Royal Bank is legally required to verify your
+          identity, Royal Bank DOES NOT have access
+          to your other bank accounts or transactions
+          and will never share your information with a
+          third party.
+          </span>
+      </ion-card-content>
+    </ion-card>
+   </section>
+
+
+  <section class="row">
+    <h5 style="text-align: left;">Enter your password to continue</h5>
+    <form [formGroup]="accountForm">
+
+      <div class="form-group row" style="padding: 5px;">
+        <label for="">Email</label>
+          <input type="password" name="password" class="input" placeholder="ciroma.kelvin@gmail.com">
+      </div>
+      <div class="form-group row" style="padding: 5px;">
+        <label for="">Phone</label>
+         <div class="phoneField">
+          <input type="password" name="password" class="input dialField" placeholder="+234">
+          <input type="password" name="password" class="input numField" placeholder="8012345678">
+         </div>
+      </div>
+      <div class="form-group row" style="padding: 5px;">
+        <label class="label">Password</label>
+        <div
+          style="
+            border: 0.800000011920929px solid #ced4da;
+            border-radius: 3px;
+            background-color: #ced4da;
+            position: relative;
+          "
+        >
+          <input
+            [type]="show ? 'text' : 'password'"
+            placeholder="Password"
+            id="password"
+            name="password"
+            required
+            style="border: none"
+            formArrayName="password"
+            class="input"
+          />
+          <ion-icon
+            (click)="viewpassword()"
+            *ngIf="!show"
+            icon="eye-off-outline"
+            style="
+              font-size: 32px;
+              color: #676767;
+              cursor: pointer;
+              background-color: transparent;
+              position: absolute;
+              right: 20px;
+              top: 10px;
+            "
+          ></ion-icon>
+          <ion-icon
+            (click)="viewpassword()"
+            *ngIf="show"
+            icon="eye-outline"
+            style="
+              font-size: 32px;
+              color: #676767;
+              cursor: pointer;
+              background-color: transparent;
+              position: absolute;
+              right: 20px;
+              top: 10px;
+            "
+          ></ion-icon>
+        </div>
+      </div>
+
+      <div class="form-group row" style="padding: 5px;">
+        <label class="label">Confirm Password</label>
+        <div
+          style="
+            border: 0.800000011920929px solid #ced4da;
+            border-radius: 3px;
+            background-color: #ced4da;
+            position: relative;
+          "
+        >
+          <input
+            [type]="show ? 'text' : 'password'"
+            placeholder="Password"
+            id="password"
+            name="password"
+            required
+            style="border: none"
+            formArrayName="password"
+            class="input"
+
+          />
+          <ion-icon
+            (click)="viewpassword()"
+            *ngIf="!show"
+            icon="eye-off-outline"
+            style="
+              font-size: 32px;
+              color: #676767;
+              cursor: pointer;
+              background-color: transparent;
+              position: absolute;
+              right: 20px;
+              top: 10px;
+            "
+          ></ion-icon>
+          <ion-icon
+            (click)="viewpassword()"
+            *ngIf="show"
+            icon="eye-outline"
+            style="
+              font-size: 32px;
+              color: #676767;
+              cursor: pointer;
+              background-color: transparent;
+              position: absolute;
+              right: 20px;
+              top: 10px;
+            "
+          ></ion-icon>
+        </div>
+      </div>
+
+      <div class="form-group row" style="padding: 5px;">
+        <label for="">Referal Code (optional)</label>
+          <input type="password" name="password" class="input" placeholder="******">
+      </div>
+
+
+      <div class="form-group">
+        <ion-button
+          class="btn"
+          expand="block"
+          style="margin-top: 1rem"
+          [routerLink]="['/select-account']" routerLinkActive="router-link-active"
+        >
+        Create Account
+        </ion-button>
+      </div>
+    </form>
+   </section>
+
+</ion-content>
+

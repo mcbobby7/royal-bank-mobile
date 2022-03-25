@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/http/services/auth.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IOnboarding } from '../../core/interfaces/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,12 +10,20 @@ import { IOnboarding } from '../../core/interfaces/user';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  source = 'assets/icon/royalty.png';
   data: any;
   stage = 1;
   id: any = localStorage.getItem('onboardingId');
   process: any;
   onboardingForm!: FormGroup;
-  constructor(private auth: AuthService) {}
+  loading = false;
+  show = false;
+  signupForm = new FormGroup({
+    accountType: new FormControl(''),
+    password: new FormControl(''),
+  });
+  imageSrc = 'assets/icon/hey.png';
+  constructor(private auth: AuthService, private router: Router) {}
 
   getOnboardingStage() {
     if (this.id) {
@@ -111,5 +120,6 @@ export class RegisterComponent implements OnInit {
     // console.log(this.onboardingForm.value);
   }
   continue(){
+    this.router.navigate(['select-account']);
   }
 }

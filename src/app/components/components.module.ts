@@ -10,6 +10,11 @@ import { SignupComponent } from '../core/templates/signup/signup.component';
 import { WelcomeComponent } from '../modules/welcome/welcome.component';
 import { ChooseSigninComponent } from '../modules/choose-signin/choose-signin.component';
 import { LoaderComponent } from './loader/loader.component';
+import { VerifyBvnComponent } from '../modules/register/verify-bvn/verify-bvn.component';
+import { VerifyInfoComponent } from '../modules/register/verify-info/verify-info.component';
+import { CreateAccountComponent } from '../modules/register/create-account/create-account.component';
+import { VerifyEmailComponent } from '../modules/register/verify-email/verify-email.component';
+import { VerifyPhoneComponent } from '../modules/register/verify-phone/verify-phone.component';
 
 const components = [
   LoginComponent,
@@ -19,6 +24,11 @@ const components = [
   WelcomeComponent,
   ChooseSigninComponent,
   LoaderComponent,
+  VerifyBvnComponent,
+  VerifyInfoComponent,
+  CreateAccountComponent,
+  VerifyEmailComponent,
+  VerifyPhoneComponent
 ];
 
 const materialModules = [RouterModule];
@@ -31,6 +41,7 @@ const materialModules = [RouterModule];
     ...materialModules,
     ReactiveFormsModule,
     IonicModule.forRoot(),
+
   ],
   exports: [CommonModule, IonicModule, ...materialModules, ...components],
 })
