@@ -1,4 +1,42 @@
-<div>
-  <app-header></app-header>
-  <!-- <p>register works!</p> -->
-</div>
+<ion-content>
+  <section class="central-image">
+    <ion-img [src]="imageSrc" class="img"></ion-img>
+  </section>
+
+  <section style="text-align: center; margin-top: -80px; display: flex; flex-direction: column; align-content: space-between;">
+    <section style="margin-top: 2rem">
+      <span class="sub-title">Hey there I&#39;m <span style="font-size: 20px; text-align: center; color: #25214f; font-weight: 800;">Ayo</span>,
+      but my friends here call me A.Y. I am here to help you</span>
+    </section>
+
+    <section class="central-image" style="height: 100px">
+      <ion-img [src]="source" class="img"></ion-img>
+      <span style="color:#676767; font-size: 18px; font-weight: 700; text-align: center;">
+        Get a bank account in less than 5 minutes
+      </span>
+    </section>
+
+  </section>
+
+ <section class="central-image row">
+  <form [formGroup]="signupForm">
+    <div class="form-group row" style="padding: 3px;">
+      <label for="" class="label">What type of account do you need?</label>
+      <select class="input">
+        <option value="brown" class="input" >Select Account Type</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <ion-button
+        class="btn"
+        expand="block"
+        style="margin-top: 1rem"
+        [routerLink]="['/select-account']" routerLinkActive="router-link-active"
+      >
+        Continue
+      </ion-button>
+    </div>
+  </form>
+ </section>
+</ion-content>

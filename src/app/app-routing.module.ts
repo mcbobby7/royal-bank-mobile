@@ -9,12 +9,17 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () =>
       import('./modules/register/register.module').then(
         (m) => m.RegisterModule
       ),
   },
+  // {
+  //   path: 'select-account',
+  //   loadChildren: () =>
+  //   import('./modules/register/select-account-type/select-account-type.module').then((m) => m.SelectAccountTypeModule)
+  // },
   {
     path: 'choose-signin',
     loadChildren: () =>
@@ -32,6 +37,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/login/login.module').then((m) => m.LoginModule),
   },
+
 ];
 @NgModule({
   imports: [

@@ -1,3 +1,24 @@
+.header {
+  color: #25214F;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+section {
+  text-align: center;
+}
+
+.btn {
+  --background: #25214f;
+  --color: #fff;
+  text-transform: capitalize;
+  height: 3.5rem;
+  font-weight: 300;
+  font-size: 1.2rem;
+  --background-activated: #25214f;
+}
+
+
 .row {
   display: flex;
   flex-direction: column;
@@ -19,6 +40,7 @@ input {
 
 label {
   color: #676767;
+  text-align: left;
 }
 
 ion-content {
@@ -26,15 +48,6 @@ ion-content {
   --padding-start: 20px;
 }
 
-.btn {
-  --background: #25214f;
-  --color: #fff;
-  text-transform: capitalize;
-  height: 3.5rem;
-  font-weight: 300;
-  font-size: 1.2rem;
-  --background-activated: #25214f;
-}
 
 .form-inline [fullWidth] {
   flex: 1;
@@ -73,7 +86,12 @@ label {
 .sub-title {
   color: #676767;
   text-align: center;
-  padding: 10px;
+}
+
+.link {
+  color: #d9ac0b;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 img {
@@ -93,3 +111,5 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
+
+
