@@ -18,69 +18,36 @@ export class RegisterComponent implements OnInit {
 
   getOnboardingStage() {
     if (this.id) {
-      this.auth.getOnboardingStage(this.id).subscribe(
-        (res: any) => {
-          if (!res.hasError) {
-            this.process = res.data;
-            console.log(res);
-          } else {
-            console.log('Error happend');
-          }
-        },
-        (err) => console.error(err.message)
-      );
+      this.auth
+        .post({ UserId: 9 }, 'UserManager.UserService.FetchUserDetail')
+        .subscribe(
+          (res: any) => {
+            if (res.data.responseCode === '00') {
+              this.process = res.data.userDetail;
+              console.log(res);
+            } else {
+              console.log('Error happend');
+            }
+          },
+          (err) => console.error(err.message)
+        );
     }
     return;
   }
 
   // register method
   register() {
-    const {
-      firstName,
-      lastName,
-      middleName,
-      phone,
-      email,
-      dob,
-      password,
-      refCode,
-      accountType,
-      companyType,
-      bvn,
-      hasBVN,
-      isVrifiedInfo,
-      stage,
-      isFinal,
-      image,
-    }: IOnboarding = this.onboardingForm.value;
     this.auth
-      .onboarding({
-        firstName,
-        lastName,
-        middleName,
-        phone,
-        email,
-        dob,
-        password,
-        refCode,
-        accountType,
-        companyType,
-        bvn,
-        hasBVN,
-        isVrifiedInfo,
-        stage,
-        isFinal,
-        image,
-      })
+      .post(this.onboardingForm.value, 'UserManager.UserService.CreateUser')
       .subscribe(
         (res: any) => {
-          if (!res.hasError) {
+          if (res.data.responseCode === '00') {
             this.data = res.data;
             localStorage.setItem('onboardingId', res.data.id);
             // deal with register
             console.log(res);
           } else {
-            console.log('Error happend');
+            console.log(res.data.responseMessage);
           }
         },
         (err) => console.error(err.message)
@@ -91,23 +58,26 @@ export class RegisterComponent implements OnInit {
     // register form
     // this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      middleName: new FormControl(''),
-      phone: new FormControl(''),
-      email: new FormControl(''),
-      dob: new FormControl(''),
-      password: new FormControl(''),
-      refCode: new FormControl(''),
-      accountType: new FormControl(''),
-      companyType: new FormControl(''),
-      bvn: new FormControl(''),
-      hasBVN: new FormControl(false),
-      isVrifiedInfo: new FormControl(false),
-      stage: new FormControl(1),
-      isFinal: new FormControl(false),
-      image: new FormControl(''),
+      FirstName: new FormControl(''),
+      LastName: new FormControl(''),
+      MiddleName: new FormControl(''),
+      UserName: new FormControl('a'),
+      Phone: new FormControl('875'),
+      Email: new FormControl(''),
+      Password: new FormControl(''),
+      CreateBankAccount: new FormControl(true),
+      DOB: new FormControl(''),
+      RefCode: new FormControl(''),
+      Verified: new FormControl(false),
+      AccountType: new FormControl(''),
+      CompanyType: new FormControl(''),
+      PassportUrl: new FormControl(''),
+      HasBVN: new FormControl(false),
+      Stage: new FormControl(1),
+      IsFinal: new FormControl(false),
+      BVN: new FormControl(''),
     });
+    this.register();
     // console.log(this.onboardingForm.value);
   }
 }

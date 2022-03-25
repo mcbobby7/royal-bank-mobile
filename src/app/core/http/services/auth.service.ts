@@ -55,6 +55,43 @@ export class AuthService {
       action,
       data,
     };
+    console.log(payload);
+
+    return this.httpClient
+      .post<void>(this.baseUrl, payload, this.headers)
+      .pipe(catchError(this.handleError));
+  }
+  test(data: any, action: string): Observable<void> {
+    const payload = {
+      action,
+      data,
+      response: {
+        ResponseCode: '000',
+        ResponseMessage: 'User Found',
+        user: {
+          UserName: 'Benzy',
+          FirstName: 'Benzy',
+          LastName: 'LukzeeMan',
+          MiddleName: 'AyobMan',
+          Phone: '07099999998',
+          Email: 'test2@gmail.com',
+          Password: 'p@ssw0rd',
+          CreateBankAccount: true,
+          DOB: '30 March 2022',
+          RefCode: '123456',
+          Verified: false,
+          AccountType: 'Royal Basic',
+          CompanyType: 'Corporate',
+          PassportUrl: '',
+          HasBVN: true,
+          Stage: 1,
+          IsFinal: false,
+          BVN: '17654345678',
+        },
+      },
+    };
+    console.log(payload);
+
     return this.httpClient
       .post<void>(this.baseUrl, payload, this.headers)
       .pipe(catchError(this.handleError));
