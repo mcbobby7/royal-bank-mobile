@@ -8,7 +8,9 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./verify-email.component.scss'],
 })
 export class VerifyEmailComponent implements OnInit {
-stage = 0;
+stage = 3;
+imageSrc = 'assets/icon/success.png';
+done = 'assets/icon/check.png';
 verifyForm = new FormGroup({
   code: new FormControl(''),
 });

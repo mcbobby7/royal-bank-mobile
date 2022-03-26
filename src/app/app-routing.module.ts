@@ -8,6 +8,11 @@ const routes: Routes = [
       import('./modules/welcome/welcome.module').then((m) => m.WelcomeModule),
   },
   {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./modules/dashboard/dashboard.module').then((m) => m.DashboardPageModule),
+  },
+  {
     path: 'register',
     // canActivate: [AuthGuard],
     loadChildren: () =>
@@ -37,6 +42,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/login/login.module').then((m) => m.LoginModule),
   },
+
+
+
+
 
 ];
 @NgModule({

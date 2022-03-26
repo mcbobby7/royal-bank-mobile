@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content *ngIf="stage === 0">
   <section class="row">
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
@@ -48,3 +48,64 @@
   </section>
 </ion-content>
 
+<ion-content *ngIf="stage === 1">
+  <section class="central-image">
+    <ion-img [src]="imageSrc" class="img"></ion-img>
+  </section>
+
+  <section>
+    <p class="sub-title" style="color: #25214F; font-weight: 500;">All Done Kelvin,</p>
+    <p>Your information all checked out.</p>
+  </section>
+
+  <section>
+    <div style="background-color: #F8F8F8; border-radius: 8px; padding: 10px; text-align: left;">
+      <span style="color: #25214F; font-weight: 500">Upload your picture</span>
+      <p style="font-weight: 100;">Now that you have opened you account, please show us that beautiful face so we know what you look like.
+          </p>
+      <span style="color: #25214F; font-weight: 300">Picture must be taken in a well lit environment and clear background</span>
+    </div>
+  </section>
+
+ <section class="row" style="margin-top: 80px;">
+  <form [formGroup]="verifyForm">
+    <div class="form-group">
+      <ion-button
+        class="btn"
+        expand="block"
+        style="margin-top: 1rem"
+        [routerLink]="['/select-account']" routerLinkActive="router-link-active"
+      >
+      Take a Picture
+      </ion-button>
+    </div>
+  </form>
+ </section>
+</ion-content>
+
+<ion-content *ngIf="stage === 3">
+  <section style="margin-top: 80px;">
+    <ion-img [src]="done" class="icon"></ion-img>
+  </section>
+
+  <section>
+    <p style="color: #25214f; font-weight: 800;">Image captured successfully</p>
+  </section>
+</ion-content>
+
+<ion-footer style="padding: 20px 5px;">
+  <section class="central-image row" style="margin-top: 80px;">
+    <form [formGroup]="verifyForm">
+      <div class="form-group">
+        <ion-button
+          class="btn"
+          expand="block"
+          style="margin-top: 1rem"
+          [routerLink]="['/select-account']" routerLinkActive="router-link-active"
+        >
+          Continue
+        </ion-button>
+      </div>
+    </form>
+   </section>
+</ion-footer>
