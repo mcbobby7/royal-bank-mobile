@@ -1,0 +1,51 @@
+<ion-content>
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      height: 100vh;
+      padding-bottom: 40px;
+    "
+  >
+    <div>
+      <section
+        class="central-image"
+        style="position: relative; width: 291px; margin: auto"
+      >
+        <ion-img [src]="imageSrc" class="img"></ion-img>
+        <ion-img
+          src="assets/icon/check.png"
+          style="width: 30px; position: absolute; right: 35px; top: 80px"
+        ></ion-img>
+      </section>
+
+      <section
+        style="
+          text-align: center;
+          margin-top: -80px;
+          display: flex;
+          flex-direction: column;
+          align-content: space-between;
+        "
+      >
+        <section class="we" style="margin-top: 4rem">
+          BVN verified Successfully
+        </section>
+      </section>
+    </div>
+    <section class="central-image row">
+      <div class="form-group">
+        <ion-button
+          class="btn"
+          expand="block"
+          style="margin-top: 1rem"
+          (click)="next()"
+          routerLinkActive="router-link-active"
+        >
+          Continue
+        </ion-button>
+      </div>
+    </section>
+  </div>
+</ion-content>

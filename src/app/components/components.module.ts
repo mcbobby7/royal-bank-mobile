@@ -15,6 +15,15 @@ import { VerifyInfoComponent } from '../modules/register/verify-info/verify-info
 import { CreateAccountComponent } from '../modules/register/create-account/create-account.component';
 import { VerifyEmailComponent } from '../modules/register/verify-email/verify-email.component';
 import { VerifyPhoneComponent } from '../modules/register/verify-phone/verify-phone.component';
+import { BecomeRoyaltyComponent } from '../modules/register/become-royalty/become-royalty.component';
+import { SelectAccountTypeComponent } from '../modules/register/select-account-type/select-account-type.component';
+import { BvnSuccessComponent } from '../modules/register/bvn-success/bvn-success.component';
+import { ImageComponent } from '../modules/register/image/image.component';
+import { DoneComponent } from '../modules/register/done/done.component';
+import { DetailsComponent } from '../modules/register/details/details.component';
+import { CoOperatreDetailsComponent } from '../modules/register/co-operatre-details/co-operatre-details.component';
+import { ImageDoneComponent } from '../modules/register/image-done/image-done.component';
+import { RoyalSetupComponent } from '../modules/register/royal-setup/royal-setup.component';
 
 const components = [
   LoginComponent,
@@ -28,7 +37,16 @@ const components = [
   VerifyInfoComponent,
   CreateAccountComponent,
   VerifyEmailComponent,
-  VerifyPhoneComponent
+  VerifyPhoneComponent,
+  BecomeRoyaltyComponent,
+  SelectAccountTypeComponent,
+  BvnSuccessComponent,
+  ImageComponent,
+  DoneComponent,
+  DetailsComponent,
+  CoOperatreDetailsComponent,
+  ImageDoneComponent,
+  RoyalSetupComponent,
 ];
 
 const materialModules = [RouterModule];
@@ -41,7 +59,6 @@ const materialModules = [RouterModule];
     ...materialModules,
     ReactiveFormsModule,
     IonicModule.forRoot(),
-
   ],
   exports: [CommonModule, IonicModule, ...materialModules, ...components],
 })

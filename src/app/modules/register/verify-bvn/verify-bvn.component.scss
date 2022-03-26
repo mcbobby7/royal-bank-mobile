@@ -1,5 +1,5 @@
 .header {
-  color: #25214F;
+  color: #25214f;
   font-size: 16px;
   font-weight: 800;
 }
@@ -17,7 +17,6 @@ section {
   font-size: 1.2rem;
   --background-activated: #25214f;
 }
-
 
 .row {
   display: flex;
@@ -48,7 +47,6 @@ ion-content {
   --padding-start: 20px;
 }
 
-
 .form-inline [fullWidth] {
   flex: 1;
 }
@@ -57,19 +55,19 @@ ion-content {
   margin: 0 1.5rem 1.5rem 0;
 }
 
-.input{
+.input {
   height: 3.2rem;
-  background: #E8E8E8;
-  border: 1px solid #B6B6B6;
+  background: #e8e8e8;
+  border: 1px solid #b6b6b6;
   box-sizing: border-box;
   border-radius: 8px;
-
 }
 
 label {
   color: #080730 !important;
-  font-size: 1rem !important;
+  font-size: 14px !important;
   font-style: normal !important;
+  padding-bottom: 5px;
 }
 .title {
   color: #25214f;
@@ -83,9 +81,11 @@ label {
   margin-top: 30px;
 }
 
-.sub-title {
+.sub {
   color: #676767;
   text-align: center;
+  width: 70vw !important;
+  margin: auto !important;
 }
 
 .link {
@@ -112,4 +112,22 @@ img {
   margin-right: auto;
 }
 
-
+.active {
+  background-color: #e0feea;
+}
+.notActive {
+  background-color: #f8f8f8;
+}
+.card {
+  width: 85vw;
+  border-radius: 10px;
+  margin: 20px auto;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
+}
+.tsx {
+  width: 85%;
+  font-size: 14px;
+  float: left;
+}

@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   id: any = localStorage.getItem('onboardingId');
   process: any;
   onboardingForm!: FormGroup;
-  loading = false;
+  loading = true;
   show = false;
   signupForm = new FormGroup({
     accountType: new FormControl(''),
@@ -27,15 +27,24 @@ export class RegisterComponent implements OnInit {
 
   getOnboardingStage() {
     if (this.id) {
+      console.log('run', this.id);
+
       this.auth
-        .post({ UserId: 9 }, 'UserManager.UserService.FetchUserDetail')
+        .post({ UserId: this.id }, 'UserManager.UserService.FetchUserDetail')
         .subscribe(
           (res: any) => {
+            this.loading = false;
             if (res.data.responseCode === '00') {
               this.process = res.data.userDetail;
+              if (res.data.userDetail.stage <= 1) {
+                this.router.navigate(['/register/become-royalty']);
+              } else if (res.data.userDetail.stage === 2) {
+                this.router.navigate(['/register/select-account']);
+              }
               console.log(res);
             } else {
-              console.log('Error happend');
+              this.loading = false;
+              console.log(res);
             }
           },
           (err) => console.error(err.message)
@@ -65,7 +74,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     // register form
-    // this.getOnboardingStage();
+    this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
       FirstName: new FormControl(''),
       LastName: new FormControl(''),
@@ -86,10 +95,9 @@ export class RegisterComponent implements OnInit {
       IsFinal: new FormControl(false),
       BVN: new FormControl(''),
     });
-    this.register();
     // console.log(this.onboardingForm.value);
   }
-  continue(){
+  continue() {
     this.router.navigate(['select-account']);
   }
 }

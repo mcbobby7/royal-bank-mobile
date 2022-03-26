@@ -1,0 +1,285 @@
+<ion-content>
+  <section *ngIf="page === 'add'">
+    <div>
+      <section class="row">
+        <h3>Create Account</h3>
+      </section>
+    </div>
+
+    <section class="row">
+      <div style="border-radius: 8px; margin: 10px 4px">
+        <div class="has">Thanks Kelvin,</div>
+        <div class="hassub">
+          Enter your email or phone number and password to continue
+        </div>
+      </div>
+    </section>
+
+    <section class="row">
+      <h5 style="text-align: left; color: black">
+        Enter your password to continue
+      </h5>
+      <form [formGroup]="accountForm">
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Email</label>
+          <input
+            type="password"
+            name="password"
+            class="input"
+            placeholder="ciroma.kelvin@gmail.com"
+          />
+        </div>
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Phone</label>
+          <div class="phoneField">
+            <input
+              type="password"
+              name="password"
+              class="input dialField"
+              placeholder="+234"
+            />
+            <input
+              type="password"
+              name="password"
+              class="input numField"
+              placeholder="8012345678"
+            />
+          </div>
+        </div>
+        <div class="form-group row" style="padding: 5px">
+          <label class="label">Password</label>
+          <div
+            style="
+              border: 0.800000011920929px solid #ced4da;
+              border-radius: 3px;
+              background-color: #ced4da;
+              position: relative;
+            "
+          >
+            <input
+              [type]="show ? 'text' : 'password'"
+              placeholder="Password"
+              id="password"
+              name="password"
+              required
+              style="border: none"
+              formArrayName="password"
+              class="input"
+            />
+            <ion-icon
+              (click)="viewpassword()"
+              *ngIf="!show"
+              icon="eye-off-outline"
+              style="
+                font-size: 32px;
+                color: #676767;
+                cursor: pointer;
+                background-color: transparent;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+              "
+            ></ion-icon>
+            <ion-icon
+              (click)="viewpassword()"
+              *ngIf="show"
+              icon="eye-outline"
+              style="
+                font-size: 32px;
+                color: #676767;
+                cursor: pointer;
+                background-color: transparent;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+              "
+            ></ion-icon>
+          </div>
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label class="label">Confirm Password</label>
+          <div
+            style="
+              border: 0.800000011920929px solid #ced4da;
+              border-radius: 3px;
+              background-color: #ced4da;
+              position: relative;
+            "
+          >
+            <input
+              [type]="show ? 'text' : 'password'"
+              placeholder="Password"
+              id="password"
+              name="password"
+              required
+              style="border: none"
+              formArrayName="password"
+              class="input"
+            />
+            <ion-icon
+              (click)="viewpassword()"
+              *ngIf="!show"
+              icon="eye-off-outline"
+              style="
+                font-size: 32px;
+                color: #676767;
+                cursor: pointer;
+                background-color: transparent;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+              "
+            ></ion-icon>
+            <ion-icon
+              (click)="viewpassword()"
+              *ngIf="show"
+              icon="eye-outline"
+              style="
+                font-size: 32px;
+                color: #676767;
+                cursor: pointer;
+                background-color: transparent;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+              "
+            ></ion-icon>
+          </div>
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Referal Code (optional)</label>
+          <input
+            type="password"
+            name="password"
+            class="input"
+            placeholder="******"
+          />
+        </div>
+
+        <div class="form-group">
+          <ion-button
+            class="btn"
+            expand="block"
+            style="margin-top: 1rem"
+            (click)="next()"
+            routerLinkActive="router-link-active"
+          >
+            Next
+          </ion-button>
+        </div>
+      </form>
+    </section>
+  </section>
+
+  <section *ngIf="page === 'finish'">
+    <div>
+      <section class="row">
+        <h3>Create Account</h3>
+      </section>
+
+      <section class="central-image" style="margin-top: -50px">
+        <ion-img [src]="imageSrc" class="img"></ion-img>
+      </section>
+
+      <section
+        style="
+          text-align: center;
+          margin-top: -80px;
+          display: flex;
+          flex-direction: column;
+          align-content: space-between;
+        "
+      >
+        <section class="we" style="margin-top: 4rem">
+          <span class="sub-title"
+            >Hey, you already know my name, tell me your’s so I can help you
+            setup your <br /><span style="color: #25214f; font-weight: 600">
+              Royal Basic Account</span
+            >
+          </span>
+        </section>
+      </section>
+    </div>
+
+    <section class="row">
+      <h5 style="text-align: left; color: black">
+        Enter your password to continue
+      </h5>
+      <form [formGroup]="accountForm">
+        <div class="form-group row" style="padding: 5px">
+          <label class="label">First Name</label>
+          <div
+            style="
+              border: 0.800000011920929px solid #ced4da;
+              border-radius: 3px;
+              background-color: #ced4da;
+              position: relative;
+            "
+          >
+            <input
+              type="text"
+              placeholder="Kelvin"
+              required
+              style="border: none"
+              class="input"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label class="label">Last Name</label>
+          <div
+            style="
+              border: 0.800000011920929px solid #ced4da;
+              border-radius: 3px;
+              background-color: #ced4da;
+              position: relative;
+            "
+          >
+            <input
+              type="text"
+              placeholder="Chukwuma"
+              required
+              style="border: none"
+              class="input"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label class="label">Middle Name</label>
+          <div
+            style="
+              border: 0.800000011920929px solid #ced4da;
+              border-radius: 3px;
+              background-color: #ced4da;
+              position: relative;
+            "
+          >
+            <input
+              type="text"
+              placeholder="Adekunle"
+              required
+              style="border: none"
+              class="input"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <ion-button
+            class="btn"
+            expand="block"
+            style="margin-top: 1rem"
+            (click)="change('add')"
+            routerLinkActive="router-link-active"
+          >
+            Next
+          </ion-button>
+        </div>
+      </form>
+    </section>
+  </section>
+</ion-content>

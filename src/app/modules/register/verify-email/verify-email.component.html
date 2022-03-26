@@ -2,49 +2,68 @@
   <section class="row">
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
-        <ion-icon name="arrow-back-outline" style="color: #676767; padding-top: 10px;"></ion-icon>
+        <ion-icon
+          name="arrow-back-outline"
+          style="color: #676767; padding-top: 10px"
+        ></ion-icon>
       </ion-button>
     </ion-buttons>
   </section>
   <section class="row">
     <h3>Verify your email</h3>
   </section>
-  <section class="row" style="text-align: center; margin: 10px 0; display: flex; flex-direction: column; align-content: space-between;">
+  <section
+    class="row"
+    style="
+      text-align: center;
+      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      align-content: space-between;
+    "
+  >
     <section style="margin-top: 2rem">
-      <span class="sub-title">We sent a verfication code to your email address just to make sure its yours. </span>
+      <span class="sub-title"
+        >We sent a verfication code to your email address just to make sure its
+        yours.
+      </span>
     </section>
 
     <section>
       <p class="sub-title">OTP has been sent to</p>
-      <p style="font-weight: 800;">ciroma.kelvin@gmail.com.com</p>
+      <p style="font-weight: 800">ciroma.kelvin@gmail.com.com</p>
     </section>
-
   </section>
 
- <section class="row">
-  <form [formGroup]="verifyForm">
-    <div class="form-group row" style="padding: 3px;">
-      <label>Verification Code</label>
-        <input type="password" name="password" class="input" placeholder="123456789012">
-    </div>
+  <section class="row">
+    <form [formGroup]="verifyForm">
+      <div class="form-group row" style="padding: 3px">
+        <label>Verification Code</label>
+        <input
+          type="password"
+          name="password"
+          class="input"
+          placeholder="123456789012"
+        />
+      </div>
 
-
-    <div class="form-group">
-      <ion-button
-        class="btn"
-        expand="block"
-        style="margin-top: 1rem"
-        [routerLink]="['/select-account']" routerLinkActive="router-link-active"
-      >
-      Verify
-      </ion-button>
-    </div>
-  </form>
- </section>
+      <div class="form-group">
+        <ion-button
+          class="btn"
+          expand="block"
+          style="margin-top: 1rem"
+          (click)="next()"
+        >
+          Verify
+        </ion-button>
+      </div>
+    </form>
+  </section>
 
   <section>
     <p class="sub-title">Didn&#39;t get any code?</p>
-    <a href="http://" class="link" target="_blank" rel="noopener noreferrer">Resend Code</a>
+    <a href="http://" class="link" target="_blank" rel="noopener noreferrer"
+      >Resend Code</a
+    >
   </section>
 </ion-content>
-
