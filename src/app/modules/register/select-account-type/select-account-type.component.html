@@ -1,87 +1,139 @@
 <ion-content *ngIf="stage < 1">
-  <section>
-    <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <ion-icon name="arrow-back-outline" style="color: #676767; padding-top: 10px;"></ion-icon>
+  <ion-content *ngIf="stage < 1">
+    <section>
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()">
+          <ion-icon
+            name="arrow-back-outline"
+            style="color: #676767; padding-top: 10px"
+          ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </section>
+    <section>
+      <h3>Select Account Type</h3>
+    </section>
+    <div
+      [ngClass]="mode === 'basic' ? 'active card' : 'notActive card'"
+      (click)="setMode('basic')"
+    >
+      <ion-card-header class="header">Royal Basic</ion-card-header>
+      <ion-card-content
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        "
+      >
+        <span class="tsx"
+          >This account is perfect for Individuals, Students, Freelancers,
+        </span>
+        <ion-img
+          *ngIf="mode === 'basic'"
+          src="assets/icon/check.png"
+          style="width: 30px"
+        ></ion-img>
+      </ion-card-content>
+    </div>
+
+    <div
+      [ngClass]="mode !== 'basic' ? 'active card' : 'notActive card'"
+      (click)="setMode('cooprate')"
+    >
+      <ion-card-header class="header">Royal Corporate</ion-card-header>
+      <ion-card-content
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        "
+      >
+        <span class="tsx"
+          >This account is perfect for Companies, SMEs, Sole Traders,
+          Enterprises
+        </span>
+        <ion-img
+          *ngIf="mode !== 'basic'"
+          src="assets/icon/check.png"
+          style="width: 30px"
+        ></ion-img>
+      </ion-card-content>
+    </div>
+
+    <div class="form-group" style="padding: 12px">
+      <ion-button
+        class="btn"
+        expand="block"
+        (click)="next()"
+        style="margin-top: 1rem"
+      >
+        Continue
       </ion-button>
-    </ion-buttons>
-  </section>
-  <section>
-    <h3>Select Account Type</h3>
-  </section>
-  <ion-card style="background: #E0FEEA; border-radius: 8px;">
-    <ion-card-header class="header">Royal Basic</ion-card-header>
-    <ion-card-content style="display: flex; flex-direction: row; justify-content: space-around;">
-      <span>This account is perfect for Individuals,
-        Students, Freelancers,
+    </div>
+  </ion-content>
+
+  <!-- Step Two -->
+  <ion-content *ngIf="stage > 0">
+    <section>
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()">
+          <ion-icon
+            name="arrow-back-outline"
+            style="color: #676767; padding-top: 10px"
+          ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </section>
+    <section>
+      <h3>Create Account</h3>
+    </section>
+    <ion-card style="background: #e0feea; border-radius: 8px">
+      <ion-card-header class="header">I have BVN</ion-card-header>
+      <ion-card-content
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+        "
+      >
+        <span
+          >Create a Royal Bank account using your Bank Verification Numnber
         </span>
-      <ion-img src="assets/icon/check.png" style="width: 55px; height: 55px;"></ion-img>
-    </ion-card-content>
-  </ion-card>
+        <ion-img
+          src="assets/icon/check.png"
+          style="width: 55px; height: 55px"
+        ></ion-img>
+      </ion-card-content>
+    </ion-card>
 
-  <ion-card style="background: #F8F8F8; border-radius: 8px;">
-    <ion-card-header class="header">Royal Corporate</ion-card-header>
-    <ion-card-content style="display: flex; flex-direction: row; justify-content: space-around;">
-      <span>This account is perfect for Companies,
-        SMEs, Sole Traders, Enterprises
+    <ion-card style="background: #f8f8f8; border-radius: 8px">
+      <ion-card-header class="header">I don&#39;t have BVN</ion-card-header>
+      <ion-card-content
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+        "
+      >
+        <span
+          >Create a Royal Bank account using your Bank Verification Numnber
         </span>
-      <ion-img src="assets/icon/check.png" style="width: 55px; height: 55px;"></ion-img>
-    </ion-card-content>
-  </ion-card>
+        <ion-img
+          src="assets/icon/check.png"
+          style="width: 55px; height: 55px"
+        ></ion-img>
+      </ion-card-content>
+    </ion-card>
 
-  <div class="form-group" style="padding: 12px;">
-    <ion-button
-      class="btn"
-      expand="block"
-      click ="next()"
-      style="margin-top: 1rem">
-      Continue
-    </ion-button>
-  </div>
-</ion-content>
-
-
-
-<!-- Step Two -->
-<ion-content *ngIf="stage > 0">
-  <section>
-    <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <ion-icon name="arrow-back-outline" style="color: #676767; padding-top: 10px;"></ion-icon>
+    <div class="form-group" style="padding: 12px">
+      <ion-button
+        class="btn"
+        expand="block"
+        (click)="next()"
+        style="margin-top: 1rem"
+      >
+        Continue
       </ion-button>
-    </ion-buttons>
-  </section>
-  <section>
-    <h3>Create Account</h3>
-  </section>
-  <ion-card style="background: #E0FEEA; border-radius: 8px;">
-    <ion-card-header class="header">I have BVN</ion-card-header>
-    <ion-card-content style="display: flex; flex-direction: row; justify-content: space-around;">
-      <span>Create a Royal Bank account using
-        your Bank Verification Numnber
-        </span>
-      <ion-img src="assets/icon/check.png" style="width: 55px; height: 55px;"></ion-img>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card style="background: #F8F8F8; border-radius: 8px;">
-    <ion-card-header class="header">I don&#39;t have BVN</ion-card-header>
-    <ion-card-content style="display: flex; flex-direction: row; justify-content: space-around;">
-      <span>Create a Royal Bank account using
-        your Bank Verification Numnber
-        </span>
-      <ion-img src="assets/icon/check.png" style="width: 55px; height: 55px;"></ion-img>
-    </ion-card-content>
-  </ion-card>
-
-  <div class="form-group" style="padding: 12px;">
-    <ion-button
-      class="btn"
-      expand="block"
-      (click) ="next()"
-      style="margin-top: 1rem">
-      Continue
-    </ion-button>
-  </div>
+    </div>
+  </ion-content>
 </ion-content>
-

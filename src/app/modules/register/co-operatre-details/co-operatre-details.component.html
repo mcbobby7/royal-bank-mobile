@@ -1,0 +1,181 @@
+<ion-content>
+  <section>
+    <section>
+      <div style="height: 20px"></div>
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()">
+          <ion-icon
+            name="arrow-back-outline"
+            style="color: #676767; padding-top: 10px"
+          ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </section>
+
+    <section class="row">
+      <div style="border-radius: 8px; margin: 10px 4px">
+        <div class="has">Let’s get started</div>
+        <div class="hassub">
+          Enter your email or phone number and password to continue
+        </div>
+      </div>
+    </section>
+
+    <section class="row">
+      <h5 style="text-align: left; color: black">
+        Enter your password to continue
+      </h5>
+      <form [formGroup]="accountForm">
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Email</label>
+          <input
+            type="password"
+            name="password"
+            class="input"
+            placeholder="ciroma.kelvin@gmail.com"
+          />
+        </div>
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Phone</label>
+          <div class="phoneField">
+            <input
+              type="password"
+              name="password"
+              class="input dialField"
+              placeholder="+234"
+            />
+            <input
+              type="password"
+              name="password"
+              class="input numField"
+              placeholder="8012345678"
+            />
+          </div>
+        </div>
+        <div class="form-group row" style="padding: 5px">
+          <label class="label">Password</label>
+          <div
+            style="
+              border: 0.800000011920929px solid #ced4da;
+              border-radius: 3px;
+              background-color: #ced4da;
+              position: relative;
+            "
+          >
+            <input
+              [type]="show ? 'text' : 'password'"
+              placeholder="Password"
+              id="password"
+              name="password"
+              required
+              style="border: none"
+              formArrayName="password"
+              class="input"
+            />
+            <ion-icon
+              (click)="viewpassword()"
+              *ngIf="!show"
+              icon="eye-off-outline"
+              style="
+                font-size: 32px;
+                color: #676767;
+                cursor: pointer;
+                background-color: transparent;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+              "
+            ></ion-icon>
+            <ion-icon
+              (click)="viewpassword()"
+              *ngIf="show"
+              icon="eye-outline"
+              style="
+                font-size: 32px;
+                color: #676767;
+                cursor: pointer;
+                background-color: transparent;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+              "
+            ></ion-icon>
+          </div>
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label class="label">Confirm Password</label>
+          <div
+            style="
+              border: 0.800000011920929px solid #ced4da;
+              border-radius: 3px;
+              background-color: #ced4da;
+              position: relative;
+            "
+          >
+            <input
+              [type]="show ? 'text' : 'password'"
+              placeholder="Password"
+              id="password"
+              name="password"
+              required
+              style="border: none"
+              formArrayName="password"
+              class="input"
+            />
+            <ion-icon
+              (click)="viewpassword()"
+              *ngIf="!show"
+              icon="eye-off-outline"
+              style="
+                font-size: 32px;
+                color: #676767;
+                cursor: pointer;
+                background-color: transparent;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+              "
+            ></ion-icon>
+            <ion-icon
+              (click)="viewpassword()"
+              *ngIf="show"
+              icon="eye-outline"
+              style="
+                font-size: 32px;
+                color: #676767;
+                cursor: pointer;
+                background-color: transparent;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+              "
+            ></ion-icon>
+          </div>
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Referal Code (optional)</label>
+          <input
+            type="password"
+            name="password"
+            class="input"
+            placeholder="******"
+          />
+        </div>
+
+        <div class="form-group">
+          <ion-button
+            class="btn"
+            expand="block"
+            style="margin-top: 1rem"
+            (click)="next()"
+            routerLinkActive="router-link-active"
+          >
+            Next
+          </ion-button>
+        </div>
+      </form>
+    </section>
+  </section>
+</ion-content>

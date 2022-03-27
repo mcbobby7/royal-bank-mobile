@@ -1,32 +1,22 @@
 <ion-content>
 <div class="top=menu" style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 20px;">
   <section>
-    <ion-icon name="menu-outline" style="font-size: 40px;">Menu</ion-icon>
+    <ion-icon name="menu-outline" style="font-size: 40px;"></ion-icon>
   </section>
-  <section style="display: flex; flex-direction: row; align-items: flex-end; justify-content: space-around;">
-    <span>Hello, Kelvin</span>
-    <ion-img src="assets/icon/hey.png" class="userImg"></ion-img>
+  <section style="display: flex; flex-direction: row; justify-content: flex-end;">
+    <div style="flex: 70%; padding: 5px;"><span><span style="font-size: 18px; font-weight: 800;">Kelvin,</span> <br>Hello today</span></div>
+    <div style="flex: 25%; padding: 5px;"><ion-img src="assets/icon/hey.png" class="userImg"></ion-img></div>
   </section>
 </div>
-
-<!-- <div style="background-color: #F8F8F8; border-radius: 8px;">
-  <ion-card-header class="header">Increase your limit</ion-card-header>
-  <ion-card-content style="display: flex; flex-direction: row; justify-content: space-around;">
-    <span>This account is perfect for Individuals,
-      Students, Freelancers,
-      </span>
-    <ion-img src="assets/icon/red-arrow.png" style="width: 55px; height: 55px;"></ion-img>
-  </ion-card-content>
-</div> -->
 
 <section class="row">
   <ion-card style="background-color: #25214f; border-radius: 8px; margin: 10px 4px;">
     <ion-card-content style="display: flex; flex-direction: column; justify-content: space-between; border-radius: 8px; text-align: center;">
-      <span class="card-items" style="color: #676767; font-size: 20px;">Royal Basic</span>
+      <span class="card-items" style="color: #676767; font-size: 18px; font-weight: 700;">Royal Basic</span>
       <span class="card-items" style="font-size: 30px; font-weight: 800; color: #fff;">&#8358;300</span>
-      <div class="card-items" style="background-color: #fff; border: #fff 5px; border-radius: 5px; margin: 0px 20px; width: 80%;">
-        <span style="padding: 20px;">0123456789</span>
-        <ion-icon name="copy-outline"></ion-icon>
+      <div class="card-items" style="background-color: #fff; border-radius: 5px; margin: 0px 45px; ">
+        <span style="margin: 20px; font-size: 20px; font-weight: 600;">0123456789</span>
+        <ion-icon name="copy-outline" style="cursor: pointer; font-size: 18px; margin-top: 3px;"></ion-icon>
       </div>
       <div style="text-align: right !important; margin-top: 10px !important;">
         <ion-icon *ngIf="!show" (click)="viewBalance()"
@@ -49,11 +39,11 @@
   </ion-card>
  </section>
 
- <section style="display: flex; flex-direction: row; justify-content: space-evenly;">
-  <ion-icon class="icons" name="paper-plane-outline"></ion-icon>
-  <ion-icon class="icons" name="grid-outline"></ion-icon>
-  <ion-icon class="icons" name="save-outline"></ion-icon>
-  <ion-icon class="icons" name="add-outline"></ion-icon>
+ <section style="display: flex; flex-direction: row; justify-content: space-evenly; margin-top: 20px;">
+  <div class="icons-bg"><ion-icon class="icons" name="paper-plane-outline"></ion-icon></div>
+  <div class="icons-bg"><ion-icon class="icons" name="grid-outline"></ion-icon></div>
+  <div class="icons-bg"><ion-icon class="icons" name="save-outline"></ion-icon></div>
+  <div class="icons-bg"><ion-icon class="icons" name="add-outline"></ion-icon></div>
  </section>
 
  <section style="margin-top: 50px;">
@@ -80,7 +70,7 @@
 
   <section style="margin-top: 50px;">
     <!-- <ion-icon name="information-circle-outline"></ion-icon> -->
-    <span style="color: #25214F; font-size: 20px; margin-top: 15px; font-weight: 500;">Your transactions</span>
+    <span style="color: #25214F; font-size: 18px; margin-top: 15px; font-weight: 600;">Your transactions</span>
 
    </section>
 

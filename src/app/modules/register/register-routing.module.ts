@@ -1,12 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CreateAccountComponent } from './create-account/create-account.component';
 import { RegisterComponent } from './register.component';
-import { SelectAccountTypeComponent } from './select-account-type/select-account-type.component';
-import { VerifyBvnComponent } from './verify-bvn/verify-bvn.component';
-import { VerifyEmailComponent } from './verify-email/verify-email.component';
-import { VerifyInfoComponent } from './verify-info/verify-info.component';
-import { VerifyPhoneComponent } from './verify-phone/verify-phone.component';
 
 const routes: Routes = [
   {
@@ -15,39 +9,87 @@ const routes: Routes = [
     children: [
     ],
   },
-{
-  path: 'select-account',
-  component: SelectAccountTypeComponent
-},
-
-{
-  path: 'verify-bvn',
-  component: VerifyBvnComponent
-},
-
-{
-  path: 'verify-info',
-  component: VerifyInfoComponent
-},
-
-{
-  path: 'create-account',
-  component: CreateAccountComponent
-},
-
-{
-  path: 'verify-phone',
-  component: VerifyPhoneComponent
-},
-
-{
-  path: 'verify-email',
-  component: VerifyEmailComponent
-}
-
-
+  {
+    path: 'become-royalty',
+    loadChildren: () =>
+      import('./become-royalty/become-royalty.module').then(
+        (m) => m.BecomeRoyaltyModule
+      ),
+  },
+  {
+    path: 'select-account',
+    loadChildren: () =>
+      import('./select-account-type/select-account-type.module').then(
+        (m) => m.SelectAccountTypeModule
+      ),
+  },
+  {
+    path: 'bvn/:mode',
+    loadChildren: () =>
+      import('./verify-bvn/verify-bvn.module').then((m) => m.VerifyBvnModule),
+  },
+  {
+    path: 'bvn-success/:mode',
+    loadChildren: () =>
+      import('./bvn-success/bvn-success.module').then(
+        (m) => m.BvnSuccessModule
+      ),
+  },
+  {
+    path: 'phone/:number/:mode',
+    loadChildren: () =>
+      import('./verify-phone/verify-phone.module').then(
+        (m) => m.VerifyPhoneModule
+      ),
+  },
+  {
+    path: 'account',
+    loadChildren: () =>
+      import('./create-account/create-account.module').then(
+        (m) => m.CreateAccountModule
+      ),
+  },
+  {
+    path: 'details',
+    loadChildren: () =>
+      import('./details/details.module').then((m) => m.DetailsModule),
+  },
+  {
+    path: 'royal-setup',
+    loadChildren: () =>
+      import('./royal-setup/royal-setup.module').then(
+        (m) => m.RoyalSetupModule
+      ),
+  },
+  {
+    path: 'cop-details',
+    loadChildren: () =>
+      import('./co-operatre-details/co-operatre-details.module').then(
+        (m) => m.CoOperatreDetailsModule
+      ),
+  },
+  {
+    path: 'email/:mode',
+    loadChildren: () =>
+      import('./verify-email/verify-email.module').then(
+        (m) => m.VerifyEmailModule
+      ),
+  },
+  {
+    path: 'image',
+    loadChildren: () =>
+      import('./image/image.module').then((m) => m.ImageModule),
+  },
+  {
+    path: 'image-done',
+    loadChildren: () =>
+      import('./image-done/image-done.module').then((m) => m.ImageDoneModule),
+  },
+  {
+    path: 'done',
+    loadChildren: () => import('./done/done.module').then((m) => m.DoneModule),
+  },
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],

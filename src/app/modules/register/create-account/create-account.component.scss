@@ -1,5 +1,5 @@
 .header {
-  color: #25214F;
+  color: #25214f;
   font-size: 16px;
   font-weight: 800;
 }
@@ -19,19 +19,18 @@ section {
 }
 
 .phoneField {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .dialField {
-width: 30% !important;
+  width: 30% !important;
 }
 
 .numField {
-width: 65% !important;
+  width: 65% !important;
 }
-
 
 .row {
   display: flex;
@@ -44,12 +43,12 @@ width: 65% !important;
 }
 
 input {
-  height: 32px;
+  height: 15px;
   width: 100%;
   border: 0.800000011920929px solid #ced4da;
   border-radius: 5px;
   background-color: #d5d4d4;
-  padding: 25px;
+  padding: 0px 25px;
 }
 
 // label {
@@ -63,7 +62,6 @@ ion-content {
   --padding-start: 20px;
 }
 
-
 .form-inline [fullWidth] {
   flex: 1;
 }
@@ -72,13 +70,12 @@ ion-content {
   margin: 0 1.5rem 1.5rem 0;
 }
 
-.input{
+.input {
   height: 3.2rem;
-  background: #E8E8E8;
-  border: 1px solid #B6B6B6;
+  background: #e8e8e8;
+  border: 1px solid #b6b6b6;
   box-sizing: border-box;
   border-radius: 8px;
-
 }
 
 label {
@@ -103,7 +100,7 @@ label {
 }
 
 .link {
-  color: #25214F;
+  color: #25214f;
   font-weight: 500;
   text-decoration: none;
 }
@@ -121,5 +118,12 @@ label {
   margin-left: auto;
   margin-right: auto;
 }
-
-
+.btn2 {
+  --background: #d9ac0b;
+  --color: #fff;
+  text-transform: capitalize;
+  height: 3.5rem;
+  font-weight: 300;
+  font-size: 1.2rem;
+  --background-activated: #d9ac0b;
+}

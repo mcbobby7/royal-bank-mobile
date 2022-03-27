@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   id: any = localStorage.getItem('onboardingId');
   process: any;
   onboardingForm!: FormGroup;
-  loading = false;
+  loading = true;
   show = false;
   signupForm = new FormGroup({
     accountType: new FormControl(''),
@@ -27,69 +27,45 @@ export class RegisterComponent implements OnInit {
 
   getOnboardingStage() {
     if (this.id) {
-      this.auth.getOnboardingStage(this.id).subscribe(
-        (res: any) => {
-          if (!res.hasError) {
-            this.process = res.data;
-            console.log(res);
-          } else {
-            console.log('Error happend');
-          }
-        },
-        (err) => console.error(err.message)
-      );
+      console.log('run', this.id);
+
+      this.auth
+        .post({ UserId: 9}, 'UserManager.UserService.FetchUserDetail')
+        .subscribe(
+          (res: any) => {
+            this.loading = false;
+            if (res.data.responseCode === '00') {
+              this.process = res.data.userDetail;
+              if (res.data.userDetail.stage <= 1) {
+                this.router.navigate(['/register/become-royalty']);
+              } else if (res.data.userDetail.stage === 2) {
+                this.router.navigate(['/register/select-account']);
+              }
+              console.log(res);
+            } else {
+              this.loading = false;
+              console.log(res);
+            }
+          },
+          (err) => console.error(err.message)
+        );
     }
     return;
   }
 
   // register method
   register() {
-    const {
-      firstName,
-      lastName,
-      middleName,
-      phone,
-      email,
-      dob,
-      password,
-      refCode,
-      accountType,
-      companyType,
-      bvn,
-      hasBVN,
-      isVrifiedInfo,
-      stage,
-      isFinal,
-      image,
-    }: IOnboarding = this.onboardingForm.value;
     this.auth
-      .onboarding({
-        firstName,
-        lastName,
-        middleName,
-        phone,
-        email,
-        dob,
-        password,
-        refCode,
-        accountType,
-        companyType,
-        bvn,
-        hasBVN,
-        isVrifiedInfo,
-        stage,
-        isFinal,
-        image,
-      })
+      .post(this.onboardingForm.value, 'UserManager.UserService.CreateUser')
       .subscribe(
         (res: any) => {
-          if (!res.hasError) {
+          if (res.data.responseCode === '00') {
             this.data = res.data;
             localStorage.setItem('onboardingId', res.data.id);
             // deal with register
             console.log(res);
           } else {
-            console.log('Error happend');
+            console.log(res.data.responseMessage);
           }
         },
         (err) => console.error(err.message)
@@ -98,28 +74,30 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     // register form
-    // this.getOnboardingStage();
+    this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      middleName: new FormControl(''),
-      phone: new FormControl(''),
-      email: new FormControl(''),
-      dob: new FormControl(''),
-      password: new FormControl(''),
-      refCode: new FormControl(''),
-      accountType: new FormControl(''),
-      companyType: new FormControl(''),
-      bvn: new FormControl(''),
-      hasBVN: new FormControl(false),
-      isVrifiedInfo: new FormControl(false),
-      stage: new FormControl(1),
-      isFinal: new FormControl(false),
-      image: new FormControl(''),
+      FirstName: new FormControl(''),
+      LastName: new FormControl(''),
+      MiddleName: new FormControl(''),
+      UserName: new FormControl('a'),
+      Phone: new FormControl('875'),
+      Email: new FormControl(''),
+      Password: new FormControl(''),
+      CreateBankAccount: new FormControl(true),
+      DOB: new FormControl(''),
+      RefCode: new FormControl(''),
+      Verified: new FormControl(false),
+      AccountType: new FormControl(''),
+      CompanyType: new FormControl(''),
+      PassportUrl: new FormControl(''),
+      HasBVN: new FormControl(false),
+      Stage: new FormControl(1),
+      IsFinal: new FormControl(false),
+      BVN: new FormControl(''),
     });
     // console.log(this.onboardingForm.value);
   }
-  continue(){
+  continue() {
     this.router.navigate(['select-account']);
   }
 }

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 
+import { SelectAccountTypeRoutingModule } from './select-account-type-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    BrowserModule
+    SelectAccountTypeRoutingModule
   ]
 })
 export class SelectAccountTypeModule { }
