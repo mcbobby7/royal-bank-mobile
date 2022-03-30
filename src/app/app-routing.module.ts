@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+import { DashboardTemplateComponent } from './core/templates/dashboard-template/dashboard-template.component';
 const routes: Routes = [
   {
     path: '',
@@ -8,9 +9,24 @@ const routes: Routes = [
       import('./modules/welcome/welcome.module').then((m) => m.WelcomeModule),
   },
   {
-    path: 'dashboard',
+    path: 'ds',
     loadChildren: () =>
-      import('./modules/dashboard/dashboard.module').then((m) => m.DashboardPageModule),
+      import(
+        './core/templates/dashboard-template/dashboard-template.module'
+      ).then((m) => m.DashboardTemplateModule),
+  },
+  {
+    path: 'dashboard',
+    component: DashboardTemplateComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./modules/dashboard/dashboard.module').then(
+            (m) => m.DashboardPageModule
+          ),
+      },
+    ],
   },
   {
     path: 'register',
@@ -42,11 +58,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/login/login.module').then((m) => m.LoginModule),
   },
-
-
-
-
-
 ];
 @NgModule({
   imports: [

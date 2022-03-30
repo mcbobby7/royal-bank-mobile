@@ -1,85 +1,164 @@
 <ion-content>
-<div class="top=menu" style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 20px;">
-  <section>
-    <ion-icon name="menu-outline" style="font-size: 40px;"></ion-icon>
-  </section>
-  <section style="display: flex; flex-direction: row; justify-content: flex-end;">
-    <div style="flex: 70%; padding: 5px;"><span><span style="font-size: 18px; font-weight: 800;">Kelvin,</span> <br>Hello today</span></div>
-    <div style="flex: 25%; padding: 5px;"><ion-img src="assets/icon/hey.png" class="userImg"></ion-img></div>
-  </section>
-</div>
+  <div style="height: 150px"></div>
 
-<section class="row">
-  <ion-card style="background-color: #25214f; border-radius: 8px; margin: 10px 4px;">
-    <ion-card-content style="display: flex; flex-direction: column; justify-content: space-between; border-radius: 8px; text-align: center;">
-      <span class="card-items" style="color: #676767; font-size: 18px; font-weight: 700;">Royal Basic</span>
-      <span class="card-items" style="font-size: 30px; font-weight: 800; color: #fff;">&#8358;300</span>
-      <div class="card-items" style="background-color: #fff; border-radius: 5px; margin: 0px 45px; ">
-        <span style="margin: 20px; font-size: 20px; font-weight: 600;">0123456789</span>
-        <ion-icon name="copy-outline" style="cursor: pointer; font-size: 18px; margin-top: 3px;"></ion-icon>
+  <section class="row">
+    <ion-card
+      style="background-color: #25214f; border-radius: 8px; margin: 10px 4px"
+    >
+      <ion-card-content
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          border-radius: 8px;
+          text-align: center;
+        "
+      >
+        <span
+          class="card-items"
+          style="color: white; font-size: 18px; font-weight: 700"
+          >Royal Basic</span
+        >
+        <span
+          class="card-items"
+          style="font-size: 30px; font-weight: 800; color: #fff"
+          >&#8358;300</span
+        >
+        <div
+          class="card-items"
+          style="background-color: #fff; border-radius: 5px; margin: 0px 45px"
+        >
+          <span style="margin: 20px; font-size: 20px; font-weight: 600"
+            >0123456789</span
+          >
+          <ion-icon
+            name="copy-outline"
+            style="cursor: pointer; font-size: 18px; margin-top: 3px"
+          ></ion-icon>
+        </div>
+        <div style="text-align: right !important; margin-top: -10px !important">
+          <ion-icon
+            *ngIf="!show"
+            (click)="viewBalance()"
+            style="font-size: 22px; color: #fff; cursor: pointer; right: 20px"
+            name="eye-off-outline"
+          ></ion-icon>
+          <ion-icon
+            *ngIf="show"
+            (click)="viewBalance()"
+            style="font-size: 22px; color: #fff; cursor: pointer; right: 20px"
+            name="eye-off-outline"
+          ></ion-icon>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </section>
+
+  <section
+    style="
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      margin-top: 50px;
+    "
+  >
+    <div>
+      <ion-img
+        src="assets/icon/transfer.png"
+        style="width: 55px; height: 55px"
+      ></ion-img>
+      <div style="font-size: 13px; padding-top: 5px; text-align: center">
+        Transfer
       </div>
-      <div style="text-align: right !important; margin-top: 10px !important;">
-        <ion-icon *ngIf="!show" (click)="viewBalance()"
-        style="
-              font-size: 22px;
-              color: #fff;
-              cursor: pointer;
-              right: 20px;
-            "
-            name="eye-off-outline"></ion-icon>
-        <ion-icon *ngIf="show" (click)="viewBalance()"
-        style="
-              font-size: 22px;
-              color: #fff;
-              cursor: pointer;
-              right: 20px;
-            " name="eye-off-outline"></ion-icon>
-       </div>
-    </ion-card-content>
-  </ion-card>
- </section>
+    </div>
+    <div>
+      <ion-img
+        src="assets/icon/save.png"
+        style="width: 55px; height: 55px"
+      ></ion-img>
+      <div style="font-size: 13px; padding-top: 5px; text-align: center">
+        Save
+      </div>
+    </div>
+    <div>
+      <ion-img
+        src="assets/icon/borrow.png"
+        style="width: 55px; height: 55px"
+      ></ion-img>
+      <div style="font-size: 13px; padding-top: 5px; text-align: center">
+        Borrow
+      </div>
+    </div>
+    <div>
+      <ion-img
+        src="assets/icon/money.png"
+        style="width: 55px; height: 55px; margin: auto"
+      ></ion-img>
+      <div style="font-size: 13px; padding-top: 5px; text-align: center">
+        Add Money
+      </div>
+    </div>
+  </section>
 
- <section style="display: flex; flex-direction: row; justify-content: space-evenly; margin-top: 20px;">
-  <div class="icons-bg"><ion-icon class="icons" name="paper-plane-outline"></ion-icon></div>
-  <div class="icons-bg"><ion-icon class="icons" name="grid-outline"></ion-icon></div>
-  <div class="icons-bg"><ion-icon class="icons" name="save-outline"></ion-icon></div>
-  <div class="icons-bg"><ion-icon class="icons" name="add-outline"></ion-icon></div>
- </section>
-
- <section style="margin-top: 50px;">
-  <!-- <ion-icon name="information-circle-outline"></ion-icon> -->
-  <span style="color: #d9ac0b; font-size: 20px; margin-top: 15px; font-weight: 500;">Your account is limied</span>
-
- </section>
-
- <section>
-  <div style="background-color: #F8F8F8; border-radius: 8px;">
-    <ion-card-header class="header">Increase your limit</ion-card-header>
-    <ion-card-content style="display: flex; flex-direction: row; justify-content: space-around;">
-      <span>This account is perfect for Individuals,
-        Students, Freelancers,
-        </span>
-      <ion-img src="assets/icon/red-arrow.png" style="width: 55px; height: 55px;"></ion-img>
-    </ion-card-content>
-  </div>
- </section>
-
-
-
- <section>
-
-  <section style="margin-top: 50px;">
+  <section style="margin-top: 50px">
     <!-- <ion-icon name="information-circle-outline"></ion-icon> -->
-    <span style="color: #25214F; font-size: 18px; margin-top: 15px; font-weight: 600;">Your transactions</span>
+    <div
+      style="
+        color: #d9ac0b;
+        font-size: 20px;
+        margin-top: 15px;
+        padding-bottom: 15px;
+        font-weight: 500;
+      "
+    >
+      Your account is limied
+    </div>
+  </section>
 
-   </section>
-
-  <div style="background-color: #F8F8F8; border-radius: 8px;">
-    <ion-card-content>
-      <span style="text-align: left;">No transactions today
+  <section>
+    <div style="background-color: #f8f8f8; border-radius: 8px">
+      <ion-card-header class="header">Increase your limit</ion-card-header>
+      <ion-card-content
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+        "
+      >
+        <span style="font-size: 13px"
+          >This account is perfect for Individuals, Students, Freelancers,
         </span>
-    </ion-card-content>
-  </div>
- </section>
+        <ion-img
+          src="assets/icon/red-arrow.png"
+          style="width: 55px; height: 55px"
+        ></ion-img>
+      </ion-card-content>
+    </div>
+  </section>
 
+  <section>
+    <section style="margin-top: 50px">
+      <!-- <ion-icon name="information-circle-outline"></ion-icon> -->
+      <div
+        style="
+          color: #25214f;
+          font-size: 18px;
+          margin-top: 15px;
+          padding-bottom: 15px;
+          font-weight: 600;
+        "
+      >
+        Your transactions
+      </div>
+    </section>
+
+    <div style="background-color: #f8f8f8; border-radius: 8px">
+      <ion-card-content>
+        <span style="text-align: left; font-size: 13px"
+          >No transactions today
+        </span>
+      </ion-card-content>
+    </div>
+  </section>
+  <div style="height: 100px"></div>
 </ion-content>

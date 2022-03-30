@@ -19,6 +19,6 @@ export class DoneComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   create() {
-    this.router.navigate(['/register']);
+    this.router.navigate(['/dashboard']);
   }
 }

@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "royalBankApp",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

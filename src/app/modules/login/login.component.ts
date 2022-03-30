@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService,
     public toast: ToastrService,
-    public router: Router
+    private router: Router
   ) {}
   viewpassword() {
     this.show = !this.show;
@@ -38,26 +38,30 @@ export class LoginComponent implements OnInit {
   // login method
   login() {
     this.loading = true;
-    const data = {
-      AuthMode: 'Bearer',
-      Username: this.loginForm.value.email,
-      Password: this.loginForm.value.password,
-    };
-    this.auth.post(data, 'UserManager.UserService.Login').subscribe(
-      (res: any) => {
-        this.loading = false;
-        if (res.data.responseCode === '00') {
-          this.toast.success('Login was successfull', 'Success');
-          this.data = res.data;
-          localStorage.setItem('user', JSON.stringify(res.data.profile));
-          localStorage.setItem('token', res.data.token);
-          this.router.navigate(['/register']);
-        } else {
-          this.toast.error(res.data.responseMessage, 'Error');
-        }
-      },
-      (err) => console.error(err.message)
-    );
+    setTimeout(() => {
+      this.router.navigate(['/dashboard']);
+      this.loading = false;
+    }, 3000);
+    // const data = {
+    //   AuthMode: 'Bearer',
+    //   Username: this.loginForm.value.email,
+    //   Password: this.loginForm.value.password,
+    // };
+    // this.auth.post(data, 'UserManager.UserService.Login').subscribe(
+    //   (res: any) => {
+    //     this.loading = false;
+    //     if (res.data.responseCode === '00') {
+    //       this.toast.success('Login was successfull', 'Success');
+    //       this.data = res.data;
+    //       localStorage.setItem('user', JSON.stringify(res.data.profile));
+    //       localStorage.setItem('token', res.data.token);
+    //       this.router.navigate(['/dashboard']);
+    //     } else {
+    //       this.toast.error(res.data.responseMessage, 'Error');
+    //     }
+    //   },
+    //   (err) => console.error(err.message)
+    // );
   }
 
   ngOnInit(): void {

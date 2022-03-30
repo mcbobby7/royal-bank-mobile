@@ -1,0 +1,80 @@
+<ion-app>
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <!-- Hamburger -->
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button
+        ><span style="font-size: 15px">Menu</span>
+      </ion-buttons>
+      <section
+        slot="end"
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          align-items: center;
+        "
+      >
+        <div style="flex: 70%; padding: 5px">
+          <span
+            ><span style="font-size: 16px; font-weight: 700">Kelvin,</span>
+            <br /><span style="color: rgb(130, 133, 133); font-size: 14px"
+              >How you dey today</span
+            ></span
+          >
+        </div>
+        <div style="flex: 25%; padding: 5px">
+          <ion-img
+            style="width: 50px"
+            src="assets/icon/hey.png"
+            class="userImg"
+          ></ion-img>
+        </div>
+      </section>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <!-- Content -->
+  </ion-content>
+  <ion-menu contentId="main-content" side="start">
+    <ion-header>
+      <ion-toolbar>
+        <ion-img
+          [src]="imageSrc"
+          style="width: 170px; margin: 30px auto; margin-top: 40px"
+        ></ion-img>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle auto-hide="false" *ngFor="let nav of nav">
+          <ion-item
+            detail="false"
+            routerDirection="root"
+            [routerLink]="nav.link"
+            [class.active-menu]="active === nav.link"
+            style="color: #374957"
+          >
+            {{ nav.name }}
+            <!-- <ion-icon
+              style="color: #374957"
+              slot="start"
+              [ios]="nav.icon + '-outline'"
+              [md]="nav.icon + '-sharp'"
+            ></ion-icon> -->
+            <ion-img
+              slot="start"
+              style="width: 20px"
+              [src]="nav.icon"
+              class="userImg"
+            ></ion-img>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content" main></ion-router-outlet>
+</ion-app>

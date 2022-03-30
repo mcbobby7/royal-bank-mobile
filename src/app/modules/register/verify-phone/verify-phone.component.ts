@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./verify-phone.component.scss'],
 })
 export class VerifyPhoneComponent implements OnInit {
-  bvnError = true;
+  bvnError = false;
   stage = 0;
   verifyForm = new FormGroup({
     code: new FormControl(''),

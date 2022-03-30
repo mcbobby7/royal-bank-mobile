@@ -24,6 +24,7 @@ import { DetailsComponent } from '../modules/register/details/details.component'
 import { CoOperatreDetailsComponent } from '../modules/register/co-operatre-details/co-operatre-details.component';
 import { ImageDoneComponent } from '../modules/register/image-done/image-done.component';
 import { RoyalSetupComponent } from '../modules/register/royal-setup/royal-setup.component';
+import { DashboardTemplateComponent } from '../core/templates/dashboard-template/dashboard-template.component';
 
 const components = [
   LoginComponent,
@@ -47,6 +48,7 @@ const components = [
   CoOperatreDetailsComponent,
   ImageDoneComponent,
   RoyalSetupComponent,
+  DashboardTemplateComponent,
 ];
 
 const materialModules = [RouterModule];

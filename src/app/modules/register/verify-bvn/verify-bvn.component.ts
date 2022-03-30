@@ -17,7 +17,7 @@ export class VerifyBvnComponent implements OnInit {
     code: new FormControl(''),
   });
   stage = 0;
-  bvnError = true;
+  bvnError = false;
   constructor(
     private navController: NavController,
     private router: Router,

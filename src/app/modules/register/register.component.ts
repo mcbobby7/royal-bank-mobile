@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   source = 'assets/icon/royalty.png';
   data: any;
   stage = 1;
-  id: any = localStorage.getItem('onboardingId');
+  id: any = 9;
   process: any;
   onboardingForm!: FormGroup;
   loading = true;
@@ -26,30 +26,34 @@ export class RegisterComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) {}
 
   getOnboardingStage() {
-    if (this.id) {
-      console.log('run', this.id);
+    setTimeout(() => {
+      this.loading = false;
+      this.router.navigate(['/register/become-royalty']);
+    }, 3000);
+    // if (this.id) {
+    //   console.log('run', this.id);
 
-      this.auth
-        .post({ UserId: 9}, 'UserManager.UserService.FetchUserDetail')
-        .subscribe(
-          (res: any) => {
-            this.loading = false;
-            if (res.data.responseCode === '00') {
-              this.process = res.data.userDetail;
-              if (res.data.userDetail.stage <= 1) {
-                this.router.navigate(['/register/become-royalty']);
-              } else if (res.data.userDetail.stage === 2) {
-                this.router.navigate(['/register/select-account']);
-              }
-              console.log(res);
-            } else {
-              this.loading = false;
-              console.log(res);
-            }
-          },
-          (err) => console.error(err.message)
-        );
-    }
+    //   this.auth
+    //     .post({ UserId: this.id }, 'UserManager.UserService.FetchUserDetail')
+    //     .subscribe(
+    //       (res: any) => {
+    //         this.loading = false;
+    //         if (res.data.responseCode === '00') {
+    //           this.process = res.data.userDetail;
+    //           if (res.data.userDetail.stage <= 1) {
+    //             this.router.navigate(['/register/become-royalty']);
+    //           } else if (res.data.userDetail.stage === 2) {
+    //             this.router.navigate(['/register/select-account']);
+    //           }
+    //           console.log(res);
+    //         } else {
+    //           this.loading = false;
+    //           console.log(res);
+    //         }
+    //       },
+    //       (err) => console.error(err.message)
+    //     );
+    // }
     return;
   }
 
