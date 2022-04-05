@@ -1,0 +1,177 @@
+<ion-content>
+  <div style="padding: 100px;"></div>
+  <h1>dddfdf</h1>
+
+  <!-- <section  *ngIf="transType ===0"> -->
+
+
+    <!-- <div style="
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
+    margin: 1.5rem;"
+    (click)="transactionType(1)">
+      <div class="icon-container">
+        <ion-icon name="send" class="inner-icon"></ion-icon>
+      </div>
+      <span style="margin: auto; font-size: 20px;">Send to Royal Bank</span>
+      <ion-icon name="arrow-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+      </div>
+
+      <div style="
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
+    margin: 1.5rem;"
+    (click)="transactionType(2)">
+      <div class="icon-container">
+        <ion-icon name="send" class="inner-icon"></ion-icon>
+      </div>
+      <span style="margin: auto; font-size: 20px;">Send to other Banks</span>
+      <ion-icon name="arrow-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+      </div>
+  </section>
+
+  <section *ngIf="transType ===1">
+    <div style="height:100px"></div>
+    <div style="height:100px"></div>
+  <form [formGroup]="royalAccount">
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Beneficiary</label>
+            <input
+              type="text"
+              name="beneficiary"
+              class="input"
+              placeholder="1234567890"
+            />
+          </div>
+
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Amount</label>
+            <input
+              type="text"
+              name="amount"
+              class="input"
+              placeholder="100000"
+            />
+          </div>
+
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Narration</label>
+            <input
+              type="text"
+              name="narration"
+              class="input"
+              placeholder="1234567890"
+            />
+          </div>
+
+
+
+          <div class="form-group">
+            <ion-button
+              class="btn"
+              expand="block"
+              style="margin-top: 1rem"
+              (click)="next()"
+              routerLinkActive="router-link-active"
+            >
+              Transfer
+            </ion-button>
+          </div>
+        </form>
+  </section>
+
+  <section *ngIf="transType ===2">
+    <div style="height:100px"></div>
+    <form [formGroup]="othersAccount">
+            <div class="form-group row" style="padding: 5px">
+              <label for="">Beneficiary</label>
+              <input
+                type="text"
+                name="beneficiary"
+                class="input"
+                placeholder="1234567890"
+              />
+            </div>
+
+            <div class="form-group row" style="padding: 5px">
+              <label for="">Bank</label>
+              <select name="bank" id="" class="input">
+                <option value="1">Access</option>
+                <option value="1">GTB</option>
+                <option value="1">UBA</option>
+              </select>
+            </div>
+
+            <div class="form-group row" style="padding: 5px">
+              <label for="">Amount</label>
+              <input
+                type="text"
+                name="amount"
+                class="input"
+                placeholder="100000"
+              />
+            </div>
+
+            <div class="form-group row" style="padding: 5px">
+              <label for="">Narration</label>
+              <input
+                type="text"
+                name="narration"
+                class="input"
+                placeholder="1234567890"
+              />
+            </div>
+
+
+
+            <div class="form-group">
+              <ion-button
+                class="btn"
+                expand="block"
+                style="margin-top: 1rem"
+                (click)="next()"
+                routerLinkActive="router-link-active"
+              >
+                Transfer
+              </ion-button>
+            </div>
+          </form>
+    </section>
+
+    <section *ngIf="transType ===3">
+      <div style="height:100px"></div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+          "
+        >
+          <div>
+            <span style="text-align: center; font-size: 25px; font-weight: 500;">Transfer Successful</span>
+            <section class="central-image" style="height: 200px">
+              <ion-img [src]="imageSrc" class="img"></ion-img>
+            </section>
+
+          </div>
+
+          <section
+            style="
+              display: flex;
+              flex-direction: column;
+              align-content: space-between;
+            "
+          >
+            <ion-button class="btn" expand="block" (click)="create()">
+              Go To Dashboard
+            </ion-button>
+          </section>
+        </div>
+    </section> -->
+
+</ion-content>

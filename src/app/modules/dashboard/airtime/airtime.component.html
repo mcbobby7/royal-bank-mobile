@@ -1,0 +1,146 @@
+<ion-content>
+  <div style="height:100px"></div>
+  <section *ngIf="transType === 0">
+
+    <div style="
+    font-family: Mulish !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
+    margin: 1.5rem 0.5rem;"
+    (click)="transactionType(1)">
+      <div class="icon-container">
+        <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
+        <ion-icon name="phone-portrait" class="inner-icon"></ion-icon>
+      </div>
+      <span style="margin: auto; font-size: 20px;  width: 100%;">Mobile Topup</span>
+      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+      </div>
+
+      <div style="
+    font-family: Mulish !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
+    margin: 1.5rem 0.5rem;"
+    (click)="transactionType(1)">
+      <div class="icon-container">
+        <ion-icon name="people" class="inner-icon"></ion-icon>
+      </div>
+      <span style="margin: auto; font-size: 20px;  width: 100%;">Data Bundles</span>
+      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+      </div>
+
+      <div style="
+    font-family: Mulish !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
+    margin: 1.5rem 0.5rem;"
+    (click)="transactionType(2)">
+      <div class="icon-container">
+        <ion-icon name="stats-chart" class="inner-icon"></ion-icon>
+      </div>
+      <span style="margin: auto; font-size: 20px;  width: 100%;">Airtime History</span>
+      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+      </div>
+  </section>
+
+  <section *ngIf="transType === 1">
+
+    <div style="
+    font-family: Mulish !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
+    margin: 1.5rem 0.5rem;"
+    (click)="transactionType(2)">
+      <div class="icon-container">
+        <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
+        <ion-img
+        src="assets/icon/airtel.png"
+        class="icons"
+      ></ion-img>      </div>
+      <span style="margin: auto; font-size: 20px;  width: 100%;">Airtel</span>
+      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+      </div>
+
+      <div style="
+    font-family: Mulish !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
+    margin: 1.5rem 0.5rem;"
+    (click)="transactionType(2)">
+      <div class="icon-container">
+        <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
+        <ion-img
+        src="assets/icon/mtn.png"
+        class="icons"
+      ></ion-img>      </div>
+      <span style="margin: auto; font-size: 20px;  width: 100%;">MTN</span>
+      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+      </div>
+
+      <div style="
+    font-family: Mulish !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
+    margin: 1.5rem 0.5rem;"
+    (click)="transactionType(2)">
+      <div class="icon-container">
+        <ion-img
+        src="assets/icon/glo.png"
+        class="icons"
+      ></ion-img>      </div>
+      <span style="margin: auto; font-size: 20px;  width: 100%;">GLO</span>
+      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+      </div>
+
+      <div style="
+    font-family: Mulish !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
+    margin: 1.5rem 0.5rem;"
+    (click)="transactionType(2)">
+      <div class="icon-container">
+        <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
+        <ion-img
+        src="assets/icon/9mobile.png"
+        class="icons"
+      ></ion-img>      </div>
+      <span style="margin: auto; font-size: 20px; width: 100%;">9 Mobile</span>
+      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+      </div>
+  </section>
+
+  <section *ngIf="transType === 2">
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="schedule">
+          <ion-icon name="calendar"></ion-icon>
+          <ion-label>New</ion-label>
+        </ion-tab-button>
+        <ion-content fullscreen class="ion-padding">
+          <h1>Movies</h1>
+        </ion-content>
+
+        <ion-tab-button tab="speakers">
+          <ion-icon name="person-circle"></ion-icon>
+          <ion-label>Beneficiaries</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+
+    </ion-tabs>
+  </section>
+
+</ion-content>

@@ -26,6 +26,30 @@ const routes: Routes = [
             (m) => m.DashboardPageModule
           ),
       },
+
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./modules/dashboard/profile/profile.module').then(
+            (m) => m.ProfileModule
+          ),
+      },
+
+      {
+        path: 'airtime',
+        loadChildren: () =>
+          import('./modules/dashboard/airtime/airtime.module').then(
+            (m) => m.AirtimeModule
+          ),
+      },
+
+      {
+        path: 'history',
+        loadChildren: () =>
+          import('./modules/dashboard/history/history.module').then(
+            (m) => m.HistoryModule
+          ),
+      },
     ],
   },
   {

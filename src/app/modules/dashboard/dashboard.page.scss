@@ -5,6 +5,10 @@
   align-content: space-between;
 }
 
+section {
+  font-family: Mulish !important;
+}
+
 
 .userImg {
   width: 50px;
@@ -29,6 +33,7 @@
 }
 
 ion-content {
+  font-family: Mulish !important;
   --padding-end: 20px;
   --padding-start: 20px;
 }

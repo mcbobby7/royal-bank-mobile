@@ -1,0 +1,61 @@
+<ion-content>
+
+  <section *ngIf="transType ===0">
+    <form [formGroup]="othersAccount">
+            <div class="form-group row" style="padding: 5px">
+              <label for="">Beneficiary</label>
+              <input
+                type="text"
+                name="beneficiary"
+                class="input"
+                placeholder="1234567890"
+              />
+            </div>
+
+            <div class="form-group row" style="padding: 5px">
+              <label for="">Bank</label>
+              <select name="bank" id="" class="input">
+                <option value="1">Access</option>
+                <option value="1">GTB</option>
+                <option value="1">UBA</option>
+              </select>
+            </div>
+
+            <div class="form-group row" style="padding: 5px">
+              <label for="">Amount</label>
+              <input
+                type="text"
+                name="amount"
+                class="input"
+                placeholder="100000"
+              />
+            </div>
+
+            <div class="form-group row" style="padding: 5px">
+              <label for="">Narration</label>
+              <input
+                type="text"
+                name="narration"
+                class="input"
+                placeholder="1234567890"
+              />
+            </div>
+
+            <div class="form-group">
+              <a href="javascript: void(0)" (click)="transactionType(9)" style="text-align: left; color: #25214f; font-weight: 700; text-decoration: none">Choose Beneficiary</a>
+            </div>
+
+            <div class="form-group">
+              <ion-button
+                class="btn"
+                expand="block"
+                style="margin-top: 1rem"
+                (click)="next()"
+                routerLinkActive="router-link-active"
+              >
+                Transfer
+              </ion-button>
+            </div>
+          </form>
+    </section>
+</ion-content>

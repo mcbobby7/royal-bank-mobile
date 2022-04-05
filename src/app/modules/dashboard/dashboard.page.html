@@ -16,12 +16,12 @@
       >
         <span
           class="card-items"
-          style="color: white; font-size: 18px; font-weight: 700"
+          style="color: white; font-family: Mulish !important; font-size: 18px; font-weight: 700"
           >Royal Basic</span
         >
         <span
           class="card-items"
-          style="font-size: 30px; font-weight: 800; color: #fff"
+          style="  font-family: Mulish !important; font-size: 30px; font-weight: 800; color: #fff"
           >&#8358;300</span
         >
         <div
@@ -62,39 +62,39 @@
       margin-top: 50px;
     "
   >
-    <div>
+    <div style="cursor: pointer;" [routerLink]="['transfer']" routerLinkActive="router-link-active" >
       <ion-img
         src="assets/icon/transfer.png"
         style="width: 55px; height: 55px"
       ></ion-img>
-      <div style="font-size: 13px; padding-top: 5px; text-align: center">
+      <div style="font-size: 13px; padding-top: 5px; text-align: center; cursor: pointer;">
         Transfer
       </div>
     </div>
-    <div>
+    <div style="cursor: pointer;" [routerLink]="['addfund']" routerLinkActive="router-link-active" >
       <ion-img
         src="assets/icon/save.png"
         style="width: 55px; height: 55px"
       ></ion-img>
-      <div style="font-size: 13px; padding-top: 5px; text-align: center">
+      <div style="font-size: 13px; padding-top: 5px; text-align: center; cursor: pointer;">
         Save
       </div>
     </div>
-    <div>
+    <div style="cursor: pointer;" [routerLink]="['borrow']" routerLinkActive="router-link-active" >
       <ion-img
         src="assets/icon/borrow.png"
         style="width: 55px; height: 55px"
       ></ion-img>
-      <div style="font-size: 13px; padding-top: 5px; text-align: center">
+      <div style="font-size: 13px; padding-top: 5px; text-align: center; cursor: pointer;">
         Borrow
       </div>
     </div>
-    <div>
+    <div style="cursor: pointer;" [routerLink]="['addfund']" routerLinkActive="router-link-active" >
       <ion-img
         src="assets/icon/money.png"
         style="width: 55px; height: 55px; margin: auto"
       ></ion-img>
-      <div style="font-size: 13px; padding-top: 5px; text-align: center">
+      <div style="font-size: 13px; padding-top: 5px; text-align: center; cursor: pointer;">
         Add Money
       </div>
     </div>
