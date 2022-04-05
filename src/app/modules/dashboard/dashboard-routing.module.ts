@@ -40,7 +40,8 @@ const routes: Routes = [
   {
     path: 'bills-payments',
     loadChildren: () => import('./bills-payments/bills-payments.module').then( m => m.BillsPaymentsPageModule)
-  },  {
+  },
+  {
     path: 'loan',
     loadChildren: () => import('./loan/loan.module').then( m => m.LoanPageModule)
   }
