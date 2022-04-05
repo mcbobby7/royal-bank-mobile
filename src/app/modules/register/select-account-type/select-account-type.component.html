@@ -1,5 +1,5 @@
 <div style="height: 50px"></div>
-
+<app-loader *ngIf="loading"></app-loader>
 <ion-content *ngIf="stage < 1">
   <ion-content *ngIf="stage < 1">
     <section>
@@ -16,8 +16,8 @@
       <h3>Select Account Type</h3>
     </section>
     <div
-      [ngClass]="mode === 'basic' ? 'active card' : 'notActive card'"
-      (click)="setMode('basic')"
+      [ngClass]="mode === 'Royal Basic' ? 'active card' : 'notActive card'"
+      (click)="setMode('Royal Basic')"
     >
       <ion-card-header class="header">Royal Basic</ion-card-header>
       <ion-card-content
@@ -31,7 +31,7 @@
           >This account is perfect for Individuals, Students, Freelancers,
         </span>
         <ion-img
-          *ngIf="mode === 'basic'"
+          *ngIf="mode === 'Royal Basic'"
           src="assets/icon/check.png"
           style="width: 30px"
         ></ion-img>
@@ -39,8 +39,8 @@
     </div>
 
     <div
-      [ngClass]="mode !== 'basic' ? 'active card' : 'notActive card'"
-      (click)="setMode('cooprate')"
+      [ngClass]="mode !== 'Royal Basic' ? 'active card' : 'notActive card'"
+      (click)="setMode('Royal Corporate')"
     >
       <ion-card-header class="header">Royal Corporate</ion-card-header>
       <ion-card-content
@@ -55,7 +55,7 @@
           Enterprises
         </span>
         <ion-img
-          *ngIf="mode !== 'basic'"
+          *ngIf="mode !== 'Royal Basic'"
           src="assets/icon/check.png"
           style="width: 30px"
         ></ion-img>
@@ -66,7 +66,7 @@
       <ion-button
         class="btn"
         expand="block"
-        (click)="next()"
+        (click)="register()"
         style="margin-top: 1rem"
       >
         Continue

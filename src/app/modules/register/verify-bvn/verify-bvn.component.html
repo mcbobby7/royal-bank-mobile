@@ -1,5 +1,5 @@
 <div style="height: 50px"></div>
-
+<app-loader *ngIf="loading"></app-loader>
 <ion-content *ngIf="page === 'select'">
   <div *ngIf="stage < 1">
     <section>
@@ -65,7 +65,7 @@
       <ion-button
         class="btn"
         expand="block"
-        (click)="goNext()"
+        (click)="register()"
         style="margin-top: 1rem"
       >
         Continue
@@ -113,10 +113,16 @@
     </section>
 
     <section class="row">
-      <form [formGroup]="verifyForm">
+      <form [formGroup]="onboardingForm">
         <div class="form-group row" style="padding: 3px">
           <label for="" class="label">Enter your BVN</label>
-          <input type="text" name class="input" placeholder="123456789012" />
+          <input
+            type="text"
+            formControlName="BVN"
+            name="BVN"
+            class="input"
+            placeholder="123456789012"
+          />
         </div>
 
         <div class="form-group">
@@ -124,7 +130,7 @@
             class="btn"
             expand="block"
             style="margin-top: 1rem"
-            (click)="verify()"
+            (click)="validateBVN()"
             routerLinkActive="router-link-active"
           >
             Verify

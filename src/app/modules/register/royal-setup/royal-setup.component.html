@@ -1,6 +1,6 @@
 <ion-content>
   <div style="height: 50px"></div>
-
+  <app-loader *ngIf="loading"></app-loader>
   <section>
     <section>
       <div style="height: 20px"></div>
@@ -23,24 +23,26 @@
     </section>
 
     <section class="row">
-      <form [formGroup]="accountForm">
+      <form [formGroup]="onboardingForm">
         <div class="form-group row" style="padding: 5px">
           <label for="">Company Type</label>
           <input
+            formControlName="CompanyType"
             type="text"
-            name="password"
+            name="company type"
             class="input"
-            placeholder="ciroma.kelvin@gmail.com"
+            placeholder=""
           />
         </div>
         <div class="form-group row" style="padding: 5px">
           <label for="">Company Name</label>
           <div class="phoneField">
             <input
+              formControlName="CompanyName"
               type="text"
-              name="password"
+              name="company name"
               class="input"
-              placeholder="8012345678"
+              placeholder="Midra"
             />
           </div>
         </div>
@@ -56,12 +58,12 @@
           >
             <input
               type="text"
-              placeholder="35363527262"
+              formControlName="RCNumber"
+              placeholder="3536352"
               id="text"
-              name="password"
+              name="rc number"
               required
               style="border: none"
-              formArrayName="password"
               class="input"
             />
           </div>
@@ -80,11 +82,11 @@
             <input
               type="text"
               placeholder="235352"
-              id="password"
-              name="password"
+              id="text"
+              name="text"
               required
               style="border: none"
-              formArrayName="password"
+              formControlName="TinNumber"
               class="input"
             />
           </div>
@@ -103,11 +105,23 @@
               margin-left: -35px;
             "
           >
-            <input type="radio" id="yes" name="shares" value="yes" />
-            <label for="html">Yes</label>
+            <input
+              formControlName="Shares"
+              type="radio"
+              id="true"
+              name="Shares"
+              [value]="true"
+            />
+            <label for="yes">Yes</label>
 
-            <input type="radio" id="no" name="shares" value="no" />
-            <label for="css">No</label><br />
+            <input
+              formControlName="Shares"
+              type="radio"
+              id="no"
+              name="Shares"
+              [value]="false"
+            />
+            <label for="No">No</label><br />
           </div>
         </div>
 
@@ -116,7 +130,7 @@
             class="btn"
             expand="block"
             style="margin-top: 1rem"
-            (click)="next()"
+            (click)="register()"
             routerLinkActive="router-link-active"
           >
             Next

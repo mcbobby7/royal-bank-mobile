@@ -1,5 +1,6 @@
 <ion-content class="content">
   <div style="height: 50px"></div>
+  <app-loader *ngIf="loading"></app-loader>
 
   <div
     style="
@@ -20,7 +21,7 @@
       </section>
 
       <section class="central-image">
-        <div class="tit">Hello Kelvin</div>
+        <div class="tit">Hello {{ user.firstName }}</div>
       </section>
       <section style="text-align: center; margin-top: 20px">
         <div class="subTit">
