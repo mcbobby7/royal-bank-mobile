@@ -1,6 +1,6 @@
 <ion-content>
   <div style="height: 50px"></div>
-
+  <app-loader *ngIf="loading"></app-loader>
   <section>
     <section>
       <div style="height: 20px"></div>
@@ -27,12 +27,13 @@
       <h5 style="text-align: left; color: black">
         Enter your password to continue
       </h5>
-      <form [formGroup]="accountForm">
+      <form [formGroup]="onboardingForm">
         <div class="form-group row" style="padding: 5px">
           <label for="">Email</label>
           <input
-            type="password"
-            name="password"
+            type="text"
+            formControlName="Email"
+            name="email"
             class="input"
             placeholder="ciroma.kelvin@gmail.com"
           />
@@ -41,14 +42,15 @@
           <label for="">Phone</label>
           <div class="phoneField">
             <input
-              type="password"
-              name="password"
+              type="text"
+              name="text"
               class="input dialField"
               placeholder="+234"
             />
             <input
-              type="password"
-              name="password"
+              formControlName="Phone"
+              type="text"
+              name="text"
               class="input numField"
               placeholder="8012345678"
             />
@@ -71,7 +73,7 @@
               name="password"
               required
               style="border: none"
-              formArrayName="password"
+              formControlName="Password"
               class="input"
             />
             <ion-icon
@@ -122,8 +124,9 @@
               name="password"
               required
               style="border: none"
-              formArrayName="password"
               class="input"
+              [(ngModel)]="confirmPass"
+              [ngModelOptions]="{ standalone: true }"
             />
             <ion-icon
               (click)="viewpassword()"
@@ -159,10 +162,11 @@
         <div class="form-group row" style="padding: 5px">
           <label for="">Referal Code (optional)</label>
           <input
-            type="password"
-            name="password"
+            formControlName="RefCode"
+            type="text"
+            name="text"
             class="input"
-            placeholder="******"
+            placeholder="63653757"
           />
         </div>
 
@@ -171,7 +175,7 @@
             class="btn"
             expand="block"
             style="margin-top: 1rem"
-            (click)="next()"
+            (click)="register()"
             routerLinkActive="router-link-active"
           >
             Next

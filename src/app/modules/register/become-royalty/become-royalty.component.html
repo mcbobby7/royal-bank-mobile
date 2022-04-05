@@ -1,6 +1,6 @@
 <ion-content>
   <div style="height: 50px"></div>
-
+  <app-loader *ngIf="loading"></app-loader>
   <section class="central-image">
     <ion-img [src]="imageSrc" class="img"></ion-img>
   </section>
@@ -41,15 +41,14 @@
   </section>
 
   <section class="central-image row">
-    <form [formGroup]="signupForm">
-      <div class="form-group row" style="padding: 3px">
+    <form [formGroup]="onboardingForm">
+      <!-- <div class="form-group row" style="padding: 3px">
         <label for="" class="label">What type of account do you need?</label>
-        <select class="input">
-          <option value="brown" class="input">Tire 1</option>
-          <option value="brown" class="input">Tire 2</option>
-          <option value="brown" class="input">Tire 3</option>
+        <select formControlName="AccountType" class="input">
+          <option value="Corporate" class="input">Corporate</option>
+          <option value="Individual" class="input">Individual</option>
         </select>
-      </div>
+      </div> -->
 
       <div class="form-group">
         <ion-button

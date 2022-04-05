@@ -27,18 +27,18 @@
     <section style="margin-top: 2rem">
       <span class="sub-title"
         >We sent a verfication code to your phone number just to make sure its
-        yours.
+        yours. otp is {{ otp }}
       </span>
     </section>
 
     <section>
       <p class="sub-title">OTP has been sent to</p>
-      <p style="font-weight: 800">+2348012345678</p>
+      <p style="font-weight: 800">{{ user.phoneNo }}</p>
     </section>
   </section>
 
   <section class="row">
-    <form [formGroup]="verifyForm">
+    <form>
       <div class="form-group row" style="padding: 3px">
         <label for="">Verification Code</label>
         <input
@@ -46,13 +46,15 @@
           name="password"
           class="input"
           placeholder="123458"
+          [(ngModel)]="enOTP"
         />
       </div>
       <section *ngIf="bvnError" class="row">
         <div style="background: #f8e2e2; border-radius: 8px; margin: 10px 4px">
           <ion-card-content>
             <span style="text-align: justify; font-size: 12px; color: #de0000"
-              >Sorry, We could not verify your BVN, Try Again
+              >Sorry, We could not verify your OTP, input the correct OTP and
+              Try Again
             </span>
           </ion-card-content>
         </div>
@@ -63,7 +65,7 @@
           class="btn"
           expand="block"
           style="margin-top: 1rem"
-          (click)="next()"
+          (click)="verifyOtp()"
           routerLinkActive="router-link-active"
         >
           Verify
@@ -74,8 +76,6 @@
 
   <section>
     <p class="sub-title">Didn&#39;t get any code?</p>
-    <a href="http://" class="link" target="_blank" rel="noopener noreferrer"
-      >Resend Code</a
-    >
+    <a class="link" (click)="sendOtp()">Resend Code</a>
   </section>
 </ion-content>

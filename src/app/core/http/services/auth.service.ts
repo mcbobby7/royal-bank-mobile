@@ -8,12 +8,66 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
+
+// import {
+//   mergeMap as _observableMergeMap,
+//   catchError as _observableCatch,
+// } from "rxjs/operators";
+// import {
+//   Observable,
+//   throwError as _observableThrow,
+//   of as _observableOf,
+// } from "rxjs";
+// import { Injectable, Inject, Optional, InjectionToken } from "@angular/core";
+// import {
+//   HttpClient,
+//   HttpHeaders,
+//   HttpResponse,
+//   HttpResponseBase,
+// } from "@angular/common/http";
+// import { environment } from "../../environments/environment";
+// import { HTTP } from "@ionic-native/http/ngx";
+// import { from } from "rxjs";
+
+// let options_: any = {
+//   body: content_,
+//   observe: "response",
+//   responseType: "blob",
+//   headers: new HttpHeaders({
+//     session_token:
+//       session_token !== undefined && session_token !== null
+//         ? "" + session_token
+//         : "",
+//     imei: imei !== undefined && imei !== null ? "" + imei : "",
+//     "Content-Type": "application/json",
+//     Accept: "application/json",
+//   }),
+// };
+// this.htp.setDataSerializer("json");
+// return from(
+//   this.htp
+//     .post(url_, payload, null)
+//     .then((data) => {
+//       return JSON.parse(data.data);
+//     })
+//     .catch((error) => {
+//       return throwException(
+//         "An unexpected server error occurred.",
+//         400,
+//         "server error",
+//         options_
+//       );
+//     })
+// );
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   baseUrl =
-    'http://bankingsandboxapi.midraconsulting.com/financialservice/api/v1/proxy';
+    'https://bankingsandboxapi.vaballiance.com/financialservice/api/v1/proxy';
+  notificationBaseUrl = 'https://bankingsandboxapi.vaballiance.com';
+  testUrl = 'https://gamelyd.herokuapp.com/users/checkUserName/mcbobby';
   headers = {
     headers: new HttpHeaders({
       /* eslint-disable camelcase */
@@ -36,16 +90,23 @@ export class AuthService {
     return throwError(() => errorRsponse);
   }
 
-  getOnboardingStage(id: string): Observable<any[]> {
-    return this.httpClient
-      .get<any[]>(this.baseUrl + `${id}`)
-      .pipe(catchError(this.handleError));
-  }
-
   // onboarding service
-  onboarding(data: IOnboarding): Observable<void> {
+  sendEmail(subject, messageBody, receiver, cc): Observable<void> {
+    const data = {
+      subject,
+      messageBody,
+      receiver,
+      cc,
+    };
+    console.log(data);
+
     return this.httpClient
-      .post<void>(this.baseUrl, data, this.headers)
+      .post<void>(
+        this.notificationBaseUrl +
+          '/notificationservice/api/notification/sendmails',
+        data,
+        this.headers
+      )
       .pipe(catchError(this.handleError));
   }
 
@@ -54,41 +115,6 @@ export class AuthService {
     const payload = {
       action,
       data,
-    };
-    console.log(payload);
-
-    return this.httpClient
-      .post<void>(this.baseUrl, payload, this.headers)
-      .pipe(catchError(this.handleError));
-  }
-  test(data: any, action: string): Observable<void> {
-    const payload = {
-      action,
-      data,
-      response: {
-        ResponseCode: '000',
-        ResponseMessage: 'User Found',
-        user: {
-          UserName: 'Benzy',
-          FirstName: 'Benzy',
-          LastName: 'LukzeeMan',
-          MiddleName: 'AyobMan',
-          Phone: '07099999998',
-          Email: 'test2@gmail.com',
-          Password: 'p@ssw0rd',
-          CreateBankAccount: true,
-          DOB: '30 March 2022',
-          RefCode: '123456',
-          Verified: false,
-          AccountType: 'Royal Basic',
-          CompanyType: 'Corporate',
-          PassportUrl: '',
-          HasBVN: true,
-          Stage: 1,
-          IsFinal: false,
-          BVN: '17654345678',
-        },
-      },
     };
     console.log(payload);
 

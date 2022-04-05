@@ -68,6 +68,7 @@ const materialModules = [RouterModule];
     CommonModule,
     ...materialModules,
     ReactiveFormsModule,
+    FormsModule,
     IonicModule.forRoot(),
   ],
   exports: [CommonModule, IonicModule, ...materialModules, ...components],
