@@ -60,7 +60,7 @@ export class VerifyBvnComponent implements OnInit {
                 CompanyType: res.data.userDetail.companyType,
                 PassportUrl: res.data.userDetail.passportUrl,
                 HasBVN: res.data.userDetail.hasBVN,
-                Stage: 3,
+                Stage: res.data.userDetail.stage,
                 IsFinal: res.data.userDetail.isFinal,
                 BVN: res.data.userDetail.bvn,
               });

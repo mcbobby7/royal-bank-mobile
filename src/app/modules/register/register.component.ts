@@ -36,13 +36,8 @@ export class RegisterComponent implements OnInit {
             this.loading = false;
             if (res.data.responseCode === '00') {
               this.process = res.data.userDetail;
-              if (res.data.userDetail.stage <= 1) {
-                this.router.navigate(['/register/become-royalty']);
-              } else if (res.data.userDetail.stage === 2) {
-                this.router.navigate(['/register/select-account']);
-              } else if (res.data.userDetail.stage === 3) {
-                this.router.navigate(['/register/bvn/1']);
-              }
+              this.router.navigate(['/register/become-royalty']);
+
               console.log(res);
             } else {
               this.loading = false;
