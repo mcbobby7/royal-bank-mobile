@@ -2,22 +2,22 @@
   <div style="height: 50px"></div>
 
   <section class="row">
-    <div class="skip" (click)="skip()">Skip</div>
+    <div class="skip" (click)="skip()" style="font-family: Mulish !important;">Skip</div>
   </section>
   <section class="central-image">
     <ion-img [src]="source" class="img"></ion-img>
   </section>
   <section section style="padding-top: 2rem">
-    <div class="title">{{ caption }}</div>
+    <div class="title" style="font-family: Mulish !important;">{{ caption }}</div>
   </section>
 
   <section class="row">
-    <p class="sub">
+    <p class="sub" style="font-family: Mulish !important;">
       {{ subtitle }}
     </p>
   </section>
 
   <section style="padding-bottom: 2rem; padding-top: 2rem">
-    <ion-button class="btn" expand="block" (click)="next()"> Next </ion-button>
+    <ion-button class="btn" expand="block" (click)="next()" style="font-family: Mulish !important;"> Next </ion-button>
   </section>
 </ion-content>

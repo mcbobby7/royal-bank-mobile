@@ -32,12 +32,17 @@
               />
             </div>
 
+
+          <div class="form-group">
+            <a href="javascript: void(0)" (click)="transactionType(9)" style="text-align: left; color: #25214f; font-weight: 700; text-decoration: none">View History</a>
+          </div>
+
             <div class="form-group">
               <ion-button
                 class="btn"
                 expand="block"
                 style="margin-top: 1rem"
-                (click)="next()"
+                (click)="transactionType(1)"
                 routerLinkActive="router-link-active"
               >
                 Apply
@@ -45,4 +50,57 @@
             </div>
           </form>
     </section>
+
+    <section *ngIf="transType ===1">
+      <div style="background-color: #f8f8f8; border-radius: 8px; text-align: left;">
+        <ion-card-header class="header">Repayment Schedule</ion-card-header>
+        <ion-card-content
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+          "
+        >
+
+        <table>
+          <thead>
+            <th>No.</th>
+            <th>Payment</th>
+            <th>Principal</th>
+            <th>Interest</th>
+            <th>Balance</th>
+            <th></th>
+          </thead>
+          <tr style="margin-top: 5px;">
+            <td>1011</td>
+            <td>&#8358;3000</td>
+            <td>&#8358;50000</td>
+            <td>&#8358;300</td>
+            <td>&#8358;40000</td>
+            <td><ion-img
+              src="assets/icon/red-arrow.png"
+              style="width: 40px; height: 40px; cursor: pointer;"
+              (click)="transactionType(7)"
+            ></ion-img></td>
+          </tr>
+          <tr style="margin-top: 15px;">
+            <td>1099</td>
+            <td>&#8358;4000</td>
+            <td>&#8358;60000</td>
+            <td>&#8358;200</td>
+            <td>&#8358;53000</td>
+            <td><ion-img
+              src="assets/icon/red-arrow.png"
+              style="width: 40px; height: 40px; cursor: pointer;"
+            ></ion-img></td>
+            </tr>
+        </table>
+          <!-- <ion-img
+            src="assets/icon/red-arrow.png"
+            style="width: 55px; height: 55px"
+          ></ion-img> -->
+        </ion-card-content>
+      </div>
+    </section>
+
 </ion-content>

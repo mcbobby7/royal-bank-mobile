@@ -31,7 +31,7 @@ export class VerifyBvnComponent implements OnInit {
   getOnboardingStage() {
     if (this.id) {
       this.auth
-        .post({ UserId: this.id }, 'UserManager.UserService.FetchUserDetail')
+        .post({ userId: this.id }, 'UserManager.UserService.FetchUserDetail')
         .subscribe(
           (res: any) => {
             this.loading = false;
@@ -44,25 +44,25 @@ export class VerifyBvnComponent implements OnInit {
                 this.mode = 'coporate';
               }
               this.onboardingForm.patchValue({
-                Id: +this.id,
-                FirstName: res.data.userDetail.firstName,
-                LastName: res.data.userDetail.lastName,
-                MiddleName: res.data.userDetail.middleName,
-                UserName: res.data.userDetail.userName,
-                Phone: res.data.userDetail.phoneNo,
-                Email: res.data.userDetail.emailAddress,
-                Password: res.data.userDetail.password,
-                CreateBankAccount: res.data.userDetail.createBankAccount,
-                DOB: res.data.userDetail.dob,
-                RefCode: res.data.userDetail.refCode,
-                Verified: res.data.userDetail.verified,
-                AccountType: res.data.userDetail.accountType,
-                CompanyType: res.data.userDetail.companyType,
-                PassportUrl: res.data.userDetail.passportUrl,
-                HasBVN: res.data.userDetail.hasBVN,
-                Stage: 3,
-                IsFinal: res.data.userDetail.isFinal,
-                BVN: res.data.userDetail.bvn,
+                id: +this.id,
+                firstName: res.data.userDetail.firstName,
+                lastName: res.data.userDetail.lastName,
+                middleName: res.data.userDetail.middleName,
+                userName: res.data.userDetail.userName,
+                phone: res.data.userDetail.phoneNo,
+                email: res.data.userDetail.emailAddress,
+                password: res.data.userDetail.password,
+                createBankAccount: res.data.userDetail.createBankAccount,
+                dob: res.data.userDetail.dob,
+                refCode: res.data.userDetail.refCode,
+                verified: res.data.userDetail.verified,
+                accountType: res.data.userDetail.accountType,
+                companyType: res.data.userDetail.companyType,
+                passportUrl: res.data.userDetail.passportUrl,
+                hasBVN: res.data.userDetail.hasBVN,
+                stage: 3,
+                isFinal: res.data.userDetail.isFinal,
+                bvn: res.data.userDetail.bvn,
               });
               console.log(res);
             } else {
@@ -94,12 +94,12 @@ export class VerifyBvnComponent implements OnInit {
             const fulname = res.data.fullName.split(' ');
             this.phone = res.data.phoneNo;
             this.onboardingForm.patchValue({
-              FirstName: fulname[0],
-              LastName: fulname[2],
-              MiddleName: fulname[1],
-              Phone: res.data.phoneNo,
-              Email: res.data.emailAddress,
-              DOB: res.data.dateOfBirth,
+              firstName: fulname[0],
+              lastName: fulname[2],
+              middleName: fulname[1],
+              phone: res.data.phoneNo,
+              email: res.data.emailAddress,
+              dob: res.data.dateOfBirth,
             });
 
             this.register();
@@ -156,25 +156,25 @@ export class VerifyBvnComponent implements OnInit {
     // register form
     this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
-      Id: new FormControl(+this.id),
-      FirstName: new FormControl(''),
-      LastName: new FormControl(''),
-      MiddleName: new FormControl(''),
-      UserName: new FormControl('a'),
-      Phone: new FormControl('875'),
-      Email: new FormControl(''),
-      Password: new FormControl(''),
-      CreateBankAccount: new FormControl(true),
-      DOB: new FormControl(''),
-      RefCode: new FormControl(''),
-      Verified: new FormControl(false),
-      AccountType: new FormControl(''),
-      CompanyType: new FormControl(''),
-      PassportUrl: new FormControl(''),
-      HasBVN: new FormControl(false),
-      Stage: new FormControl(3),
-      IsFinal: new FormControl(false),
-      BVN: new FormControl(''),
+      id: new FormControl(+this.id),
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      middleName: new FormControl(''),
+      userName: new FormControl('a'),
+      phone: new FormControl('875'),
+      email: new FormControl(''),
+      password: new FormControl(''),
+      createBankAccount: new FormControl(true),
+      dob: new FormControl(''),
+      refCode: new FormControl(''),
+      verified: new FormControl(false),
+      accountType: new FormControl(''),
+      companyType: new FormControl(''),
+      passportUrl: new FormControl(''),
+      hasBVN: new FormControl(false),
+      stage: new FormControl(3),
+      isFinal: new FormControl(false),
+      bvn: new FormControl(''),
     });
     // console.log(this.onboardingForm.value);
   }
@@ -192,11 +192,11 @@ export class VerifyBvnComponent implements OnInit {
     this.mode = mode;
     if (mode === 'basic') {
       this.onboardingForm.patchValue({
-        HasBVN: true,
+        hasBVN: true,
       });
     } else {
       this.onboardingForm.patchValue({
-        HasBVN: false,
+        hasBVN: false,
       });
     }
     console.log(this.onboardingForm.value);
