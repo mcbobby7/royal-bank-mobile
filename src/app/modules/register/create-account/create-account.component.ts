@@ -52,7 +52,7 @@ export class CreateAccountComponent implements OnInit {
                 CompanyType: res.data.userDetail.companyType,
                 PassportUrl: res.data.userDetail.passportUrl,
                 HasBVN: res.data.userDetail.hasBVN,
-                Stage: res.data.userDetail.stage,
+                Stage: 5,
                 IsFinal: res.data.userDetail.isFinal,
                 BVN: res.data.userDetail.bvn,
               });
@@ -137,7 +137,7 @@ export class CreateAccountComponent implements OnInit {
       CompanyType: new FormControl(''),
       PassportUrl: new FormControl(''),
       HasBVN: new FormControl(false),
-      Stage: new FormControl(2),
+      Stage: new FormControl(5),
       IsFinal: new FormControl(false),
       BVN: new FormControl(''),
     });

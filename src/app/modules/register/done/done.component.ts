@@ -35,9 +35,32 @@ export class DoneComponent implements OnInit {
             if (res.data.responseCode === '00') {
               // this.process = res.data.userDetail;
               this.user = res.data.userDetail;
-
+              this.user = res.data.userDetail;
+              this.onboardingForm.patchValue({
+                Id: +this.id,
+                FirstName: res.data.userDetail.firstName,
+                LastName: res.data.userDetail.lastName,
+                MiddleName: res.data.userDetail.middleName,
+                UserName: res.data.userDetail.userName,
+                Phone: res.data.userDetail.phoneNo,
+                Email: res.data.userDetail.emailAddress,
+                Password: res.data.userDetail.password,
+                CreateBankAccount: res.data.userDetail.createBankAccount,
+                DOB: res.data.userDetail.dob,
+                RefCode: res.data.userDetail.refCode,
+                Verified: res.data.userDetail.verified,
+                AccountType: res.data.userDetail.accountType,
+                CompanyType: res.data.userDetail.companyType,
+                PassportUrl: res.data.userDetail.passportUrl,
+                HasBVN: res.data.userDetail.hasBVN,
+                Stage: 15,
+                IsFinal: true,
+                BVN: res.data.userDetail.bvn,
+              });
+              localStorage.setItem('stageId', '');
               console.log(res);
               console.log(this.onboardingForm.value);
+              this.register();
             } else {
               console.log(res);
               this.router.navigate(['/register']);
@@ -56,8 +79,56 @@ export class DoneComponent implements OnInit {
     return;
   }
 
+  register() {
+    this.loading = true;
+    console.log(this.onboardingForm.value);
+    this.loading = true;
+    this.auth
+      .post(this.onboardingForm.value, 'UserManager.UserService.UpdateUser')
+      .subscribe(
+        (res: any) => {
+          this.loading = false;
+          if (res.data.responseCode === '00') {
+            console.log(res.data.data.id);
+            this.loading = false;
+            // this.data = res.data;
+
+            // deal with register
+            console.log(res);
+          } else {
+            console.log(res.data.responseMessage);
+          }
+        },
+        (err) => {
+          console.error(err.message);
+          this.loading = false;
+        }
+      );
+  }
+
   ngOnInit() {
     this.getOnboardingStage();
+    this.onboardingForm = new FormGroup({
+      Id: new FormControl(+this.id),
+      FirstName: new FormControl(''),
+      LastName: new FormControl(''),
+      MiddleName: new FormControl(''),
+      UserName: new FormControl('a'),
+      Phone: new FormControl('875'),
+      Email: new FormControl(''),
+      Password: new FormControl(''),
+      CreateBankAccount: new FormControl(true),
+      DOB: new FormControl(''),
+      RefCode: new FormControl(''),
+      Verified: new FormControl(false),
+      AccountType: new FormControl(''),
+      CompanyType: new FormControl(''),
+      PassportUrl: new FormControl(''),
+      HasBVN: new FormControl(false),
+      Stage: new FormControl(5),
+      IsFinal: new FormControl(true),
+      BVN: new FormControl(''),
+    });
   }
   sign() {
     this.router.navigate(['/login']);

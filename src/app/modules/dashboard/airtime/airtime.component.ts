@@ -8,8 +8,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AirtimeComponent implements OnInit {
 
+  selectedBtn = true;
+  selectedBtn1 = false;
+  newReq = true;
   transType = 0;
-  royalAccount = new FormGroup({
+  beneficiaryForm = new FormGroup({
     beneficiaryAccount: new FormControl(''),
     amount: new FormControl(''),
     narration: new FormControl(''),
@@ -26,5 +29,11 @@ export class AirtimeComponent implements OnInit {
 
   create(){
     console.log('Hey');
+  }
+
+  toggleRequest(e){
+    this.newReq = e;
+    this.selectedBtn = !this.selectedBtn;
+    this.selectedBtn1 = !this.selectedBtn1;
   }
 }

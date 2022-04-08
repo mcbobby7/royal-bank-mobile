@@ -8,6 +8,11 @@
   --background-activated: #25214f;
 }
 
+ion-toggle {
+  --height: 15px;
+  --background-checked:#25214f;
+}
+
 .inner-icon {
 // font-size: 20px;
 color: #d9ac0b;
@@ -85,6 +90,14 @@ ion-content {
 
 .form-inline [fullWidth] {
   flex: 1;
+}
+
+ion-button {
+  --background:#d9ac0b; --color:#fff !important;
+}
+
+.active {
+  width: 100%; --border-radius: none; --background:#25214f; --color:#fff; --color-activated:#fff; --background-activated:#d9ac0b;
 }
 
 .form-inline > * {

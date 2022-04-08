@@ -83,6 +83,22 @@ ion-content {
   margin: 0 1.5rem 1.5rem 0;
 }
 
+.row-one {
+  border: 0.800000011920929px solid #ced4da;
+  border-radius: 5px;
+  margin-top: 50px;
+  padding: 10px;
+  // background-color: #d5d4d4;
+}
+
+ion-button {
+  --background:#d9ac0b; --color:#fff !important;
+}
+
+.active {
+  width: 100%; --border-radius: none; --background:#25214f; --color:#fff; --color-activated:#fff; --background-activated:#d9ac0b;
+}
+
 .input {
   height: 3.2rem;
   background: #e8e8e8;

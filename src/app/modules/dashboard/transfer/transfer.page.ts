@@ -10,7 +10,10 @@ export class TransferPage implements OnInit {
 
   source = 'assets/icon/royalty.png';
   imageSrc = 'assets/icon/success.png';
+  selectedBtn = true;
+  selectedBtn1 = false;
   transType = 0;
+  newReq = true;
   royalAccount = new FormGroup({
     beneficiaryAccount: new FormControl(''),
     amount: new FormControl(''),
@@ -32,6 +35,8 @@ export class TransferPage implements OnInit {
 
   transactionType(e){
     this.transType = e;
+
+
   }
 
   create(){
@@ -40,6 +45,12 @@ export class TransferPage implements OnInit {
 
   chooseBeneficiary(e){
     console.log('chosen');
+  }
+
+  toggleRequest(e){
+    this.newReq = e;
+    this.selectedBtn = !this.selectedBtn;
+    this.selectedBtn1 = !this.selectedBtn1;
   }
 
 }
