@@ -8,13 +8,13 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { DashboardComponent } from './core/templates/dashboard/dashboard.component';
+import { DashboardPage } from './modules/dashboard/dashboard.page';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DashboardPage],
   entryComponents: [],
   imports: [
     BrowserModule,

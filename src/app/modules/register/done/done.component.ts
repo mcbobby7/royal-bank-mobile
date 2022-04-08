@@ -41,11 +41,11 @@ export class DoneComponent implements OnInit {
                 FirstName: res.data.userDetail.firstName,
                 LastName: res.data.userDetail.lastName,
                 MiddleName: res.data.userDetail.middleName,
-                UserName: res.data.userDetail.userName,
+                UserName: res.data.userDetail.emailAddress,
                 Phone: res.data.userDetail.phoneNo,
                 Email: res.data.userDetail.emailAddress,
                 Password: res.data.userDetail.password,
-                CreateBankAccount: res.data.userDetail.createBankAccount,
+                CreateBankAccount: true,
                 DOB: res.data.userDetail.dob,
                 RefCode: res.data.userDetail.refCode,
                 Verified: res.data.userDetail.verified,
@@ -56,6 +56,10 @@ export class DoneComponent implements OnInit {
                 Stage: 15,
                 IsFinal: true,
                 BVN: res.data.userDetail.bvn,
+                Shares: res.data.userDetail.shares,
+                TinNumber: res.data.userDetail.tinNumber,
+                RCNumber: res.data.userDetail.rcNumber,
+                CompanyName: res.data.userDetail.companyName,
               });
               localStorage.setItem('stageId', '');
               console.log(res);
@@ -128,6 +132,10 @@ export class DoneComponent implements OnInit {
       Stage: new FormControl(5),
       IsFinal: new FormControl(true),
       BVN: new FormControl(''),
+      Shares: new FormControl(false),
+      TinNumber: new FormControl(''),
+      RCNumber: new FormControl(''),
+      CompanyName: new FormControl(''),
     });
   }
   sign() {

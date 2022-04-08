@@ -42,9 +42,13 @@ export class RegisterComponent implements OnInit {
             } else {
               this.loading = false;
               console.log(res);
+              this.router.navigate(['/register/become-royalty']);
             }
           },
-          (err) => console.error(err.message)
+          (err) => {
+            console.error(err.message);
+            this.router.navigate(['/register/become-royalty']);
+          }
         );
     } else {
       this.router.navigate(['/register/become-royalty']);
@@ -53,23 +57,6 @@ export class RegisterComponent implements OnInit {
   }
 
   // register method
-  register() {
-    this.auth
-      .post(this.onboardingForm.value, 'UserManager.UserService.CreateUser')
-      .subscribe(
-        (res: any) => {
-          if (res.data.responseCode === '00') {
-            this.data = res.data;
-            localStorage.setItem('onboardingId', res.data.id);
-            // deal with register
-            console.log(res);
-          } else {
-            console.log(res.data.responseMessage);
-          }
-        },
-        (err) => console.error(err.message)
-      );
-  }
 
   ngOnInit(): void {
     // register form
@@ -93,6 +80,10 @@ export class RegisterComponent implements OnInit {
       Stage: new FormControl(1),
       IsFinal: new FormControl(false),
       BVN: new FormControl(''),
+      Shares: new FormControl(false),
+      TinNumber: new FormControl(''),
+      RCNumber: new FormControl(''),
+      CompanyName: new FormControl(''),
     });
     // console.log(this.onboardingForm.value);
   }

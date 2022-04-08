@@ -58,6 +58,10 @@ export class ImageComponent implements OnInit {
                 Stage: res.data.userDetail.stage,
                 IsFinal: res.data.userDetail.isFinal,
                 BVN: res.data.userDetail.bvn,
+                Shares: res.data.userDetail.shares,
+                TinNumber: res.data.userDetail.tinNumber,
+                RCNumber: res.data.userDetail.rcNumber,
+                CompanyName: res.data.userDetail.companyName,
               });
               console.log(res);
               console.log(this.onboardingForm.value);
@@ -125,6 +129,10 @@ export class ImageComponent implements OnInit {
       Stage: new FormControl(2),
       IsFinal: new FormControl(false),
       BVN: new FormControl(''),
+      Shares: new FormControl(false),
+      TinNumber: new FormControl(''),
+      RCNumber: new FormControl(''),
+      CompanyName: new FormControl(''),
     });
     // console.log(this.onboardingForm.value);
   }

@@ -1,0 +1,74 @@
+<section class="row">
+  <ion-card
+    style="background-color: #25214f; border-radius: 8px; margin: 10px 4px"
+  >
+    <ion-card-content
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius: 8px;
+        text-align: center;
+      "
+    >
+      <span
+        class="card-items"
+        style="
+          color: white;
+          font-family: Mulish !important;
+          font-size: 18px;
+          font-weight: 700;
+        "
+        >Royal Basic</span
+      >
+      <span
+        class="card-items"
+        style="
+          font-family: Mulish !important;
+          font-size: 30px;
+          font-weight: 800;
+          color: #fff;
+        "
+        *ngIf="show"
+        >&#8358;300</span
+      >
+      <span
+        class="card-items"
+        style="
+          font-family: Mulish !important;
+          font-size: 30px;
+          font-weight: 800;
+          color: #fff;
+        "
+        *ngIf="!show"
+        >**********</span
+      >
+      <div
+        class="card-items"
+        style="background-color: #fff; border-radius: 5px; margin: 0px 45px"
+      >
+        <span style="margin: 20px; font-size: 20px; font-weight: 600"
+          >0123456789</span
+        >
+        <ion-icon
+          name="copy-outline"
+          style="cursor: pointer; font-size: 18px; margin-top: 3px"
+        ></ion-icon>
+      </div>
+      <div style="text-align: right !important; margin-top: -10px !important">
+        <ion-icon
+          *ngIf="!show"
+          (click)="viewBalance()"
+          style="font-size: 22px; color: #fff; cursor: pointer; right: 20px"
+          name="eye-off-outline"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="show"
+          (click)="viewBalance()"
+          style="font-size: 22px; color: #fff; cursor: pointer; right: 20px"
+          name="eye-off-outline"
+        ></ion-icon>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</section>

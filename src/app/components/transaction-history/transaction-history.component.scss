@@ -1,0 +1,32 @@
+.tran {
+  background-color: #f8f8f8;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .text {
+      padding: 0 10px;
+
+      .tit {
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .mode {
+        font-size: 11px;
+        color: rgb(141, 141, 136);
+        padding: 0 3px;
+      }
+    }
+  }
+  .amount {
+    font-size: 17px;
+    font-weight: 600;
+    color: rgb(213, 75, 75);
+  }
+}
