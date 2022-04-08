@@ -31,7 +31,7 @@ export class VerifyBvnComponent implements OnInit {
   getOnboardingStage() {
     if (this.id) {
       this.auth
-        .post({ UserId: this.id }, 'UserManager.UserService.FetchUserDetail')
+        .post({ userId: this.id }, 'UserManager.UserService.FetchUserDetail')
         .subscribe(
           (res: any) => {
             this.loading = false;
@@ -98,12 +98,12 @@ export class VerifyBvnComponent implements OnInit {
             const fulname = res.data.fullName.split(' ');
             this.phone = res.data.phoneNo;
             this.onboardingForm.patchValue({
-              FirstName: fulname[0],
-              LastName: fulname[2],
-              MiddleName: fulname[1],
-              Phone: res.data.phoneNo,
-              Email: res.data.emailAddress,
-              DOB: res.data.dateOfBirth,
+              firstName: fulname[0],
+              lastName: fulname[2],
+              middleName: fulname[1],
+              phone: res.data.phoneNo,
+              email: res.data.emailAddress,
+              dob: res.data.dateOfBirth,
             });
 
             this.register();
@@ -200,11 +200,11 @@ export class VerifyBvnComponent implements OnInit {
     this.mode = mode;
     if (mode === 'basic') {
       this.onboardingForm.patchValue({
-        HasBVN: true,
+        hasBVN: true,
       });
     } else {
       this.onboardingForm.patchValue({
-        HasBVN: false,
+        hasBVN: false,
       });
     }
     console.log(this.onboardingForm.value);

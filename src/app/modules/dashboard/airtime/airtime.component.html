@@ -124,23 +124,83 @@
   </section>
 
   <section *ngIf="transType === 2">
-    <ion-tabs>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="schedule">
-          <ion-icon name="calendar"></ion-icon>
-          <ion-label>New</ion-label>
-        </ion-tab-button>
-        <ion-content fullscreen class="ion-padding">
-          <h1>Movies</h1>
-        </ion-content>
+    <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
+      <ion-button  (click)="toggleRequest(true)" [ngClass]="{active: selectedBtn === true}"
+      style="width: 100%; --border-radius: none;">
+        New
+      </ion-button>
 
-        <ion-tab-button tab="speakers">
-          <ion-icon name="person-circle"></ion-icon>
-          <ion-label>Beneficiaries</ion-label>
-        </ion-tab-button>
-      </ion-tab-bar>
+      <ion-button (click)="toggleRequest(false)" size="medium" [ngClass]="{active: selectedBtn1 === true}"
+      style="width: 100%; --border-radius: none;">
+        Beneficiary
+      </ion-button>
+    </div>
 
-    </ion-tabs>
+    <form [formGroup]="beneficiaryForm">
+
+      <div class="form-group row" style="padding: 5px">
+        <label for="">Phone Number</label>
+        <input
+          type="text"
+          name="amount"
+          class="input"
+          placeholder="100000"
+        />
+      </div>
+
+      <div class="form-group row" style="padding: 5px">
+        <label for="">Amount</label>
+        <input
+          type="text"
+          name="amount"
+          class="input"
+          placeholder="100000"
+        />
+      </div>
+
+      <div class="form-group">
+        <a href="javascript: void(0)" (click)="transactionType(9)" style="text-align: left; color: #25214f; font-weight: 700; text-decoration: none">Choose Beneficiary</a>
+      </div>
+
+      <div class="form-group">
+        <ion-button
+          class="btn"
+          expand="block"
+          style="margin-top: 1rem"
+          (click)="next()"
+          routerLinkActive="router-link-active"
+        >
+          Transfer
+        </ion-button>
+      </div>
+    </form>
+
+    <form [formGroup]="beneficiaryForm">
+      <div class="form-group row" style="padding: 5px">
+        <label for="">Search Beneficiary</label>
+        <input
+          type="text"
+          class="input"
+          placeholder="Search.."
+          name="search"
+        />
+        <ion-icon name="search" style="margin-top: -34px; margin-left: 7px;"></ion-icon>
+      </div>
+
+      <div class="row-one">
+        <span style="text-align: left;">No beneficiary found</span>
+      </div>
+
+    </form>
+  </section>
+
+
+  <section *ngIf="transType ===9">
+
+
+    <ion-card>
+
+    </ion-card>
   </section>
 
 </ion-content>
