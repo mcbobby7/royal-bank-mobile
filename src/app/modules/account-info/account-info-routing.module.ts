@@ -9,23 +9,23 @@ import { ResetPinComponent } from './reset-pin/reset-pin.component';
 const routes: Routes = [
   {
     path: '',
-    component: AccountInfoPage
+    component: AccountInfoPage,
   },
 
   {
     path: 'change-password',
-    component: ChangePasswordComponent
+    component: ChangePasswordComponent,
   },
 
   {
     path: 'reset-pin',
-    component: ResetPinComponent
+    component: ResetPinComponent,
   },
 
   {
     path: 'limit',
-    component: LimitComponent
-  }
+    component: LimitComponent,
+  },
 ];
 
 @NgModule({
