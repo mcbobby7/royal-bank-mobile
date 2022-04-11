@@ -1,9 +1,156 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>account-info</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content style="margin-top: 100px;">
+<section>
+  <section>
+    <div style="padding:20px; width:100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #25214f; color: #fff; padding: 20px 30px;">
+      <div style="border-radius: 50%; margin: 10px 0;">
+        <ion-img
+          src="assets/icon/money.png"
+          style="width: 55px; height: 55px; margin: auto"
+        ></ion-img>
+      </div>
+      <span>Ogungbenro Philip</span>
 
-<ion-content>
+      <ion-button id="details" size="small">Show Details</ion-button>
+<ion-popover trigger="details">
+  <ng-template>
+  <ion-list>
+      <ion-item>
+        <ion-label>Account No</ion-label>
+        <span>0123456789</span>
+      </ion-item>
+      <ion-item>
+        <ion-label>Username</ion-label>
+        <span>onaopemipo</span>
+      </ion-item>
 
+      <ion-item>
+        <ion-label>BVN</ion-label>
+        <span>0123456789</span>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <span>philipmuyiwa@gmail.com</span>
+      </ion-item>
+      <ion-item>
+        <ion-label>Phone No.</ion-label>
+        <span>08136895580</span>
+      </ion-item>
+    </ion-list>
+  </ng-template>
+</ion-popover>
+    </div>
+  </section>
+
+  <section>
+    <div style="
+    font-family: Mulish !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
+    margin: 1.5rem 0.5rem;"
+    [routerLink]="['change-password']">
+      <div class="icon-container">
+        <ion-icon name="lock-closed-sharp" class="inner-icon"></ion-icon>
+      </div>
+      <span class="items">Changed Password</span>
+      <ion-icon name="caret-forward" style="margin:auto; font-size: 25px; color: #25214f;"></ion-icon>
+      </div>
+
+      <div style="
+    font-family: Mulish !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
+    margin: 1.5rem 0.5rem;"
+    (click)="enableBiomterics()">
+      <div class="icon-container">
+        <ion-icon name="finger-print-sharp" class="inner-icon"></ion-icon>
+      </div>
+      <span class="items">Biometric Login</span>
+      <ion-toggle></ion-toggle>
+    </div>
+
+      <div style="
+      font-family: Mulish !important;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      cursor: pointer;
+      margin: 1.5rem 0.5rem;"
+      (click)="selectedOption(3)">
+        <div class="icon-container">
+          <ion-icon name="wallet-sharp" class="inner-icon"></ion-icon>
+        </div>
+        <span class="items">Increase Limit</span>
+        <ion-icon name="caret-forward" style="margin:auto; font-size: 25px; color: #25214f;"></ion-icon>
+        </div>
+
+        <div style="
+        font-family: Mulish !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        cursor: pointer;
+        margin: 1.5rem 0.5rem;"
+        [routerLink]="['reset-pin']">
+          <div class="icon-container">
+            <ion-icon name="settings-sharp" class="inner-icon"></ion-icon>
+          </div>
+          <span class="items">Reset/Change PIN</span>
+          <ion-icon name="caret-forward" style="margin:auto; font-size: 25px; color: #25214f;"></ion-icon>
+          </div>
+
+  </section>
+</section>
+
+
+  <!-- <section *ngIf="option ===2">
+    <form [formGroup]="passwordForm">
+      <div class="form-group row" style="padding: 5px">
+        <label for="">Old Password</label>
+        <input
+          type="password"
+          name="password"
+          class="input"
+          placeholder="1234567890"
+        />
+      </div>
+
+      <div class="form-group row" style="padding: 5px">
+        <label for="">Amount</label>
+        <input
+          type="text"
+          name="amount"
+          class="input"
+          placeholder="100000"
+        />
+      </div>
+  </form>
+  </section> -->
+
+  <!-- <section *ngIf="option ===3">
+    <form [formGroup]="passwordForm">
+      <div class="form-group row" style="padding: 5px">
+        <label for="">Old Password</label>
+        <input
+          type="password"
+          name="password"
+          class="input"
+          placeholder="1234567890"
+        />
+      </div>
+
+      <div class="form-group row" style="padding: 5px">
+        <label for="">Amount</label>
+        <input
+          type="text"
+          name="amount"
+          class="input"
+          placeholder="100000"
+        />
+      </div>
+  </form>
+  </section> -->
 </ion-content>
