@@ -1,0 +1,44 @@
+.icon-container {
+  border-radius: 10%;
+  background-color: #25214f;
+  padding: 10px;
+}
+
+ion-button {
+  --background:#d9ac0b;
+  --color: #25214f;
+  --background-activated: #25214f;
+  --color-activated: #fff;
+  --background-hover: #25214f;
+  --color-hover: #fff;
+}
+
+ion-toggle {
+  --height: 15px;
+  --background-checked:#25214f;
+}
+
+.inner-icon {
+  // font-size: 20px;
+  color: #d9ac0b;
+  }
+
+  span {
+    font-family: Mulish !important;
+    // font-size: 15px !important;
+    display: flex !important;
+    align-self: center !important;
+  }
+  ion-content {
+    font-family: Mulish !important;
+    // --padding-end: 20px;
+    // --padding-start: 20px;
+  }
+
+  .items {
+    padding-left: 20px; font-size: 20px; width: 100%;
+  }
+
+  ion-popover {
+    --width: 22.5rem;
+  }

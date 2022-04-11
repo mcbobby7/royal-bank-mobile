@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountInfoPage implements OnInit {
 
+  option = 0;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  selectedOption(e){
+    this.option = e;
+  }
+
+  enableBiomterics(){
+    console.log('Biometric login enabled');
   }
 
 }
