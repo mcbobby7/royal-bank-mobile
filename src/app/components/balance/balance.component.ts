@@ -8,33 +8,36 @@ import { AuthService } from '../../core/http/services/auth.service';
 })
 export class BalanceComponent implements OnInit {
   show = false;
+  user = JSON.parse(localStorage.getItem('user'));
+  data = null;
   constructor(private auth: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getBalance();
+  }
   viewBalance() {
     this.show = !this.show;
   }
 
-  register() {
-    this.auth
-      .post(
-        {
-          clientId: 418,
-          savingsId: 20,
-        },
-        'Cba.BankingService.FetchAccountBalance'
-      )
-      .subscribe(
-        (res: any) => {
-          if (res.data.responseCode === '00') {
-            console.log(res.data.data.id);
+  getBalance() {
+    const data = {
+      clientId: +this.user.accountNos[0].clientId,
+      accountId: +this.user.accountNos[0].accountId,
+    };
+    this.auth.post(data, 'Cba.BankingService.FetchAccountBalance').subscribe(
+      (res: any) => {
+        console.log(res);
 
-            console.log(res);
-          } else {
-            console.log(res.data.responseMessage);
-          }
-        },
-        (err) => console.error(err.message)
-      );
+        if (res.data.responseCode === '00') {
+          this.data = JSON.parse(res.data.data.resultstring);
+          console.log(this.data);
+
+          console.log(res);
+        } else {
+          console.log(res);
+        }
+      },
+      (err) => console.error(err.message)
+    );
   }
 }

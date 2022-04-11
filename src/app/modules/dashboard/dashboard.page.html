@@ -87,11 +87,10 @@
           cursor: pointer;
         "
       >
-        Add Money
+        Add Fund
       </div>
     </div>
   </section>
-  <app-transaction-history></app-transaction-history>
 
   <!-- <section style="margin-top: 50px">
     <div
@@ -107,7 +106,7 @@
     </div>
   </section> -->
 
-  <section style="margin-top: 10px;">
+  <section style="margin-top: 10px">
     <div style="background-color: #f8f8f8; border-radius: 8px">
       <ion-card-header class="header">Increase your limit</ion-card-header>
       <ion-card-content
@@ -128,9 +127,11 @@
     </div>
   </section>
 
-  <section style="margin-top: 10px;">
+  <section style="margin-top: 10px">
     <div style="background-color: #f8f8f8; border-radius: 8px">
-      <ion-card-header class="header">Request a Royal Bank Card</ion-card-header>
+      <ion-card-header class="header"
+        >Request a Royal Bank Card</ion-card-header
+      >
       <ion-card-content
         style="
           display: flex;
@@ -139,8 +140,7 @@
         "
       >
         <span style="font-size: 13px"
-          >We will send you your Royal Bank Card
-          where ever you are for FREE
+          >We will send you your Royal Bank Card where ever you are for FREE
         </span>
         <ion-img
           src="assets/icon/card.png"
@@ -164,73 +164,6 @@
       </div>
     </section>
 
-    <div style="background-color: #f8f8f8; border-radius: 8px">
-      <ion-card-content>
-        <span style="text-align: left; font-size: 13px"
-          >No transactions today
-        </span>
-      </ion-card-content>
-    </div>
-
-    <div style="background-color: #f8f8f8; border-radius: 8px; margin-top: 5px;  padding: 10px 5px;">
-      <div
-        style="
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-        "
-      >
-      <div style="height: 35px; width: 35px; border-radius: 50%; background-color: #FFC8C8; padding: 10px;">
-        <ion-icon name="arrow-up-sharp"></ion-icon>
-      </div>
-
-      <div style="font-size: 12px; display: flex; flex-direction: column; text-align: left;">
-        <span style="font-weight: 600;"
-          >Ogungbenro Philip - 0141944727
-        </span>
-        <span style="font-size: 10px;"
-          >GTB - 0141944727
-        </span>
-        <span style="font-size: 10px;"
-          >05/04/2022
-        </span>
-      </div>
-
-        <span style="color: #FF5A5A; font-size: 12px;">
-          - &#8358; 60000
-        </span>
-
-      </div>
-    </div>
-
-    <div style="background-color: #f8f8f8; border-radius: 5px; margin-top: 5px; padding: 10px 5px;">
-      <div
-        style="
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-        "
-      >
-      <div style="height: 35px; width: 35px; border-radius: 50%; background-color: #E0FEEA; padding: 10px;">
-        <ion-icon name="arrow-down-sharp"></ion-icon>
-      </div>
-
-      <div style="font-size: 12px; display: flex; flex-direction: column;">
-        <span style="-weight: 600;"
-          >Ogungbenro Philip - 0141944727
-        </span>
-        <span style="font-size: 10px;">GTB - 0141944727
-        </span>
-        <span style="font-size: 10px;">08/04/2022
-        </span>
-      </div>
-
-        <span style="color: #46AE6A; font-size: 12px;">
-          - &#8358; 160000
-        </span>
-
-      </div>
-    </div>
-
+    <app-transaction-history></app-transaction-history>
   </section>
 </ion-content>

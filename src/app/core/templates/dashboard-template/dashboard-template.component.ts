@@ -11,6 +11,7 @@ import { Router, RouterEvent } from '@angular/router';
 export class DashboardTemplateComponent implements OnInit {
   active = '';
   imageSrc = 'assets/icon/royalL.png';
+  user = JSON.parse(localStorage.getItem('user'));
 
   nav = [
     {

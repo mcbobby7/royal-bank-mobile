@@ -5,6 +5,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin: 5px 0;
   .icon {
     display: flex;
     flex-direction: row;
@@ -14,7 +15,7 @@
       padding: 0 10px;
 
       .tit {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 700;
       }
       .mode {
@@ -25,8 +26,13 @@
     }
   }
   .amount {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 600;
+  }
+  .red {
     color: rgb(213, 75, 75);
+  }
+  .green {
+    color: rgb(18, 126, 18);
   }
 }

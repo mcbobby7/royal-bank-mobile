@@ -1,11 +1,44 @@
-<div class="tran">
-  <div class="icon">
-    <div class="img"><img src="assets/icon/debit.png" alt="" /></div>
-    <div class="text">
-      <div class="tit">Transfer From Segun</div>
-      <div class="mode">E - Channels Mobile App</div>
-      <div class="mode">23/7/2022</div>
+<div
+  *ngIf="data.length === 0"
+  style="background-color: #f8f8f8; border-radius: 8px"
+>
+  <ion-card-content>
+    <span style="text-align: left; font-size: 13px"
+      >No transactions today
+    </span>
+  </ion-card-content>
+</div>
+<div *ngIf="!loading">
+  <div *ngFor="let trans of data">
+    <div class="tran">
+      <div class="icon">
+        <div class="img"><img src="assets/icon/credict.png" alt="" /></div>
+        <div class="text">
+          <div class="tit">
+            {{ trans?.narration ? trans?.narration : "No Description" }}
+          </div>
+          <div class="mode">{{ trans?.submittedByUsername }}</div>
+          <div class="mode">
+            {{ trans.date[0] }}-{{ trans?.date[1] }}-{{ trans.date[2] }}
+          </div>
+        </div>
+      </div>
+      <div class="amount green">{{ trans.amount | currency: "&#8358;" }}</div>
     </div>
+    <!-- <div class="tran">
+      <div class="icon">
+        <div class="img"><img src="assets/icon/debit.png" alt="" /></div>
+        <div class="text">
+          <div class="tit">Transfer From Segun</div>
+          <div class="mode">{{ trans.submittedByUsername }}</div>
+          <div class="mode">
+            {{ trans.submittedOnDate[0] }}-{{ trans.submittedOnDate[1] }}-{{
+              trans.submittedOnDate[2]
+            }}
+          </div>
+        </div>
+      </div>
+      <div class="amount red">-N{{ trans.amount }}</div>
+    </div> -->
   </div>
-  <div class="amount">-N4000</div>
 </div>

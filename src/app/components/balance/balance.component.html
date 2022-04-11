@@ -30,7 +30,7 @@
           color: #fff;
         "
         *ngIf="show"
-        >&#8358;300</span
+        >{{ data.Balance | currency: "&#8358;" }}</span
       >
       <span
         class="card-items"
@@ -47,9 +47,9 @@
         class="card-items"
         style="background-color: #fff; border-radius: 5px; margin: 0px 45px"
       >
-        <span style="margin: 20px; font-size: 20px; font-weight: 600"
-          >0123456789</span
-        >
+        <span style="margin: 20px; font-size: 20px; font-weight: 600">{{
+          user.accountNos[0].accountNo
+        }}</span>
         <ion-icon
           name="copy-outline"
           style="cursor: pointer; font-size: 18px; margin-top: 3px"
