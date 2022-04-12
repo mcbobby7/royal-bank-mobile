@@ -29,8 +29,14 @@ import { ProfileComponent } from '../modules/dashboard/profile/profile.component
 import { HistoryComponent } from '../modules/dashboard/history/history.component';
 import { AirtimeComponent } from '../modules/dashboard/airtime/airtime.component';
 import { CabletvComponent } from '../modules/dashboard/bills-payments/cabletv/cabletv.component';
+import { TransactionHistoryComponent } from '../components/transaction-history/transaction-history.component';
+import { BalanceComponent } from '../components/balance/balance.component';
+import { TabsPage } from '../tabs/tabs.page';
 
 const components = [
+  TabsPage,
+  BalanceComponent,
+  TransactionHistoryComponent,
   LoginComponent,
   HeaderComponent,
   RegisterComponent,
@@ -56,7 +62,7 @@ const components = [
   ProfileComponent,
   HistoryComponent,
   AirtimeComponent,
-  CabletvComponent
+  CabletvComponent,
 ];
 
 const materialModules = [RouterModule];

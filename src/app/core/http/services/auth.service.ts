@@ -9,57 +9,6 @@ import {
 } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-// import {
-//   mergeMap as _observableMergeMap,
-//   catchError as _observableCatch,
-// } from "rxjs/operators";
-// import {
-//   Observable,
-//   throwError as _observableThrow,
-//   of as _observableOf,
-// } from "rxjs";
-// import { Injectable, Inject, Optional, InjectionToken } from "@angular/core";
-// import {
-//   HttpClient,
-//   HttpHeaders,
-//   HttpResponse,
-//   HttpResponseBase,
-// } from "@angular/common/http";
-// import { environment } from "../../environments/environment";
-// import { HTTP } from "@ionic-native/http/ngx";
-// import { from } from "rxjs";
-
-// let options_: any = {
-//   body: content_,
-//   observe: "response",
-//   responseType: "blob",
-//   headers: new HttpHeaders({
-//     session_token:
-//       session_token !== undefined && session_token !== null
-//         ? "" + session_token
-//         : "",
-//     imei: imei !== undefined && imei !== null ? "" + imei : "",
-//     "Content-Type": "application/json",
-//     Accept: "application/json",
-//   }),
-// };
-// this.htp.setDataSerializer("json");
-// return from(
-//   this.htp
-//     .post(url_, payload, null)
-//     .then((data) => {
-//       return JSON.parse(data.data);
-//     })
-//     .catch((error) => {
-//       return throwException(
-//         "An unexpected server error occurred.",
-//         400,
-//         "server error",
-//         options_
-//       );
-//     })
-// );
-
 @Injectable({
   providedIn: 'root',
 })

@@ -1,0 +1,38 @@
+.tran {
+  background-color: #f8f8f8;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
+  .icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .text {
+      padding: 0 10px;
+
+      .tit {
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .mode {
+        font-size: 11px;
+        color: rgb(141, 141, 136);
+        padding: 0 3px;
+      }
+    }
+  }
+  .amount {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .red {
+    color: rgb(213, 75, 75);
+  }
+  .green {
+    color: rgb(18, 126, 18);
+  }
+}

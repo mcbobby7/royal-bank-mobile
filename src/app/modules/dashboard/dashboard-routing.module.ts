@@ -14,45 +14,54 @@ const routes: Routes = [
 
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
   },
 
   {
     path: 'history',
-    component: HistoryComponent
+    component: HistoryComponent,
   },
   {
     path: 'airtime',
-    component: AirtimeComponent
+    component: AirtimeComponent,
   },
   {
     path: 'transfer',
-    loadChildren: () => import('./transfer/transfer.module').then( m => m.TransferPageModule)
+    loadChildren: () =>
+      import('./transfer/transfer.module').then((m) => m.TransferPageModule),
+  },
+  {
+    path: 'tab1',
+    loadChildren: () =>
+      import('./transfer/transfer.module').then((m) => m.TransferPageModule),
   },
   {
     path: 'borrow',
-    loadChildren: () => import('./borrow/borrow.module').then( m => m.BorrowPageModule)
+    loadChildren: () =>
+      import('./borrow/borrow.module').then((m) => m.BorrowPageModule),
   },
   {
     path: 'addfund',
-    loadChildren: () => import('./addfund/addfund.module').then( m => m.AddfundPageModule)
+    loadChildren: () =>
+      import('./addfund/addfund.module').then((m) => m.AddfundPageModule),
   },
   {
     path: 'bills-payments',
-    loadChildren: () => import('./bills-payments/bills-payments.module').then( m => m.BillsPaymentsPageModule)
+    loadChildren: () =>
+      import('./bills-payments/bills-payments.module').then(
+        (m) => m.BillsPaymentsPageModule
+      ),
   },
   {
     path: 'loan',
-    loadChildren: () => import('./loan/loan.module').then( m => m.LoanPageModule)
+    loadChildren: () =>
+      import('./loan/loan.module').then((m) => m.LoanPageModule),
   },
 
   // {
   //   path: 'account-info',
   //   loadChildren: () => import('../account-info/account-info.module').then(m => m.AccountInfoPageModule)
   // }
-
-
-
 ];
 
 @NgModule({

@@ -57,6 +57,10 @@ export class RoyalSetupComponent implements OnInit {
                 Stage: res.data.userDetail.stage,
                 IsFinal: res.data.userDetail.isFinal,
                 BVN: res.data.userDetail.bvn,
+                Shares: res.data.userDetail.shares,
+                TinNumber: res.data.userDetail.tinNumber,
+                RCNumber: res.data.userDetail.rcNumber,
+                CompanyName: res.data.userDetail.companyName,
               });
               console.log(res);
               console.log(this.onboardingForm.value);
@@ -89,13 +93,6 @@ export class RoyalSetupComponent implements OnInit {
     }
     if (!this.onboardingForm.value.TinNumber) {
       this.toast.error('TIN is required', 'Error');
-      return false;
-    }
-    if (
-      this.onboardingForm.value.Shares !== true ||
-      this.onboardingForm.value.Shares !== false
-    ) {
-      this.toast.error('Share % is required', 'Error');
       return false;
     }
   }

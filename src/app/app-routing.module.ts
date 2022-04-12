@@ -17,6 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
+    canActivate: [AuthGuard],
     component: DashboardTemplateComponent,
     children: [
       {
@@ -54,7 +55,6 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    // canActivate: [AuthGuard],
     loadChildren: () =>
       import('./modules/register/register.module').then(
         (m) => m.RegisterModule
@@ -84,9 +84,11 @@ const routes: Routes = [
   },
   {
     path: 'account-info',
-    loadChildren: () => import('./modules/account-info/account-info.module').then( m => m.AccountInfoPageModule)
+    loadChildren: () =>
+      import('./modules/account-info/account-info.module').then(
+        (m) => m.AccountInfoPageModule
+      ),
   },
-
 ];
 @NgModule({
   imports: [

@@ -1,7 +1,7 @@
 <div style="height: 50px"></div>
 <app-loader *ngIf="loading"></app-loader>
 <ion-content *ngIf="stage < 1">
-  <ion-content *ngIf="stage < 1">
+  <div *ngIf="stage < 1">
     <section>
       <ion-buttons slot="start">
         <ion-button (click)="goBack()">
@@ -72,10 +72,10 @@
         Continue
       </ion-button>
     </div>
-  </ion-content>
+  </div>
 
   <!-- Step Two -->
-  <ion-content *ngIf="stage > 0">
+  <div *ngIf="stage > 0">
     <section>
       <ion-buttons slot="start">
         <ion-button (click)="goBack()">
@@ -137,5 +137,5 @@
         Continue
       </ion-button>
     </div>
-  </ion-content>
+  </div>
 </ion-content>

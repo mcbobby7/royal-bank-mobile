@@ -43,7 +43,7 @@ export class SelectAccountTypeComponent implements OnInit {
                 Phone: res.data.userDetail.phoneNo,
                 Email: res.data.userDetail.emailAddress,
                 Password: res.data.userDetail.password,
-                CreateBankAccount: res.data.userDetail.createBankAccount,
+                CreateBankAccount: true,
                 DOB: res.data.userDetail.dob,
                 RefCode: res.data.userDetail.refCode,
                 Verified: res.data.userDetail.verified,
@@ -54,6 +54,10 @@ export class SelectAccountTypeComponent implements OnInit {
                 Stage: 2,
                 IsFinal: res.data.userDetail.isFinal,
                 BVN: res.data.userDetail.bvn,
+                Shares: res.data.userDetail.shares,
+                TinNumber: res.data.userDetail.tinNumber,
+                RCNumber: res.data.userDetail.rcNumber,
+                CompanyName: res.data.userDetail.companyName,
               });
               console.log(res);
             } else {
@@ -129,6 +133,13 @@ export class SelectAccountTypeComponent implements OnInit {
       Stage: new FormControl(2),
       IsFinal: new FormControl(false),
       BVN: new FormControl(''),
+      Shares: new FormControl(false),
+      TinNumber: new FormControl(''),
+      RCNumber: new FormControl(''),
+      CompanyName: new FormControl(''),
+    });
+    this.onboardingForm.patchValue({
+      AccountType: this.mode,
     });
     // console.log(this.onboardingForm.value);
   }

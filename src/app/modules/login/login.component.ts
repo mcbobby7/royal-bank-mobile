@@ -12,10 +12,10 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loading = false;
   show = false;
-  signinForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
+  // signinForm = new FormGroup({
+  //   username: new FormControl(''),
+  //   password: new FormControl(''),
+  // });
   imageSrc = 'assets/icon/hey.png';
   data: any;
   loginForm!: FormGroup;
@@ -54,6 +54,8 @@ export class LoginComponent implements OnInit {
           this.toast.success('Login was successfull', 'Success');
           this.data = res.data;
           localStorage.setItem('user', JSON.stringify(res.data.profile));
+          console.log(res.data);
+
           localStorage.setItem('token', res.data.token);
           this.router.navigate(['/dashboard']);
         } else {
