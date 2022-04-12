@@ -9,12 +9,19 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class LoanPage implements OnInit {
 
   transType = 0;
-
+  newReq = true;
+  selectedBtn = true;
+  selectedBtn1 = false;
   loanForm = new FormGroup({
     beneficiaryAccount: new FormControl(''),
     bank: new FormControl(''),
     amount: new FormControl(''),
     narration: new FormControl(''),
+  });
+
+  othersForm = new FormGroup({
+    document: new FormControl(''),
+    comment: new FormControl(''),
   });
 
 
@@ -25,6 +32,17 @@ export class LoanPage implements OnInit {
 
   transactionType(e){
     this.transType = e;
+  }
+
+  toggleRequest(e){
+    this.newReq = e;
+    if(e === true){
+      this.selectedBtn = e;
+      this.selectedBtn1 = false;
+    } else {
+      this.selectedBtn = false;
+      this.selectedBtn1 = e;
+    }
   }
 
 }

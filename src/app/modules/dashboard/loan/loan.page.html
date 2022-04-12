@@ -1,8 +1,18 @@
 <ion-content>
   <div style="padding: 100px;"></div>
+   <section *ngIf="transType ===0">
+    <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
+      <ion-button (click)="toggleRequest(true)" [ngClass]="{active: selectedBtn === true}"
+      style="width: 100%; --border-radius: none;">
+        New
+      </ion-button>
 
-  <section *ngIf="transType ===0">
-    <form [formGroup]="othersAccount">
+      <ion-button (click)="toggleRequest(false)" size="medium" [ngClass]="{active: selectedBtn1 === true}"
+      style="width: 100%; --border-radius: none;">
+        History
+      </ion-button>
+    </div>
+    <form *ngIf="newReq" [formGroup]="loanForm">
 
             <div class="form-group row" style="padding: 5px">
               <label for="">Loan Type</label>
@@ -49,6 +59,32 @@
               </ion-button>
             </div>
           </form>
+
+    <div *ngIf="!newReq" class="row">
+      <table style="width: 100%;">
+        <thead>
+          <th>Loan ID</th>
+          <th>Principal</th>
+          <th>Status</th>
+        </thead>
+        <tr style="margin-top: 15px;">
+          <td>1011</td>
+          <td>&#8358;3000</td>
+          <td style="padding: 5px;">
+            <ion-button size="small"  style="--background:#46AE6A; --color:#fff;">Approved</ion-button>
+        </td>
+        </tr>
+
+        <tr style="margin-top: 15px;">
+          <td>1091</td>
+          <td>&#8358;3000</td>
+          <td style="padding: 5px;">
+            <ion-button size="small" style="--background:#FF5A5A; --color:#fff;">Rejected</ion-button>
+        </td>
+        </tr>
+
+      </table>
+    </div>
     </section>
 
     <section *ngIf="transType ===1">
@@ -71,29 +107,28 @@
             <th>Balance</th>
             <th></th>
           </thead>
-          <tr style="margin-top: 5px;">
+          <tr style="margin-top: 15px;">
             <td>1011</td>
             <td>&#8358;3000</td>
             <td>&#8358;50000</td>
             <td>&#8358;300</td>
             <td>&#8358;40000</td>
-            <td><ion-img
-              src="assets/icon/red-arrow.png"
-              style="width: 40px; height: 40px; cursor: pointer;"
-              (click)="transactionType(7)"
-            ></ion-img></td>
+            <td style="padding: 5px;">
+            <div (click)="transactionType(7)" style="height: 35px; width: 35px; border-radius: 50%; background-color: #FF5A5A; padding: 10px;">
+              <ion-icon name="arrow-forward-sharp" style="color: #fff;"></ion-icon>
+            </div>
+          </td>
           </tr>
-          <tr style="margin-top: 15px;">
+          <tr style="margin-top: 45px;">
             <td>1099</td>
             <td>&#8358;4000</td>
             <td>&#8358;60000</td>
             <td>&#8358;200</td>
             <td>&#8358;53000</td>
-            <td><ion-img
-              src="assets/icon/red-arrow.png"
-              style="width: 40px; height: 40px; cursor: pointer;"
-              (click)="transactionType(7)"
-            ></ion-img></td>
+            <td style="padding: 5px;">
+              <div (click)="transactionType(7)" style="height: 35px; width: 35px; border-radius: 50%; background-color: #FF5A5A; padding: 10px;">
+              <ion-icon name="arrow-forward-sharp" style="color: #fff;"></ion-icon>
+            </div></td>
             </tr>
         </table>
           <!-- <ion-img
@@ -105,31 +140,17 @@
     </section>
 
     <section *ngIf="transType ===7">
-      <form [formGroup]="othersAccount">
+      <form [formGroup]="othersForm">
 
               <div class="form-group row" style="padding: 5px">
-                <label for="">Loan Tenure</label>
-                <select name="tenure" id="" class="input">
-                  <option value="1">3 months </option>
-                  <option value="2">6 months</option>
-                  <option value="3">12 months</option>
-                </select>
+                <label for="">Document</label>
+                <input type="file" name="document" class="custom-file-input">
               </div>
 
               <div class="form-group row" style="padding: 5px">
-                <label for="">Amount</label>
-                <input
-                  type="text"
-                  name="amount"
-                  class="input"
-                  placeholder="100000"
-                />
+                <label for="">Comment</label>
+                <textarea name="comment" class="input" cols="30" rows="10"></textarea>
               </div>
-
-
-            <div class="form-group">
-              <a href="javascript: void(0)" (click)="transactionType(9)" style="text-align: left; color: #25214f; font-weight: 700; text-decoration: none">View History</a>
-            </div>
 
               <div class="form-group">
                 <ion-button

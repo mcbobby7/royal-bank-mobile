@@ -1,0 +1,22 @@
+ion-button {
+  margin: 0 auto;
+  --background:#25214f;; --color:#fff !important;
+  --background-activated: #d9ac0b;
+  --color-activated: #25214f;
+}
+
+ion-content {
+  font-family: Mulish !important;
+  --padding-end: 20px;
+  --padding-start: 20px;
+}
+
+.items {
+  padding-left: 20px; font-size: 20px; width: 100%;
+}
+
+ion-popover {
+  opacity: 1;
+  --width: 22.5rem;
+  --background:#25214f;
+}

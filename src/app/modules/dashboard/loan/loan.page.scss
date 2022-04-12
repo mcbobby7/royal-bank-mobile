@@ -1,12 +1,12 @@
-.btn {
-  --background: #25214f;
-  --color: #fff;
-  text-transform: capitalize;
-  height: 3.5rem;
-  font-weight: 300;
-  font-size: 1.2rem;
-  --background-activated: #25214f;
-}
+// .btn {
+//   --background: #25214f;
+//   --color: #fff;
+//   text-transform: capitalize;
+//   height: 3.5rem;
+//   font-weight: 300;
+//   font-size: 1.2rem;
+//   --background-activated: #25214f;
+// }
 
 .inner-icon {
 // font-size: 20px;
@@ -26,6 +26,30 @@ table {
 
 td {
   margin-left: 5px;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: 'Select some files';
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.custom-file-input:hover::before {
+  border-color: #25214f;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
 .row-one {
@@ -71,14 +95,14 @@ section {
   border-radius: 5px;
 }
 
-input {
-  height: 15px;
-  width: 100%;
-  border: 0.800000011920929px solid #ced4da;
-  border-radius: 5px;
-  background-color: #d5d4d4;
-  padding: 0px 25px;
-}
+// input {
+//   height: 15px;
+//   width: 100%;
+//   border: 0.800000011920929px solid #ced4da;
+//   border-radius: 5px;
+//   background-color: #d5d4d4;
+//   padding: 0px 25px;
+// }
 
 // label {
 //   color: #000;
@@ -141,6 +165,7 @@ label {
   margin-left: auto;
   margin-right: auto;
 }
+
 .btn2 {
   --background: #d9ac0b;
   --color: #fff;
@@ -151,10 +176,30 @@ label {
   --background-activated: #d9ac0b;
 }
 
+
 ion-button {
   --border-radius: 15px;
+  --background:#25214f;
+  --color:#fff !important;
+  // --background-activated: #25214f !important;
+
 }
 
+// ion-button:active {
+//   width: 100%; --border-radius: none;
+//   --background:#d9ac0b;
+//   --color:#fff;
+//   --color-activated:#fff;
+//   --background-activated:#d9ac0b;
+// }
+
+.active {
+  width: 100%; --border-radius: none;
+  --background:#d9ac0b !important;
+  --color:#fff;
+  --color-activated:#25214f;
+  --background-activated:#d9ac0b !important;
+}
 
 .content {
   font-family: Mulish !important;

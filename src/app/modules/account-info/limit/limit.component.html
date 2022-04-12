@@ -1,4 +1,6 @@
-<section>
+<ion-content style="display: flex; align-self: center; align-items: center;">
+  <span style="text-align: center;">Update Limit</span>
+  <section>
     <div>
       <div style="
       font-family: Mulish !important;
@@ -7,10 +9,58 @@
       justify-content: space-between;
       cursor: pointer;
       margin: 1.5rem 0.5rem;">
-        <span class="items">Foreign Currency</span>
-        <ion-icon name="create"></ion-icon>
+        <div>
+          <p style="font-weight: 900;">Royal to Royal</p>
+          <p>Daily Limit</p>
+        </div>
+        <div>
+          <!-- <ion-icon name="create"></ion-icon>
+           -->
+           <ion-button id="royal" size="small">Update</ion-button>
+          <p>5,000,000</p>
+        </div>
       </div>
 
+      <ion-popover trigger="royal" side="top">
+        <ng-template>
+          <span>Royal to Royal</span>
+          <form [formGroup]="passwordResetForm">
+            <div class="form-group row" style="padding: 5px">
+              <label for="">Daily Limit</label>
+              <input
+                type="text"
+                name="oldPassword"
+                class="input"
+                placeholder="1,000,000"
+              />
+            </div>
+
+            <div class="form-group row" style="padding: 5px">
+              <label for="">Single Limit</label>
+              <input
+                type="text"
+                name="newPassword"
+                class="input"
+                placeholder="1,000,000"
+              />
+            </div>
+
+            <div class="form-group">
+              <ion-button
+                class="btn"
+                expand="block"
+                style="margin-top: 1rem; font-family: Mulish !important;
+                "
+              >
+                Save
+              </ion-button>
+            </div>
+        </form>
+        </ng-template>
+      </ion-popover>
+    </div>
+
+    <div>
       <div style="
       font-family: Mulish !important;
       display: flex;
@@ -18,24 +68,94 @@
       justify-content: space-between;
       cursor: pointer;
       margin: 1.5rem 0.5rem;">
-        <span class="items">Foreign Currency</span>
-        <ion-icon name="create"></ion-icon>
+        <div>
+          <p style="font-weight: 900;">Other Banks</p>
+          <p>Daily Limit</p>
+        </div>
+        <div>
+           <ion-button id="others" size="small">Update</ion-button>
+          <p>5,000,000</p>
+        </div>
       </div>
+
+      <ion-popover trigger="others">
+        <ng-template>
+          <span>Other Banks</span>
+          <form [formGroup]="passwordResetForm">
+            <div class="form-group row" style="padding: 5px">
+              <label for="">Daily Limit</label>
+              <input
+                type="text"
+                name="oldPassword"
+                class="input"
+                placeholder="1,000,000"
+              />
+            </div>
+
+            <div class="form-group row" style="padding: 5px">
+              <label for="">Single Limit</label>
+              <input
+                type="text"
+                name="newPassword"
+                class="input"
+                placeholder="1,000,000"
+              />
+            </div>
+
+            <div class="form-group">
+              <ion-button
+                class="btn"
+                expand="block"
+                style="margin-top: 1rem; font-family: Mulish !important;
+                "
+              >
+                Save
+              </ion-button>
+            </div>
+        </form>
+        </ng-template>
+      </ion-popover>
+
     </div>
 
+    <div>
       <div style="
       font-family: Mulish !important;
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
+      justify-content: space-between;
       cursor: pointer;
-      margin: 1.5rem 0.5rem;"
-      [routerLink]="['reset-pin']">
-        <div class="icon-container">
-          <ion-icon name="settings-sharp" class="inner-icon"></ion-icon>
+      margin: 1.5rem 0.5rem;">
+        <div>
+          <p style="font-weight: 900;">Foreign Currency</p>
+          <p>Daily Limit</p>
         </div>
-        <span class="items">Airtime</span>
-        <ion-icon name="caret-forward" style="margin:auto; font-size: 25px; color: #25214f;"></ion-icon>
+        <div>
+
+           <ion-button size="small">Update</ion-button>
+          <p>5,000,000</p>
         </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="
+      font-family: Mulish !important;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      cursor: pointer;
+      margin: 1.5rem 0.5rem;">
+        <div>
+          <p style="font-weight: 900;">Airtime</p>
+          <p>Daily Limit</p>
+        </div>
+        <div>
+           <ion-button size="small">Update</ion-button>
+          <p>5,000,000</p>
+        </div>
+      </div>
+    </div>
 
 </section>
+</ion-content>
