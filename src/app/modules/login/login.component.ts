@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
           this.toast.success('Login was successfull', 'Success');
           this.data = res.data;
           localStorage.setItem('user', JSON.stringify(res.data.profile));
-          console.log(res.data);
+          console.log(res.data.profile);
 
           localStorage.setItem('token', res.data.token);
           this.router.navigate(['/dashboard']);
