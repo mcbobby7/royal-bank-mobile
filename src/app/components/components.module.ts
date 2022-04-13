@@ -25,6 +25,7 @@ import { CoOperatreDetailsComponent } from '../modules/register/co-operatre-deta
 import { ImageDoneComponent } from '../modules/register/image-done/image-done.component';
 import { RoyalSetupComponent } from '../modules/register/royal-setup/royal-setup.component';
 import { DashboardTemplateComponent } from '../core/templates/dashboard-template/dashboard-template.component';
+import { InPageComponent } from '../core/templates/in-page/in-page.component';
 import { ProfileComponent } from '../modules/profile/profile.component';
 import { HistoryComponent } from '../modules/history/history.component';
 import { AirtimeComponent } from '../modules/airtime/airtime.component';
@@ -60,11 +61,12 @@ const components = [
   ImageDoneComponent,
   RoyalSetupComponent,
   DashboardTemplateComponent,
+  InPageComponent,
   ProfileComponent,
   HistoryComponent,
   AirtimeComponent,
   CabletvComponent,
-  LimitComponent
+  LimitComponent,
 ];
 
 const materialModules = [RouterModule];

@@ -20,6 +20,9 @@ export class BalanceComponent implements OnInit {
   }
 
   getBalance() {
+    if (this.user.accountNos.length === 0) {
+      return;
+    }
     const data = {
       clientId: +this.user.accountNos[0].clientId,
       accountId: +this.user.accountNos[0].accountId,
@@ -29,7 +32,7 @@ export class BalanceComponent implements OnInit {
         console.log(res);
 
         if (res.data.responseCode === '00') {
-          this.data = JSON.parse(res.data.data.resultstring);
+          this.data = res.data.data.resultstring;
           console.log(this.data);
 
           console.log(res);

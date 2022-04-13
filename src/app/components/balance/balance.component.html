@@ -21,17 +21,32 @@
         "
         >Royal Basic</span
       >
-      <span
-        class="card-items"
-        style="
-          font-family: Mulish !important;
-          font-size: 30px;
-          font-weight: 800;
-          color: #fff;
-        "
-        *ngIf="show"
-        >{{ data.Balance | currency: "&#8358;" }}</span
-      >
+      <span *ngIf="data">
+        <span
+          class="card-items"
+          style="
+            font-family: Mulish !important;
+            font-size: 30px;
+            font-weight: 800;
+            color: #fff;
+          "
+          *ngIf="show"
+          >{{ data.Balance | currency: "&#8358;" }}</span
+        >
+      </span>
+      <span *ngIf="!data">
+        <span
+          class="card-items"
+          style="
+            font-family: Mulish !important;
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+          "
+          *ngIf="show"
+          >Unavailable</span
+        >
+      </span>
       <span
         class="card-items"
         style="
@@ -48,7 +63,9 @@
         style="background-color: #fff; border-radius: 5px; margin: 0px 45px"
       >
         <span style="margin: 20px; font-size: 20px; font-weight: 600">{{
-          user.accountNos[0].accountNo
+          user?.accountNos[0]?.accountNo
+            ? user?.accountNos[0]?.accountNo
+            : "Unavailable"
         }}</span>
         <ion-icon
           name="copy-outline"

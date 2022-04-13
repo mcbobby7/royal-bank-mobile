@@ -38,42 +38,71 @@ export class DoneComponent implements OnInit {
               this.user = res.data.userDetail;
               this.onboardingForm.patchValue({
                 Id: +this.id,
-                FirstName: res.data.userDetail.firstName,
-                LastName: res.data.userDetail.lastName,
-                MiddleName: res.data.userDetail.middleName,
-                UserName: res.data.userDetail.emailAddress,
-                Phone: res.data.userDetail.phoneNo,
-                Email: res.data.userDetail.emailAddress,
-                Password: res.data.userDetail.password,
+                FirstName: res.data.userDetail.firstName
+                  ? res.data.userDetail.firstName
+                  : '',
+                LastName: res.data.userDetail.lastName
+                  ? res.data.userDetail.lastName
+                  : '',
+                MiddleName: res.data.userDetail.middleName
+                  ? res.data.userDetail.middleName
+                  : '',
+                UserName: res.data.userDetail.emailAddress
+                  ? res.data.userDetail.emailAddress
+                  : '',
+                Phone: res.data.userDetail.phoneNo
+                  ? res.data.userDetail.phoneNo
+                  : '',
+                Email: res.data.userDetail.emailAddress
+                  ? res.data.userDetail.emailAddress
+                  : '',
+                Password: res.data.userDetail.password
+                  ? res.data.userDetail.password
+                  : '',
                 CreateBankAccount: true,
-                DOB: res.data.userDetail.dob,
-                RefCode: res.data.userDetail.refCode,
-                Verified: res.data.userDetail.verified,
-                AccountType: res.data.userDetail.accountType,
-                CompanyType: res.data.userDetail.companyType,
-                PassportUrl: res.data.userDetail.passportUrl,
-                HasBVN: res.data.userDetail.hasBVN,
-                Stage: 15,
+                DOB: res.data.userDetail.dob ? res.data.userDetail.dob : '',
+                RefCode: res.data.userDetail.refCode
+                  ? res.data.userDetail.refCode
+                  : '',
+                Verified: true,
+                AccountType: res.data.userDetail.accountType
+                  ? res.data.userDetail.accountType
+                  : '',
+                CompanyType: res.data.userDetail.companyType
+                  ? res.data.userDetail.companyType
+                  : '',
+                PassportUrl: res.data.userDetail.passportUrl
+                  ? res.data.userDetail.passportUrl
+                  : '',
+                HasBVN: res.data.userDetail.hasBVN
+                  ? res.data.userDetail.hasBVN
+                  : false,
+                Stage: 2,
                 IsFinal: true,
-                BVN: res.data.userDetail.bvn,
-                Shares: res.data.userDetail.shares,
-                TinNumber: res.data.userDetail.tinNumber,
-                RCNumber: res.data.userDetail.rcNumber,
-                CompanyName: res.data.userDetail.companyName,
+                BVN: res.data.userDetail.bvn ? res.data.userDetail.bvn : '',
+                Shares: res.data.userDetail.shares
+                  ? res.data.userDetail.shares
+                  : false,
+                TinNumber: res.data.userDetail.tinNumber
+                  ? res.data.userDetail.tinNumber
+                  : '',
+                RCNumber: res.data.userDetail.rcNumber
+                  ? res.data.userDetail.rcNumber
+                  : '',
+                CompanyName: res.data.userDetail.companyName
+                  ? res.data.userDetail.companyName
+                  : '',
               });
               localStorage.setItem('stageId', '');
               console.log(res);
               console.log(this.onboardingForm.value);
               this.register();
             } else {
-              console.log(res);
-              this.router.navigate(['/register']);
-              this.toast.error('Please try again', 'Error');
+              this.reloadCurrentRoute();
             }
           },
           (err) => {
-            this.router.navigate(['/register']);
-            this.toast.error('Please try again', 'Error');
+            this.reloadCurrentRoute();
           }
         );
     } else {
@@ -81,6 +110,12 @@ export class DoneComponent implements OnInit {
     }
 
     return;
+  }
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 
   register() {
@@ -95,11 +130,13 @@ export class DoneComponent implements OnInit {
           if (res.data.responseCode === '00') {
             console.log(res.data.data.id);
             this.loading = false;
+            localStorage.setItem('stageId', '');
             // this.data = res.data;
 
             // deal with register
             console.log(res);
           } else {
+            this.reloadCurrentRoute();
             console.log(res.data.responseMessage);
           }
         },
@@ -124,7 +161,7 @@ export class DoneComponent implements OnInit {
       CreateBankAccount: new FormControl(true),
       DOB: new FormControl(''),
       RefCode: new FormControl(''),
-      Verified: new FormControl(false),
+      Verified: new FormControl(true),
       AccountType: new FormControl(''),
       CompanyType: new FormControl(''),
       PassportUrl: new FormControl(''),

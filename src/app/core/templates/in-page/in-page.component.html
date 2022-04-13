@@ -1,0 +1,16 @@
+<ion-app>
+  <ion-header class="ion-no-border" style="background-color: white">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()">
+          <ion-icon
+            name="arrow-back-outline"
+            style="color: #676767; padding-top: 10px"
+          ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-router-outlet id="main-content" main></ion-router-outlet>
+</ion-app>

@@ -21,6 +21,9 @@ export class TransactionHistoryComponent implements OnInit {
   }
 
   getTransactions() {
+    if (this.user.accountNos.length === 0) {
+      return;
+    }
     const data = {
       accountId: +this.user.accountNos[0].accountId,
     };
@@ -31,7 +34,7 @@ export class TransactionHistoryComponent implements OnInit {
           console.log(res);
 
           this.loading = false;
-          this.data = JSON.parse(res.data.data.resultstring);
+          this.data = res.data.data.resultstring;
           console.log(this.data);
           if (res.data.responseCode === '00') {
           } else {

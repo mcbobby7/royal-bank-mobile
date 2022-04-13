@@ -40,28 +40,64 @@ export class ImageComponent implements OnInit {
               this.user = res.data.userDetail;
               this.onboardingForm.patchValue({
                 Id: +this.id,
-                FirstName: res.data.userDetail.firstName,
-                LastName: res.data.userDetail.lastName,
-                MiddleName: res.data.userDetail.middleName,
-                UserName: res.data.userDetail.userName,
-                Phone: res.data.userDetail.phoneNo,
-                Email: res.data.userDetail.emailAddress,
-                Password: res.data.userDetail.password,
-                CreateBankAccount: res.data.userDetail.createBankAccount,
-                DOB: res.data.userDetail.dob,
-                RefCode: res.data.userDetail.refCode,
-                Verified: res.data.userDetail.verified,
-                AccountType: res.data.userDetail.accountType,
-                CompanyType: res.data.userDetail.companyType,
-                PassportUrl: res.data.userDetail.passportUrl,
-                HasBVN: res.data.userDetail.hasBVN,
-                Stage: res.data.userDetail.stage,
-                IsFinal: res.data.userDetail.isFinal,
-                BVN: res.data.userDetail.bvn,
-                Shares: res.data.userDetail.shares,
-                TinNumber: res.data.userDetail.tinNumber,
-                RCNumber: res.data.userDetail.rcNumber,
-                CompanyName: res.data.userDetail.companyName,
+                FirstName: res.data.userDetail.firstName
+                  ? res.data.userDetail.firstName
+                  : '',
+                LastName: res.data.userDetail.lastName
+                  ? res.data.userDetail.lastName
+                  : '',
+                MiddleName: res.data.userDetail.middleName
+                  ? res.data.userDetail.middleName
+                  : '',
+                UserName: res.data.userDetail.userName
+                  ? res.data.userDetail.userName
+                  : '',
+                Phone: res.data.userDetail.phoneNo
+                  ? res.data.userDetail.phoneNo
+                  : '',
+                Email: res.data.userDetail.emailAddress
+                  ? res.data.userDetail.emailAddress
+                  : '',
+                Password: res.data.userDetail.password
+                  ? res.data.userDetail.password
+                  : '',
+                CreateBankAccount: true,
+                DOB: res.data.userDetail.dob ? res.data.userDetail.dob : '',
+                RefCode: res.data.userDetail.refCode
+                  ? res.data.userDetail.refCode
+                  : '',
+                Verified: res.data.userDetail.verified
+                  ? res.data.userDetail.verified
+                  : false,
+                AccountType: res.data.userDetail.accountType
+                  ? res.data.userDetail.accountType
+                  : '',
+                CompanyType: res.data.userDetail.companyType
+                  ? res.data.userDetail.companyType
+                  : '',
+                PassportUrl: res.data.userDetail.passportUrl
+                  ? res.data.userDetail.passportUrl
+                  : '',
+                HasBVN: res.data.userDetail.hasBVN
+                  ? res.data.userDetail.hasBVN
+                  : false,
+                Stage: 2,
+                IsFinal: res.data.userDetail.isFinal
+                  ? res.data.userDetail.isFinal
+                  : false,
+                BVN: res.data.userDetail.bvn ? res.data.userDetail.bvn : '',
+                Shares: res.data.userDetail.shares
+                  ? res.data.userDetail.shares
+                  : false,
+                TinNumber: res.data.userDetail.tinNumber
+                  ? res.data.userDetail.tinNumber
+                  : '',
+                RCNumber: res.data.userDetail.rcNumber
+                  ? res.data.userDetail.rcNumber
+                  : '',
+                CompanyName: res.data.userDetail.companyName
+                  ? res.data.userDetail.companyName
+                  : '',
               });
               console.log(res);
               console.log(this.onboardingForm.value);
