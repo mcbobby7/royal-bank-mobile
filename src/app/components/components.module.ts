@@ -29,7 +29,7 @@ import { InPageComponent } from '../core/templates/in-page/in-page.component';
 import { ProfileComponent } from '../modules/profile/profile.component';
 import { HistoryComponent } from '../modules/history/history.component';
 import { AirtimeComponent } from '../modules/airtime/airtime.component';
-import { CabletvComponent } from '../modules/dashboard/bills-payments/cabletv/cabletv.component';
+import { CabletvComponent } from '../modules/bills-payments/cabletv/cabletv.component';
 import { TransactionHistoryComponent } from '../components/transaction-history/transaction-history.component';
 import { BalanceComponent } from '../components/balance/balance.component';
 import { TabsPage } from '../tabs/tabs.page';

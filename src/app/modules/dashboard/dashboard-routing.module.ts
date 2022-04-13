@@ -30,17 +30,6 @@ const routes: Routes = [
   //   loadChildren: () =>
   //     import('../transfer/transfer.module').then((m) => m.TransferPageModule),
   // },
-  {
-    path: 'tab1',
-    loadChildren: () =>
-      import('../transfer/transfer.module').then((m) => m.TransferPageModule),
-  },
-
-  {
-    path: 'tab3',
-    loadChildren: () =>
-      import('../account-info/account-info.module').then((m) => m.AccountInfoPageModule),
-  },
   // {
   //   path: 'borrow',
   //   loadChildren: () =>
@@ -59,8 +48,11 @@ const routes: Routes = [
 
   // {
   //   path: 'account-info',
-  //   loadChildren: () => import('../account-info/account-info.module').then(m => m.AccountInfoPageModule)
-  // }
+  //   loadChildren: () =>
+  //     import('../account-info/account-info.module').then(
+  //       (m) => m.AccountInfoPageModule
+  //     ),
+  // },
 ];
 
 @NgModule({
