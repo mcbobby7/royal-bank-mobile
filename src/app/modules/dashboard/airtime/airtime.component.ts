@@ -33,7 +33,12 @@ export class AirtimeComponent implements OnInit {
 
   toggleRequest(e){
     this.newReq = e;
-    this.selectedBtn = !this.selectedBtn;
-    this.selectedBtn1 = !this.selectedBtn1;
+    if(e === true){
+      this.selectedBtn = e;
+      this.selectedBtn1 = false;
+    } else {
+      this.selectedBtn = false;
+      this.selectedBtn1 = true;
+    }
   }
 }

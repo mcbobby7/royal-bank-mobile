@@ -1,6 +1,6 @@
 <ion-content style="display: flex; align-self: center; align-items: center;">
   <span style="text-align: center;">Update Limit</span>
-  <section>
+  <section *ngIf="btnClicked">
     <div>
       <div style="
       font-family: Mulish !important;
@@ -16,48 +16,10 @@
         <div>
           <!-- <ion-icon name="create"></ion-icon>
            -->
-           <ion-button id="royal" size="small">Update</ion-button>
+           <ion-button id="royal" (click)="update(1)" size="small">Update</ion-button>
           <p>5,000,000</p>
         </div>
       </div>
-
-      <ion-popover trigger="royal" side="top">
-        <ng-template>
-          <span>Royal to Royal</span>
-          <form [formGroup]="passwordResetForm">
-            <div class="form-group row" style="padding: 5px">
-              <label for="">Daily Limit</label>
-              <input
-                type="text"
-                name="oldPassword"
-                class="input"
-                placeholder="1,000,000"
-              />
-            </div>
-
-            <div class="form-group row" style="padding: 5px">
-              <label for="">Single Limit</label>
-              <input
-                type="text"
-                name="newPassword"
-                class="input"
-                placeholder="1,000,000"
-              />
-            </div>
-
-            <div class="form-group">
-              <ion-button
-                class="btn"
-                expand="block"
-                style="margin-top: 1rem; font-family: Mulish !important;
-                "
-              >
-                Save
-              </ion-button>
-            </div>
-        </form>
-        </ng-template>
-      </ion-popover>
     </div>
 
     <div>
@@ -73,48 +35,11 @@
           <p>Daily Limit</p>
         </div>
         <div>
-           <ion-button id="others" size="small">Update</ion-button>
+           <ion-button id="others" (click)="update(2)" size="small">Update</ion-button>
           <p>5,000,000</p>
         </div>
       </div>
 
-      <ion-popover trigger="others">
-        <ng-template>
-          <span>Other Banks</span>
-          <form [formGroup]="passwordResetForm">
-            <div class="form-group row" style="padding: 5px">
-              <label for="">Daily Limit</label>
-              <input
-                type="text"
-                name="oldPassword"
-                class="input"
-                placeholder="1,000,000"
-              />
-            </div>
-
-            <div class="form-group row" style="padding: 5px">
-              <label for="">Single Limit</label>
-              <input
-                type="text"
-                name="newPassword"
-                class="input"
-                placeholder="1,000,000"
-              />
-            </div>
-
-            <div class="form-group">
-              <ion-button
-                class="btn"
-                expand="block"
-                style="margin-top: 1rem; font-family: Mulish !important;
-                "
-              >
-                Save
-              </ion-button>
-            </div>
-        </form>
-        </ng-template>
-      </ion-popover>
 
     </div>
 
@@ -132,7 +57,7 @@
         </div>
         <div>
 
-           <ion-button size="small">Update</ion-button>
+           <ion-button size="small" (click)="update(3)" >Update</ion-button>
           <p>5,000,000</p>
         </div>
       </div>
@@ -151,11 +76,116 @@
           <p>Daily Limit</p>
         </div>
         <div>
-           <ion-button size="small">Update</ion-button>
+           <ion-button size="small" (click)="update(4)" >Update</ion-button>
           <p>5,000,000</p>
         </div>
       </div>
     </div>
 
+</section>
+
+<section *ngIf="!btnClicked && updatedForm === 1">
+  <form [formGroup]="limitForm">
+    <div class="form-group row" style="padding: 5px">
+      <label for="">Daily Limit</label>
+      <input
+        type="text"
+        name="dailyLimit"
+        class="input"
+        placeholder="1,000,000"
+      />
+    </div>
+
+    <div class="form-group row" style="padding: 5px">
+      <label for="">Single Limit</label>
+      <input
+        type="text"
+        name="singleLimit"
+        class="input"
+        placeholder="1,000,000"
+      />
+    </div>
+
+    <div class="form-group">
+      <ion-button
+        class="btn"
+        expand="block"
+        style="margin-top: 1rem; font-family: Mulish !important;
+        "
+      >
+        Save
+      </ion-button>
+    </div>
+</form>
+</section>
+
+<section *ngIf="!btnClicked && updatedForm === 2">
+  <form [formGroup]="limitForm">
+    <div class="form-group row" style="padding: 5px">
+      <label for="">Daily Limit</label>
+      <input
+        type="text"
+        name="dailyLimit"
+        class="input"
+        placeholder="1,000,000"
+      />
+    </div>
+
+    <div class="form-group row" style="padding: 5px">
+      <label for="">Single Limit</label>
+      <input
+        type="text"
+        name="singleLimit"
+        class="input"
+        placeholder="1,000,000"
+      />
+    </div>
+
+    <div class="form-group">
+      <ion-button
+        class="btn"
+        expand="block"
+        style="margin-top: 1rem; font-family: Mulish !important;
+        "
+      >
+        Save
+      </ion-button>
+    </div>
+</form>
+</section>
+
+<section *ngIf="!btnClicked && updatedForm === 3">
+  <form [formGroup]="limitForm">
+    <div class="form-group row" style="padding: 5px">
+      <label for="">Daily Limit</label>
+      <input
+        type="text"
+        name="dailyLimit"
+        class="input"
+        placeholder="1,000,000"
+      />
+    </div>
+
+    <div class="form-group row" style="padding: 5px">
+      <label for="">Single Limit</label>
+      <input
+        type="text"
+        name="singleLimit"
+        class="input"
+        placeholder="1,000,000"
+      />
+    </div>
+
+    <div class="form-group">
+      <ion-button
+        class="btn"
+        expand="block"
+        style="margin-top: 1rem; font-family: Mulish !important;
+        "
+      >
+        Save
+      </ion-button>
+    </div>
+</form>
 </section>
 </ion-content>

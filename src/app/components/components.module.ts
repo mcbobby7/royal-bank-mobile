@@ -32,6 +32,7 @@ import { CabletvComponent } from '../modules/dashboard/bills-payments/cabletv/ca
 import { TransactionHistoryComponent } from '../components/transaction-history/transaction-history.component';
 import { BalanceComponent } from '../components/balance/balance.component';
 import { TabsPage } from '../tabs/tabs.page';
+import { LimitComponent } from '../modules/account-info/limit/limit.component';
 
 const components = [
   TabsPage,
@@ -63,6 +64,7 @@ const components = [
   HistoryComponent,
   AirtimeComponent,
   CabletvComponent,
+  LimitComponent
 ];
 
 const materialModules = [RouterModule];

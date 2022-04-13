@@ -41,7 +41,7 @@ export class LoanPage implements OnInit {
       this.selectedBtn1 = false;
     } else {
       this.selectedBtn = false;
-      this.selectedBtn1 = e;
+      this.selectedBtn1 = true;
     }
   }
 
