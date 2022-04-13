@@ -97,13 +97,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/login/login.module').then((m) => m.LoginModule),
   },
-  {
-    path: 'account-info',
-    loadChildren: () =>
-      import('./modules/account-info/account-info.module').then(
-        (m) => m.AccountInfoPageModule
-      ),
-  },
+  // {
+  //   path: 'account-info',
+  //   loadChildren: () =>
+  //     import('./modules/account-info/account-info.module').then(
+  //       (m) => m.AccountInfoPageModule
+  //     ),
+  // },
 ];
 @NgModule({
   imports: [
