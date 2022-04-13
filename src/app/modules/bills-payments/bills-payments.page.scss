@@ -38,6 +38,8 @@ ion-content {
   // font-size: 30px;
   height: 40px;
   width: 40px;
+  color: #25214F !important;
+  margin-bottom: 3px !important;
 }
 
 .icons-bg {
@@ -47,5 +49,10 @@ ion-content {
   background-color: #F8F8F8;
   padding: 10px;
   margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center !important;
+  text-align: center;
+  align-items: center !important;
   cursor: pointer;
 }

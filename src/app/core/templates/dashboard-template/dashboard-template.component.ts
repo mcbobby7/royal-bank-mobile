@@ -14,44 +14,49 @@ export class DashboardTemplateComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user'));
 
   nav = [
+    // {
+    //   name: 'Overview',
+    //   link: '/nav/about',
+    //   icon: 'assets/icon/dashboard.png',
+    // },
     {
-      name: 'Overview',
-      link: '/nav/about',
-      icon: 'assets/icon/dashboard.png',
-    },
-    {
-      name: 'Bills Payment',
-      link: '/nav/blog',
-      icon: 'assets/icon/airtime.png',
-    },
-    {
-      name: 'Scheduled Payments',
-      link: '/nav/contact',
-      icon: 'assets/icon/payment.png',
-    },
-    {
-      name: 'QR Payment',
-      link: '/nav/contact',
-      icon: 'assets/icon/qr.png',
-    },
-    {
-      name: 'Cards',
-      link: '/nav/contact',
+      name: 'Transfer',
+      link: '/action/transfer',
       icon: 'assets/icon/cards.png',
     },
     {
-      name: 'Cheques',
-      link: '/nav/contact',
+      name: 'Bills Payment',
+      link: '/action/bills-payment',
+      icon: 'assets/icon/airtime.png',
+    },
+    {
+      name: 'Airtime and Data',
+      link: '/action/airtime',
+      icon: 'assets/icon/payment.png',
+    },
+    {
+      name: 'Loan',
+      link: '/action/loan',
+      icon: 'assets/icon/qr.png',
+    },
+    // {
+    //   name: 'Cards',
+    //   link: '/nav/contact',
+    //   icon: 'assets/icon/cards.png',
+    // },
+    {
+      name: 'Transaction History',
+      link: '/action/history',
       icon: 'assets/icon/cheques.png',
     },
     {
       name: 'Settings',
-      link: '/nav/contact',
+      link: '/action/profile',
       icon: 'assets/icon/setting.png',
     },
     {
-      name: 'Airtime Recharge',
-      link: '/nav/contact',
+      name: 'Profile',
+      link: '/action/profile',
       icon: 'assets/icon/bills.png',
     },
   ];

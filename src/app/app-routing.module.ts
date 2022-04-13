@@ -18,9 +18,9 @@ const routes: Routes = [
       ).then((m) => m.DashboardTemplateModule),
   },
   {
-    path: 'DashboardTemplateComponent',
-    // canActivate: [AuthGuard],
-    component: InPageComponent,
+    path: 'dashboard',
+    canActivate: [AuthGuard],
+    component: DashboardTemplateComponent,
     children: [
       {
         path: '',
@@ -29,7 +29,41 @@ const routes: Routes = [
             (m) => m.DashboardPageModule
           ),
       },
-
+    ],
+  },
+  {
+    path: 'action',
+    // canActivate: [AuthGuard],
+    component: InPageComponent,
+    children: [
+      {
+        path: 'account-info',
+        loadChildren: () =>
+          import('./modules/account-info/account-info.module').then(
+            (m) => m.AccountInfoPageModule
+          ),
+      },
+      {
+        path: '',
+        loadChildren: () =>
+          import('./modules/dashboard/dashboard.module').then(
+            (m) => m.DashboardPageModule
+          ),
+      },
+      {
+        path: 'tab1',
+        loadChildren: () =>
+          import('../app/modules/transfer/transfer.module').then(
+            (m) => m.TransferPageModule
+          ),
+      },
+      {
+        path: 'tab3',
+        loadChildren: () =>
+          import('../app/modules/account-info/account-info.module').then(
+            (m) => m.AccountInfoPageModule
+          ),
+      },
       {
         path: 'profile',
         loadChildren: () =>
@@ -37,7 +71,6 @@ const routes: Routes = [
             (m) => m.ProfileModule
           ),
       },
-
       {
         path: 'airtime',
         loadChildren: () =>
@@ -45,18 +78,14 @@ const routes: Routes = [
             (m) => m.AirtimeModule
           ),
       },
-
       {
         path: 'loan',
         loadChildren: () =>
-          import('./modules/loan/loan.module').then(
-            (m) => m.LoanPageModule
-          ),
+          import('./modules/loan/loan.module').then((m) => m.LoanPageModule),
       },
-
       {
         path: 'cable-tv',
-        component: CabletvComponent
+        component: CabletvComponent,
       },
 
       {
@@ -64,6 +93,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/transfer/transfer.module').then(
             (m) => m.TransferPageModule
+          ),
+      },
+
+      {
+        path: 'bills-payment',
+        loadChildren: () =>
+          import('./modules/bills-payments/bills-payments.module').then(
+            (m) => m.BillsPaymentsPageModule
           ),
       },
     ],
@@ -97,13 +134,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/login/login.module').then((m) => m.LoginModule),
   },
-  // {
-  //   path: 'account-info',
-  //   loadChildren: () =>
-  //     import('./modules/account-info/account-info.module').then(
-  //       (m) => m.AccountInfoPageModule
-  //     ),
-  // },
 ];
 @NgModule({
   imports: [
