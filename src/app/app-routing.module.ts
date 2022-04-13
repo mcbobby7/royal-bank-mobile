@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { DashboardTemplateComponent } from './core/templates/dashboard-template/dashboard-template.component';
 import { InPageComponent } from './core/templates/in-page/in-page.component';
+import { CabletvComponent } from './modules/bills-payments/cabletv/cabletv.component';
 const routes: Routes = [
   {
     path: '',
@@ -51,6 +52,11 @@ const routes: Routes = [
           import('./modules/loan/loan.module').then(
             (m) => m.LoanPageModule
           ),
+      },
+
+      {
+        path: 'cable-tv',
+        component: CabletvComponent
       },
 
       {
