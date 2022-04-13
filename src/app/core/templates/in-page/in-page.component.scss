@@ -1,0 +1,13 @@
+ion-header {
+  ion-toolbar {
+    // set background color
+    --background: #ffffff;
+    // set icon/text color
+    box-shadow: none !important;
+    padding-top: 50px;
+    height: 100%;
+  }
+  ion-menu-button {
+    color: #374957;
+  }
+}
