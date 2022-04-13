@@ -25,9 +25,9 @@ import { CoOperatreDetailsComponent } from '../modules/register/co-operatre-deta
 import { ImageDoneComponent } from '../modules/register/image-done/image-done.component';
 import { RoyalSetupComponent } from '../modules/register/royal-setup/royal-setup.component';
 import { DashboardTemplateComponent } from '../core/templates/dashboard-template/dashboard-template.component';
-import { ProfileComponent } from '../modules/dashboard/profile/profile.component';
-import { HistoryComponent } from '../modules/dashboard/history/history.component';
-import { AirtimeComponent } from '../modules/dashboard/airtime/airtime.component';
+import { ProfileComponent } from '../modules/profile/profile.component';
+import { HistoryComponent } from '../modules/history/history.component';
+import { AirtimeComponent } from '../modules/airtime/airtime.component';
 import { CabletvComponent } from '../modules/dashboard/bills-payments/cabletv/cabletv.component';
 import { TransactionHistoryComponent } from '../components/transaction-history/transaction-history.component';
 import { BalanceComponent } from '../components/balance/balance.component';

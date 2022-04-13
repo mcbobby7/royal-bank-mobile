@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AirtimeComponent } from './airtime/airtime.component';
+import { AirtimeComponent } from '../airtime/airtime.component';
 
 import { DashboardPage } from './dashboard.page';
-import { HistoryComponent } from './history/history.component';
-import { ProfileComponent } from './profile/profile.component';
+import { HistoryComponent } from '../history/history.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 const routes: Routes = [
   {
@@ -28,22 +28,28 @@ const routes: Routes = [
   {
     path: 'transfer',
     loadChildren: () =>
-      import('./transfer/transfer.module').then((m) => m.TransferPageModule),
+      import('../transfer/transfer.module').then((m) => m.TransferPageModule),
   },
   {
     path: 'tab1',
     loadChildren: () =>
-      import('./transfer/transfer.module').then((m) => m.TransferPageModule),
+      import('../transfer/transfer.module').then((m) => m.TransferPageModule),
+  },
+
+  {
+    path: 'tab3',
+    loadChildren: () =>
+      import('../account-info/account-info.module').then((m) => m.AccountInfoPageModule),
   },
   {
     path: 'borrow',
     loadChildren: () =>
-      import('./borrow/borrow.module').then((m) => m.BorrowPageModule),
+      import('../borrow/borrow.module').then((m) => m.BorrowPageModule),
   },
   {
     path: 'addfund',
     loadChildren: () =>
-      import('./addfund/addfund.module').then((m) => m.AddfundPageModule),
+      import('../addfund/addfund.module').then((m) => m.AddfundPageModule),
   },
   {
     path: 'bills-payments',
@@ -55,7 +61,7 @@ const routes: Routes = [
   {
     path: 'loan',
     loadChildren: () =>
-      import('./loan/loan.module').then((m) => m.LoanPageModule),
+      import('../loan/loan.module').then((m) => m.LoanPageModule),
   },
 
   // {

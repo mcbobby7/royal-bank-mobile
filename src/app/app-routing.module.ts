@@ -31,7 +31,7 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () =>
-          import('./modules/dashboard/profile/profile.module').then(
+          import('./modules/profile/profile.module').then(
             (m) => m.ProfileModule
           ),
       },
@@ -39,7 +39,7 @@ const routes: Routes = [
       {
         path: 'airtime',
         loadChildren: () =>
-          import('./modules/dashboard/airtime/airtime.module').then(
+          import('./modules/airtime/airtime.module').then(
             (m) => m.AirtimeModule
           ),
       },
@@ -47,7 +47,7 @@ const routes: Routes = [
       {
         path: 'history',
         loadChildren: () =>
-          import('./modules/dashboard/history/history.module').then(
+          import('./modules/history/history.module').then(
             (m) => m.HistoryModule
           ),
       },

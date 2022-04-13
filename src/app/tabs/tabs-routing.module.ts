@@ -10,7 +10,7 @@ const routes: Routes = [
       {
         path: 'tab1',
         loadChildren: () =>
-          import('../modules/dashboard/transfer/transfer.module').then(
+          import('../modules/transfer/transfer.module').then(
             (m) => m.TransferPageModule
           ),
       },
