@@ -12,24 +12,24 @@ const routes: Routes = [
     component: DashboardPage,
   },
 
-  {
-    path: 'profile',
-    component: ProfileComponent,
-  },
+  // {
+  //   path: 'profile',
+  //   component: ProfileComponent,
+  // },
 
-  {
-    path: 'history',
-    component: HistoryComponent,
-  },
-  {
-    path: 'airtime',
-    component: AirtimeComponent,
-  },
-  {
-    path: 'transfer',
-    loadChildren: () =>
-      import('../transfer/transfer.module').then((m) => m.TransferPageModule),
-  },
+  // {
+  //   path: 'history',
+  //   component: HistoryComponent,
+  // },
+  // {
+  //   path: 'airtime',
+  //   component: AirtimeComponent,
+  // },
+  // {
+  //   path: 'transfer',
+  //   loadChildren: () =>
+  //     import('../transfer/transfer.module').then((m) => m.TransferPageModule),
+  // },
   {
     path: 'tab1',
     loadChildren: () =>
@@ -41,21 +41,21 @@ const routes: Routes = [
     loadChildren: () =>
       import('../account-info/account-info.module').then((m) => m.AccountInfoPageModule),
   },
-  {
-    path: 'borrow',
-    loadChildren: () =>
-      import('../borrow/borrow.module').then((m) => m.BorrowPageModule),
-  },
-  {
-    path: 'addfund',
-    loadChildren: () =>
-      import('../addfund/addfund.module').then((m) => m.AddfundPageModule),
-  },
-  {
-    path: 'loan',
-    loadChildren: () =>
-      import('../loan/loan.module').then((m) => m.LoanPageModule),
-  },
+  // {
+  //   path: 'borrow',
+  //   loadChildren: () =>
+  //     import('../borrow/borrow.module').then((m) => m.BorrowPageModule),
+  // },
+  // {
+  //   path: 'addfund',
+  //   loadChildren: () =>
+  //     import('../addfund/addfund.module').then((m) => m.AddfundPageModule),
+  // },
+  // {
+  //   path: 'loan',
+  //   loadChildren: () =>
+  //     import('../loan/loan.module').then((m) => m.LoanPageModule),
+  // },
 
   // {
   //   path: 'account-info',
