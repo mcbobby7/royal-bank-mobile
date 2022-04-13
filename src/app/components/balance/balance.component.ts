@@ -29,15 +29,15 @@ export class BalanceComponent implements OnInit {
     };
     this.auth.post(data, 'Cba.BankingService.FetchAccountBalance').subscribe(
       (res: any) => {
-        console.log(res);
+        // console.log(res);
 
         if (res.data.responseCode === '00') {
-          this.data = res.data.data.resultstring;
-          console.log(this.data);
+          this.data = res.data.data.balance;
+          // console.log(this.data);
 
-          console.log(res);
+          // console.log(res);
         } else {
-          console.log(res);
+          // console.log(res);
         }
       },
       (err) => console.error(err.message)

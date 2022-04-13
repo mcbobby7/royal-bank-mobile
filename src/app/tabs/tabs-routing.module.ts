@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { InPageComponent } from '../core/templates/in-page/in-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: TabsPage,
+    component: InPageComponent,
     children: [
       {
         path: 'tab1',

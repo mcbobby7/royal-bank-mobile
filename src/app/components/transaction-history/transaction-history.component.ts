@@ -34,7 +34,7 @@ export class TransactionHistoryComponent implements OnInit {
           console.log(res);
 
           this.loading = false;
-          this.data = res.data.data.resultstring;
+          this.data = res.data.data;
           console.log(this.data);
           if (res.data.responseCode === '00') {
           } else {

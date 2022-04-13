@@ -1,16 +1,25 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom" style="background-color: #25214f; color: white">
-    <ion-tab-button tab="tab1" style="background-color: #25214f; color: white">
+    <ion-tab-button
+      (click)="transfer()"
+      style="background-color: #25214f; color: white"
+    >
       <ion-icon name="card"></ion-icon>
       <ion-label>Transfer</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab2" style="background-color: #25214f; color: white">
+    <ion-tab-button
+      (click)="support()"
+      style="background-color: #25214f; color: white"
+    >
       <ion-icon name="headset"></ion-icon>
       <ion-label>Support</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab3" style="background-color: #25214f; color: white">
+    <ion-tab-button
+      (click)="profile()"
+      style="background-color: #25214f; color: white"
+    >
       <ion-icon name="person"></ion-icon>
       <ion-label>Account</ion-label>
     </ion-tab-button>

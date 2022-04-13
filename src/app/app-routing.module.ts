@@ -18,15 +18,50 @@ const routes: Routes = [
       ).then((m) => m.DashboardTemplateModule),
   },
   {
-    path: 'DashboardTemplateComponent',
-    // canActivate: [AuthGuard],
-    component: InPageComponent,
+    path: 'dashboard',
+    canActivate: [AuthGuard],
+    component: DashboardTemplateComponent,
     children: [
       {
         path: '',
         loadChildren: () =>
           import('./modules/dashboard/dashboard.module').then(
             (m) => m.DashboardPageModule
+          ),
+      },
+    ],
+  },
+  {
+    path: 'action',
+    canActivate: [AuthGuard],
+    component: InPageComponent,
+    children: [
+      {
+        path: 'account-info',
+        loadChildren: () =>
+          import('./modules/account-info/account-info.module').then(
+            (m) => m.AccountInfoPageModule
+          ),
+      },
+      {
+        path: '',
+        loadChildren: () =>
+          import('./modules/dashboard/dashboard.module').then(
+            (m) => m.DashboardPageModule
+          ),
+      },
+      {
+        path: 'tab1',
+        loadChildren: () =>
+          import('../app/modules/transfer/transfer.module').then(
+            (m) => m.TransferPageModule
+          ),
+      },
+      {
+        path: 'tab3',
+        loadChildren: () =>
+          import('../app/modules/account-info/account-info.module').then(
+            (m) => m.AccountInfoPageModule
           ),
       },
 
@@ -49,14 +84,12 @@ const routes: Routes = [
       {
         path: 'loan',
         loadChildren: () =>
-          import('./modules/loan/loan.module').then(
-            (m) => m.LoanPageModule
-          ),
+          import('./modules/loan/loan.module').then((m) => m.LoanPageModule),
       },
 
       {
         path: 'cable-tv',
-        component: CabletvComponent
+        component: CabletvComponent,
       },
 
       {
@@ -96,13 +129,6 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import('./modules/login/login.module').then((m) => m.LoginModule),
-  },
-  {
-    path: 'account-info',
-    loadChildren: () =>
-      import('./modules/account-info/account-info.module').then(
-        (m) => m.AccountInfoPageModule
-      ),
   },
 ];
 @NgModule({
