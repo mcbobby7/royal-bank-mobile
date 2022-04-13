@@ -4,7 +4,7 @@ import { HistoryComponent } from './history.component';
 
 const routes: Routes = [
   {
-    path: 'history',
+    path: '',
     component: HistoryComponent
   }
 ];

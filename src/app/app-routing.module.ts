@@ -78,6 +78,14 @@ const routes: Routes = [
             (m) => m.AirtimeModule
           ),
       },
+
+      {
+        path: 'history',
+        loadChildren: () =>
+          import('./modules/history/history.module').then(
+            (m) => m.HistoryModule
+          ),
+      },
       {
         path: 'loan',
         loadChildren: () =>

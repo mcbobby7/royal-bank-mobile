@@ -49,11 +49,11 @@ export class DashboardTemplateComponent implements OnInit {
       link: '/action/history',
       icon: 'assets/icon/cheques.png',
     },
-    {
-      name: 'Settings',
-      link: '/action/profile',
-      icon: 'assets/icon/setting.png',
-    },
+    // {
+    //   name: 'Settings',
+    //   link: '/action/profile',
+    //   icon: 'assets/icon/setting.png',
+    // },
     {
       name: 'Profile',
       link: '/action/profile',
