@@ -34,6 +34,7 @@ import { TransactionHistoryComponent } from '../components/transaction-history/t
 import { BalanceComponent } from '../components/balance/balance.component';
 import { TabsPage } from '../tabs/tabs.page';
 import { LimitComponent } from '../modules/account-info/limit/limit.component';
+import { TransferPage } from '../modules/transfer/transfer.page';
 
 const components = [
   TabsPage,
@@ -67,6 +68,7 @@ const components = [
   AirtimeComponent,
   CabletvComponent,
   LimitComponent,
+  TransferPage,
 ];
 
 const materialModules = [RouterModule];

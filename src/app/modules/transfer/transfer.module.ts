@@ -4,17 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TransferPageRoutingModule } from './transfer-routing.module';
-
 import { TransferPage } from './transfer.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TransferPageRoutingModule
-  ],
-  declarations: [TransferPage]
+  imports: [CommonModule, FormsModule, IonicModule],
+  declarations: [TransferPage],
 })
 export class TransferPageModule {}
