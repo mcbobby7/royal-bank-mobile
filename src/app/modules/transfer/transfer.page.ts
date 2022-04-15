@@ -7,49 +7,48 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./transfer.page.scss'],
 })
 export class TransferPage implements OnInit {
-
   source = 'assets/icon/royalty.png';
   imageSrc = 'assets/icon/success.png';
   selectedBtn = true;
   selectedBtn1 = false;
   transType = 0;
   newReq = true;
-  royalAccount = new FormGroup({
+
+  form = new FormGroup({
     beneficiaryAccount: new FormControl(''),
-    amount: new FormControl(''),
-    narration: new FormControl(''),
+    accountId: new FormControl(''),
+    txnType: new FormControl(''),
+    locale: new FormControl(''),
+    dateFormat: new FormControl('dd MMMM yyyy'),
+    transactionDate: new FormControl(''),
+    transactionAmount: new FormControl(''),
+    paymentTypeId: new FormControl(''),
+    accountNumber: new FormControl(''),
+    checkNumber: new FormControl(''),
+    routingCode: new FormControl(''),
+    receiptNumber: new FormControl(''),
+    bankNumber: new FormControl(''),
   });
 
-  othersAccount = new FormGroup({
-    beneficiaryAccount: new FormControl(''),
-    bank: new FormControl(''),
-    amount: new FormControl(''),
-    narration: new FormControl(''),
-  });
+  constructor() {}
 
+  ngOnInit() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  transactionType(e){
+  transactionType(e) {
     this.transType = e;
-
-
   }
 
-  create(){
+  create() {
     console.log('Hey');
   }
 
-  chooseBeneficiary(e){
+  chooseBeneficiary(e) {
     console.log('chosen');
   }
 
-  toggleRequest(e){
+  toggleRequest(e) {
     this.newReq = e;
-    if(e === true){
+    if (e === true) {
       this.selectedBtn = e;
       this.selectedBtn1 = false;
     } else {

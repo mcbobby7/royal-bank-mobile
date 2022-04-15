@@ -1,159 +1,215 @@
 <ion-content>
-  <div style="height:100px"></div>
+  <div style="height: 100px"></div>
+  <app-loader *ngIf="loading"></app-loader>
   <section *ngIf="transType === 0">
-
-    <div style="
-    font-family: Mulish !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    cursor: pointer;
-    margin: 1.5rem 0.5rem;"
-    (click)="transactionType(1)">
+    <div
+      *ngFor="let data of vars"
+      style="
+        font-family: Mulish !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        cursor: pointer;
+        margin: 1.5rem 0.5rem;
+      "
+      (click)="transactionType(2, data.code)"
+    >
       <div class="icon-container">
         <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
         <ion-icon name="phone-portrait" class="inner-icon"></ion-icon>
       </div>
-      <span style="margin: auto; font-size: 20px;  width: 100%;">Mobile Topup</span>
-      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
-      </div>
+      <span
+        style="
+          margin: auto;
+          text-align: left;
+          padding-left: 20px;
+          font-size: 20px;
+          width: 100%;
+        "
+        >{{ data.name }}</span
+      >
+      <ion-icon
+        name="caret-forward"
+        style="margin: auto; font-size: 20px; color: #25214f"
+      ></ion-icon>
+    </div>
 
-      <div style="
-    font-family: Mulish !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    cursor: pointer;
-    margin: 1.5rem 0.5rem;"
-    (click)="transactionType(1)">
+    <!-- <div
+      style="
+        font-family: Mulish !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        cursor: pointer;
+        margin: 1.5rem 0.5rem;
+      "
+      (click)="transactionType(1)"
+    >
       <div class="icon-container">
         <ion-icon name="people" class="inner-icon"></ion-icon>
       </div>
-      <span style="margin: auto; font-size: 20px;  width: 100%;">Data Bundles</span>
-      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
-      </div>
+      <span style="margin: auto; font-size: 20px; width: 100%"
+        >Data Bundles</span
+      >
+      <ion-icon
+        name="caret-forward"
+        style="margin: auto; font-size: 20px; color: #25214f"
+      ></ion-icon>
+    </div> -->
 
-      <div style="
-    font-family: Mulish !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    cursor: pointer;
-    margin: 1.5rem 0.5rem;"
-    (click)="transactionType(2)">
+    <!-- <div
+      style="
+        font-family: Mulish !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        cursor: pointer;
+        margin: 1.5rem 0.5rem;
+      "
+      (click)="transactionType(2)"
+    >
       <div class="icon-container">
         <ion-icon name="stats-chart" class="inner-icon"></ion-icon>
       </div>
-      <span style="margin: auto; font-size: 20px;  width: 100%;">Airtime History</span>
-      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
-      </div>
+      <span style="margin: auto; font-size: 20px; width: 100%"
+        >Airtime History</span
+      >
+      <ion-icon
+        name="caret-forward"
+        style="margin: auto; font-size: 20px; color: #25214f"
+      ></ion-icon>
+    </div> -->
   </section>
 
-  <section *ngIf="transType === 1">
-
-    <div style="
-    font-family: Mulish !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    cursor: pointer;
-    margin: 1.5rem 0.5rem;"
-    (click)="transactionType(2)">
+  <!-- <section *ngIf="transType === 1">
+    <div
+      style="
+        font-family: Mulish !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        cursor: pointer;
+        margin: 1.5rem 0.5rem;
+      "
+      (click)="transactionType(2)"
+    >
       <div class="icon-container">
-        <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
-        <ion-img
-        src="assets/icon/airtel.png"
-        class="icons"
-      ></ion-img>      </div>
-      <span style="margin: auto; font-size: 20px;  width: 100%;">Airtel</span>
-      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+        <ion-img src="assets/icon/airtel.png" class="icons"></ion-img>
       </div>
+      <span style="margin: auto; font-size: 20px; width: 100%">Airtel</span>
+      <ion-icon
+        name="caret-forward"
+        style="margin: auto; font-size: 20px; color: #25214f"
+      ></ion-icon>
+    </div>
 
-      <div style="
-    font-family: Mulish !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    cursor: pointer;
-    margin: 1.5rem 0.5rem;"
-    (click)="transactionType(2)">
+    <div
+      style="
+        font-family: Mulish !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        cursor: pointer;
+        margin: 1.5rem 0.5rem;
+      "
+      (click)="transactionType(2)"
+    >
       <div class="icon-container">
-        <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
-        <ion-img
-        src="assets/icon/mtn.png"
-        class="icons"
-      ></ion-img>      </div>
-      <span style="margin: auto; font-size: 20px;  width: 100%;">MTN</span>
-      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+        <ion-img src="assets/icon/mtn.png" class="icons"></ion-img>
       </div>
+      <span style="margin: auto; font-size: 20px; width: 100%">MTN</span>
+      <ion-icon
+        name="caret-forward"
+        style="margin: auto; font-size: 20px; color: #25214f"
+      ></ion-icon>
+    </div>
 
-      <div style="
-    font-family: Mulish !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    cursor: pointer;
-    margin: 1.5rem 0.5rem;"
-    (click)="transactionType(2)">
+    <div
+      style="
+        font-family: Mulish !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        cursor: pointer;
+        margin: 1.5rem 0.5rem;
+      "
+      (click)="transactionType(2)"
+    >
       <div class="icon-container">
-        <ion-img
-        src="assets/icon/glo.png"
-        class="icons"
-      ></ion-img>      </div>
-      <span style="margin: auto; font-size: 20px;  width: 100%;">GLO</span>
-      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+        <ion-img src="assets/icon/glo.png" class="icons"></ion-img>
       </div>
+      <span style="margin: auto; font-size: 20px; width: 100%">GLO</span>
+      <ion-icon
+        name="caret-forward"
+        style="margin: auto; font-size: 20px; color: #25214f"
+      ></ion-icon>
+    </div>
 
-      <div style="
-    font-family: Mulish !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    cursor: pointer;
-    margin: 1.5rem 0.5rem;"
-    (click)="transactionType(2)">
+    <div
+      style="
+        font-family: Mulish !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        cursor: pointer;
+        margin: 1.5rem 0.5rem;
+      "
+      (click)="transactionType(2)"
+    >
       <div class="icon-container">
-        <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
-        <ion-img
-        src="assets/icon/9mobile.png"
-        class="icons"
-      ></ion-img>      </div>
-      <span style="margin: auto; font-size: 20px; width: 100%;">9 Mobile</span>
-      <ion-icon name="caret-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+        <ion-img src="assets/icon/9mobile.png" class="icons"></ion-img>
       </div>
-  </section>
+      <span style="margin: auto; font-size: 20px; width: 100%">9 Mobile</span>
+      <ion-icon
+        name="caret-forward"
+        style="margin: auto; font-size: 20px; color: #25214f"
+      ></ion-icon>
+    </div>
+  </section> -->
 
   <section *ngIf="transType === 2">
-    <div class="row" style="display: flex; flex-direction: row; justify-content: space-between;">
-      <ion-button  (click)="toggleRequest(true)" [ngClass]="{active: selectedBtn === true}"
-      style="width: 100%; --border-radius: none;">
+    <div
+      class="row"
+      style="display: flex; flex-direction: row; justify-content: space-between"
+    >
+      <ion-button
+        (click)="toggleRequest(true)"
+        [ngClass]="{ active: selectedBtn === true }"
+        style="width: 100%; --border-radius: none"
+      >
         New
       </ion-button>
 
-      <ion-button (click)="toggleRequest(false)" size="medium" [ngClass]="{active: selectedBtn1 === true}"
-      style="width: 100%; --border-radius: none;">
+      <ion-button
+        (click)="toggleRequest(false)"
+        size="medium"
+        [ngClass]="{ active: selectedBtn1 === true }"
+        style="width: 100%; --border-radius: none"
+      >
         Beneficiary
       </ion-button>
     </div>
 
-    <form *ngIf="newReq" [formGroup]="beneficiaryForm">
-
+    <div *ngIf="newReq">
       <div class="form-group row" style="padding: 5px">
         <label for="">Phone Number</label>
         <input
+          [(ngModel)]="phoneNumber"
           type="text"
-          name="amount"
+          name="mobile"
           class="input"
-          placeholder="100000"
+          placeholder="08079172267"
         />
       </div>
 
       <div class="form-group row" style="padding: 5px">
         <label for="">Select Bundle</label>
-        <select name="bank" id="" class="input">
-          <option value="1">10MB/10 days</option>
-          <option value="1">1GB/30 days</option>
-          <option value="1">5GB/ 30 days</option>
+        <select [(ngModel)]="productCode" name="bank" id="" class="input">
+          <!-- <option value="">-- Select Type --</option> -->
+          <option *ngFor="let data of products" [value]="data.productCode">
+            <div>{{ data.productTitle }}</div>
+            <div>{{ data.productPrice }}</div>
+          </option>
         </select>
       </div>
 
@@ -162,40 +218,105 @@
           class="btn"
           expand="block"
           style="margin-top: 1rem"
-          (click)="next()"
+          (click)="submit()"
           routerLinkActive="router-link-active"
         >
-          Transfer
+          Send
         </ion-button>
       </div>
-    </form>
+    </div>
 
-    <form *ngIf="!newReq" [formGroup]="beneficiaryForm">
-      <div class="form-group row" style="padding: 5px">
+    <div *ngIf="!newReq">
+      <!-- <div class="form-group row" style="padding: 5px">
         <label for="">Search Beneficiary</label>
+        <input type="text" class="input" placeholder="Search.." name="search" />
+        <ion-icon
+          name="search"
+          style="margin-top: -34px; margin-left: 7px"
+        ></ion-icon>
+      </div> -->
+      <div
+        (click)="new()"
+        style="
+          margin: 20px 0;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        Add <ion-icon name="add"></ion-icon>
+      </div>
+      <div *ngIf="add">
         <input
           type="text"
           class="input"
-          placeholder="Search.."
-          name="search"
+          placeholder="name"
+          name="name"
+          style="margin-bottom: 10px"
+          [(ngModel)]="name"
         />
-        <ion-icon name="search" style="margin-top: -34px; margin-left: 7px;"></ion-icon>
+        <input
+          type="text"
+          class="input"
+          placeholder="Number"
+          name="number"
+          [(ngModel)]="benNum"
+        />
+        <ion-button
+          class="btn"
+          expand="block"
+          style="margin-top: 1rem"
+          (click)="adds()"
+        >
+          Add
+        </ion-button>
       </div>
 
       <div class="row-one">
-        <span style="text-align: left;">No beneficiary found</span>
+        <span style="text-align: left" *ngIf="benes.length === 0"
+          >No beneficiary found</span
+        >
+        <div
+          style="background-color: #f8f8f8; border-radius: 8px; margin-top: 5px"
+          *ngFor="let data of benes"
+        >
+          <ion-card-content style="display: flex; flex-direction: row">
+            <ion-icon
+              name="trash"
+              style="
+                margin-right: 10px;
+                font-size: 25px;
+                color: #25214f;
+                width: 10%;
+              "
+              (click)="delete(data.phoneNumber)"
+            ></ion-icon>
+            <div
+              style="
+                font-size: 13px;
+                display: flex;
+                flex-direction: column;
+                width: 80%;
+              "
+            >
+              <span style="text-align: left; font-weight: 800"
+                >{{ data.name }}
+              </span>
+              <span style="text-align: left">{{ data.phoneNumber }} </span>
+            </div>
+            <ion-icon
+              (click)="use(data.phoneNumber)"
+              name="caret-forward"
+              style="margin: auto; font-size: 30px; color: #25214f; width: 10%"
+            ></ion-icon>
+          </ion-card-content>
+        </div>
       </div>
-
-    </form>
+    </div>
   </section>
 
-
-  <section *ngIf="transType ===9">
-
-
-    <ion-card>
-
-    </ion-card>
+  <section *ngIf="transType === 9">
+    <ion-card> </ion-card>
   </section>
-
 </ion-content>

@@ -4,7 +4,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/http/services/auth.service';
-
+import { Uid } from '@ionic-native/uid/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 @Component({
   selector: 'app-done',
   templateUrl: './done.component.html',
@@ -12,6 +13,7 @@ import { AuthService } from '../../../core/http/services/auth.service';
 })
 export class DoneComponent implements OnInit {
   source1 = 'assets/icon/royalL.png';
+  imei = this.uid.IMEI;
 
   source = 'assets/icon/royalty.png';
   imageSrc = 'assets/icon/phoneA.png';
@@ -23,8 +25,12 @@ export class DoneComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     public toast: ToastrService,
-    public navController: NavController
-  ) {}
+    public navController: NavController,
+    private uid: Uid,
+    private androidPermissions: AndroidPermissions
+  ) {
+    this.getPermission();
+  }
   getOnboardingStage() {
     if (this.id) {
       this.auth
@@ -130,10 +136,27 @@ export class DoneComponent implements OnInit {
           if (res.data.responseCode === '00') {
             console.log(res.data.data.id);
             this.loading = false;
-            localStorage.setItem('stageId', '');
             // this.data = res.data;
 
             // deal with register
+            const data = {
+              Channel: 'MobileApp',
+              ChannelIdentifier: this.imei ? this.imei : '12345',
+              UserId: this.id,
+            };
+            this.auth
+              .post(data, 'UserManager.UserService.SaveUserChannel')
+              .subscribe(
+                (response: any) => {
+                  this.loading = false;
+                  console.log(response);
+                  if (res.data.responseCode === '00') {
+                    localStorage.setItem('stageId', '');
+                  } else {
+                  }
+                },
+                (err) => console.error(err.message)
+              );
             console.log(res);
           } else {
             this.reloadCurrentRoute();
@@ -180,5 +203,27 @@ export class DoneComponent implements OnInit {
   }
   create() {
     this.router.navigate(['/dashboard']);
+  }
+  getPermission() {
+    this.androidPermissions
+      .checkPermission(this.androidPermissions.PERMISSION.READ_PHONE_STATE)
+      .then((res) => {
+        if (res.hasPermission) {
+        } else {
+          this.androidPermissions
+            .requestPermission(
+              this.androidPermissions.PERMISSION.READ_PHONE_STATE
+            )
+            .then((response: any) => {
+              alert('Persmission Granted Please Restart App!');
+            })
+            .catch((error) => {
+              alert('Error! ' + error);
+            });
+        }
+      })
+      .catch((error) => {
+        alert('Error! ' + error);
+      });
   }
 }
