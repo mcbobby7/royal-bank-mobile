@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/http/services/auth.service';
+
 
 @Component({
   selector: 'app-cabletv',
@@ -6,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cabletv.component.scss'],
 })
 export class CabletvComponent implements OnInit {
+  billProducts = [];
+  transType = 0;
+  constructor(private auth: AuthService,) { }
 
-  constructor() { }
+  ngOnInit() {
+    this.fetchBillsProducts();
+  }
 
-  ngOnInit() {}
+   fetchBillsProducts(){
+    this.auth.post(1, 'Cba.ValueAddedService.FetchTypes').subscribe((data: any) => {
+      if(data.status === '00'){
+        this.billProducts = data.data;
+        console.log(this.billProducts);
+      } else {
+        console.log('Could not fetch data');
+      }
+    });
+  }
 
 }

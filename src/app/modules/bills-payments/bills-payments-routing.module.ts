@@ -10,7 +10,7 @@ const routes: Routes = [
     component: BillsPaymentsPage
   },
   {
-    path: 'cabletv',
+    path: 'CableTv',
     component: CabletvComponent
   }
 ];

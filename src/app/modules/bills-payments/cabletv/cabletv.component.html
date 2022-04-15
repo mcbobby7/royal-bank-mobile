@@ -1,36 +1,24 @@
 <ion-content>
   <div style="padding: 100px;"></div>
-  <h1>dddfdf</h1>
 
-  <!-- <section  *ngIf="transType ===0"> -->
+  <section *ngIf="transType === 0">
 
-
-    <!-- <div style="
+    <div style="
+    font-family: Mulish !important;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     cursor: pointer;
-    margin: 1.5rem;"
+    width: 100%;
+    align-items: center;
+    font-size: 20px;
+    margin: 1.5rem 0.5rem;"
     (click)="transactionType(1)">
       <div class="icon-container">
-        <ion-icon name="send" class="inner-icon"></ion-icon>
+        <ion-icon name="caret-up-circle" class="inner-icon"></ion-icon>
       </div>
-      <span style="margin: auto; font-size: 20px;">Send to Royal Bank</span>
-      <ion-icon name="arrow-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
-      </div>
-
-      <div style="
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    cursor: pointer;
-    margin: 1.5rem;"
-    (click)="transactionType(2)">
-      <div class="icon-container">
-        <ion-icon name="send" class="inner-icon"></ion-icon>
-      </div>
-      <span style="margin: auto; font-size: 20px;">Send to other Banks</span>
-      <ion-icon name="arrow-forward" style="margin:auto; font-size: 20px; color: #25214f;"></ion-icon>
+      <span style="margin: auto;">DSTV</span>
+      <ion-icon name="caret-forward" style="color: #25214f;"></ion-icon>
       </div>
   </section>
 
@@ -172,6 +160,6 @@
             </ion-button>
           </section>
         </div>
-    </section> -->
+    </section>
 
 </ion-content>
