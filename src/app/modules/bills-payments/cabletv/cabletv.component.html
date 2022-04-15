@@ -1,9 +1,9 @@
 <ion-content>
-  <div style="padding: 100px;"></div>
+  <div style="padding: 50px;"></div>
 
   <section *ngIf="transType === 0">
 
-    <div style="
+    <div *ngFor="let item of billProducts" style="
     font-family: Mulish !important;
     display: flex;
     flex-direction: row;
@@ -12,12 +12,12 @@
     width: 100%;
     align-items: center;
     font-size: 20px;
-    margin: 1.5rem 0.5rem;"
+    margin: 1rem 0;"
     (click)="transactionType(1)">
       <div class="icon-container">
         <ion-icon name="caret-up-circle" class="inner-icon"></ion-icon>
       </div>
-      <span style="margin: auto;">DSTV</span>
+      <span style="margin: auto;">{{item.name}}</span>
       <ion-icon name="caret-forward" style="color: #25214f;"></ion-icon>
       </div>
   </section>

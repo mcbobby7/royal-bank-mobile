@@ -17,14 +17,14 @@ export class CabletvComponent implements OnInit {
   }
 
    fetchBillsProducts(){
-    this.auth.post(1, 'Cba.ValueAddedService.FetchTypes').subscribe((data: any) => {
+    this.auth.post({ VasCategoryId: 1 }, 'Cba.ValueAddedService.FetchTypes').subscribe((data: any) => {
       if(data.status === '00'){
         this.billProducts = data.data;
         console.log(this.billProducts);
       } else {
         console.log('Could not fetch data');
       }
-    });
+    }, (err) => console.error(err.message));
   }
 
 }

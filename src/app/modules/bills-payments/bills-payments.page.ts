@@ -15,6 +15,10 @@ export class BillsPaymentsPage implements OnInit {
     this.fetchBillsCategory();
   }
 
+//   You can use FetchVasType to get the Vas type code
+// FetchProduct to get the product code
+// FetchVasCategory for the payment type
+
   fetchBillsCategory(){
     this.auth.post(null, 'Cba.ValueAddedService.FetchCategories').subscribe((data: any) => {
       if(data.status === '00'){
@@ -23,7 +27,7 @@ export class BillsPaymentsPage implements OnInit {
       } else {
         console.log('Could not fetch data');
       }
-    });
+    },(err) => console.error(err.message));
   }
 
 }
