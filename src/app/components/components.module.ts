@@ -35,6 +35,7 @@ import { BalanceComponent } from '../components/balance/balance.component';
 import { TabsPage } from '../tabs/tabs.page';
 import { LimitComponent } from '../modules/account-info/limit/limit.component';
 import { TransferPage } from '../modules/transfer/transfer.page';
+import { ProductsComponent } from '../modules/bills-payments/products/products.component';
 
 const components = [
   TabsPage,
@@ -69,6 +70,7 @@ const components = [
   CabletvComponent,
   LimitComponent,
   TransferPage,
+  ProductsComponent
 ];
 
 const materialModules = [RouterModule];

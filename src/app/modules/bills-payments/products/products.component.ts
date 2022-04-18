@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AuthService } from '../../core/http/services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/http/services/auth.service';
 
 @Component({
-  selector: 'app-airtime',
-  templateUrl: './airtime.component.html',
-  styleUrls: ['./airtime.component.scss'],
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.scss'],
 })
-export class AirtimeComponent implements OnInit {
+export class ProductsComponent implements OnInit {
+
   selectedBtn = true;
   selectedBtn1 = false;
   newReq = true;
@@ -23,6 +25,7 @@ export class AirtimeComponent implements OnInit {
   loading = false;
   vasType;
   submitCode;
+  typeCode = 0;
   benes = localStorage.getItem('benNums')
     ? JSON.parse(localStorage.getItem('benNums'))
     : [];
@@ -32,16 +35,19 @@ export class AirtimeComponent implements OnInit {
     narration: new FormControl(''),
   });
 
-  constructor(private auth: AuthService, public toast: ToastrService) {}
+  constructor(private auth: AuthService, public toast: ToastrService, private route: ActivatedRoute) {}
+
+
 
   ngOnInit() {
+    this.typeCode = Number(this.route.snapshot.queryParamMap.get('id'));
     this.fetchData();
   }
   fetchData() {
     console.log();
 
     this.auth
-      .post({ VasCategoryId: 4 }, 'Cba.ValueAddedService.FetchTypes')
+      .post({ VasCategoryId: this.typeCode }, 'Cba.ValueAddedService.FetchTypes')
       .subscribe(
         (res: any) => {
           if (res.status === '00') {
