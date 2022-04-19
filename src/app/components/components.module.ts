@@ -36,6 +36,7 @@ import { TabsPage } from '../tabs/tabs.page';
 import { LimitComponent } from '../modules/account-info/limit/limit.component';
 import { TransferPage } from '../modules/transfer/transfer.page';
 import { ProductsComponent } from '../modules/bills-payments/products/products.component';
+import { PinComponent } from './pin/pin.component';
 
 const components = [
   TabsPage,
@@ -70,7 +71,8 @@ const components = [
   CabletvComponent,
   LimitComponent,
   TransferPage,
-  ProductsComponent
+  ProductsComponent,
+  PinComponent
 ];
 
 const materialModules = [RouterModule];

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PinComponent } from './components/pin/pin.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { DashboardTemplateComponent } from './core/templates/dashboard-template/dashboard-template.component';
 import { InPageComponent } from './core/templates/in-page/in-page.component';
@@ -111,6 +112,10 @@ const routes: Routes = [
             (m) => m.BillsPaymentsPageModule
           ),
       },
+      {
+        path: 'pin',
+        component: PinComponent
+      }
     ],
   },
   {
