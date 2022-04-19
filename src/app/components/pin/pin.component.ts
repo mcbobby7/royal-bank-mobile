@@ -26,7 +26,6 @@ export class PinComponent implements OnInit {
   ngOnInit() {}
 
   getPinValue(e){
-
     if(e === 11){
       this.transactionPin.pop();
       console.log(this.transactionPin);
