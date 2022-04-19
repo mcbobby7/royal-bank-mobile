@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { BillsPaymentsPage } from './bills-payments.page';
 import { CabletvComponent } from './cabletv/cabletv.component';
+import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
   {
@@ -10,9 +11,9 @@ const routes: Routes = [
     component: BillsPaymentsPage
   },
   {
-    path: 'cabletv',
-    component: CabletvComponent
-  }
+    path: 'products',
+    component: ProductsComponent
+  },
 ];
 
 @NgModule({

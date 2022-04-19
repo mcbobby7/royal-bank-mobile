@@ -1,29 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AuthService } from '../../core/http/services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/http/services/auth.service';
 
 @Component({
-  selector: 'app-airtime',
-  templateUrl: './airtime.component.html',
-  styleUrls: ['./airtime.component.scss'],
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.scss'],
 })
-export class AirtimeComponent implements OnInit {
+export class ProductsComponent implements OnInit {
+
   selectedBtn = true;
   selectedBtn1 = false;
   newReq = true;
   transType = 0;
   vars: any = [];
-  subs: any = [];
   products: any = [];
   add = false;
   name;
   benNum;
   productCode;
   phoneNumber;
-  loading = true;
+  loading = false;
   vasType;
   submitCode;
+  typeCode = 0;
   benes = localStorage.getItem('benNums')
     ? JSON.parse(localStorage.getItem('benNums'))
     : [];
@@ -33,50 +35,31 @@ export class AirtimeComponent implements OnInit {
     narration: new FormControl(''),
   });
 
-  constructor(private auth: AuthService, public toast: ToastrService) {}
+  constructor(private auth: AuthService, public toast: ToastrService, private route: ActivatedRoute) {}
+
+
 
   ngOnInit() {
+    this.typeCode = Number(this.route.snapshot.queryParamMap.get('id'));
     this.fetchData();
   }
   fetchData() {
     console.log();
-    try {
-      this.auth
-        .post({ VasCategoryId: 4 }, 'Cba.ValueAddedService.FetchTypes')
-        .subscribe(
-          (res: any) => {
-            if (res.status === '00') {
-              // deal with register
-              this.loading = false;
 
-              this.vars = res.data;
-              console.log(this.vars);
-            } else {
-              console.log(res.data.responseMessage);
-            }
-          },
-          (err) => console.error(err.message)
-        );
-      this.auth
-        .post({ VasCategoryId: 2 }, 'Cba.ValueAddedService.FetchTypes')
-        .subscribe(
-          (res: any) => {
-            if (res.status === '00') {
-              // deal with register
-              this.loading = false;
-
-              this.subs = res.data;
-              console.log(this.subs);
-            } else {
-              console.log(res.data.responseMessage);
-            }
-          },
-          (err) => console.error(err.message)
-        );
-    } catch (err) {
-      console.log(err);
-      this.loading = false;
-    }
+    this.auth
+      .post({ VasCategoryId: this.typeCode }, 'Cba.ValueAddedService.FetchTypes')
+      .subscribe(
+        (res: any) => {
+          if (res.status === '00') {
+            // deal with register
+            this.vars = res.data;
+            console.log(this.vars);
+          } else {
+            console.log(res.data.responseMessage);
+          }
+        },
+        (err) => console.error(err.message)
+      );
   }
 
   fetchProduct(code) {

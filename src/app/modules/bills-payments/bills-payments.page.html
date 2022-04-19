@@ -9,16 +9,16 @@ style="
   margin-top: 10px;
 "
 >
-<div class="icons-bg"  [routerLink]="['cabletv']" routerLinkActive="router-link-active" >
+<div *ngFor="let item of billCategories" class="icons-bg"  [routerLink]="['products']" [queryParams]="{id: item.id}" routerLinkActive="router-link-active" >
   <ion-img
-    src="assets/icon/cable-tv.png"
+    src='{{"assets/icon/" + item.code + ".png" }}'
     class="icons"
   ></ion-img>
   <div>
-    Cable TV
+    {{item.name}}
   </div>
 </div>
-<div class="icons-bg"  [routerLink]="['addfund']" routerLinkActive="router-link-active" >
+<!-- <div class="icons-bg"  [routerLink]="['addfund']" routerLinkActive="router-link-active" >
   <ion-img
     src="assets/icon/internet.png"
     class="icons"
@@ -36,15 +36,7 @@ style="
     Insurance
   </div>
 </div>
-<!-- </section>
-<section
-style="
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 10px;
-"
-> -->
+
 <div class="icons-bg"  [routerLink]="['transfer']" routerLinkActive="router-link-active" >
   <ion-img
     src="assets/icon/church.png"
@@ -71,7 +63,7 @@ style="
   <div>
     Utility
   </div>
-</div>
+</div> -->
 <!-- </section>
 
 <section
@@ -82,7 +74,7 @@ style="
   margin-top: 10px;
 "
 > -->
-<div class="icons-bg"  [routerLink]="['transfer']" routerLinkActive="router-link-active" >
+<!-- <div class="icons-bg"  [routerLink]="['transfer']" routerLinkActive="router-link-active" >
   <ion-img
     src="assets/icon/data.png"
     class="icons"
@@ -108,7 +100,7 @@ style="
   <div>
     Airline
   </div>
-</div>
+</div> -->
 </section>
 
 </ion-content>
