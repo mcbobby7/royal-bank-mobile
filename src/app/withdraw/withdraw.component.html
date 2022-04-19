@@ -1,6 +1,5 @@
 <ion-content>
   <div style="height: 120px"></div>
-  <app-loader *ngIf="loading"></app-loader>
 
   <section *ngIf="transType === 0">
     <div
@@ -53,7 +52,7 @@
     >
       <ion-button
         (click)="toggleRequest(true)"
-        [ngClass]="{active: selectedBtn === true}"
+        [ngClass]="{ active: selectedBtn === true }"
         style="width: 100%; --border-radius: none"
       >
         New
@@ -62,14 +61,14 @@
       <ion-button
         (click)="toggleRequest(false)"
         size="medium"
-        [ngClass]="{active: selectedBtn1 === true}"
+        [ngClass]="{ active: selectedBtn1 === true }"
         style="width: 100%; --border-radius: none"
       >
         Beneficiary
       </ion-button>
     </div>
 
-    <!-- <section *ngIf="transType ===1">
+    <section *ngIf="transType === 1">
       <form *ngIf="newReq">
         <div class="form-group row" style="padding: 5px">
           <label for="">Beneficiary</label>
@@ -107,6 +106,145 @@
         >
           <label>Save Beneficiary</label>
           <ion-toggle></ion-toggle>
+        </div>
+
+        <div class="form-group">
+          <ion-button
+            class="btn"
+            expand="block"
+            style="margin-top: 1rem; font-family: Mulish !important"
+            (click)="next()"
+            routerLinkActive="router-link-active"
+          >
+            Transfer
+          </ion-button>
+        </div>
+      </form>
+
+      <form *ngIf="!newReq" [formGroup]="form">
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Search Beneficiary</label>
+          <input
+            type="text"
+            class="input"
+            placeholder="Search.."
+            name="search"
+          />
+          <ion-icon
+            name="search"
+            style="margin-top: -34px; margin-left: 7px"
+          ></ion-icon>
+        </div>
+
+        <div class="row-one">
+          <span style="text-align: left">No beneficiary found</span>
+        </div>
+
+        <div class="row" style="margin-top: 5px">
+          <span class="header" style="text-align: left">Beneficiaries</span>
+          <div
+            style="
+              background-color: #f8f8f8;
+              border-radius: 8px;
+              margin-top: 5px;
+            "
+          >
+            <ion-card-content
+              style="
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+              "
+            >
+              <ion-icon
+                name="trash"
+                style="margin-right: 10px; font-size: 30px; color: #25214f"
+              ></ion-icon>
+              <div
+                style="font-size: 13px; display: flex; flex-direction: column"
+              >
+                <span style="text-align: left; font-weight: 800"
+                  >Ogungbenro Philip - 0141944727
+                </span>
+                <span style="text-align: left">GTB - 0141944727 </span>
+              </div>
+              <ion-icon
+                name="caret-forward"
+                style="margin: auto; font-size: 30px; color: #25214f"
+              ></ion-icon>
+            </ion-card-content>
+          </div>
+
+          <div
+            style="
+              background-color: #f8f8f8;
+              border-radius: 8px;
+              margin-top: 5px;
+            "
+          >
+            <ion-card-content
+              style="
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+              "
+            >
+              <ion-icon
+                name="trash"
+                style="margin-right: 10px; font-size: 30px; color: #25214f"
+              ></ion-icon>
+              <div
+                style="font-size: 13px; display: flex; flex-direction: column"
+              >
+                <span style="text-align: left; font-weight: 800"
+                  >Ogungbenro Philip - 2075898881
+                </span>
+                <span style="text-align: left">UBA - 2075898881 </span>
+              </div>
+              <ion-icon
+                name="caret-forward"
+                style="margin: auto; font-size: 30px; color: #25214f"
+              ></ion-icon>
+            </ion-card-content>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section *ngIf="transType === 2">
+      <form *ngIf="newReq">
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Beneficiary</label>
+          <input
+            type="text"
+            name="beneficiary"
+            class="input"
+            placeholder="1234567890"
+          />
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Bank</label>
+          <select name="bank" id="" class="input">
+            <option value="1">Access</option>
+            <option value="1">GTB</option>
+            <option value="1">UBA</option>
+          </select>
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Amount</label>
+          <input type="text" name="amount" class="input" placeholder="100000" />
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Narration</label>
+          <input
+            type="text"
+            name="narration"
+            class="input"
+            placeholder="1234567890"
+          />
         </div>
 
         <div class="form-group">
@@ -210,265 +348,10 @@
           </div>
         </div>
       </form>
-    </section> -->
-
-    <section *ngIf="transType === 2 || transType === 1">
-      <form *ngIf="newReq">
-        <div class="form-group row" style="padding: 5px">
-          <label for="">Select Account</label>
-          <select [(ngModel)]="accNum" name="account" id="" class="input">
-            <option
-              *ngFor="let data of user.accountNos"
-              [value]="data.accountNo"
-            >
-              {{data.accountNo}}
-            </option>
-          </select>
-        </div>
-
-        <div
-          class="form-group row"
-          style="padding: 5px"
-          *ngIf="transType === 2"
-        >
-          <label for="">Bank</label>
-          <select
-            [(ngModel)]="bankCode"
-            (change)="chnageBank($event)"
-            name="bank"
-            id=""
-            class="input"
-          >
-            <option *ngFor="let data of banks" [value]="data.code">
-              {{data.name}}
-            </option>
-          </select>
-        </div>
-        <div class="form-group row" style="padding: 5px; position: relative">
-          <label for="">Beneficiary Account </label>
-          <input
-            type="text"
-            name="beneficiary"
-            class="input"
-            placeholder="1234567890"
-            [(ngModel)]="benAcc"
-            (ngModelChange)="debounce($event)"
-          />
-          <div
-            *ngIf="name"
-            style="position: absolute; bottom: -15px; right: 20px"
-            [style.color]="showName ? 'red' : 'green'"
-          >
-            {{name}}
-          </div>
-        </div>
-
-        <div class="form-group row" style="padding: 5px">
-          <label for="">Amount</label>
-          <input
-            type="text"
-            [(ngModel)]="amount"
-            name="amount"
-            class="input"
-            placeholder="100000"
-          />
-        </div>
-
-        <div class="form-group row" style="padding: 5px">
-          <label for="">Narration</label>
-          <input
-            type="text"
-            name="narration"
-            class="input"
-            [(ngModel)]="narration"
-            placeholder="1234567890"
-          />
-        </div>
-        <div
-          class="form-group row"
-          style="
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 5px;
-          "
-        >
-          <label>Save Beneficiary</label>
-          <ion-toggle
-            [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="saveBene"
-          ></ion-toggle>
-        </div>
-
-        <div class="form-group">
-          <ion-button
-            class="btn"
-            expand="block"
-            style="margin-top: 1rem; font-family: Mulish !important"
-            (click)="next()"
-            routerLinkActive="router-link-active"
-          >
-            Transfer
-          </ion-button>
-        </div>
-      </form>
-
-      <form *ngIf="!newReq">
-        <div class="form-group row" style="padding: 5px">
-          <label for="">Search Beneficiary</label>
-          <input
-            type="text"
-            class="input"
-            placeholder="Search.."
-            name="search"
-          />
-          <ion-icon
-            name="search"
-            style="margin-top: -34px; margin-left: 7px"
-          ></ion-icon>
-        </div>
-
-        <div class="row-one">
-          <span style="text-align: left">No beneficiary found</span>
-        </div>
-
-        <div class="row" style="margin-top: 5px">
-          <span class="header" style="text-align: left">Beneficiaries</span>
-
-          <div
-            style="
-              background-color: #f8f8f8;
-              border-radius: 8px;
-              margin-top: 5px;
-            "
-            *ngFor="let data of benes"
-          >
-            <ion-card-content style="display: flex; flex-direction: row">
-              <ion-icon
-                name="trash"
-                style="
-                  margin-right: 10px;
-                  font-size: 25px;
-                  color: #25214f;
-                  width: 10%;
-                "
-                (click)="delete(data.accNumber)"
-              ></ion-icon>
-              <div
-                style="
-                  font-size: 13px;
-                  display: flex;
-                  flex-direction: column;
-                  width: 80%;
-                "
-              >
-                <span style="text-align: left; font-weight: 800"
-                  >{{ data.name }} ({{data.bankName}})
-                </span>
-                <span style="text-align: left">{{ data.accNumber }} </span>
-              </div>
-              <ion-icon
-                (click)="use(data)"
-                name="caret-forward"
-                style="
-                  margin: auto;
-                  font-size: 30px;
-                  color: #25214f;
-                  width: 10%;
-                "
-              ></ion-icon>
-            </ion-card-content>
-          </div>
-        </div>
-      </form>
     </section>
   </section>
 
-  <section *ngIf="transType === 4">
-    <div
-      style="
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        text-align: left;
-      "
-    >
-      <div style="width: 30vw">
-        <div style="font-size: 11px">From</div>
-        <div style="font-size: 14px">{{benAcc}}</div>
-        <div style="font-size: 14px">your account</div>
-      </div>
-      <div style="width: 30vw">
-        <div style="text-align: center; font-size: 15">
-          {{amount | currency: "&#8358;" }}
-        </div>
-        <div style="display: flex; flex-direction: row; align-items: center">
-          <div
-            style="
-              height: 10px;
-              width: 10px;
-              border-radius: 50%;
-              background-color: rgb(126, 121, 121);
-            "
-          ></div>
-          <div
-            style="
-              width: 90%;
-              height: 4px;
-              background-color: rgb(126, 121, 121);
-            "
-          ></div>
-          <div
-            style="
-              height: 10px;
-              width: 10px;
-              border-radius: 50%;
-              background-color: rgb(126, 121, 121);
-            "
-          ></div>
-        </div>
-      </div>
-      <div style="width: 30vw; text-align: right">
-        <div style="font-size: 11px">To</div>
-        <div style="font-size: 14px">{{benAcc}}</div>
-        <div style="font-size: 14px">{{name}}</div>
-        <!-- <div>From</div> -->
-      </div>
-    </div>
-    <div
-      style="
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        background-color: rgb(246, 238, 238);
-        padding: 20px 10px;
-        margin-top: 40px;
-        font-size: 14px;
-        border-radius: 5px;
-      "
-    >
-      <span style="width: 30%">Narration</span>
-      <span style="width: 70%">{{narration}}</span>
-    </div>
-    <ion-button
-      style="margin-top: 30px"
-      class="btn"
-      expand="block"
-      (click)="transfer()"
-    >
-      Pay
-    </ion-button>
-    <ion-button
-      style="margin-top: 30px"
-      class="btn"
-      expand="block"
-      (click)="back()"
-    >
-      Back
-    </ion-button>
-  </section>
-
-  <section *ngIf="transType ===3">
+  <section *ngIf="transType === 3">
     <div
       style="
         display: flex;
