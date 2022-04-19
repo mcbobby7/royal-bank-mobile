@@ -2,6 +2,42 @@
   <div style="height: 100px"></div>
   <app-loader *ngIf="loading"></app-loader>
   <section *ngIf="transType === 0">
+    <div *ngIf="!loading" style="font-size: 20px; text-align: left">Data</div>
+    <div
+      *ngFor="let data of subs"
+      style="
+        font-family: Mulish !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        cursor: pointer;
+        margin: 1.5rem 0.5rem;
+      "
+      (click)="transactionType(2, data.code)"
+    >
+      <div class="icon-container">
+        <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
+        <ion-icon name="phone-portrait" class="inner-icon"></ion-icon>
+      </div>
+      <span
+        style="
+          margin: auto;
+          text-align: left;
+          padding-left: 20px;
+          font-size: 20px;
+          width: 100%;
+        "
+        >{{ data.name }}</span
+      >
+      <ion-icon
+        name="caret-forward"
+        style="margin: auto; font-size: 20px; color: #25214f"
+      ></ion-icon>
+    </div>
+    <div *ngIf="!loading" style="font-size: 20px; text-align: left">
+      Airtime
+    </div>
+
     <div
       *ngFor="let data of vars"
       style="
@@ -208,7 +244,7 @@
           <!-- <option value="">-- Select Type --</option> -->
           <option *ngFor="let data of products" [value]="data.productCode">
             <div>{{ data.productTitle }}</div>
-            <div>{{ data.productPrice }}</div>
+            <div>({{ data.productPrice | currency: "&#8358;" }})</div>
           </option>
         </select>
       </div>

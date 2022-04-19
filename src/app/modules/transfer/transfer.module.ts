@@ -4,10 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TransferPage } from './transfer.page';
-
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule],
-  declarations: [TransferPage],
+  declarations: [],
 })
 export class TransferPageModule {}

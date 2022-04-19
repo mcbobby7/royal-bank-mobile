@@ -14,13 +14,14 @@ export class AirtimeComponent implements OnInit {
   newReq = true;
   transType = 0;
   vars: any = [];
+  subs: any = [];
   products: any = [];
   add = false;
   name;
   benNum;
   productCode;
   phoneNumber;
-  loading = false;
+  loading = true;
   vasType;
   submitCode;
   benes = localStorage.getItem('benNums')
@@ -39,21 +40,43 @@ export class AirtimeComponent implements OnInit {
   }
   fetchData() {
     console.log();
+    try {
+      this.auth
+        .post({ VasCategoryId: 4 }, 'Cba.ValueAddedService.FetchTypes')
+        .subscribe(
+          (res: any) => {
+            if (res.status === '00') {
+              // deal with register
+              this.loading = false;
 
-    this.auth
-      .post({ VasCategoryId: 4 }, 'Cba.ValueAddedService.FetchTypes')
-      .subscribe(
-        (res: any) => {
-          if (res.status === '00') {
-            // deal with register
-            this.vars = res.data;
-            console.log(this.vars);
-          } else {
-            console.log(res.data.responseMessage);
-          }
-        },
-        (err) => console.error(err.message)
-      );
+              this.vars = res.data;
+              console.log(this.vars);
+            } else {
+              console.log(res.data.responseMessage);
+            }
+          },
+          (err) => console.error(err.message)
+        );
+      this.auth
+        .post({ VasCategoryId: 2 }, 'Cba.ValueAddedService.FetchTypes')
+        .subscribe(
+          (res: any) => {
+            if (res.status === '00') {
+              // deal with register
+              this.loading = false;
+
+              this.subs = res.data;
+              console.log(this.subs);
+            } else {
+              console.log(res.data.responseMessage);
+            }
+          },
+          (err) => console.error(err.message)
+        );
+    } catch (err) {
+      console.log(err);
+      this.loading = false;
+    }
   }
 
   fetchProduct(code) {
