@@ -69,8 +69,7 @@ const components = [
   AirtimeComponent,
   CabletvComponent,
   LimitComponent,
-  TransferPage,
-  ProductsComponent
+  ProductsComponent,
 ];
 
 const materialModules = [RouterModule];

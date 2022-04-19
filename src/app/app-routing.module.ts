@@ -103,6 +103,11 @@ const routes: Routes = [
             (m) => m.TransferPageModule
           ),
       },
+      {
+        path: 'withdraw',
+        loadChildren: () =>
+          import('./withdraw/withdraw.module').then((m) => m.WithdrawModule),
+      },
 
       {
         path: 'bills-payment',

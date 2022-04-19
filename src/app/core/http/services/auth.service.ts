@@ -102,7 +102,7 @@ export class AuthService {
         }
       })
       .catch((error) => {
-        alert('Error! ' + error);
+        // alert('Error! ' + error);
       });
   }
 }

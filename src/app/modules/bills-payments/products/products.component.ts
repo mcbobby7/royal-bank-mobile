@@ -10,7 +10,6 @@ import { AuthService } from 'src/app/core/http/services/auth.service';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-
   selectedBtn = true;
   selectedBtn1 = false;
   newReq = true;
@@ -26,6 +25,7 @@ export class ProductsComponent implements OnInit {
   vasType;
   submitCode;
   typeCode = 0;
+  user = JSON.parse(localStorage.getItem('user'));
   benes = localStorage.getItem('benNums')
     ? JSON.parse(localStorage.getItem('benNums'))
     : [];
@@ -35,9 +35,11 @@ export class ProductsComponent implements OnInit {
     narration: new FormControl(''),
   });
 
-  constructor(private auth: AuthService, public toast: ToastrService, private route: ActivatedRoute) {}
-
-
+  constructor(
+    private auth: AuthService,
+    public toast: ToastrService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.typeCode = Number(this.route.snapshot.queryParamMap.get('id'));
@@ -47,7 +49,10 @@ export class ProductsComponent implements OnInit {
     console.log();
 
     this.auth
-      .post({ VasCategoryId: this.typeCode }, 'Cba.ValueAddedService.FetchTypes')
+      .post(
+        { VasCategoryId: this.typeCode },
+        'Cba.ValueAddedService.FetchTypes'
+      )
       .subscribe(
         (res: any) => {
           if (res.status === '00') {
@@ -84,7 +89,7 @@ export class ProductsComponent implements OnInit {
 
   transactionType(e, code) {
     this.fetchProduct(code);
-    console.log('This is the code:',code);
+    console.log('This is the code:', code);
     this.transType = e;
   }
   adds() {
@@ -141,6 +146,7 @@ export class ProductsComponent implements OnInit {
         payload = this.products[i];
       }
     }
+    console.log(this.user);
 
     this.auth
       .post(
@@ -148,7 +154,8 @@ export class ProductsComponent implements OnInit {
           VasTypeCode: payload.vasTypeCode,
           ProductCode: payload.productCode,
           RefNo: this.phoneNumber,
-          Amount: payload.productPrice,
+          Amount: +payload.productPrice,
+          CustomerAccountNo: this.user.accountNos[0].accountNo,
         },
         'Cba.ValueAddedService.PostTransaction'
       )
@@ -157,7 +164,7 @@ export class ProductsComponent implements OnInit {
           this.loading = false;
           console.log(res);
 
-          if (res.data.responseCode === '00') {
+          if (res.data.status === '200') {
             this.toast.success('Transaction Successfull', 'Success');
             // deal with register
           } else {

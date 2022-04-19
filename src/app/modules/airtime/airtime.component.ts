@@ -101,7 +101,7 @@ export class AirtimeComponent implements OnInit {
 
   transactionType(e, code) {
     this.fetchProduct(code);
-    console.log('This is the code:',code);
+    console.log('This is the code:', code);
     this.transType = e;
   }
   adds() {
@@ -158,6 +158,7 @@ export class AirtimeComponent implements OnInit {
         payload = this.products[i];
       }
     }
+    payload.productPrice = +payload.productPrice;
 
     this.auth
       .post(
@@ -165,7 +166,7 @@ export class AirtimeComponent implements OnInit {
           VasTypeCode: payload.vasTypeCode,
           ProductCode: payload.productCode,
           RefNo: this.phoneNumber,
-          Amount: payload.productPrice,
+          Amount: +payload.productPrice,
         },
         'Cba.ValueAddedService.PostTransaction'
       )
