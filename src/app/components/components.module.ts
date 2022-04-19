@@ -70,7 +70,7 @@ const components = [
   AirtimeComponent,
   CabletvComponent,
   LimitComponent,
-  TransferPage,
+  // TransferPage,
   ProductsComponent,
   PinComponent
 ];
