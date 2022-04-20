@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../core/http/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transfer',
@@ -32,7 +33,11 @@ export class TransferPage implements OnInit {
     ? JSON.parse(localStorage.getItem('benAccs'))
     : [];
 
-  constructor(private auth: AuthService, public toast: ToastrService) {}
+  constructor(
+    private auth: AuthService,
+    public toast: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     console.log(this.user);
@@ -44,7 +49,7 @@ export class TransferPage implements OnInit {
   }
 
   create() {
-    console.log('Hey');
+    this.router.navigate(['/dashboard']);
   }
   sanitise() {
     console.log('wait');
@@ -198,27 +203,66 @@ export class TransferPage implements OnInit {
 
   transfer() {
     this.loading = true;
+    let acc;
+    for (let i = 0; i < this.user.accountNos.length; i++) {
+      console.log();
+
+      if (this.accNum === this.user.accountNos[i].accountNo) {
+        acc = this.user.accountNos[i].accountId;
+      }
+    }
+
     this.auth
       .post(
         {
-          debitAccountNo: this.accNum,
-          creditAccountNo: this.benAcc,
-          Amount: this.amount,
-          Narration: this.narration,
+          clientId: this.user.clientId,
+          accountId: acc,
         },
-        'Cba.BankingService.FundTransfer'
+        'Cba.BankingService.FetchAccountBalance'
       )
       .subscribe(
         (res: any) => {
-          this.loading = false;
-          console.log(res);
-
+          console.log(res.data.data.balance);
           if (res.data.responseCode === '00') {
-            this.toast.success('Transaction successful', 'Success');
+            console.log(res.data.data.balance, +this.amount);
+
+            if (+this.amount > res.data.data.balance) {
+              this.loading = false;
+              this.toast.error('Insufficient balance', 'Error');
+              return;
+            } else {
+              this.auth
+                .post(
+                  {
+                    bankName: this.bankName,
+                    accountNumber: this.benAcc,
+                    Amount: +this.amount,
+                    Narration: this.narration,
+                  },
+                  'Nibss.NipService.InterFundsTransfer'
+                )
+                .subscribe(
+                  (res: any) => {
+                    this.loading = false;
+                    console.log(res);
+
+                    if (res.data.responseCode === '00') {
+                      this.transType = 3;
+                      // deal with register
+                    } else {
+                      console.log(res.data.responseMessage);
+                      this.toast.error(res.data.responseMessage, 'Error');
+                    }
+                  },
+                  (err) => {
+                    this.loading = false;
+                    this.toast.error('Please try again', 'Error');
+                  }
+                );
+            }
             // deal with register
           } else {
             console.log(res.data.responseMessage);
-            this.toast.error(res.data.responseMessage, 'Error');
           }
         },
         (err) => {

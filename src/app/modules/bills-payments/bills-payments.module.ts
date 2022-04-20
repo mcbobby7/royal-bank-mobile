@@ -6,15 +6,13 @@ import { IonicModule } from '@ionic/angular';
 
 import { BillsPaymentsPageRoutingModule } from './bills-payments-routing.module';
 
-import { BillsPaymentsPage } from './bills-payments.page';
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BillsPaymentsPageRoutingModule
+    BillsPaymentsPageRoutingModule,
   ],
-  declarations: [BillsPaymentsPage]
+  declarations: [],
 })
 export class BillsPaymentsPageModule {}

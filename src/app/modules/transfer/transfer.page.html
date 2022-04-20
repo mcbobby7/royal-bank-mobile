@@ -69,149 +69,6 @@
       </ion-button>
     </div>
 
-    <!-- <section *ngIf="transType ===1">
-      <form *ngIf="newReq">
-        <div class="form-group row" style="padding: 5px">
-          <label for="">Beneficiary</label>
-          <input
-            type="text"
-            name="beneficiary"
-            class="input"
-            placeholder="1234567890"
-          />
-        </div>
-
-        <div class="form-group row" style="padding: 5px">
-          <label for="">Amount</label>
-          <input type="text" name="amount" class="input" placeholder="100000" />
-        </div>
-
-        <div class="form-group row" style="padding: 5px">
-          <label for="">Narration</label>
-          <input
-            type="text"
-            name="narration"
-            class="input"
-            placeholder="1234567890"
-          />
-        </div>
-
-        <div
-          class="form-group row"
-          style="
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 5px;
-          "
-        >
-          <label>Save Beneficiary</label>
-          <ion-toggle></ion-toggle>
-        </div>
-
-        <div class="form-group">
-          <ion-button
-            class="btn"
-            expand="block"
-            style="margin-top: 1rem; font-family: Mulish !important"
-            (click)="next()"
-            routerLinkActive="router-link-active"
-          >
-            Transfer
-          </ion-button>
-        </div>
-      </form>
-
-      <form *ngIf="!newReq">
-        <div class="form-group row" style="padding: 5px">
-          <label for="">Search Beneficiary</label>
-          <input
-            type="text"
-            class="input"
-            placeholder="Search.."
-            name="search"
-          />
-          <ion-icon
-            name="search"
-            style="margin-top: -34px; margin-left: 7px"
-          ></ion-icon>
-        </div>
-
-        <div class="row-one">
-          <span style="text-align: left">No beneficiary found</span>
-        </div>
-
-        <div class="row" style="margin-top: 5px">
-          <span class="header" style="text-align: left">Beneficiaries</span>
-          <div
-            style="
-              background-color: #f8f8f8;
-              border-radius: 8px;
-              margin-top: 5px;
-            "
-          >
-            <ion-card-content
-              style="
-                display: flex;
-                flex-direction: row;
-                justify-content: space-around;
-              "
-            >
-              <ion-icon
-                name="trash"
-                style="margin-right: 10px; font-size: 30px; color: #25214f"
-              ></ion-icon>
-              <div
-                style="font-size: 13px; display: flex; flex-direction: column"
-              >
-                <span style="text-align: left; font-weight: 800"
-                  >Ogungbenro Philip - 0141944727
-                </span>
-                <span style="text-align: left">GTB - 0141944727 </span>
-              </div>
-              <ion-icon
-                name="caret-forward"
-                style="margin: auto; font-size: 30px; color: #25214f"
-              ></ion-icon>
-            </ion-card-content>
-          </div>
-
-          <div
-            style="
-              background-color: #f8f8f8;
-              border-radius: 8px;
-              margin-top: 5px;
-            "
-          >
-            <ion-card-content
-              style="
-                display: flex;
-                flex-direction: row;
-                justify-content: space-around;
-              "
-            >
-              <ion-icon
-                name="trash"
-                style="margin-right: 10px; font-size: 30px; color: #25214f"
-              ></ion-icon>
-              <div
-                style="font-size: 13px; display: flex; flex-direction: column"
-              >
-                <span style="text-align: left; font-weight: 800"
-                  >Ogungbenro Philip - 2075898881
-                </span>
-                <span style="text-align: left">UBA - 2075898881 </span>
-              </div>
-              <ion-icon
-                name="caret-forward"
-                style="margin: auto; font-size: 30px; color: #25214f"
-              ></ion-icon>
-            </ion-card-content>
-          </div>
-        </div>
-      </form>
-    </section> -->
-
     <section *ngIf="transType === 2 || transType === 1">
       <form *ngIf="newReq">
         <div class="form-group row" style="padding: 5px">
@@ -221,7 +78,7 @@
               *ngFor="let data of user.accountNos"
               [value]="data.accountNo"
             >
-              {{data.accountNo}}
+              {{data.accountNo}} ({{data.accountBalance | currency: "&#8358;"}})
             </option>
           </select>
         </div>
@@ -395,7 +252,7 @@
     >
       <div style="width: 30vw">
         <div style="font-size: 11px">From</div>
-        <div style="font-size: 14px">{{benAcc}}</div>
+        <div style="font-size: 14px">{{accNum}}</div>
         <div style="font-size: 14px">your account</div>
       </div>
       <div style="width: 30vw">
@@ -447,8 +304,10 @@
         border-radius: 5px;
       "
     >
-      <span style="width: 30%">Narration</span>
-      <span style="width: 70%">{{narration}}</span>
+      <span style="width: 30%; text-align: left">Narration</span>
+      <span style="width: 70%; text-align: right; font-size: 12px"
+        >{{narration}}</span
+      >
     </div>
     <ion-button
       style="margin-top: 30px"
@@ -474,7 +333,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 100vh;
+        height: 80vh;
       "
     >
       <div>

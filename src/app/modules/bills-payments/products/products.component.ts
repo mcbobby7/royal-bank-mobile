@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/http/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -21,9 +22,10 @@ export class ProductsComponent implements OnInit {
   benNum;
   productCode;
   phoneNumber;
-  loading = false;
+  loading = true;
   vasType;
   submitCode;
+  prodLoad = true;
   typeCode = 0;
   user = JSON.parse(localStorage.getItem('user'));
   benes = localStorage.getItem('benNums')
@@ -38,7 +40,8 @@ export class ProductsComponent implements OnInit {
   constructor(
     private auth: AuthService,
     public toast: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -55,15 +58,21 @@ export class ProductsComponent implements OnInit {
       )
       .subscribe(
         (res: any) => {
+          this.loading = false;
           if (res.status === '00') {
             // deal with register
             this.vars = res.data;
             console.log(this.vars);
           } else {
+            this.loading = false;
+            this.router.navigate(['/dashboard']);
             console.log(res.data.responseMessage);
           }
         },
-        (err) => console.error(err.message)
+        (err) => {
+          this.loading = false;
+          this.router.navigate(['/dashboard']);
+        }
       );
   }
 
@@ -75,15 +84,20 @@ export class ProductsComponent implements OnInit {
       .subscribe(
         (res: any) => {
           if (res.status === '00') {
+            this.prodLoad = false;
             // deal with register
             this.products = res.data;
             console.log(this.vars);
             console.log(res);
           } else {
+            this.prodLoad = false;
+
             console.log(res.data.responseMessage);
           }
         },
-        (err) => console.error(err.message)
+        (err) => {
+          this.prodLoad = false;
+        }
       );
   }
 
@@ -146,38 +160,67 @@ export class ProductsComponent implements OnInit {
         payload = this.products[i];
       }
     }
-    console.log(this.user);
 
     this.auth
       .post(
         {
-          VasTypeCode: payload.vasTypeCode,
-          ProductCode: payload.productCode,
-          RefNo: this.phoneNumber,
-          Amount: +payload.productPrice,
-          CustomerAccountNo: this.user.accountNos[0].accountNo,
+          clientId: this.user.clientId,
+          accountId: this.user.accountNos[0].accountId,
         },
-        'Cba.ValueAddedService.PostTransaction'
+        'Cba.BankingService.FetchAccountBalance'
       )
       .subscribe(
         (res: any) => {
-          this.loading = false;
-          console.log(res);
+          console.log(res.data.data.balance);
+          if (res.data.responseCode === '00') {
+            console.log(res.data.data.balance, +payload.productPrice);
 
-          if (res.data.status === '200') {
-            this.toast.success('Transaction Successfull', 'Success');
+            if (+payload.productPrice > res.data.data.balance) {
+              this.loading = false;
+              this.toast.error('Insufficient balance', 'Error');
+              return;
+            } else {
+              this.auth
+                .post(
+                  {
+                    VasTypeCode: payload.vasTypeCode,
+                    ProductCode: payload.productCode,
+                    RefNo: this.phoneNumber,
+                    Amount: +payload.productPrice,
+                    CustomerAccountNo: this.user.accountNos[0].accountNo,
+                  },
+                  'Cba.ValueAddedService.PostTransaction'
+                )
+                .subscribe(
+                  (res: any) => {
+                    this.loading = false;
+                    console.log(res);
+
+                    if (res.data.status === '200') {
+                      this.toast.success('Transaction Successfull', 'Success');
+                      // deal with register
+                    } else {
+                      this.toast.error('Error please try again', 'Error');
+
+                      console.log(res.data.responseMessage);
+                    }
+                  },
+                  (err) => {
+                    console.error(err.message);
+                    this.toast.error('Error please try again', 'Error');
+
+                    this.loading = true;
+                  }
+                );
+            }
             // deal with register
           } else {
-            this.toast.error('Error please try again', 'Error');
-
             console.log(res.data.responseMessage);
           }
         },
         (err) => {
-          console.error(err.message);
-          this.toast.error('Error please try again', 'Error');
-
-          this.loading = true;
+          this.loading = false;
+          this.toast.error('Please try again', 'Error');
         }
       );
   }

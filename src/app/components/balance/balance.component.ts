@@ -13,6 +13,9 @@ export class BalanceComponent implements OnInit {
   constructor(private auth: AuthService) {}
 
   ngOnInit() {
+    setInterval(() => {
+      this.getBalance();
+    }, 60000);
     this.getBalance();
   }
   viewBalance() {

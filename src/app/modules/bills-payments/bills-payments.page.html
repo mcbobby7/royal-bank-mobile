@@ -1,24 +1,29 @@
 <ion-content>
-  <div style="padding: 70px;"></div>
-<section
-style="
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 10px;
-"
->
-<div *ngFor="let item of billCategories" class="icons-bg"  [routerLink]="['products']" [queryParams]="{id: item.id}" routerLinkActive="router-link-active" >
-  <ion-img
-    src='{{"assets/icon/" + item.code + ".png" }}'
-    class="icons"
-  ></ion-img>
-  <div>
-    {{item.name}}
-  </div>
-</div>
-<!-- <div class="icons-bg"  [routerLink]="['addfund']" routerLinkActive="router-link-active" >
+  <div style="padding: 70px"></div>
+  <app-loader *ngIf="loading"></app-loader>
+  <section
+    style="
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 10px;
+    "
+  >
+    <div
+      *ngFor="let item of billCategories"
+      class="icons-bg"
+      [routerLink]="['products']"
+      [queryParams]="{id: item.id}"
+      routerLinkActive="router-link-active"
+    >
+      <ion-img
+        src='{{"assets/icon/" + item.code + ".png" }}'
+        class="icons"
+      ></ion-img>
+      <div>{{item.name}}</div>
+    </div>
+    <!-- <div class="icons-bg"  [routerLink]="['addfund']" routerLinkActive="router-link-active" >
   <ion-img
     src="assets/icon/internet.png"
     class="icons"
@@ -64,7 +69,7 @@ style="
     Utility
   </div>
 </div> -->
-<!-- </section>
+    <!-- </section>
 
 <section
 style="
@@ -74,7 +79,7 @@ style="
   margin-top: 10px;
 "
 > -->
-<!-- <div class="icons-bg"  [routerLink]="['transfer']" routerLinkActive="router-link-active" >
+    <!-- <div class="icons-bg"  [routerLink]="['transfer']" routerLinkActive="router-link-active" >
   <ion-img
     src="assets/icon/data.png"
     class="icons"
@@ -101,6 +106,5 @@ style="
     Airline
   </div>
 </div> -->
-</section>
-
+  </section>
 </ion-content>

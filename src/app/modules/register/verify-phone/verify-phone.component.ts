@@ -40,18 +40,21 @@ export class VerifyPhoneComponent implements OnInit {
             if (res.data.responseCode === '00') {
               // this.process = res.data.userDetail;
               this.user = res.data.userDetail;
+              this.sendOtp();
               console.log(res);
             } else {
               console.log(res);
-              this.router.navigate(['/register']);
+              this.router.navigate(['/register/become-royalty']);
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register']);
+            this.router.navigate(['/register/become-royalty']);
             this.toast.error('Please try again', 'Error');
           }
         );
+    } else {
+      this.router.navigate(['/register/become-royalty']);
     }
     return;
   }
@@ -59,17 +62,21 @@ export class VerifyPhoneComponent implements OnInit {
   ngOnInit(): void {
     // register form
     this.getOnboardingStage();
-    this.sendOtp();
     // console.log(this.onboardingForm.value);
   }
 
   sendOtp() {
     this.loading = true;
     this.auth
-      .post({ UserId: +this.id }, 'UserManager.UserService.SendOtp')
+      .post(
+        { UserId: +this.id, EmailorPhonenumber: this.user.phoneNo },
+        'UserManager.UserService.SendOtp'
+      )
       .subscribe(
         (res: any) => {
           this.loading = false;
+          console.log(res);
+
           if (res.status === '00') {
             this.otp = res.data.data.otp;
             this.toast.success('OTP sent to your Mobile', 'Thanks');
@@ -83,18 +90,38 @@ export class VerifyPhoneComponent implements OnInit {
 
   verifyOtp() {
     console.log(this.otp, this.enOTP);
+    this.loading = true;
+    this.bvnError = false;
+    console.log(this.otp, this.enOTP);
+    this.auth
+      .post(
+        { EmailorPhonenumber: this.user.phoneNo, Otp: this.enOTP },
+        'UserManager.UserService.ValidateOtp'
+      )
+      .subscribe(
+        (res: any) => {
+          this.loading = false;
+          console.log(res);
+
+          if (res.data.responseCode === '00') {
+            if (this.route.snapshot.params.mode === '1') {
+              this.router.navigate(['/register/bvn-success/1']);
+            } else if (this.route.snapshot.params.mode === '2') {
+              this.router.navigate(['/register/image']);
+            } else if (this.route.snapshot.params.mode === '3') {
+              this.router.navigate(['/register/image-done']);
+            } else if (this.route.snapshot.params.mode === '4') {
+              this.router.navigate(['/register/bvn-success/2']);
+            }
+          } else {
+            this.bvnError = true;
+          }
+        },
+        (err) => console.error(err.message)
+      );
 
     this.bvnError = false;
     if (this.otp === this.enOTP) {
-      if (this.route.snapshot.params.mode === '1') {
-        this.router.navigate(['/register/bvn-success/1']);
-      } else if (this.route.snapshot.params.mode === '2') {
-        this.router.navigate(['/register/image']);
-      } else if (this.route.snapshot.params.mode === '3') {
-        this.router.navigate(['/register/image-done']);
-      } else if (this.route.snapshot.params.mode === '4') {
-        this.router.navigate(['/register/bvn-success/2']);
-      }
     } else {
       this.bvnError = true;
     }

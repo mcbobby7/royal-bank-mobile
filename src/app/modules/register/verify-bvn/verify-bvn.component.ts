@@ -102,15 +102,17 @@ export class VerifyBvnComponent implements OnInit {
               console.log(res);
             } else {
               console.log(res);
-              this.router.navigate(['/register']);
+              this.router.navigate(['/register/become-royalty']);
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register']);
+            this.router.navigate(['/register/become-royalty']);
             this.toast.error('Please try again', 'Error');
           }
         );
+    } else {
+      this.router.navigate(['/register/become-royalty']);
     }
     this.loading = false;
   }
@@ -126,15 +128,18 @@ export class VerifyBvnComponent implements OnInit {
         (res: any) => {
           this.loading = false;
           if (res.status === '00') {
+            console.log(res);
             const fulname = res.data.fullName.split(' ');
             this.phone = res.data.phoneNo;
+            console.log(res.data.phoneNo);
+
             this.onboardingForm.patchValue({
-              firstName: fulname[0],
-              lastName: fulname[2],
-              middleName: fulname[1],
-              phone: res.data.phoneNo,
-              email: res.data.emailAddress,
-              dob: res.data.dateOfBirth,
+              FirstName: fulname[0],
+              LastName: fulname[2],
+              MiddleName: fulname[1],
+              Phone: res.data.phoneNo,
+              Email: res.data.emailAddress,
+              DOB: res.data.dateOfBirth,
             });
 
             this.register();
@@ -180,10 +185,13 @@ export class VerifyBvnComponent implements OnInit {
             // deal with register
             console.log(res);
           } else {
-            console.log(res.data.responseMessage);
+            this.toast.error(res.data.responseMessage, 'Error');
           }
         },
-        (err) => console.error(err.message)
+        (err) => {
+          this.toast.error('Error please try Again', 'Error');
+          this.loading = false;
+        }
       );
   }
 
@@ -195,8 +203,8 @@ export class VerifyBvnComponent implements OnInit {
       FirstName: new FormControl(''),
       LastName: new FormControl(''),
       MiddleName: new FormControl(''),
-      UserName: new FormControl('a'),
-      Phone: new FormControl('875'),
+      UserName: new FormControl(''),
+      Phone: new FormControl(''),
       Email: new FormControl(''),
       Password: new FormControl(''),
       CreateBankAccount: new FormControl(true),

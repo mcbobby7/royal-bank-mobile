@@ -11,10 +11,7 @@
 
     <section class="row">
       <div style="border-radius: 8px; margin: 10px 4px">
-        <div class="has">Thanks Kelvin,</div>
-        <div class="hassub">
-          Enter your email or phone number and password to continue
-        </div>
+        <div class="has">Thanks {{ onboardingForm.value.FirstName }},</div>
       </div>
     </section>
 
@@ -39,13 +36,7 @@
             <input
               type="text"
               name="phone"
-              class="input dialField"
-              placeholder="+234"
-            />
-            <input
-              type="text"
-              name="phone"
-              class="input numField"
+              class="input"
               placeholder="8012345678"
               formControlName="Phone"
             />
@@ -211,9 +202,6 @@
     </div>
 
     <section class="row">
-      <h5 style="text-align: left; color: black">
-        Enter your password to continue
-      </h5>
       <form [formGroup]="onboardingForm">
         <div class="form-group row" style="padding: 5px">
           <label class="label">First Name</label>

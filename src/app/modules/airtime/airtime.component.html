@@ -243,8 +243,9 @@
         <select [(ngModel)]="productCode" name="bank" id="" class="input">
           <!-- <option value="">-- Select Type --</option> -->
           <option *ngFor="let data of products" [value]="data.productCode">
-            <div>{{ data.productTitle }}</div>
-            <div>({{ data.productPrice | currency: "&#8358;" }})</div>
+            {{ data.productTitle }} ({{
+              data.productPrice | currency: "&#8358;"
+            }})
           </option>
         </select>
       </div>

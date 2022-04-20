@@ -12,7 +12,7 @@ import { AuthService } from '../../../core/http/services/auth.service';
 })
 export class VerifyEmailComponent implements OnInit {
   bvnError = false;
-  otp = Math.floor(100000 + Math.random() * 900000);
+  otp;
   enOTP;
   stage = 0;
   id: any = localStorage.getItem('stageId');
@@ -44,15 +44,17 @@ export class VerifyEmailComponent implements OnInit {
               this.sendOtp();
             } else {
               console.log(res);
-              this.router.navigate(['/register']);
+              this.router.navigate(['/register/become-royalty']);
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register']);
+            this.router.navigate(['/register/become-royalty']);
             this.toast.error('Please try again', 'Error');
           }
         );
+    } else {
+      this.router.navigate(['/register/become-royalty']);
     }
     return;
   }
@@ -64,40 +66,55 @@ export class VerifyEmailComponent implements OnInit {
   }
 
   sendOtp() {
+    this.bvnError = false;
     this.loading = true;
     this.auth
-      .sendEmail(
-        'OTP from Royal Bank',
-        `Your OTP is ${this.otp}`,
-        this.user.emailAddress,
-        ''
+      .post(
+        { UserId: +this.id, EmailorPhonenumber: this.user.emailAddress },
+        'UserManager.UserService.SendOtp'
       )
       .subscribe(
         (res: any) => {
           this.loading = false;
-          if (res.status === true) {
-            this.toast.success('OTP sent to your email', 'Thanks');
+          console.log(res);
+
+          if (res.status === '00') {
+            this.otp = res.data.data.otp;
+            this.toast.success('OTP sent to your Email', 'Thanks');
           } else {
             this.bvnError = true;
           }
         },
-        (err) => console.error(err)
+        (err) => console.error(err.message)
       );
   }
 
   verifyOtp() {
-    console.log(this.otp, this.enOTP);
-
+    this.loading = true;
     this.bvnError = false;
-    if (+this.otp === +this.enOTP) {
-      if (this.route.snapshot.params.mode === '3') {
-        this.router.navigate(['/register/phone/098897776667/3']);
-      } else {
-        this.router.navigate(['/register/phone/098897776667/2']);
-      }
-    } else {
-      this.bvnError = true;
-    }
+    console.log(this.otp, this.enOTP);
+    this.auth
+      .post(
+        { EmailorPhonenumber: this.user.emailAddress, Otp: this.enOTP },
+        'UserManager.UserService.ValidateOtp'
+      )
+      .subscribe(
+        (res: any) => {
+          this.loading = false;
+          console.log(res);
+
+          if (res.data.responseCode === '00') {
+            if (this.route.snapshot.params.mode === '3') {
+              this.router.navigate(['/register/phone/098897776667/3']);
+            } else {
+              this.router.navigate(['/register/phone/098897776667/2']);
+            }
+          } else {
+            this.bvnError = true;
+          }
+        },
+        (err) => console.error(err.message)
+      );
   }
 
   goBack() {

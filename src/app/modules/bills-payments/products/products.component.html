@@ -33,10 +33,11 @@
         style="margin: auto; font-size: 20px; color: #25214f"
       ></ion-icon>
     </div>
- </section>
+  </section>
 
   <section *ngIf="transType === 2">
-    <div *ngIf="typeCode === 2 || typeCode === 4"
+    <div
+      *ngIf="typeCode === 2 || typeCode === 4"
       class="row"
       style="display: flex; flex-direction: row; justify-content: space-between"
     >
@@ -61,22 +62,31 @@
     <div *ngIf="newReq">
       <div class="row" style="padding: 5px">
         <label *ngIf="typeCode === 1" for="">Decoder Number</label>
-        <label *ngIf="typeCode === 2 ||
-                      typeCode === 4" for="">Phone Number</label>
-        <label *ngIf="typeCode === 3 ||
-                      typeCode === 5 ||
-                      typeCode === 6 ||
-                      typeCode === 7 ||
-                      typeCode === 9" for="">Customer ID</label>
+        <label *ngIf="typeCode === 2 || typeCode === 4" for=""
+          >Phone Number</label
+        >
+        <label
+          *ngIf="
+            typeCode === 3 ||
+            typeCode === 5 ||
+            typeCode === 6 ||
+            typeCode === 7 ||
+            typeCode === 9
+          "
+          for=""
+          >Customer ID</label
+        >
 
-        <input *ngIf="typeCode === 1"
+        <input
+          *ngIf="typeCode === 1"
           [(ngModel)]="phoneNumber"
           type="text"
           name="mobile"
           class="input"
           placeholder="Decoder Number"
         />
-        <input *ngIf="typeCode === 2 || typeCode === 4"
+        <input
+          *ngIf="typeCode === 2 || typeCode === 4"
           [(ngModel)]="phoneNumber"
           type="text"
           name="mobile"
@@ -84,8 +94,14 @@
           placeholder="08079172267"
         />
 
-        <input *ngIf="typeCode === 3 || typeCode === 5 ||
-        typeCode === 6 || typeCode === 7 || typeCode === 9"
+        <input
+          *ngIf="
+            typeCode === 3 ||
+            typeCode === 5 ||
+            typeCode === 6 ||
+            typeCode === 7 ||
+            typeCode === 9
+          "
           [(ngModel)]="phoneNumber"
           type="text"
           name="mobile"
@@ -99,8 +115,9 @@
         <select [(ngModel)]="productCode" name="bank" id="" class="input">
           <!-- <option value="">-- Select Type --</option> -->
           <option *ngFor="let data of products" [value]="data.productCode">
-            <div>{{ data.productTitle }}</div>
-            <div>{{ data.productPrice }}</div>
+            {{ data.productTitle }} ({{
+              data.productPrice | currency: "&#8358;"
+            }})
           </option>
         </select>
       </div>
@@ -137,41 +154,39 @@
           justify-content: center;
         "
       >
-        Add <ion-icon name="add" style="font-size:20px"></ion-icon>
+        Add <ion-icon name="add" style="font-size: 20px"></ion-icon>
       </div>
 
       <div *ngIf="add">
         <div class="row" style="padding: 5px">
           <input
-          type="text"
-          class="input"
-          placeholder="Beneficiary Name"
-          name="name"
-          style="margin-bottom: 10px"
-          [(ngModel)]="name"
-        />
+            type="text"
+            class="input"
+            placeholder="Beneficiary Name"
+            name="name"
+            style="margin-bottom: 10px"
+            [(ngModel)]="name"
+          />
         </div>
         <div class="row" style="padding: 5px">
           <input
-          type="text"
-          class="input"
-          placeholder="Beneficiary Number"
-          name="number"
-          [(ngModel)]="benNum"
-        />
+            type="text"
+            class="input"
+            placeholder="Beneficiary Number"
+            name="number"
+            [(ngModel)]="benNum"
+          />
         </div>
         <div class="">
           <ion-button
-          class="btn"
-          expand="block"
-          style="margin-top: 1rem"
-          (click)="adds()"
-        >
-          Add
-        </ion-button>
+            class="btn"
+            expand="block"
+            style="margin-top: 1rem"
+            (click)="adds()"
+          >
+            Add
+          </ion-button>
         </div>
-
-
       </div>
 
       <div class="row-one">

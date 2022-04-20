@@ -100,15 +100,17 @@ export class CreateAccountComponent implements OnInit {
               console.log(this.onboardingForm.value);
             } else {
               console.log(res);
-              this.router.navigate(['/register']);
+              this.router.navigate(['/register/become-royalty']);
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register']);
+            this.router.navigate(['/register/become-royalty']);
             this.toast.error('Please try again', 'Error');
           }
         );
+    } else {
+      this.router.navigate(['/register/become-royalty']);
     }
     return;
   }
@@ -150,10 +152,13 @@ export class CreateAccountComponent implements OnInit {
             // deal with register
             console.log(res);
           } else {
-            console.log(res.data.responseMessage);
+            this.toast.error(res.data.responseMessage, 'Error');
           }
         },
-        (err) => console.error(err.message)
+        (err) => {
+          this.toast.error('Error please try Again', 'Error');
+          this.loading = false;
+        }
       );
   }
 

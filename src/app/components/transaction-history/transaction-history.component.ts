@@ -14,6 +14,9 @@ export class TransactionHistoryComponent implements OnInit {
   constructor(private auth: AuthService) {}
 
   ngOnInit() {
+    setInterval(() => {
+      this.getTransactions();
+    }, 60000);
     this.getTransactions();
   }
   viewBalance() {

@@ -99,20 +99,21 @@ export class DoneComponent implements OnInit {
                   ? res.data.userDetail.companyName
                   : '',
               });
-              localStorage.setItem('stageId', '');
               console.log(res);
               console.log(this.onboardingForm.value);
               this.register();
+              localStorage.setItem('stageId', '');
             } else {
               this.reloadCurrentRoute();
             }
           },
           (err) => {
             this.reloadCurrentRoute();
+            this.router.navigate(['/register/become-royalty']);
           }
         );
     } else {
-      this.router.navigate(['/register/register']);
+      this.router.navigate(['/register/become-royalty']);
     }
 
     return;
@@ -159,11 +160,13 @@ export class DoneComponent implements OnInit {
               );
             console.log(res);
           } else {
+            this.toast.error(res.data.responseMessage, 'Error');
             this.reloadCurrentRoute();
             console.log(res.data.responseMessage);
           }
         },
         (err) => {
+          this.reloadCurrentRoute();
           console.error(err.message);
           this.loading = false;
         }

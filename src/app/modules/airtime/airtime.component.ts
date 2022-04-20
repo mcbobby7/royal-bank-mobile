@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../core/http/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-airtime',
@@ -24,6 +25,7 @@ export class AirtimeComponent implements OnInit {
   loading = true;
   vasType;
   submitCode;
+  user = JSON.parse(localStorage.getItem('user'));
   benes = localStorage.getItem('benNums')
     ? JSON.parse(localStorage.getItem('benNums'))
     : [];
@@ -33,7 +35,11 @@ export class AirtimeComponent implements OnInit {
     narration: new FormControl(''),
   });
 
-  constructor(private auth: AuthService, public toast: ToastrService) {}
+  constructor(
+    private auth: AuthService,
+    public toast: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.fetchData();
@@ -52,10 +58,14 @@ export class AirtimeComponent implements OnInit {
               this.vars = res.data;
               console.log(this.vars);
             } else {
-              console.log(res.data.responseMessage);
+              this.loading = false;
+              this.router.navigate(['/dashboard']);
             }
           },
-          (err) => console.error(err.message)
+          (err) => {
+            this.loading = false;
+            this.router.navigate(['/dashboard']);
+          }
         );
       this.auth
         .post({ VasCategoryId: 2 }, 'Cba.ValueAddedService.FetchTypes')
@@ -158,41 +168,70 @@ export class AirtimeComponent implements OnInit {
         payload = this.products[i];
       }
     }
-    payload.productPrice = +payload.productPrice;
 
     this.auth
       .post(
         {
-          VasTypeCode: payload.vasTypeCode,
-          ProductCode: payload.productCode,
-          RefNo: this.phoneNumber,
-          Amount: +payload.productPrice,
+          clientId: this.user.clientId,
+          accountId: this.user.accountNos[0].accountId,
         },
-        'Cba.ValueAddedService.PostTransaction'
+        'Cba.BankingService.FetchAccountBalance'
       )
       .subscribe(
         (res: any) => {
-          this.loading = false;
-          console.log(res);
-
+          console.log(res.data.data.balance);
           if (res.data.responseCode === '00') {
-            this.toast.success('Transaction Successfull', 'Success');
+            console.log(res.data.data.balance, +payload.productPrice);
+
+            if (+payload.productPrice > res.data.data.balance) {
+              this.loading = false;
+              this.toast.error('Insufficient balance', 'Error');
+              return;
+            } else {
+              this.auth
+                .post(
+                  {
+                    VasTypeCode: payload.vasTypeCode,
+                    ProductCode: payload.productCode,
+                    RefNo: this.phoneNumber,
+                    Amount: +payload.productPrice,
+                    CustomerAccountNo: this.user.accountNos[0].accountNo,
+                  },
+                  'Cba.ValueAddedService.PostTransaction'
+                )
+                .subscribe(
+                  (res: any) => {
+                    this.loading = false;
+                    console.log(res);
+
+                    if (res.data.status === '200') {
+                      this.toast.success('Transaction Successfull', 'Success');
+                      // deal with register
+                    } else {
+                      this.toast.error('Error please try again', 'Error');
+
+                      console.log(res.data.responseMessage);
+                    }
+                  },
+                  (err) => {
+                    console.error(err.message);
+                    this.toast.error('Error please try again', 'Error');
+
+                    this.loading = true;
+                  }
+                );
+            }
             // deal with register
           } else {
-            this.toast.error('Error please try again', 'Error');
-
             console.log(res.data.responseMessage);
           }
         },
         (err) => {
-          console.error(err.message);
-          this.toast.error('Error please try again', 'Error');
-
-          this.loading = true;
+          this.loading = false;
+          this.toast.error('Please try again', 'Error');
         }
       );
   }
-
   toggleRequest(e) {
     this.newReq = e;
     if (e === true) {

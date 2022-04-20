@@ -103,15 +103,17 @@ export class ImageComponent implements OnInit {
               console.log(this.onboardingForm.value);
             } else {
               console.log(res);
-              this.router.navigate(['/register']);
+              this.router.navigate(['/register/become-royalty']);
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register']);
+            this.router.navigate(['/register/become-royalty']);
             this.toast.error('Please try again', 'Error');
           }
         );
+    } else {
+      this.router.navigate(['/register/become-royalty']);
     }
     return;
   }
@@ -135,10 +137,13 @@ export class ImageComponent implements OnInit {
             // deal with register
             console.log(res);
           } else {
-            this.retake();
+            this.toast.error(res.data.responseMessage, 'Error');
           }
         },
-        (err) => this.retake()
+        (err) => {
+          this.toast.error('Error please try Again', 'Error');
+          this.loading = false;
+        }
       );
   }
 
