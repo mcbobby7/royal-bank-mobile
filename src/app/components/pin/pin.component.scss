@@ -12,21 +12,25 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  align-content: center;
 }
 
 .pin-box {
   border: 2px solid #25214f;
-  border-radius: 10px;
-  padding: 2px;
+  background:#EBEEF9;
+  border-radius: 5px;
   margin-right: 5px;
-  width: 40px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 900;
   text-align: center;
+  padding-left: 10px !important;
 }
+
 
 .keypad {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   width: 80%;
   margin: 0 10%;
@@ -34,12 +38,13 @@
 }
 
 .keys {
-  width: 30%;
-  font-size: 14px;
-  font-weight: 800;
-  margin: auto;
+  background:#EBEEF9;
+  width: 26%;
+  height: 66px;
+  font-size: 16px;
+  font-weight: 900 !important;
+  margin: 0 auto;
   text-align: center;
-  border-bottom: 2px solid rgb(94, 91, 91);
   padding: 5px;
 
 }
@@ -47,7 +52,9 @@
 
 ion-button {
   --background: #fff
-  --background-activated:#25214f;
+  --background-activated: #25214f;
   --color: #25214f;
   --color-activateded:#d9ac0b;
+  font-size: 20px;
+  font-weight: 900 !important;
 }

@@ -4,10 +4,10 @@
   </div>
 
   <div class="pin-section">
-    <ion-input class="pin-box" [(value)]="transactionPin[0]" readonly></ion-input>
-    <ion-input class="pin-box" [(value)]="transactionPin[1]" readonly></ion-input>
-    <ion-input class="pin-box" [(value)]="transactionPin[2]" readonly></ion-input>
-    <ion-input class="pin-box" [(value)]="transactionPin[3]" readonly></ion-input>
+    <ion-input type="password" class="pin-box" [(value)]="transactionPin[0]" readonly></ion-input>
+    <ion-input type="password" class="pin-box" [(value)]="transactionPin[1]" readonly></ion-input>
+    <ion-input type="password" class="pin-box" [(value)]="transactionPin[2]" readonly></ion-input>
+    <ion-input type="password" class="pin-box" [(value)]="transactionPin[3]" readonly></ion-input>
   </div>
 
   <div class="sub-title">
@@ -16,16 +16,6 @@
 
   <div class="keypad">
     <div *ngFor="let item of keyPadValue" class="keys"><ion-button (click)="getPinValue(item.value)">{{item.label}}</ion-button></div>
-    <!-- <div class="keys"><ion-button >2</ion-button></div>
-    <div class="keys"><ion-button>3</ion-button></div>
-    <div class="keys"><ion-button>4</ion-button></div>
-    <div class="keys"><ion-button>5</ion-button></div>
-    <div class="keys"><ion-button>6</ion-button></div>
-    <div class="keys"><ion-button>7</ion-button></div>
-    <div class="keys"><ion-button>8</ion-button></div>
-    <div class="keys"><ion-button>9</ion-button></div>
-    <div class="keys"><ion-button>0</ion-button></div>
-    <div class="keys"><ion-button>X</ion-button></div> -->
 
   </div>
 </div>
