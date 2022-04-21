@@ -1,6 +1,12 @@
 <ion-content>
   <div style="height: 100px"></div>
   <app-loader *ngIf="loading"></app-loader>
+  <app-pin
+    (close)="close()"
+    (loading)="load()"
+    (done)="finish()"
+    *ngIf="show"
+  ></app-pin>
   <section *ngIf="transType === 0">
     <div
       *ngFor="let data of vars"
@@ -39,7 +45,12 @@
     <div
       *ngIf="typeCode === 2 || typeCode === 4"
       class="row"
-      style="display: flex; flex-direction: row; justify-content: space-between"
+      style="
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 30px;
+      "
     >
       <ion-button
         (click)="toggleRequest(true)"
@@ -127,8 +138,7 @@
           class="btn"
           expand="block"
           style="margin-top: 1rem"
-          (click)="submit()"
-          routerLinkActive="router-link-active"
+          (click)="check()"
         >
           Send
         </ion-button>

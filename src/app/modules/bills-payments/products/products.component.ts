@@ -27,6 +27,7 @@ export class ProductsComponent implements OnInit {
   submitCode;
   prodLoad = true;
   typeCode = 0;
+  show = false;
   user = JSON.parse(localStorage.getItem('user'));
   benes = localStorage.getItem('benNums')
     ? JSON.parse(localStorage.getItem('benNums'))
@@ -198,6 +199,7 @@ export class ProductsComponent implements OnInit {
 
                     if (res.data.status === '200') {
                       this.toast.success('Transaction Successfull', 'Success');
+                      this.show = false;
                       // deal with register
                     } else {
                       this.toast.error('Error please try again', 'Error');
@@ -234,5 +236,25 @@ export class ProductsComponent implements OnInit {
       this.selectedBtn = false;
       this.selectedBtn1 = true;
     }
+  }
+  check() {
+    if (!this.phoneNumber) {
+      this.toast.error('Phone number required', 'Error');
+      return;
+    }
+    if (!this.productCode) {
+      this.toast.error('Product required', 'Error');
+      return;
+    }
+    this.show = true;
+  }
+  finish() {
+    this.submit();
+  }
+  load() {
+    this.loading = !this.loading;
+  }
+  close() {
+    this.show = false;
   }
 }

@@ -7,10 +7,11 @@ import { AuthService } from 'src/app/core/http/services/auth.service';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
-  show = false;
+  show = true;
   userId: any = localStorage.getItem('stageId');
   accountId = '';
   accountBalance = '';
+  loading = false;
 
   constructor(private auth: AuthService, private router: Router) {}
 
@@ -18,5 +19,14 @@ export class DashboardPage implements OnInit {
 
   viewBalance() {
     this.show = !this.show;
+  }
+  sha() {
+    this.show = !this.show;
+  }
+  load() {
+    return;
+  }
+  finish() {
+    return;
   }
 }

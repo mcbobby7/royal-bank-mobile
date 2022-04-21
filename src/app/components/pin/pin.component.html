@@ -1,21 +1,114 @@
-<div class="container" style="padding-top: 100px;">
+<div class="container" [@slideInOut]>
+  <div
+    style="
+      background-color: #25214f;
+      border-radius: 50%;
+      position: absolute;
+      right: 10px;
+      color: white;
+      top: -20px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    "
+    (click)="closeDraw()"
+  >
+    X
+  </div>
   <div class="title">
     <span>Enter your PIN</span>
   </div>
 
   <div class="pin-section">
-    <ion-input type="password" class="pin-box" [(value)]="transactionPin[0]" readonly></ion-input>
-    <ion-input type="password" class="pin-box" [(value)]="transactionPin[1]" readonly></ion-input>
-    <ion-input type="password" class="pin-box" [(value)]="transactionPin[2]" readonly></ion-input>
-    <ion-input type="password" class="pin-box" [(value)]="transactionPin[3]" readonly></ion-input>
+    <ion-input
+      type="password"
+      class="pin-box"
+      [(value)]="transactionPin[0]"
+      readonly
+    ></ion-input>
+    <ion-input
+      type="password"
+      class="pin-box"
+      [(value)]="transactionPin[1]"
+      readonly
+    ></ion-input>
+    <ion-input
+      type="password"
+      class="pin-box"
+      [(value)]="transactionPin[2]"
+      readonly
+    ></ion-input>
+    <ion-input
+      type="password"
+      class="pin-box"
+      [(value)]="transactionPin[3]"
+      readonly
+    ></ion-input>
   </div>
 
-  <div class="sub-title">
+  <!-- <div class="sub-title">
     <span>Forgot PIN?</span>
-  </div>
+  </div> -->
 
+  <!-- <div class="keypad">
+    <div *ngFor="let item of keyPadValue" class="keys">
+      <div (click)="getPinValue(item.value)">{{
+        item.label
+      }}</div>
+    </div>
+  </div> -->
   <div class="keypad">
-    <div *ngFor="let item of keyPadValue" class="keys"><ion-button (click)="getPinValue(item.value)">{{item.label}}</ion-button></div>
+    <div class="row">
+      <div class="keys">
+        <div (click)="getPinValue(1)">1</div>
+      </div>
+      <div class="keys">
+        <div (click)="getPinValue(2)">2</div>
+      </div>
+      <div class="keys">
+        <div (click)="getPinValue(3)">3</div>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="keys">
+        <div (click)="getPinValue(4)">4</div>
+      </div>
+      <div class="keys">
+        <div (click)="getPinValue(5)">5</div>
+      </div>
+      <div class="keys">
+        <div (click)="getPinValue(6)">6</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="keys">
+        <div (click)="getPinValue(7)">7</div>
+      </div>
+      <div class="keys">
+        <div (click)="getPinValue(8)">8</div>
+      </div>
+      <div class="keys">
+        <div (click)="getPinValue(9)">9</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="keys">
+        <div (click)="getPinValue(0)">0</div>
+      </div>
+      <div class="keys">
+        <div (click)="getPinValue(11)">
+          <ion-img
+            src="assets/icon/clear.svg"
+            style="width: 70px; height: 40px"
+            alt=""
+          ></ion-img>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

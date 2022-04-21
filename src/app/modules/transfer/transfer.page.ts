@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./transfer.page.scss'],
 })
 export class TransferPage implements OnInit {
+  show = false;
   loading = false;
   source = 'assets/icon/royalty.png';
-  imageSrc = 'assets/icon/success.png';
+  imageSrc = 'assets/icon/done.png';
   selectedBtn = true;
   selectedBtn1 = false;
   transType = 0;
@@ -50,6 +51,7 @@ export class TransferPage implements OnInit {
 
   create() {
     this.router.navigate(['/dashboard']);
+    this.transType = 0;
   }
   sanitise() {
     console.log('wait');
@@ -69,7 +71,7 @@ export class TransferPage implements OnInit {
       this.toast.error('Amount is required', 'Error');
       return true;
     }
-    if (!this.name) {
+    if (!this.name || this.showName) {
       this.toast.error('please provide a valid account', 'Error');
       return true;
     }
@@ -91,7 +93,7 @@ export class TransferPage implements OnInit {
       this.benes.unshift({
         name: this.name,
         accNumber: this.benAcc,
-        bankName: this.bankName,
+        bankName: this.bankName ? this.bankName : 'royal Bank',
         bankCode: this.bankCode,
       });
       localStorage.setItem('benAccs', JSON.stringify(this.benes));
@@ -151,7 +153,12 @@ export class TransferPage implements OnInit {
               if (res.status === '00') {
                 // deal with register
                 this.showName = false;
-                this.name = res.data.data.fullName;
+                if (!res.data.data.fullName) {
+                  this.name = 'No record found';
+                  this.showName = true;
+                } else {
+                  this.name = res.data.data.fullName;
+                }
               } else {
                 this.showName = true;
                 this.name = 'failed, wrong details';
@@ -205,8 +212,6 @@ export class TransferPage implements OnInit {
     this.loading = true;
     let acc;
     for (let i = 0; i < this.user.accountNos.length; i++) {
-      console.log();
-
       if (this.accNum === this.user.accountNos[i].accountNo) {
         acc = this.user.accountNos[i].accountId;
       }
@@ -231,10 +236,11 @@ export class TransferPage implements OnInit {
               this.toast.error('Insufficient balance', 'Error');
               return;
             } else {
+              this.bankName = this.bankName ? this.bankName : 'Royal Bank';
               this.auth
                 .post(
                   {
-                    bankName: this.bankName,
+                    bankName: this.bankName ? this.bankName : 'Royal Bank',
                     accountNumber: this.benAcc,
                     Amount: +this.amount,
                     Narration: this.narration,
@@ -248,8 +254,10 @@ export class TransferPage implements OnInit {
 
                     if (res.data.responseCode === '00') {
                       this.transType = 3;
+                      this.show = false;
                       // deal with register
                     } else {
+                      this.loading = false;
                       console.log(res.data.responseMessage);
                       this.toast.error(res.data.responseMessage, 'Error');
                     }
@@ -262,7 +270,8 @@ export class TransferPage implements OnInit {
             }
             // deal with register
           } else {
-            console.log(res.data.responseMessage);
+            this.loading = false;
+            this.toast.error('Please try again', 'Error');
           }
         },
         (err) => {
@@ -270,5 +279,14 @@ export class TransferPage implements OnInit {
           this.toast.error('Please try again', 'Error');
         }
       );
+  }
+  finish() {
+    this.transfer();
+  }
+  load() {
+    this.loading = !this.loading;
+  }
+  close() {
+    this.show = false;
   }
 }

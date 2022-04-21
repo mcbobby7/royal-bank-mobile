@@ -1,5 +1,7 @@
 <ion-content>
   <div style="height: 150px"></div>
+  <app-loader *ngIf="loading"></app-loader>
+
   <app-balance></app-balance>
 
   <section
@@ -116,7 +118,7 @@
           justify-content: space-around;
         "
       >
-        <span style="font-size: 13px"
+        <span style="font-size: 13px" (click)="sha()"
           >This account is perfect for Individuals, Students, Freelancers,
         </span>
         <ion-img
