@@ -80,7 +80,7 @@ export class CoOperatreDetailsComponent implements OnInit {
                 HasBVN: res.data.userDetail.hasBVN
                   ? res.data.userDetail.hasBVN
                   : false,
-                Stage: 2,
+                Stage: 5,
                 IsFinal: res.data.userDetail.isFinal
                   ? res.data.userDetail.isFinal
                   : false,
@@ -184,7 +184,7 @@ export class CoOperatreDetailsComponent implements OnInit {
       CompanyType: new FormControl(''),
       PassportUrl: new FormControl(''),
       HasBVN: new FormControl(false),
-      Stage: new FormControl(2),
+      Stage: new FormControl(5),
       IsFinal: new FormControl(false),
       BVN: new FormControl(''),
       Shares: new FormControl(false),

@@ -78,7 +78,7 @@ export class CreateAccountComponent implements OnInit {
                 HasBVN: res.data.userDetail.hasBVN
                   ? res.data.userDetail.hasBVN
                   : false,
-                Stage: 2,
+                Stage: 5,
                 IsFinal: res.data.userDetail.isFinal
                   ? res.data.userDetail.isFinal
                   : false,
