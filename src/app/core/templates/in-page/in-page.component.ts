@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { StatusBar, Style } from '@capacitor/status-bar';
 
 import { Router, RouterEvent } from '@angular/router';
 @Component({
@@ -8,7 +9,15 @@ import { Router, RouterEvent } from '@angular/router';
   styleUrls: ['./in-page.component.scss'],
 })
 export class InPageComponent implements OnInit {
-  constructor(private navController: NavController) {}
+  constructor(private navController: NavController) {
+    const setStatusBarStyleDark = async () => {
+      await StatusBar.setStyle({ style: Style.Dark });
+    };
+    setStatusBarStyleDark();
+    StatusBar.setBackgroundColor({
+      color: '#25214f',
+    });
+  }
 
   ngOnInit() {}
   goBack() {

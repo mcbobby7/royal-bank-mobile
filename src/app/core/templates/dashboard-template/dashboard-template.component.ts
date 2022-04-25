@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { MenuController } from '@ionic/angular';
 // import { Component } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { StatusBar, Style } from '@capacitor/status-bar';
 
 @Component({
   selector: 'app-dashboard-template',
@@ -12,6 +13,7 @@ export class DashboardTemplateComponent implements OnInit {
   active = '';
   imageSrc = 'assets/icon/royalL.png';
   user = JSON.parse(localStorage.getItem('user'));
+  photo;
 
   nav = [
     // {
@@ -65,7 +67,18 @@ export class DashboardTemplateComponent implements OnInit {
     this.router.events.subscribe((event: RouterEvent) => {
       this.active = event.url;
     });
+
+    const setStatusBarStyleDark = async () => {
+      await StatusBar.setStyle({ style: Style.Light });
+    };
+    setStatusBarStyleDark();
+    StatusBar.setBackgroundColor({
+      color: '#25214f',
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.photo = user.photo ? user.photo : 'assets/icon/hey.png';
+  }
 }
