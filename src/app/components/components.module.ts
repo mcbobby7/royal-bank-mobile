@@ -38,9 +38,11 @@ import { LimitComponent } from '../modules/account-info/limit/limit.component';
 import { ProductsComponent } from '../modules/bills-payments/products/products.component';
 import { PinComponent } from './pin/pin.component';
 import { BillsPaymentsPage } from '../modules/bills-payments/bills-payments.page';
+import { AddFundComponent } from '../components/add-fund/add-fund.component';
 
 const components = [
   TabsPage,
+  AddFundComponent,
   BalanceComponent,
   TransactionHistoryComponent,
   LoginComponent,

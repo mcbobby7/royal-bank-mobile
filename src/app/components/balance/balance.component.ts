@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/http/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-balance',
@@ -10,7 +11,7 @@ export class BalanceComponent implements OnInit {
   show = false;
   user = JSON.parse(localStorage.getItem('user'));
   data = null;
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, public toast: ToastrService) {}
 
   ngOnInit() {
     setInterval(() => {
@@ -45,5 +46,20 @@ export class BalanceComponent implements OnInit {
       },
       (err) => console.error(err.message)
     );
+  }
+
+  copyMessage(val: string) {
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+    this.toast.info('Account number', 'Copied to clipboard');
   }
 }

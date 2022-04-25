@@ -1,7 +1,7 @@
 <ion-content>
-  <div style="height: 150px"></div>
+  <div style="height: 130px"></div>
   <app-loader *ngIf="loading"></app-loader>
-
+  <app-add-fund (exit)="close()" *ngIf="show"></app-add-fund>
   <app-balance></app-balance>
 
   <section
@@ -72,11 +72,7 @@
         Borrow
       </div>
     </div>
-    <div
-      style="cursor: pointer"
-      [routerLink]="['addfund']"
-      routerLinkActive="router-link-active"
-    >
+    <div style="cursor: pointer" (click)="show = !show">
       <ion-img
         src="assets/icon/money.png"
         style="width: 55px; height: 55px; margin: auto"

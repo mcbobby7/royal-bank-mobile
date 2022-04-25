@@ -103,7 +103,7 @@ export class CoOperatreDetailsComponent implements OnInit {
             } else {
               console.log(res);
               this.router.navigate(['/register/become-royalty']);
-              this.toast.error('Please try again', 'Error');
+              this.toast.error('please try again', 'Error');
             }
           },
           (err) => {
@@ -136,6 +136,9 @@ export class CoOperatreDetailsComponent implements OnInit {
     if (this.sanitize() === false) {
       return;
     }
+    this.onboardingForm.patchValue({
+      UserName: this.onboardingForm.value.Email,
+    });
     this.loading = true;
     console.log(this.onboardingForm.value);
     this.loading = true;

@@ -18,7 +18,7 @@ export class AuthService {
   baseUrl = 'https://bankingsandboxapi.azurewebsites.net/api/v1/proxy';
   notificationBaseUrl = 'https://bankingsandboxapi.vaballiance.com';
   testUrl = 'https://gamelyd.herokuapp.com/users/checkUserName/mcbobby';
-  imei = this.uid.IMEI;
+  imei;
   headers = {
     headers: new HttpHeaders({
       /* eslint-disable camelcase */
@@ -34,7 +34,7 @@ export class AuthService {
     private androidPermissions: AndroidPermissions,
     private httpClient: HttpClient
   ) {
-    this.getPermission();
+    this.getImei();
   }
   // baseUrl = 'https://api.test.woodcoreapp.com/api/v1/clients';
   // handle error method
@@ -83,26 +83,26 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-  getPermission() {
-    this.androidPermissions
-      .checkPermission(this.androidPermissions.PERMISSION.READ_PHONE_STATE)
-      .then((res) => {
-        if (res.hasPermission) {
-        } else {
-          this.androidPermissions
-            .requestPermission(
-              this.androidPermissions.PERMISSION.READ_PHONE_STATE
-            )
-            .then((response: any) => {
-              alert('Persmission Granted Please Restart App!');
-            })
-            .catch((error) => {
-              alert('Error! ' + error);
-            });
-        }
-      })
-      .catch((error) => {
-        // alert('Error! ' + error);
-      });
+  async getImei() {
+    const { hasPermission } = await this.androidPermissions.checkPermission(
+      this.androidPermissions.PERMISSION.READ_PHONE_STATE
+    );
+
+    if (!hasPermission) {
+      const result = await this.androidPermissions.requestPermission(
+        this.androidPermissions.PERMISSION.READ_PHONE_STATE
+      );
+
+      if (!result.hasPermission) {
+        throw new Error('Permissions required');
+      }
+
+      // ok, a user gave us permission, we can get him identifiers after restart app
+      return;
+    }
+    console.log('return', this.uid.IMEI);
+    console.log('state', this.imei);
+    this.imei = this.uid.IMEI;
+    return this.uid.IMEI;
   }
 }

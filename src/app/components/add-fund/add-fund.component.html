@@ -1,0 +1,69 @@
+<div class="overlay" (click)="closeDraw()" [@slideInOut]></div>
+
+<div class="container" [@slideInOut]>
+  <div
+    style="
+      background-color: #25214f;
+      border-radius: 50%;
+      position: absolute;
+      right: 10px;
+      color: white;
+      top: -20px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    "
+    (click)="closeDraw()"
+  >
+    X
+  </div>
+  <div class="title">
+    <span>My Details</span>
+  </div>
+
+  <!-- <div class="sub-title">
+    <span>Forgot PIN?</span>
+  </div> -->
+
+  <!-- <div class="keypad">
+    <div *ngFor="let item of keyPadValue" class="keys">
+      <div (click)="getPinValue(item.value)">{{
+        item.label
+      }}</div>
+    </div>
+  </div> -->
+  <div class="table">
+    <table>
+      <tbody>
+        <tr>
+          <th>Account Name</th>
+          <td>{{ user?.firstName }} {{ user?.lastName }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{ user?.email }}</td>
+        </tr>
+        <tr>
+          <th>Mobile Number</th>
+          <td>{{ user?.phone }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{ user?.email }}</td>
+        </tr>
+        <tr>
+          <th>Account Number</th>
+          <td>{{ user?.accountNos[0].accountNo }}</td>
+        </tr>
+        <tr>
+          <th>Balance</th>
+          <td>
+            {{ user?.accountNos[0].accountBalance | currency: "&#8358;" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

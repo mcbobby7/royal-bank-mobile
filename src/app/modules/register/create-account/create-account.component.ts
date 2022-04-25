@@ -134,6 +134,9 @@ export class CreateAccountComponent implements OnInit {
     if (this.sanitize() === false) {
       return;
     }
+    this.onboardingForm.patchValue({
+      UserName: this.onboardingForm.value.Email,
+    });
     this.loading = true;
     console.log(this.onboardingForm.value);
     this.loading = true;

@@ -70,6 +70,7 @@
         <ion-icon
           name="copy-outline"
           style="cursor: pointer; font-size: 18px; margin-top: 3px"
+          (click)="copyMessage(user?.accountNos[0]?.accountNo)"
         ></ion-icon>
       </div>
       <div style="text-align: right !important; margin-top: -10px !important">
@@ -83,7 +84,7 @@
           *ngIf="show"
           (click)="viewBalance()"
           style="font-size: 22px; color: #fff; cursor: pointer; right: 20px"
-          name="eye-off-outline"
+          name="eye-outline"
         ></ion-icon>
       </div>
     </ion-card-content>
