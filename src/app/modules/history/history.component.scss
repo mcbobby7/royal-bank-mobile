@@ -1,7 +1,5 @@
 ion-content {
   font-family: Mulish !important;
-  --padding-end: 20px;
-  --padding-start: 20px;
 }
 
 .btn {
@@ -16,8 +14,8 @@ ion-content {
 }
 
 .inner-icon {
-// font-size: 20px;
-color: #d9ac0b;
+  // font-size: 20px;
+  color: #d9ac0b;
 }
 
 .icon-container {
@@ -25,7 +23,6 @@ color: #d9ac0b;
   background-color: #25214f;
   padding: 10px;
 }
-
 
 .header {
   color: #25214f;
@@ -36,7 +33,6 @@ color: #d9ac0b;
 section {
   text-align: center;
 }
-
 
 .phoneField {
   display: flex;

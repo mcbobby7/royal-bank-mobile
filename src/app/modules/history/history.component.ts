@@ -7,6 +7,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent implements OnInit {
+  user = JSON.parse(localStorage.getItem('user'));
 
   transType = 'debit';
   counter = 0;
@@ -15,8 +16,7 @@ export class HistoryComponent implements OnInit {
     endDate: new FormControl(''),
     transType: new FormControl(''),
   });
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
-
 }

@@ -7,6 +7,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./loan.page.scss'],
 })
 export class LoanPage implements OnInit {
+  user = JSON.parse(localStorage.getItem('user'));
 
   transType = 0;
   newReq = true;
@@ -24,19 +25,17 @@ export class LoanPage implements OnInit {
     comment: new FormControl(''),
   });
 
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  transactionType(e){
+  transactionType(e) {
     this.transType = e;
   }
 
-  toggleRequest(e){
+  toggleRequest(e) {
     this.newReq = e;
-    if(e === true){
+    if (e === true) {
       this.selectedBtn = e;
       this.selectedBtn1 = false;
     } else {
@@ -44,5 +43,4 @@ export class LoanPage implements OnInit {
       this.selectedBtn1 = true;
     }
   }
-
 }

@@ -1,5 +1,5 @@
 <ion-content>
-  <div style="height: 130px"></div>
+  <div style="height: 70px"></div>
   <app-loader *ngIf="loading"></app-loader>
   <app-add-fund (exit)="close()" *ngIf="show"></app-add-fund>
   <app-balance></app-balance>
@@ -34,7 +34,7 @@
     </div>
     <div
       style="cursor: pointer"
-      [routerLink]="['addfund']"
+      [routerLink]="['/action/loan']"
       routerLinkActive="router-link-active"
     >
       <ion-img
@@ -49,12 +49,12 @@
           cursor: pointer;
         "
       >
-        Save
+        Loan
       </div>
     </div>
     <div
       style="cursor: pointer"
-      [routerLink]="['borrow']"
+      [routerLink]="['/action/bills-payment/products']"
       routerLinkActive="router-link-active"
     >
       <ion-img
@@ -69,10 +69,10 @@
           cursor: pointer;
         "
       >
-        Borrow
+        Utility
       </div>
     </div>
-    <div style="cursor: pointer" (click)="show = !show">
+    <div style="cursor: pointer" (click)="show = true">
       <ion-img
         src="assets/icon/money.png"
         style="width: 55px; height: 55px; margin: auto"
@@ -105,7 +105,10 @@
   </section> -->
 
   <section style="margin-top: 10px">
-    <div style="background-color: #f8f8f8; border-radius: 8px">
+    <div
+      style="background-color: #f8f8f8; border-radius: 8px"
+      [routerLink]="['/action/account-info/limit']"
+    >
       <ion-card-header class="header">Increase your limit</ion-card-header>
       <ion-card-content
         style="
@@ -114,12 +117,12 @@
           justify-content: space-around;
         "
       >
-        <span style="font-size: 13px" (click)="sha()"
+        <span style="font-size: 13px; width: 80%"
           >This account is perfect for Individuals, Students, Freelancers,
         </span>
         <ion-img
           src="assets/icon/upward-arrow.png"
-          style="width: 34px; height: 34px"
+          style="width: 34px; height: 34px; width: 18%"
         ></ion-img>
       </ion-card-content>
     </div>
@@ -137,12 +140,12 @@
           justify-content: space-around;
         "
       >
-        <span style="font-size: 13px"
+        <span style="font-size: 13px; width: 80%"
           >We will send you your Royal Bank Card where ever you are for FREE
         </span>
         <ion-img
           src="assets/icon/card.png"
-          style="width: 34px; height: 34px"
+          style="width: 34px; height: 34px; width: 18%"
         ></ion-img>
       </ion-card-content>
     </div>

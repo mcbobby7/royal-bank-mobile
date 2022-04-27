@@ -39,8 +39,14 @@ import { ProductsComponent } from '../modules/bills-payments/products/products.c
 import { PinComponent } from './pin/pin.component';
 import { BillsPaymentsPage } from '../modules/bills-payments/bills-payments.page';
 import { AddFundComponent } from '../components/add-fund/add-fund.component';
+import { AccountInfoPage } from '../modules/account-info/account-info.page';
+import { ChangePasswordComponent } from '../modules/account-info/change-password/change-password.component';
+import { ResetPinComponent } from '../modules/account-info/reset-pin/reset-pin.component';
 
 const components = [
+  ResetPinComponent,
+  ChangePasswordComponent,
+  AccountInfoPage,
   TabsPage,
   AddFundComponent,
   BalanceComponent,

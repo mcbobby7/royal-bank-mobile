@@ -9,8 +9,8 @@
 // }
 
 .inner-icon {
-// font-size: 20px;
-color: #d9ac0b;
+  // font-size: 20px;
+  color: #d9ac0b;
 }
 
 .icon-container {
@@ -32,7 +32,7 @@ td {
   visibility: hidden;
 }
 .custom-file-input::before {
-  content: 'Select some files';
+  content: "Select some files";
   display: inline-block;
   background: linear-gradient(top, #f9f9f9, #e3e3e3);
   border: 1px solid #999;
@@ -59,7 +59,6 @@ td {
   padding: 10px;
   // background-color: #d5d4d4;
 }
-
 
 .header {
   color: #25214f;
@@ -112,8 +111,6 @@ section {
 
 ion-content {
   font-family: Mulish !important;
-  --padding-end: 20px;
-  --padding-start: 20px;
 }
 
 .form-inline [fullWidth] {
@@ -160,7 +157,6 @@ label {
 }
 
 .img {
-
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -176,13 +172,11 @@ label {
   --background-activated: #d9ac0b;
 }
 
-
 ion-button {
   --border-radius: 15px;
-  --background:#25214f;
-  --color:#fff !important;
+  --background: #25214f;
+  --color: #fff !important;
   // --background-activated: #25214f !important;
-
 }
 
 // ion-button:active {
@@ -194,11 +188,12 @@ ion-button {
 // }
 
 .active {
-  width: 100%; --border-radius: none;
-  --background:#d9ac0b !important;
-  --color:#fff;
-  --color-activated:#25214f;
-  --background-activated:#d9ac0b !important;
+  width: 100%;
+  --border-radius: none;
+  --background: #d9ac0b !important;
+  --color: #fff;
+  --color-activated: #25214f;
+  --background-activated: #d9ac0b !important;
 }
 
 .content {

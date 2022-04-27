@@ -1,29 +1,68 @@
 <ion-content>
-  <div style="padding: 70px"></div>
-  <app-loader *ngIf="loading"></app-loader>
-  <section
-    style="
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 10px;
-    "
-  >
+  <section style="background-color: #25214f">
+    <div style="padding: 19px"></div>
+    <app-loader *ngIf="loading"></app-loader>
     <div
-      *ngFor="let item of billCategories"
-      class="icons-bg"
-      [routerLink]="['products']"
-      [queryParams]="{id: item.id}"
-      routerLinkActive="router-link-active"
+      style="
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #25214f;
+        color: #fff;
+        padding-top: 40px;
+      "
     >
-      <ion-img
-        src='{{"assets/icon/" + item.code + ".png" }}'
-        class="icons"
-      ></ion-img>
-      <div>{{item.name}}</div>
+      <div
+        style="
+          background-color: #d9ac0b;
+          padding: 20px 30px;
+          text-align: left;
+          width: 100%;
+          max-width: 400px;
+          margin: auto;
+          border-radius: 10px;
+          color: #25214f;
+        "
+      >
+        <div style="font-size: 26px">
+          {{ user?.accountNos[0]?.accountBalance | currency: "&#8358;" }}
+        </div>
+        <div style="font-size: 15px">
+          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}
+        </div>
+      </div>
     </div>
-    <!-- <div class="icons-bg"  [routerLink]="['addfund']" routerLinkActive="router-link-active" >
+    <section
+      style="
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 10px;
+        background-color: white;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        padding: 0 20px;
+        padding-top: 50px;
+      "
+    >
+      <div
+        *ngFor="let item of billCategories"
+        class="icons-bg"
+        [routerLink]="['products']"
+        [queryParams]="{id: item.id}"
+        routerLinkActive="router-link-active"
+      >
+        <ion-img
+          src='{{"assets/icon/" + item.code + ".png" }}'
+          class="icons"
+        ></ion-img>
+        <div>{{item.name}}</div>
+      </div>
+      <!-- <div class="icons-bg"  [routerLink]="['addfund']" routerLinkActive="router-link-active" >
   <ion-img
     src="assets/icon/internet.png"
     class="icons"
@@ -69,7 +108,7 @@
     Utility
   </div>
 </div> -->
-    <!-- </section>
+      <!-- </section>
 
 <section
 style="
@@ -79,7 +118,7 @@ style="
   margin-top: 10px;
 "
 > -->
-    <!-- <div class="icons-bg"  [routerLink]="['transfer']" routerLinkActive="router-link-active" >
+      <!-- <div class="icons-bg"  [routerLink]="['transfer']" routerLinkActive="router-link-active" >
   <ion-img
     src="assets/icon/data.png"
     class="icons"
@@ -106,5 +145,6 @@ style="
     Airline
   </div>
 </div> -->
+    </section>
   </section>
 </ion-content>

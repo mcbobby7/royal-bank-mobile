@@ -77,7 +77,8 @@ export class AuthService {
       data,
     };
     console.log(payload);
-
+    console.log('return', this.uid.IMEI);
+    console.log('state', this.imei);
     return this.httpClient
       .post<void>(this.baseUrl, payload, this.headers)
       .pipe(catchError(this.handleError));
@@ -100,8 +101,7 @@ export class AuthService {
       // ok, a user gave us permission, we can get him identifiers after restart app
       return;
     }
-    console.log('return', this.uid.IMEI);
-    console.log('state', this.imei);
+
     this.imei = this.uid.IMEI;
     return this.uid.IMEI;
   }

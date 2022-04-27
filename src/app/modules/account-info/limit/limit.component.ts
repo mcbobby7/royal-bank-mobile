@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-limit',
@@ -7,21 +8,39 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./limit.component.scss'],
 })
 export class LimitComponent implements OnInit {
-  btnClicked = true;
-  updateBtn = false;
-  updatedForm = 0;
-  limitForm = new FormGroup({
-    dailyLimit: new FormControl(''),
-    singleLimit: new FormControl(''),
+  imageSrc = 'assets/icon/royalL.png';
+  user = JSON.parse(localStorage.getItem('user'));
+  photo;
+  show = false;
+  loading = false;
+  pass = false;
+  limit;
+  passwordResetForm = new FormGroup({
+    oldPassword: new FormControl(''),
+    newPassword: new FormControl(''),
+    confirmPassword: new FormControl(''),
   });
-  constructor() { }
 
-  ngOnInit() {}
+  constructor(public toast: ToastrService) {}
 
-  update(e: number) {
-    this.btnClicked = false;
-    this.updateBtn = true;
-    this.updatedForm = e;
+  ngOnInit() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.photo = user.photo ? user.photo : 'assets/icon/hey.png';
   }
+  close() {
+    this.show = !this.show;
+  }
+  finish() {
+    this.loading = false;
+    this.toast.success('Limit Updated', 'Success');
+    this.pass = false;
 
+    // this.submit();
+  }
+  load() {
+    this.loading = !this.loading;
+  }
+  closePass() {
+    this.pass = false;
+  }
 }

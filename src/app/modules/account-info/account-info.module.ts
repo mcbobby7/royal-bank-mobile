@@ -6,15 +6,13 @@ import { IonicModule } from '@ionic/angular';
 
 import { AccountInfoPageRoutingModule } from './account-info-routing.module';
 
-import { AccountInfoPage } from './account-info.page';
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AccountInfoPageRoutingModule
+    AccountInfoPageRoutingModule,
   ],
-  declarations: [AccountInfoPage]
+  declarations: [],
 })
 export class AccountInfoPageModule {}

@@ -46,7 +46,9 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.typeCode = Number(this.route.snapshot.queryParamMap.get('id'));
+    this.typeCode = Number(this.route.snapshot.queryParamMap.get('id'))
+      ? Number(this.route.snapshot.queryParamMap.get('id'))
+      : 6;
     this.fetchData();
   }
   fetchData() {

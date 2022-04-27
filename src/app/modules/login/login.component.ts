@@ -62,7 +62,10 @@ export class LoginComponent implements OnInit {
           this.toast.error(res.data.responseMessage, 'Error');
         }
       },
-      (err) => console.error(err.message)
+      (err) => {
+        this.toast.error('Check your internet connection', 'Error');
+        this.loading = false;
+      }
     );
   }
 

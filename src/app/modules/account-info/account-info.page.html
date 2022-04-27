@@ -1,110 +1,127 @@
 <ion-content>
-<section style="margin-top: 100px;">
-  <section>
-    <div style="padding:20px; width:100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #25214f; color: #fff; padding: 20px 30px;">
-      <div style="border-radius: 50%; margin: 10px 0;">
-        <ion-img
-          src="assets/icon/money.png"
-          style="width: 55px; height: 55px; margin: auto"
-        ></ion-img>
+  <section style="margin-top: 30px; background-color: #25214f">
+    <app-add-fund (exit)="close()" *ngIf="show"></app-add-fund>
+
+    <section>
+      <div
+        style="
+          padding: 20px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background-color: #25214f;
+          color: #fff;
+          padding: 20px 30px;
+        "
+      >
+        <div style="border-radius: 50%; margin: 10px 0">
+          <ion-img
+            [src]="photo"
+            style="width: 70px; height: 70px; margin: auto; border-radius: 50%"
+            class="userImg"
+          ></ion-img>
+        </div>
+        <span>{{ user.firstName }} {{ user.lastName }}</span>
+
+        <ion-button id="details" size="small" (click)="show = true"
+          >Show Details</ion-button
+        >
       </div>
-      <span>Ogungbenro Philip</span>
+    </section>
 
-      <ion-button id="details" size="small">Show Details</ion-button>
-<ion-popover trigger="details">
-  <ng-template>
-  <ion-list>
-      <ion-item>
-        <ion-label>Account No</ion-label>
-        <span>0123456789</span>
-      </ion-item>
-      <ion-item>
-        <ion-label>Username</ion-label>
-        <span>onaopemipo</span>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>BVN</ion-label>
-        <span>0123456789</span>
-      </ion-item>
-      <ion-item>
-        <ion-label>Email</ion-label>
-        <span>philipmuyiwa@gmail.com</span>
-      </ion-item>
-      <ion-item>
-        <ion-label>Phone No.</ion-label>
-        <span>08136895580</span>
-      </ion-item>
-    </ion-list>
-  </ng-template>
-</ion-popover>
-    </div>
-  </section>
-
-  <section>
-    <div style="
-    font-family: Mulish !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    cursor: pointer;
-    margin: 1.5rem 0.5rem;"
-    [routerLink]="['change-password']">
-      <div class="icon-container">
-        <ion-icon name="lock-closed-sharp" class="inner-icon"></ion-icon>
-      </div>
-      <span class="items">Changed Password</span>
-      <ion-icon name="caret-forward" style="margin:auto; font-size: 25px; color: #25214f;"></ion-icon>
+    <section
+      style="
+        padding: 0 10px;
+        border-top-right-radius: 50px;
+        border-top-left-radius: 50px;
+        background-color: white;
+        padding-top: 60px;
+      "
+    >
+      <div
+        style="
+          font-family: Mulish !important;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          cursor: pointer;
+          margin: 1.5rem 0.5rem;
+        "
+        [routerLink]="['change-password']"
+      >
+        <div class="icon-container">
+          <ion-icon name="lock-closed-sharp" class="inner-icon"></ion-icon>
+        </div>
+        <span class="items">Changed Password</span>
+        <ion-icon
+          name="caret-forward"
+          style="margin: auto; font-size: 25px; color: #25214f"
+        ></ion-icon>
       </div>
 
-      <div style="
-    font-family: Mulish !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    cursor: pointer;
-    margin: 1.5rem 0.5rem;"
-    (click)="enableBiomterics()">
-      <div class="icon-container">
-        <ion-icon name="finger-print-sharp" class="inner-icon"></ion-icon>
-      </div>
-      <span class="items">Biometric Login</span>
-      <ion-toggle></ion-toggle>
-    </div>
+      <!-- <div
+        style="
+          font-family: Mulish !important;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          cursor: pointer;
+          margin: 1.5rem 0.5rem;
+        "
+        (click)="enableBiomterics()"
+      >
+        <div class="icon-container">
+          <ion-icon name="finger-print-sharp" class="inner-icon"></ion-icon>
+        </div>
+        <span class="items">Biometric Login</span>
+        <ion-toggle></ion-toggle>
+      </div> -->
 
-      <div style="
-      font-family: Mulish !important;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      cursor: pointer;
-      margin: 1.5rem 0.5rem;"
-      (click)="selectedOption(3)">
+      <div
+        style="
+          font-family: Mulish !important;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          cursor: pointer;
+          margin: 1.5rem 0.5rem;
+        "
+        [routerLink]="['limit']"
+      >
         <div class="icon-container">
           <ion-icon name="wallet-sharp" class="inner-icon"></ion-icon>
         </div>
         <span class="items">Increase Limit</span>
-        <ion-icon name="caret-forward" style="margin:auto; font-size: 25px; color: #25214f;"></ion-icon>
+        <ion-icon
+          name="caret-forward"
+          style="margin: auto; font-size: 25px; color: #25214f"
+        ></ion-icon>
+      </div>
+
+      <div
+        style="
+          font-family: Mulish !important;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          cursor: pointer;
+          margin: 1.5rem 0.5rem;
+        "
+        [routerLink]="['reset-pin']"
+      >
+        <div class="icon-container">
+          <ion-icon name="settings-sharp" class="inner-icon"></ion-icon>
         </div>
-
-        <div style="
-        font-family: Mulish !important;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        cursor: pointer;
-        margin: 1.5rem 0.5rem;"
-        [routerLink]="['reset-pin']">
-          <div class="icon-container">
-            <ion-icon name="settings-sharp" class="inner-icon"></ion-icon>
-          </div>
-          <span class="items">Reset/Change PIN</span>
-          <ion-icon name="caret-forward" style="margin:auto; font-size: 25px; color: #25214f;"></ion-icon>
-          </div>
-
+        <span class="items">Reset/Change PIN</span>
+        <ion-icon
+          name="caret-forward"
+          style="margin: auto; font-size: 25px; color: #25214f"
+        ></ion-icon>
+      </div>
+    </section>
   </section>
-</section>
-
 
   <!-- <section *ngIf="option ===2">
     <form [formGroup]="passwordForm">

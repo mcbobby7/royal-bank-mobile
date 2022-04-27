@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  user = JSON.parse(localStorage.getItem('user'));
+
   userForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -46,8 +48,5 @@ export class ProfileComponent implements OnInit {
   change(mode) {
     this.page = mode;
   }
-  next() {
-    this.router.navigate(['/register/email/2']);
-  }
-
+  next() {}
 }

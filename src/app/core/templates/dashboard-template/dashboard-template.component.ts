@@ -73,7 +73,7 @@ export class DashboardTemplateComponent implements OnInit {
     };
     setStatusBarStyleDark();
     StatusBar.setBackgroundColor({
-      color: '#25214f',
+      color: '#ffffff',
     });
   }
 

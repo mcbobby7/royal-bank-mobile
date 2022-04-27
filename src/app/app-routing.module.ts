@@ -118,9 +118,16 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'bills-payment',
+        loadChildren: () =>
+          import('./modules/bills-payments/bills-payments.module').then(
+            (m) => m.BillsPaymentsPageModule
+          ),
+      },
+      {
         path: 'pin',
-        component: PinComponent
-      }
+        component: PinComponent,
+      },
     ],
   },
   {

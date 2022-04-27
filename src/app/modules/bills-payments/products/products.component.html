@@ -1,152 +1,206 @@
 <ion-content>
-  <div style="height: 100px"></div>
-  <app-loader *ngIf="loading"></app-loader>
-  <app-pin
-    (close)="close()"
-    (loading)="load()"
-    (done)="finish()"
-    *ngIf="show"
-  ></app-pin>
-  <section *ngIf="transType === 0">
+  <section style="background-color: #25214f">
+    <div style="height: 50px"></div>
+    <app-loader *ngIf="loading"></app-loader>
+    <app-pin
+      (close)="close()"
+      (loading)="load()"
+      (done)="finish()"
+      *ngIf="show"
+    ></app-pin>
     <div
-      *ngFor="let data of vars"
       style="
-        font-family: Mulish !important;
+        padding: 20px;
+        width: 100%;
         display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        cursor: pointer;
-        margin: 1.5rem 0.5rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #25214f;
+        color: #fff;
+        padding-top: 40px;
       "
-      (click)="transactionType(2, data.code)"
     >
-      <div class="icon-container">
-        <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
-        <ion-icon name="phone-portrait" class="inner-icon"></ion-icon>
-      </div>
-      <span
+      <div
         style="
-          margin: auto;
+          background-color: #d9ac0b;
+          padding: 20px 30px;
           text-align: left;
-          padding-left: 20px;
-          font-size: 20px;
           width: 100%;
+          max-width: 400px;
+          margin: auto;
+          border-radius: 10px;
+          color: #25214f;
         "
-        >{{ data.name }}</span
       >
-      <ion-icon
-        name="caret-forward"
-        style="margin: auto; font-size: 20px; color: #25214f"
-      ></ion-icon>
+        <div style="font-size: 26px">
+          {{ user?.accountNos[0]?.accountBalance | currency: "&#8358;" }}
+        </div>
+        <div style="font-size: 15px">
+          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}
+        </div>
+      </div>
     </div>
-  </section>
-
-  <section *ngIf="transType === 2">
-    <div
-      *ngIf="typeCode === 2 || typeCode === 4"
-      class="row"
+    <section
+      *ngIf="transType === 0"
       style="
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin-top: 30px;
+        margin-top: 10px;
+        background-color: white;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        padding: 0 20px;
+        padding-top: 50px;
       "
     >
-      <ion-button
-        (click)="toggleRequest(true)"
-        [ngClass]="{ active: selectedBtn === true }"
-        style="width: 100%; --border-radius: none"
+      <div
+        *ngFor="let data of vars"
+        style="
+          font-family: Mulish !important;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          cursor: pointer;
+          margin: 1.5rem 0.5rem;
+        "
+        (click)="transactionType(2, data.code)"
       >
-        New
-      </ion-button>
+        <div class="icon-container">
+          <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
+          <ion-icon name="phone-portrait" class="inner-icon"></ion-icon>
+        </div>
+        <span
+          style="
+            margin: auto;
+            text-align: left;
+            padding-left: 20px;
+            font-size: 20px;
+            width: 100%;
+          "
+          >{{ data.name }}</span
+        >
+        <ion-icon
+          name="caret-forward"
+          style="margin: auto; font-size: 20px; color: #25214f"
+        ></ion-icon>
+      </div>
+    </section>
 
-      <ion-button
-        (click)="toggleRequest(false)"
-        size="medium"
-        [ngClass]="{ active: selectedBtn1 === true }"
-        style="width: 100%; --border-radius: none"
+    <section
+      *ngIf="transType === 2"
+      style="
+        margin-top: 10px;
+        background-color: white;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        padding: 0 20px;
+        padding-top: 50px;
+      "
+    >
+      <div
+        *ngIf="typeCode === 2 || typeCode === 4"
+        class="row"
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          margin-top: 30px;
+        "
       >
-        Beneficiary
-      </ion-button>
-    </div>
-
-    <div *ngIf="newReq">
-      <div class="row" style="padding: 5px">
-        <label *ngIf="typeCode === 1" for="">Decoder Number</label>
-        <label *ngIf="typeCode === 2 || typeCode === 4" for=""
-          >Phone Number</label
-        >
-        <label
-          *ngIf="
-            typeCode === 3 ||
-            typeCode === 5 ||
-            typeCode === 6 ||
-            typeCode === 7 ||
-            typeCode === 9
-          "
-          for=""
-          >Customer ID</label
-        >
-
-        <input
-          *ngIf="typeCode === 1"
-          [(ngModel)]="phoneNumber"
-          type="text"
-          name="mobile"
-          class="input"
-          placeholder="Decoder Number"
-        />
-        <input
-          *ngIf="typeCode === 2 || typeCode === 4"
-          [(ngModel)]="phoneNumber"
-          type="text"
-          name="mobile"
-          class="input"
-          placeholder="08079172267"
-        />
-
-        <input
-          *ngIf="
-            typeCode === 3 ||
-            typeCode === 5 ||
-            typeCode === 6 ||
-            typeCode === 7 ||
-            typeCode === 9
-          "
-          [(ngModel)]="phoneNumber"
-          type="text"
-          name="mobile"
-          class="input"
-          placeholder="Customer ID"
-        />
-      </div>
-
-      <div class="row" style="padding: 5px">
-        <label for="">Select Bundle</label>
-        <select [(ngModel)]="productCode" name="bank" id="" class="input">
-          <!-- <option value="">-- Select Type --</option> -->
-          <option *ngFor="let data of products" [value]="data.productCode">
-            {{ data.productTitle }} ({{
-              data.productPrice | currency: "&#8358;"
-            }})
-          </option>
-        </select>
-      </div>
-
-      <div>
         <ion-button
-          class="btn"
-          expand="block"
-          style="margin-top: 1rem"
-          (click)="check()"
+          (click)="toggleRequest(true)"
+          [ngClass]="{ active: selectedBtn === true }"
+          style="width: 100%; --border-radius: none"
         >
-          Send
+          New
+        </ion-button>
+
+        <ion-button
+          (click)="toggleRequest(false)"
+          size="medium"
+          [ngClass]="{ active: selectedBtn1 === true }"
+          style="width: 100%; --border-radius: none"
+        >
+          Beneficiary
         </ion-button>
       </div>
-    </div>
 
-    <div *ngIf="!newReq">
-      <!-- <div class=" row" style="padding: 5px">
+      <div *ngIf="newReq">
+        <div class="row" style="padding: 5px">
+          <label *ngIf="typeCode === 1" for="">Decoder Number</label>
+          <label *ngIf="typeCode === 2 || typeCode === 4" for=""
+            >Phone Number</label
+          >
+          <label
+            *ngIf="
+              typeCode === 3 ||
+              typeCode === 5 ||
+              typeCode === 6 ||
+              typeCode === 7 ||
+              typeCode === 9
+            "
+            for=""
+            >Customer ID</label
+          >
+
+          <input
+            *ngIf="typeCode === 1"
+            [(ngModel)]="phoneNumber"
+            type="text"
+            name="mobile"
+            class="input"
+            placeholder="Decoder Number"
+          />
+          <input
+            *ngIf="typeCode === 2 || typeCode === 4"
+            [(ngModel)]="phoneNumber"
+            type="text"
+            name="mobile"
+            class="input"
+            placeholder="08079172267"
+          />
+
+          <input
+            *ngIf="
+              typeCode === 3 ||
+              typeCode === 5 ||
+              typeCode === 6 ||
+              typeCode === 7 ||
+              typeCode === 9
+            "
+            [(ngModel)]="phoneNumber"
+            type="text"
+            name="mobile"
+            class="input"
+            placeholder="Customer ID"
+          />
+        </div>
+
+        <div class="row" style="padding: 5px">
+          <label for="">Select Bundle</label>
+          <select [(ngModel)]="productCode" name="bank" id="" class="input">
+            <!-- <option value="">-- Select Type --</option> -->
+            <option *ngFor="let data of products" [value]="data.productCode">
+              {{ data.productTitle }} ({{
+                data.productPrice | currency: "&#8358;"
+              }})
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <ion-button
+            class="btn"
+            expand="block"
+            style="margin-top: 1rem"
+            (click)="check()"
+          >
+            Send
+          </ion-button>
+        </div>
+      </div>
+
+      <div *ngIf="!newReq">
+        <!-- <div class=" row" style="padding: 5px">
         <label for="">Search Beneficiary</label>
         <input type="text" class="input" placeholder="Search.." name="search" />
         <ion-icon
@@ -154,95 +208,105 @@
           style="margin-top: -34px; margin-left: 7px"
         ></ion-icon>
       </div> -->
-      <div
-        (click)="new()"
-        style="
-          margin: 20px 0;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        "
-      >
-        Add <ion-icon name="add" style="font-size: 20px"></ion-icon>
-      </div>
-
-      <div *ngIf="add">
-        <div class="row" style="padding: 5px">
-          <input
-            type="text"
-            class="input"
-            placeholder="Beneficiary Name"
-            name="name"
-            style="margin-bottom: 10px"
-            [(ngModel)]="name"
-          />
-        </div>
-        <div class="row" style="padding: 5px">
-          <input
-            type="text"
-            class="input"
-            placeholder="Beneficiary Number"
-            name="number"
-            [(ngModel)]="benNum"
-          />
-        </div>
-        <div class="">
-          <ion-button
-            class="btn"
-            expand="block"
-            style="margin-top: 1rem"
-            (click)="adds()"
-          >
-            Add
-          </ion-button>
-        </div>
-      </div>
-
-      <div class="row-one">
-        <span style="text-align: left" *ngIf="benes.length === 0"
-          >No beneficiary found</span
-        >
         <div
-          style="background-color: #f8f8f8; border-radius: 8px; margin-top: 5px"
-          *ngFor="let data of benes"
+          (click)="new()"
+          style="
+            margin: 20px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
         >
-          <ion-card-content style="display: flex; flex-direction: row">
-            <ion-icon
-              name="trash"
-              style="
-                margin-right: 10px;
-                font-size: 25px;
-                color: #25214f;
-                width: 10%;
-              "
-              (click)="delete(data.phoneNumber)"
-            ></ion-icon>
-            <div
-              style="
-                font-size: 13px;
-                display: flex;
-                flex-direction: column;
-                width: 80%;
-              "
+          Add <ion-icon name="add" style="font-size: 20px"></ion-icon>
+        </div>
+
+        <div *ngIf="add">
+          <div class="row" style="padding: 5px">
+            <input
+              type="text"
+              class="input"
+              placeholder="Beneficiary Name"
+              name="name"
+              style="margin-bottom: 10px"
+              [(ngModel)]="name"
+            />
+          </div>
+          <div class="row" style="padding: 5px">
+            <input
+              type="text"
+              class="input"
+              placeholder="Beneficiary Number"
+              name="number"
+              [(ngModel)]="benNum"
+            />
+          </div>
+          <div class="">
+            <ion-button
+              class="btn"
+              expand="block"
+              style="margin-top: 1rem"
+              (click)="adds()"
             >
-              <span style="text-align: left; font-weight: 800"
-                >{{ data.name }}
-              </span>
-              <span style="text-align: left">{{ data.phoneNumber }} </span>
-            </div>
-            <ion-icon
-              (click)="use(data.phoneNumber)"
-              name="caret-forward"
-              style="margin: auto; font-size: 30px; color: #25214f; width: 10%"
-            ></ion-icon>
-          </ion-card-content>
+              Add
+            </ion-button>
+          </div>
+        </div>
+
+        <div class="row-one">
+          <span style="text-align: left" *ngIf="benes.length === 0"
+            >No beneficiary found</span
+          >
+          <div
+            style="
+              background-color: #f8f8f8;
+              border-radius: 8px;
+              margin-top: 5px;
+            "
+            *ngFor="let data of benes"
+          >
+            <ion-card-content style="display: flex; flex-direction: row">
+              <ion-icon
+                name="trash"
+                style="
+                  margin-right: 10px;
+                  font-size: 25px;
+                  color: #25214f;
+                  width: 10%;
+                "
+                (click)="delete(data.phoneNumber)"
+              ></ion-icon>
+              <div
+                style="
+                  font-size: 13px;
+                  display: flex;
+                  flex-direction: column;
+                  width: 80%;
+                "
+              >
+                <span style="text-align: left; font-weight: 800"
+                  >{{ data.name }}
+                </span>
+                <span style="text-align: left">{{ data.phoneNumber }} </span>
+              </div>
+              <ion-icon
+                (click)="use(data.phoneNumber)"
+                name="caret-forward"
+                style="
+                  margin: auto;
+                  font-size: 30px;
+                  color: #25214f;
+                  width: 10%;
+                "
+              ></ion-icon>
+            </ion-card-content>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section *ngIf="transType === 9">
-    <ion-card> </ion-card>
+    <section *ngIf="transType === 9">
+      <ion-card> </ion-card>
+    </section>
   </section>
 </ion-content>

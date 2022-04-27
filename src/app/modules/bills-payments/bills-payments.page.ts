@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./bills-payments.page.scss'],
 })
 export class BillsPaymentsPage implements OnInit {
+  user = JSON.parse(localStorage.getItem('user'));
   billCategories = [];
   loading = true;
   constructor(private auth: AuthService, private router: Router) {}
