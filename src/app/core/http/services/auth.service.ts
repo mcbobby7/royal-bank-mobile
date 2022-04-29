@@ -16,6 +16,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 })
 export class AuthService {
   baseUrl = 'https://bankingsandboxapi.azurewebsites.net/api/v1/proxy';
+  fileUrl =
+    'https://bankingsandboxapi.vaballiance.com/fileservice/api/files/upload';
   notificationBaseUrl = 'https://bankingsandboxapi.vaballiance.com';
   testUrl = 'https://gamelyd.herokuapp.com/users/checkUserName/mcbobby';
   imei;
@@ -81,6 +83,13 @@ export class AuthService {
     console.log('state', this.imei);
     return this.httpClient
       .post<void>(this.baseUrl, payload, this.headers)
+      .pipe(catchError(this.handleError));
+  }
+
+  fileUpload(data: any): Observable<void> {
+    console.log(data);
+    return this.httpClient
+      .post<void>(this.fileUrl, data, this.headers)
       .pipe(catchError(this.handleError));
   }
 

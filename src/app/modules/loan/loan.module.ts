@@ -6,15 +6,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { LoanPageRoutingModule } from './loan-routing.module';
 
-import { LoanPage } from './loan.page';
-
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    LoanPageRoutingModule
-  ],
-  declarations: [LoanPage]
+  imports: [CommonModule, FormsModule, IonicModule, LoanPageRoutingModule],
+  declarations: [],
 })
 export class LoanPageModule {}

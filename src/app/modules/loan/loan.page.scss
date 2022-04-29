@@ -25,7 +25,15 @@ table {
 }
 
 td {
-  margin-left: 5px;
+  padding: 10px 5px;
+  text-align: left;
+  font-size: 13px;
+  padding-left: 20px;
+}
+th {
+  font-size: 13px;
+  text-align: left;
+  padding: 10px 5px;
 }
 
 .custom-file-input::-webkit-file-upload-button {
@@ -64,6 +72,8 @@ td {
   color: #25214f;
   font-size: 16px;
   font-weight: 800;
+  margin: 20px 0;
+  text-align: center;
 }
 
 section {

@@ -69,12 +69,13 @@ export class ProductsComponent implements OnInit {
           } else {
             this.loading = false;
             this.router.navigate(['/dashboard']);
-            console.log(res.data.responseMessage);
+            this.toast.error(res.data.responseMessage, 'Error');
           }
         },
         (err) => {
           this.loading = false;
           this.router.navigate(['/dashboard']);
+          this.toast.error('Check your internet connection', 'Error');
         }
       );
   }

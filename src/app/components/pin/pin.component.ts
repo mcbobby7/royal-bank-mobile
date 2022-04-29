@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { trigger, transition, animate, style } from '@angular/animations';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../core/http/services/auth.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pin',
@@ -25,6 +27,9 @@ export class PinComponent implements OnInit {
   loading: EventEmitter<any> = new EventEmitter();
   @Output()
   close: EventEmitter<any> = new EventEmitter();
+  user = JSON.parse(localStorage.getItem('user'));
+  pin;
+
   keyPadValue = [
     { label: 1, value: 1 },
     { label: 2, value: 2 },
@@ -39,9 +44,44 @@ export class PinComponent implements OnInit {
     { label: 'X', value: 11 },
   ];
   transactionPin = [];
-  constructor(public toast: ToastrService) {}
+  constructor(
+    public toast: ToastrService,
+    private auth: AuthService,
+    public alertController: AlertController
+  ) {}
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Change Pin',
+      message:
+        'Your default pin is 0000 you have to change your pin to conduct transactions',
+      buttons: ['OK'],
+    });
 
-  ngOnInit() {}
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
+  ngOnInit() {
+    this.auth
+      .post(
+        { UserId: +this.user.userId },
+        'UserManager.UserService.FetchUserPin'
+      )
+      .subscribe(
+        (res: any) => {
+          console.log(res.data.data.pin);
+          console.log(res.data.data.pin);
+          if (res.data.data.pin === '0000') {
+            this.presentAlert();
+            return;
+          }
+        },
+        (err) => {}
+      );
+  }
 
   getPinValue(e) {
     if (e === 11) {
@@ -52,17 +92,44 @@ export class PinComponent implements OnInit {
     }
     if (this.transactionPin.length === 4) {
       this.loading.emit();
+      this.auth
+        .post(
+          { UserId: +this.user.userId },
+          'UserManager.UserService.FetchUserPin'
+        )
+        .subscribe(
+          (res: any) => {
+            console.log(res.data.data.pin);
+            console.log(res.data.data.pin);
+            if (res.data.data.pin === '0000') {
+              this.presentAlert();
+              this.loading.emit();
+              return;
+            }
 
-      setTimeout(() => {
-        if (this.transactionPin.join('') === '0000') {
-          this.done.emit();
-        } else {
-          this.toast.error('Invalid Pin', 'Error');
-          this.loading.emit();
-        }
-
-        this.transactionPin = [];
-      }, 1000);
+            if (res.status === '00') {
+              // deal with register
+              this.pin = res.data.data.pin;
+              if (res.data.data.pin === this.transactionPin.join('')) {
+                this.done.emit();
+              } else {
+                this.toast.error('Invalid Pin', 'Error');
+                this.loading.emit();
+              }
+              this.transactionPin = [];
+            } else {
+              this.toast.error(res.data.responseMessage, 'Error');
+              this.loading.emit();
+              console.log(res.data.responseMessage);
+              this.transactionPin = [];
+            }
+          },
+          (err) => {
+            this.toast.error('Error try again', 'Error');
+            this.loading.emit();
+            this.transactionPin = [];
+          }
+        );
     }
   }
   closeDraw() {

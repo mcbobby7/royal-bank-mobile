@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/http/services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bills-payments',
@@ -11,7 +12,11 @@ export class BillsPaymentsPage implements OnInit {
   user = JSON.parse(localStorage.getItem('user'));
   billCategories = [];
   loading = true;
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private toast: ToastrService
+  ) {}
 
   ngOnInit() {
     this.fetchBillsCategory();
@@ -30,12 +35,14 @@ export class BillsPaymentsPage implements OnInit {
           console.log(this.billCategories);
         } else {
           this.loading = false;
+          this.toast.error(data.data.responseMessage, 'Error');
           this.router.navigate(['/dashboard']);
         }
       },
       (err) => {
         this.loading = false;
         this.router.navigate(['/dashboard']);
+        this.toast.error('Check your internet connection', 'Error');
       }
     );
   }

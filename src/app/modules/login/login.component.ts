@@ -50,6 +50,8 @@ export class LoginComponent implements OnInit {
     this.auth.post(data, 'UserManager.UserService.Login').subscribe(
       (res: any) => {
         this.loading = false;
+        console.log(res);
+
         if (res.data.responseCode === '00') {
           this.toast.success('Login was successfull', 'Success');
           this.data = res.data;

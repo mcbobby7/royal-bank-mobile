@@ -224,9 +224,13 @@ export class VerifyPhoneComponent implements OnInit {
               );
           } else {
             this.bvnError = true;
+            this.loading = false;
           }
         },
-        (err) => console.error(err.message)
+        (err) => {
+          this.toast.error('Check your internet connection', 'Error');
+          this.loading = false;
+        }
       );
 
     this.bvnError = false;

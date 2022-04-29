@@ -17,8 +17,9 @@ export class ImageComponent implements OnInit {
   page = 'take';
   id: any = localStorage.getItem('stageId');
   onboardingForm!: FormGroup;
-  loading = true;
+  loading = false;
   user: any = {};
+  base64;
 
   constructor(
     private auth: AuthService,
@@ -115,6 +116,8 @@ export class ImageComponent implements OnInit {
     } else {
       this.router.navigate(['/register/become-royalty']);
     }
+    this.loading = false;
+
     return;
   }
 
@@ -149,7 +152,7 @@ export class ImageComponent implements OnInit {
 
   ngOnInit(): void {
     // register form
-    this.getOnboardingStage();
+    // this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
       Id: new FormControl(+this.id),
       FirstName: new FormControl(''),
@@ -178,14 +181,46 @@ export class ImageComponent implements OnInit {
     // console.log(this.onboardingForm.value);
   }
 
+  uploadPhoto() {
+    this.loading = true;
+    this.auth
+      .fileUpload({
+        FileName: 'state_geo.csv',
+        Base64String: this.photo.selectedImage.substring(22),
+      })
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+
+          if (res.message === 'Uploaded Successfully') {
+            console.log(res);
+            this.loading = false;
+            this.onboardingForm.patchValue({
+              PassportUrl: res.result,
+            });
+            this.register();
+            // this.data = res.data;
+
+            // deal with register
+          } else {
+            this.loading = false;
+            this.toast.error(res.data.responseMessage, 'Error');
+            this.page = 'fail';
+          }
+        },
+        (err) => {
+          this.toast.error('Error please try Again', 'Error');
+          console.log('error');
+          this.page = 'fail';
+          this.loading = false;
+        }
+      );
+  }
+
   async takePhoto() {
     const res = await this.photo.addNewToGallery();
     if (this.photo.selectedImage) {
-      this.onboardingForm.patchValue({
-        PassportUrl: this.photo.selectedImage,
-      });
-      this.register();
-      this.page = 'success';
+      this.uploadPhoto();
     } else {
       this.page = 'fail';
     }

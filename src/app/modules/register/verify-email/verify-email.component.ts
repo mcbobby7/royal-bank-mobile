@@ -223,7 +223,10 @@ export class VerifyEmailComponent implements OnInit {
             this.loading = false;
           }
         },
-        (err) => (this.loading = false)
+        (err) => {
+          this.toast.error('Check your internet connection', 'Error');
+          this.loading = false;
+        }
       );
   }
 

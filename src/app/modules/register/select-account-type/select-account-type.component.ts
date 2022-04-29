@@ -122,6 +122,8 @@ export class SelectAccountTypeComponent implements OnInit {
     } else {
       mode = 'CreateUser';
     }
+    console.log(this.id);
+
     this.auth
       .post(this.onboardingForm.value, `UserManager.UserService.${mode}`)
       .subscribe(

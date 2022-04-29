@@ -71,6 +71,21 @@
         </ion-menu-toggle>
       </ion-list>
     </ion-content>
+    <div
+      style="
+        display: flex;
+        flex-direction: row;
+        margin: 30px 0px;
+        align-items: center;
+      "
+      (click)="logout()"
+    >
+      <ion-img
+        style="margin-left: 20px; width: 30px"
+        src="/assets/icon/logout.png"
+      ></ion-img>
+      <div style="padding-left: 10px">Logout</div>
+    </div>
   </ion-menu>
 
   <ion-router-outlet id="main-content" main></ion-router-outlet>

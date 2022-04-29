@@ -30,7 +30,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 input {
-  border: 1px solid red;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-left: 26px;
 }
 select {
   -webkit-appearance: none;

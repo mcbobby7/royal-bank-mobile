@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // import { Component } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { StatusBar, Style } from '@capacitor/status-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard-template',
@@ -63,7 +64,7 @@ export class DashboardTemplateComponent implements OnInit {
     },
   ];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public toast: ToastrService) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.active = event.url;
     });
@@ -80,5 +81,10 @@ export class DashboardTemplateComponent implements OnInit {
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem('user'));
     this.photo = user.photo ? user.photo : 'assets/icon/hey.png';
+  }
+  logout() {
+    localStorage.setItem('user', '');
+    this.router.navigate(['/login']);
+    this.toast.success('Logout Successful', 'Success');
   }
 }

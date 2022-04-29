@@ -61,10 +61,13 @@ export class AirtimeComponent implements OnInit {
             } else {
               this.loading = false;
               this.router.navigate(['/dashboard']);
+              this.toast.error(res.data.responseMessage, 'Error');
             }
           },
           (err) => {
             this.loading = false;
+            this.toast.error('Check your internet connection', 'Error');
+
             this.router.navigate(['/dashboard']);
           }
         );
@@ -219,13 +222,14 @@ export class AirtimeComponent implements OnInit {
                     console.error(err.message);
                     this.toast.error('Error please try again', 'Error');
 
-                    this.loading = true;
+                    this.loading = false;
                   }
                 );
             }
             // deal with register
           } else {
             console.log(res.data.responseMessage);
+            this.toast.error(res.data.responseMessage, 'Error');
           }
         },
         (err) => {
