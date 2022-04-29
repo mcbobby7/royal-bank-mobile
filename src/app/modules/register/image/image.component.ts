@@ -136,23 +136,26 @@ export class ImageComponent implements OnInit {
             this.loading = false;
             // this.data = res.data;
             localStorage.setItem('stageId', res.data.data.id);
+            this.page = 'success';
 
             // deal with register
             console.log(res);
           } else {
             this.toast.error(res.data.responseMessage, 'Error');
+            this.page = 'fail';
           }
         },
         (err) => {
           this.toast.error('Error please try Again', 'Error');
           this.loading = false;
+          this.page = 'fail';
         }
       );
   }
 
   ngOnInit(): void {
     // register form
-    // this.getOnboardingStage();
+    this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
       Id: new FormControl(+this.id),
       FirstName: new FormControl(''),
@@ -185,7 +188,7 @@ export class ImageComponent implements OnInit {
     this.loading = true;
     this.auth
       .fileUpload({
-        FileName: 'state_geo.csv',
+        FileName: 'status.png',
         Base64String: this.photo.selectedImage.substring(22),
       })
       .subscribe(
@@ -220,6 +223,8 @@ export class ImageComponent implements OnInit {
   async takePhoto() {
     const res = await this.photo.addNewToGallery();
     if (this.photo.selectedImage) {
+      console.log(this.photo.selectedImage);
+
       this.uploadPhoto();
     } else {
       this.page = 'fail';

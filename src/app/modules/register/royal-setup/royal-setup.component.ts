@@ -142,6 +142,7 @@ export class RoyalSetupComponent implements OnInit {
     }
     this.onboardingForm.patchValue({
       UserName: this.onboardingForm.value.Email,
+      Stage: 5,
     });
     this.loading = true;
     console.log(this.onboardingForm.value);
