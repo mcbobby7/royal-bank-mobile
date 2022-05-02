@@ -29,21 +29,8 @@ export class PinComponent implements OnInit {
   close: EventEmitter<any> = new EventEmitter();
   user = JSON.parse(localStorage.getItem('user'));
   pin;
-
-  keyPadValue = [
-    { label: 1, value: 1 },
-    { label: 2, value: 2 },
-    { label: 3, value: 3 },
-    { label: 4, value: 4 },
-    { label: 5, value: 5 },
-    { label: 6, value: 6 },
-    { label: 7, value: 7 },
-    { label: 8, value: 8 },
-    { label: 9, value: 9 },
-    { label: 0, value: 0 },
-    { label: 'X', value: 11 },
-  ];
   transactionPin = [];
+  err = '';
   constructor(
     public toast: ToastrService,
     private auth: AuthService,
@@ -52,9 +39,23 @@ export class PinComponent implements OnInit {
   async presentAlert() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Change Pin',
+      header: 'Create Pin',
       message:
-        'Your default pin is 0000 you have to change your pin to conduct transactions',
+        'Your must create a pin to make transactions, go to Dashbaord/Account and create pin to.',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
+  async presentAlertNertwor() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Error',
+      message: this.err,
       buttons: ['OK'],
     });
 
@@ -67,19 +68,30 @@ export class PinComponent implements OnInit {
   ngOnInit() {
     this.auth
       .post(
-        { UserId: +this.user.userId },
+        { UserId: +this.user.userId, Pin: '0000' },
         'UserManager.UserService.FetchUserPin'
       )
       .subscribe(
         (res: any) => {
-          console.log(res.data.data.pin);
-          console.log(res.data.data.pin);
-          if (res.data.data.pin === '0000') {
+          console.log(res);
+          if (res.data.data.status === true) {
             this.presentAlert();
+            this.close.emit();
+            this.loading.emit();
+
             return;
           }
         },
-        (err) => {}
+        (err) => {
+          this.err = 'Please check your network and try again';
+          this.presentAlertNertwor();
+          this.close.emit();
+          this.loading.emit();
+
+          console.log('res');
+
+          return;
+        }
       );
   }
 
@@ -94,23 +106,18 @@ export class PinComponent implements OnInit {
       this.loading.emit();
       this.auth
         .post(
-          { UserId: +this.user.userId },
+          { UserId: +this.user.userId, Pin: this.transactionPin.join('') },
           'UserManager.UserService.FetchUserPin'
         )
         .subscribe(
           (res: any) => {
-            console.log(res.data.data.pin);
-            console.log(res.data.data.pin);
-            if (res.data.data.pin === '0000') {
-              this.presentAlert();
-              this.loading.emit();
-              return;
-            }
+            console.log(res);
 
             if (res.status === '00') {
               // deal with register
-              this.pin = res.data.data.pin;
-              if (res.data.data.pin === this.transactionPin.join('')) {
+              console.log(res.data.data.status);
+
+              if (res.data.data.status === true) {
                 this.done.emit();
               } else {
                 this.toast.error('Invalid Pin', 'Error');

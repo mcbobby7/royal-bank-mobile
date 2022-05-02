@@ -17,7 +17,7 @@ export class ImageComponent implements OnInit {
   page = 'take';
   id: any = localStorage.getItem('stageId');
   onboardingForm!: FormGroup;
-  loading = false;
+  loading = true;
   user: any = {};
   base64;
 
@@ -186,10 +186,16 @@ export class ImageComponent implements OnInit {
 
   uploadPhoto() {
     this.loading = true;
+    const photo = this.photo.selectedImage;
+    const first = photo.split(',');
+    const mainImage = first[1];
+    const extension = first[0].split('image/');
+    const mainExtension = extension[1].split(';')[0];
+
     this.auth
       .fileUpload({
-        FileName: 'status.png',
-        Base64String: this.photo.selectedImage.substring(22),
+        FileName: `status.${mainExtension}`,
+        Base64String: mainImage,
       })
       .subscribe(
         (res: any) => {
@@ -207,7 +213,7 @@ export class ImageComponent implements OnInit {
             // deal with register
           } else {
             this.loading = false;
-            this.toast.error(res.data.responseMessage, 'Error');
+            this.toast.error('Error try again', 'Error');
             this.page = 'fail';
           }
         },

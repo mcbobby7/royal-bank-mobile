@@ -39,8 +39,32 @@
         align-content: space-between;
       "
     >
-      <ion-button class="btn" expand="block" (click)="sign()">
+      <ion-button
+        *ngIf="setBack === false"
+        class="btn"
+        expand="block"
+        (click)="sign()"
+      >
         Login
+      </ion-button>
+
+      <ion-button
+        *ngIf="setBack === true"
+        class="btn"
+        expand="block"
+        style="margin-bottom: 20px"
+        (click)="register()"
+      >
+        Resend Request
+      </ion-button>
+
+      <ion-button
+        *ngIf="setBack === true"
+        class="btn"
+        expand="block"
+        (click)="back()"
+      >
+        Back
       </ion-button>
     </section>
   </div>

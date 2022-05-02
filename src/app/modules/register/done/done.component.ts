@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/http/services/auth.service';
 import { Uid } from '@ionic-native/uid/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-done',
   templateUrl: './done.component.html',
@@ -14,20 +16,22 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 export class DoneComponent implements OnInit {
   source1 = 'assets/icon/royalL.png';
   imei = this.uid.IMEI;
-
+  msg = '';
   source = 'assets/icon/royalty.png';
   imageSrc = 'assets/icon/phoneA.png';
   id: any = localStorage.getItem('stageId');
   onboardingForm!: FormGroup;
   user: any = {};
   loading = true;
+  setBack = false;
   constructor(
     private auth: AuthService,
     private router: Router,
     public toast: ToastrService,
     public navController: NavController,
     private uid: Uid,
-    private androidPermissions: AndroidPermissions
+    private androidPermissions: AndroidPermissions,
+    public alertController: AlertController
   ) {
     this.getPermission();
   }
@@ -118,6 +122,19 @@ export class DoneComponent implements OnInit {
 
     return;
   }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Change Pin',
+      message: this.msg,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
   reloadCurrentRoute() {
     const currentUrl = this.router.url;
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -126,6 +143,8 @@ export class DoneComponent implements OnInit {
   }
 
   register() {
+    this.setBack = false;
+    this.msg = '';
     this.loading = true;
     console.log(this.onboardingForm.value);
     this.loading = true;
@@ -160,17 +179,23 @@ export class DoneComponent implements OnInit {
               );
             console.log(res);
           } else {
-            this.toast.error(res.data.responseMessage, 'Error');
-            this.reloadCurrentRoute();
             console.log(res.data.responseMessage);
+            this.msg = res.data.responseMessage;
+            this.presentAlert();
+            this.setBack = true;
           }
         },
         (err) => {
-          this.reloadCurrentRoute();
+          this.msg = 'Unable to create account';
+          this.presentAlert();
+          this.setBack = true;
           console.error(err.message);
           this.loading = false;
         }
       );
+  }
+  back() {
+    this.router.navigate(['/register/select-account']);
   }
 
   ngOnInit() {

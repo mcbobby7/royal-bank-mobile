@@ -206,6 +206,7 @@ export class TransferPage implements OnInit {
     this.bankName = acc.bankName;
     this.bankCode = acc.bankCode;
     this.newReq = true;
+    this.showName = false;
   }
 
   transfer() {

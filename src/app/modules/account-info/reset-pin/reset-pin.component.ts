@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/http/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-pin',
@@ -13,17 +14,53 @@ export class ResetPinComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user'));
   photo;
   show = false;
-  loading = false;
+  loading = true;
   pass = false;
   pinConfirm;
   pin;
   pinNew;
-
-  constructor(public toast: ToastrService, private auth: AuthService) {}
+  title = 'Reset Pin';
+  constructor(
+    public toast: ToastrService,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem('user'));
     this.photo = user.photo ? user.photo : 'assets/icon/hey.png';
+    this.auth
+      .post(
+        { UserId: +this.user.userId, Pin: '0000' },
+        'UserManager.UserService.FetchUserPin'
+      )
+      .subscribe(
+        (res: any) => {
+          this.loading = false;
+
+          console.log(res);
+          if (res.status === '00') {
+            if (res.data.data.status === true) {
+              this.title = 'Create Pin';
+            } else {
+              this.title = 'Reset Pin';
+            }
+          } else {
+            this.toast.error('Error please try again', 'Error');
+            this.router.navigate(['/action/account-info']);
+          }
+        },
+        (err) => {
+          this.loading = false;
+          this.toast.error('Check your network and try again', 'Error');
+
+          this.router.navigate(['/action/account-info']);
+
+          console.log('res');
+
+          return;
+        }
+      );
   }
   close() {
     this.show = !this.show;
@@ -40,6 +77,17 @@ export class ResetPinComponent implements OnInit {
     this.pass = false;
   }
   check() {
+    if (this.title === 'Reset Pin') {
+      if (!this.pin) {
+        this.toast.error('Old Pin is required', 'Error');
+        return;
+      }
+      if (this.pin.toString().length !== 4) {
+        this.toast.error('Old Pin should be four characters long', 'Error');
+        return;
+      }
+    }
+
     if (!this.pinNew) {
       this.toast.error('New Pin is required', 'Error');
       return;
@@ -52,9 +100,47 @@ export class ResetPinComponent implements OnInit {
       this.toast.error('New pin does not match confirm pin', 'Error');
       return;
     }
-    this.pass = true;
+    if (this.title === 'Create Pin') {
+      this.submit();
+    } else {
+      this.checkPin();
+    }
+  }
+  checkPin() {
+    this.loading = true;
+    this.auth
+      .post(
+        { UserId: +this.user.userId, Pin: this.pin },
+        'UserManager.UserService.FetchUserPin'
+      )
+      .subscribe(
+        (res: any) => {
+          this.loading = false;
+          if (res.status === '00') {
+            if (res.data.data.status === true) {
+              this.submit();
+            } else {
+              this.toast.error(
+                'Old pin does not match your current pin',
+                'Error'
+              );
+            }
+          } else {
+            this.toast.error('Error please try again', 'Error');
+            this.loading = false;
+          }
+        },
+        (err) => {
+          this.loading = false;
+          this.toast.error('Check your network and try again', 'Error');
+          console.log('res');
+
+          return;
+        }
+      );
   }
   submit() {
+    this.loading = true;
     this.auth
       .post(
         {
@@ -70,7 +156,8 @@ export class ResetPinComponent implements OnInit {
 
           if (res.data.responseCode === '00') {
             this.toast.success('Pin changed successfully', 'Success');
-            this.pass = false;
+            this.router.navigate(['/dashboard']);
+
             // deal with register
           } else {
             this.toast.error(res.data.responseMessage, 'Error');
