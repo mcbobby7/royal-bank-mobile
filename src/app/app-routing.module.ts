@@ -6,6 +6,7 @@ import { DashboardTemplateComponent } from './core/templates/dashboard-template/
 import { InPageComponent } from './core/templates/in-page/in-page.component';
 import { CabletvComponent } from './modules/bills-payments/cabletv/cabletv.component';
 import { SupportComponent } from './modules/support/support.component';
+import { DashboardPage } from './modules/dashboard/dashboard.page';
 const routes: Routes = [
   {
     path: '',
@@ -26,10 +27,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () =>
-          import('./modules/dashboard/dashboard.module').then(
-            (m) => m.DashboardPageModule
-          ),
+        component: DashboardPage,
       },
     ],
   },

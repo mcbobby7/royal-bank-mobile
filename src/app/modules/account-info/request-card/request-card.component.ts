@@ -118,6 +118,7 @@ export class RequestCardComponent implements OnInit {
           if (res.data.responseCode === '00') {
             this.toast.success('Request Successful', 'Success');
             this.pass = false;
+            localStorage.setItem('card', 'true');
             this.router.navigate(['/dashboard']);
 
             // deal with register

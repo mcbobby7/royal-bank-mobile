@@ -85,7 +85,7 @@ export class PinComponent implements OnInit {
         (err) => {
           this.err = 'Please check your network and try again';
           this.presentAlertNertwor();
-          this.close.emit();
+          // this.close.emit();
 
           console.log('res');
 

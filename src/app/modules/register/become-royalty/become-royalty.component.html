@@ -1,5 +1,4 @@
 <ion-content>
-  <div style="height: 50px"></div>
   <app-loader *ngIf="loading"></app-loader>
   <section class="central-image">
     <ion-img [src]="imageSrc" class="img"></ion-img>
@@ -54,7 +53,7 @@
         <ion-button
           class="btn"
           expand="block"
-          style="margin-top: 1rem; font-family: Mulish !important;"
+          style="margin-top: 1rem; font-family: Mulish !important"
           (click)="next()"
           routerLinkActive="router-link-active"
         >

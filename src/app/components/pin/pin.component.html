@@ -24,30 +24,10 @@
   </div>
 
   <div class="pin-section">
-    <ion-input
-      type="password"
-      class="pin-box"
-      [(value)]="transactionPin[0]"
-      readonly
-    ></ion-input>
-    <ion-input
-      type="password"
-      class="pin-box"
-      [(value)]="transactionPin[1]"
-      readonly
-    ></ion-input>
-    <ion-input
-      type="password"
-      class="pin-box"
-      [(value)]="transactionPin[2]"
-      readonly
-    ></ion-input>
-    <ion-input
-      type="password"
-      class="pin-box"
-      [(value)]="transactionPin[3]"
-      readonly
-    ></ion-input>
+    <div class="pin-box"><div class="x" *ngIf="transactionPin[0]">*</div></div>
+    <div class="pin-box"><div class="x" *ngIf="transactionPin[1]">*</div></div>
+    <div class="pin-box"><div class="x" *ngIf="transactionPin[2]">*</div></div>
+    <div class="pin-box"><div class="x" *ngIf="transactionPin[3]">*</div></div>
   </div>
 
   <!-- <div class="sub-title">

@@ -156,6 +156,7 @@
   <section
     style="margin-top: 10px"
     [routerLink]="['/action/account-info/request-card']"
+    *ngIf="!isCard"
   >
     <div style="background-color: #f8f8f8; border-radius: 8px">
       <ion-card-header class="header"

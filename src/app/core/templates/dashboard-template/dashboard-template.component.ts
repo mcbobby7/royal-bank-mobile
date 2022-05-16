@@ -84,6 +84,7 @@ export class DashboardTemplateComponent implements OnInit {
   }
   logout() {
     localStorage.setItem('user', '');
+    localStorage.setItem('token', '');
     this.router.navigate(['/login']);
     this.toast.success('Logout Successful', 'Success');
   }

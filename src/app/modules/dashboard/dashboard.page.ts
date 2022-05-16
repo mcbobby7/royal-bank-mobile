@@ -22,6 +22,7 @@ import { trigger, transition, animate, style } from '@angular/animations';
 export class DashboardPage implements OnInit {
   show = false;
   userId: any = localStorage.getItem('stageId');
+  isCard: any = localStorage.getItem('card');
   accountId = '';
   accountBalance = '';
   loading = false;
@@ -31,6 +32,10 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
     console.log(this.user.hasBVN);
+    setInterval(() => {
+      this.isCard = localStorage.getItem('card');
+      this.user = localStorage.getItem('user');
+    }, 500);
   }
 
   viewBalance() {

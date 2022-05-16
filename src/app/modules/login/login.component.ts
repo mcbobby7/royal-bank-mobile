@@ -78,4 +78,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl(''),
     });
   }
+  register() {
+    this.router.navigate(['/register']);
+  }
 }
