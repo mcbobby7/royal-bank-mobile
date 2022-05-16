@@ -162,14 +162,17 @@ export class VerifyEmailComponent implements OnInit {
           this.loading = false;
           console.log(res);
 
-          if (res.status === '00') {
+          if (res.data.responseCode === '00') {
             this.otp = res.data.data.otp;
             this.toast.success('OTP sent to your Email', 'Thanks');
           } else {
-            this.bvnError = true;
+            this.toast.error(res.data.responseMessage, 'Thanks');
           }
         },
-        (err) => console.error(err.message)
+        (err) => {
+          this.toast.error('Please check you network and try again', 'Thanks');
+          this.loading = false;
+        }
       );
   }
 

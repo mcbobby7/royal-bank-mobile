@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: "Mulish"; //This is what we are going to call
-  src: url("./assets/Mulish/Mulish-Italic-VariableFont_wght.ttf");
+  src: url("./assets/Mulish/Mulish-VariableFont_wght.ttf");
 }
 
 /* Core CSS required for Ionic components to work properly */
@@ -29,6 +29,8 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
 input {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -40,4 +42,23 @@ select {
   -moz-appearance: none;
   appearance: none;
   padding-left: 26px;
+}
+* {
+  font-family: "Mulish", sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+span,
+li,
+ul,
+ol,
+label,
+input,
+select {
+  font-family: "Mulish", sans-serif;
 }

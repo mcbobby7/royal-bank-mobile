@@ -16,10 +16,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 })
 export class AuthService {
   baseUrl = 'https://bankingsandboxapi.azurewebsites.net/api/v1/proxy';
-  fileUrl =
-    'https://bankingsandboxapi.vaballiance.com/fileservice/api/files/upload';
-  notificationBaseUrl = 'https://bankingsandboxapi.vaballiance.com';
-  testUrl = 'https://gamelyd.herokuapp.com/users/checkUserName/mcbobby';
+  fileUrl = 'https://fileservice01.azurewebsites.net/api/Files/Upload';
+  notificationBaseUrl = 'https://notificationservice01.azurewebsites.net';
   imei;
   headers = {
     headers: new HttpHeaders({

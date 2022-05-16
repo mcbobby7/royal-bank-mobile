@@ -14,6 +14,8 @@ export class BalanceComponent implements OnInit {
   constructor(private auth: AuthService, public toast: ToastrService) {}
 
   ngOnInit() {
+    console.log(this.user);
+
     setInterval(() => {
       this.getBalance();
     }, 60000);
@@ -24,19 +26,37 @@ export class BalanceComponent implements OnInit {
   }
 
   getBalance() {
+    this.user = JSON.parse(localStorage.getItem('user'));
     if (this.user.accountNos.length === 0) {
       return;
     }
     const data = {
       clientId: +this.user.accountNos[0].clientId,
-      accountId: +this.user.accountNos[0].accountId,
+      accountId: null,
     };
-    this.auth.post(data, 'Cba.BankingService.FetchAccountBalance').subscribe(
+    this.auth.post(data, 'Cba.BankingService.FetchAccount').subscribe(
       (res: any) => {
-        // console.log(res);
+        console.log(res);
 
         if (res.data.responseCode === '00') {
-          this.data = res.data.data.balance;
+          this.data = res.data.data;
+          for (let i = 0; i < this.user.accountNos.length; i++) {
+            for (let j = 0; i < this.data.length; j++) {
+              if (
+                this.user.accountNos[i].accountNo === this.data[j].accountNo
+              ) {
+                console.log(this.user.accountNos[i].accountNo);
+                console.log(this.user.accountNos[i].accountBalance);
+                console.log(this.data[j].accountBalance);
+
+                this.user.accountNos[i].accountBalance =
+                  this.data[j].accountBalance;
+                localStorage.setItem('user', JSON.stringify(this.user));
+                console.log(this.user);
+              }
+            }
+          }
+
           // console.log(this.data);
 
           // console.log(res);

@@ -1,0 +1,222 @@
+<ion-content>
+  <section style="background-color: #25214f">
+    <app-add-fund (exit)="close()" *ngIf="show"></app-add-fund>
+    <app-loader *ngIf="loading"></app-loader>
+    <app-pin
+      (close)="closePass()"
+      (loading)="load()"
+      (done)="finish()"
+      *ngIf="pass"
+    ></app-pin>
+
+    <div style="height: 30px"></div>
+    <div
+      style="
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #25214f;
+        color: #fff;
+        padding: 20px 30px;
+      "
+    >
+      <div style="border-radius: 50%; margin: 10px 0">
+        <ion-img
+          [src]="photo"
+          style="width: 70px; height: 70px; margin: auto; border-radius: 50%"
+          class="userImg"
+        ></ion-img>
+      </div>
+      <span>{{ user.firstName }} {{ user.lastName }}</span>
+
+      <ion-button id="details" size="small" (click)="show = true"
+        >Show Details</ion-button
+      >
+    </div>
+    <section
+      style="
+        background-color: white;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        padding: 0 20px;
+        padding-top: 50px;
+      "
+    >
+      <div
+        class="row"
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          margin-top: 30px;
+        "
+      >
+        <ion-button
+          (click)="toggleRequest(true)"
+          [ngClass]="{ active: selectedBtn === true }"
+          style="width: 100%; --border-radius: none"
+        >
+          New
+        </ion-button>
+
+        <ion-button
+          (click)="toggleRequest(false)"
+          size="medium"
+          [ngClass]="{ active: selectedBtn1 === true }"
+          style="width: 100%; --border-radius: none"
+        >
+          History
+        </ion-button>
+      </div>
+      <section *ngIf="newReq">
+        <div style="font-size: 25px; text-align: center; padding-bottom: 20px">
+          Request Card
+        </div>
+        <form>
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Select Account</label>
+            <select [(ngModel)]="accNum" name="account" id="" class="input">
+              <option
+                *ngFor="let data of user.accountNos"
+                [value]="data.accountNo"
+              >
+                {{ data.accountNo }} ({{
+                  data.accountBalance | currency: "&#8358;"
+                }})
+              </option>
+            </select>
+          </div>
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Card Type</label>
+            <select
+              [(ngModel)]="cardType"
+              [value]="cardType"
+              name="cardType"
+              id=""
+              [ngModelOptions]="{ standalone: true }"
+              class="input"
+            >
+              <option *ngFor="let cardType of cardTypes" [value]="cardType">
+                {{ cardType }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Pickup Branch</label>
+            <select
+              [(ngModel)]="branch"
+              [value]="branch"
+              name="branch"
+              id=""
+              [ngModelOptions]="{ standalone: true }"
+              class="input"
+            >
+              <option *ngFor="let branch of branches" [value]="branch">
+                {{ branch }}
+              </option>
+            </select>
+          </div>
+
+          <!-- <div class="form-group row" style="padding: 5px">
+          <label for="">New Password</label>
+          <input
+            type="password"
+            name="newPassword"
+            class="input"
+            placeholder="Password"
+          />
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Confirm New Password</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            class="input"
+            placeholder="Password"
+          />
+        </div> -->
+
+          <ion-button
+            style="
+              width: 100%;
+              max-width: 300px;
+              margin: auto;
+              margin-top: 20px;
+              display: flex;
+            "
+            (click)="check()"
+            >Request</ion-button
+          >
+        </form>
+      </section>
+
+      <section *ngIf="!newReq">
+        <section *ngIf="history.length === 0">
+          <div
+            style="
+              background-color: #f8f8f8;
+              border-radius: 8px;
+              text-align: left;
+              padding: 20px;
+            "
+          >
+            No Record Available
+          </div>
+        </section>
+        <section *ngIf="history.length > 0">
+          <div
+            style="
+              background-color: #f8f8f8;
+              border-radius: 8px;
+              text-align: left;
+              padding: 20px;
+              margin: 10px 0;
+            "
+            *ngFor="let data of history"
+          >
+            <table>
+              <tr>
+                <th>Status</th>
+                <td>
+                  <ion-button
+                    *ngIf="data.status === 'Pending'"
+                    size="small"
+                    style="--background: #ff5a5a; --color: #fff"
+                    >Pending</ion-button
+                  ><ion-button
+                    *ngIf="data.status !== 'Pending'"
+                    size="small"
+                    style="--background: #46ae6a; --color: #fff"
+                    >Success</ion-button
+                  >
+                </td>
+              </tr>
+              <tr>
+                <th>Account Number</th>
+                <td>{{ data.accountNo }}</td>
+              </tr>
+              <tr>
+                <th>Card Type</th>
+                <td>{{ data.cardType }}</td>
+              </tr>
+              <tr>
+                <th>Request Date</th>
+                <td>{{ data.createdDate | date }}</td>
+              </tr>
+
+              <tr>
+                <th>Pickup Branch</th>
+                <td>{{ data.branch }}</td>
+              </tr>
+            </table>
+          </div>
+        </section>
+      </section>
+    </section>
+  </section>
+</ion-content>

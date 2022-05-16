@@ -161,6 +161,19 @@
 
       <div *ngIf="newReq">
         <div class="form-group row" style="padding: 5px">
+          <label for="">Select Account</label>
+          <select [(ngModel)]="accNum" name="account" id="" class="input">
+            <option
+              *ngFor="let data of user.accountNos"
+              [value]="data.accountNo"
+            >
+              {{ data.accountNo }} ({{
+                data.accountBalance | currency: "&#8358;"
+              }})
+            </option>
+          </select>
+        </div>
+        <div class="form-group row" style="padding: 5px">
           <label for="">Phone Number</label>
           <input
             [(ngModel)]="phoneNumber"

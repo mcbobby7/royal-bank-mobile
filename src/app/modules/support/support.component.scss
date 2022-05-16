@@ -1,0 +1,30 @@
+.all {
+  width: 85vw;
+  margin: auto;
+}
+.head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.line {
+  width: 85vw;
+  height: 1px;
+  background-color: rgb(204, 200, 200);
+  margin: 10px 0;
+}
+.subs {
+  font-size: 13px;
+  padding: 5px 0;
+  color: #25214f;
+}
+.phone {
+  margin: 15px 0;
+}
+td,
+th {
+  text-align: left;
+  padding: 5px;
+  font-size: 13px;
+  color: #25214f;
+}

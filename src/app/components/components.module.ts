@@ -42,10 +42,14 @@ import { AddFundComponent } from '../components/add-fund/add-fund.component';
 import { AccountInfoPage } from '../modules/account-info/account-info.page';
 import { ChangePasswordComponent } from '../modules/account-info/change-password/change-password.component';
 import { ResetPinComponent } from '../modules/account-info/reset-pin/reset-pin.component';
+import { RequestCardComponent } from '../modules/account-info/request-card/request-card.component';
 import { LoanPage } from '../modules/loan/loan.page';
+import { SupportComponent } from '../modules/support/support.component';
 
 const components = [
+  SupportComponent,
   LoanPage,
+  RequestCardComponent,
   ResetPinComponent,
   ChangePasswordComponent,
   AccountInfoPage,

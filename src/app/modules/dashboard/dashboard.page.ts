@@ -25,10 +25,13 @@ export class DashboardPage implements OnInit {
   accountId = '';
   accountBalance = '';
   loading = false;
+  user: any = JSON.parse(localStorage.getItem('user'));
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.user.hasBVN);
+  }
 
   viewBalance() {
     this.show = !this.show;

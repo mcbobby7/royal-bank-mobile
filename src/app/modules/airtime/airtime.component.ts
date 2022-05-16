@@ -25,6 +25,7 @@ export class AirtimeComponent implements OnInit {
   loading = true;
   vasType;
   submitCode;
+  accNum;
   show = false;
   user = JSON.parse(localStorage.getItem('user'));
   benes = localStorage.getItem('benNums')
@@ -44,6 +45,7 @@ export class AirtimeComponent implements OnInit {
 
   ngOnInit() {
     this.fetchData();
+    this.accNum = this.user.accountNos[0].accountNo;
   }
   fetchData() {
     console.log();
@@ -103,6 +105,7 @@ export class AirtimeComponent implements OnInit {
           if (res.status === '00') {
             // deal with register
             this.products = res.data;
+            this.productCode = this.products[0].productCode;
             console.log(this.vars);
             console.log(res);
           } else {
@@ -119,6 +122,13 @@ export class AirtimeComponent implements OnInit {
     this.transType = e;
   }
   adds() {
+    if (this.user.hasBVN === false) {
+      this.toast.error(
+        `You have to verify your BVN to carry out transactions`,
+        'Error'
+      );
+      return true;
+    }
     if (!this.benNum) {
       this.toast.error('mobile number is required', 'Error');
       return;
@@ -167,9 +177,15 @@ export class AirtimeComponent implements OnInit {
   submit() {
     this.loading = true;
     let payload;
+    let acc;
     for (let i = 0; i < this.products.length; i++) {
       if (this.productCode === this.products[i].productCode) {
         payload = this.products[i];
+      }
+    }
+    for (let i = 0; i < this.user.accountNos.length; i++) {
+      if (this.user.accountNos[i].accountNo === this.accNum) {
+        acc = this.user.accountNos[i].accountId;
       }
     }
 
@@ -177,7 +193,7 @@ export class AirtimeComponent implements OnInit {
       .post(
         {
           clientId: this.user.clientId,
-          accountId: this.user.accountNos[0].accountId,
+          accountId: acc,
         },
         'Cba.BankingService.FetchAccountBalance'
       )
@@ -199,7 +215,7 @@ export class AirtimeComponent implements OnInit {
                     ProductCode: payload.productCode,
                     RefNo: this.phoneNumber,
                     Amount: +payload.productPrice,
-                    CustomerAccountNo: this.user.accountNos[0].accountNo,
+                    CustomerAccountNo: this.accNum,
                   },
                   'Cba.ValueAddedService.PostTransaction'
                 )
@@ -249,6 +265,13 @@ export class AirtimeComponent implements OnInit {
     }
   }
   check() {
+    if (this.user.hasBVN === false) {
+      this.toast.error(
+        `You have to verify your BVN to carry out transactions`,
+        'Error'
+      );
+      return true;
+    }
     if (!this.phoneNumber) {
       this.toast.error('Phone number required', 'Error');
       return;

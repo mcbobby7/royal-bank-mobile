@@ -5,6 +5,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { DashboardTemplateComponent } from './core/templates/dashboard-template/dashboard-template.component';
 import { InPageComponent } from './core/templates/in-page/in-page.component';
 import { CabletvComponent } from './modules/bills-payments/cabletv/cabletv.component';
+import { SupportComponent } from './modules/support/support.component';
 const routes: Routes = [
   {
     path: '',
@@ -127,6 +128,10 @@ const routes: Routes = [
       {
         path: 'pin',
         component: PinComponent,
+      },
+      {
+        path: 'support',
+        component: SupportComponent,
       },
     ],
   },

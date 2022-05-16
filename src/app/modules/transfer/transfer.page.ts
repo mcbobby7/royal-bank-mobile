@@ -29,6 +29,8 @@ export class TransferPage implements OnInit {
   showName;
   saveBene = false;
   banks = [];
+  limitInter;
+  limitIntra;
   user = JSON.parse(localStorage.getItem('user'));
   benes = localStorage.getItem('benAccs')
     ? JSON.parse(localStorage.getItem('benAccs'))
@@ -42,7 +44,31 @@ export class TransferPage implements OnInit {
 
   ngOnInit() {
     console.log(this.user);
+    this.accNum = this.user.accountNos[0].accountNo;
     this.getBanks();
+    this.auth
+      .post(
+        {
+          UserId: +this.user.userId,
+          Channel: 'MobileApp',
+        },
+        'UserManager.UserService.FetchUserTransactionLimit'
+      )
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+
+          if (res.status === '00') {
+            this.limitInter = res.data.data[0].interLimit;
+            this.limitIntra = res.data.data[0].intraLimit;
+            console.log(this.limitInter, this.limitIntra);
+
+            // deal with register
+          } else {
+          }
+        },
+        (err) => {}
+      );
   }
 
   transactionType(e) {
@@ -54,10 +80,27 @@ export class TransferPage implements OnInit {
     this.transType = 0;
   }
   sanitise() {
+    if (this.user.hasBVN === false) {
+      this.toast.error(
+        `You have to verify your BVN to carry out transactions`,
+        'Error'
+      );
+      return true;
+    }
+    if (this.transType === 1) {
+      if (this.amount > this.limitIntra) {
+        this.toast.error(`Your transfer limit is ${this.limitIntra}`, 'Error');
+        return true;
+      }
+    }
     console.log('wait');
     if (this.transType === 2) {
       if (!this.bankName || !this.bankCode) {
         this.toast.error('Bank is required', 'Error');
+        return true;
+      }
+      if (this.amount > this.limitInter) {
+        this.toast.error(`Your transfer limit is ${this.limitInter}`, 'Error');
         return true;
       }
     }
@@ -93,7 +136,7 @@ export class TransferPage implements OnInit {
       this.benes.unshift({
         name: this.name,
         accNumber: this.benAcc,
-        bankName: this.bankName ? this.bankName : 'royal Bank',
+        bankName: this.bankName ? this.bankName : 'Royal Bank',
         bankCode: this.bankCode,
       });
       localStorage.setItem('benAccs', JSON.stringify(this.benes));
@@ -122,6 +165,7 @@ export class TransferPage implements OnInit {
           // deal with register
 
           this.banks = res.data.data;
+          this.bankCode = this.banks[0].code;
         } else {
           console.log(res.data.responseMessage);
         }
@@ -238,36 +282,75 @@ export class TransferPage implements OnInit {
               return;
             } else {
               this.bankName = this.bankName ? this.bankName : 'Royal Bank';
-              this.auth
-                .post(
-                  {
-                    bankName: this.bankName ? this.bankName : 'Royal Bank',
-                    accountNumber: this.benAcc,
-                    Amount: +this.amount,
-                    Narration: this.narration,
-                  },
-                  'Nibss.NipService.InterFundsTransfer'
-                )
-                .subscribe(
-                  (res: any) => {
-                    this.loading = false;
-                    console.log(res);
+              console.log(this.bankName);
 
-                    if (res.data.responseCode === '00') {
-                      this.transType = 3;
-                      this.show = false;
-                      // deal with register
-                    } else {
+              if (
+                !this.bankName ||
+                this.bankName === 'Royal Bank' ||
+                this.bankName === 'royal Bank'
+              ) {
+                this.auth
+                  .post(
+                    {
+                      debitAccountNo: this.accNum,
+                      creditAccountNo: this.benAcc,
+                      Amount: +this.amount,
+                      Narration: this.narration,
+                    },
+                    'Cba.BankingService.FundTransfer'
+                  )
+                  .subscribe(
+                    (res: any) => {
                       this.loading = false;
-                      console.log(res.data.responseMessage);
-                      this.toast.error(res.data.responseMessage, 'Error');
+                      console.log(res);
+
+                      if (res.data.responseCode === '00') {
+                        this.transType = 3;
+                        this.show = false;
+                        // deal with register
+                      } else {
+                        this.loading = false;
+                        console.log(res.data.responseMessage);
+                        this.toast.error(res.data.responseMessage, 'Error');
+                      }
+                    },
+                    (err) => {
+                      this.loading = false;
+                      this.toast.error('Please try again', 'Error');
                     }
-                  },
-                  (err) => {
-                    this.loading = false;
-                    this.toast.error('Please try again', 'Error');
-                  }
-                );
+                  );
+              } else {
+                this.auth
+                  .post(
+                    {
+                      bankName: this.bankName ? this.bankName : 'Royal Bank',
+                      accountNumber: this.benAcc,
+                      Amount: +this.amount,
+                      Narration: this.narration,
+                    },
+                    'Nibss.NipService.InterFundsTransfer'
+                  )
+                  .subscribe(
+                    (res: any) => {
+                      this.loading = false;
+                      console.log(res);
+
+                      if (res.data.responseCode === '00') {
+                        this.transType = 3;
+                        this.show = false;
+                        // deal with register
+                      } else {
+                        this.loading = false;
+                        console.log(res.data.responseMessage);
+                        this.toast.error(res.data.responseMessage, 'Error');
+                      }
+                    },
+                    (err) => {
+                      this.loading = false;
+                      this.toast.error('Please try again', 'Error');
+                    }
+                  );
+              }
             }
             // deal with register
           } else {

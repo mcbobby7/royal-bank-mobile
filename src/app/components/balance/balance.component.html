@@ -41,7 +41,7 @@
             color: #fff;
           "
           *ngIf="show"
-          >{{ data | currency: "&#8358;" }}</span
+          >{{ user.accountNos[0].accountBalance | currency: "&#8358;" }}</span
         >
       </span>
       <span *ngIf="!data">

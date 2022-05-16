@@ -34,36 +34,38 @@
       }}</div>
     </div>
   </div> -->
-  <div class="table">
-    <table>
-      <tbody>
-        <tr>
-          <th>Account Name</th>
-          <td>{{ user?.firstName }} {{ user?.lastName }}</td>
-        </tr>
-        <tr>
-          <th>Email</th>
-          <td>{{ user?.email }}</td>
-        </tr>
-        <tr>
-          <th>Mobile Number</th>
-          <td>{{ user?.phone }}</td>
-        </tr>
-        <tr>
-          <th>Email</th>
-          <td>{{ user?.email }}</td>
-        </tr>
-        <tr>
-          <th>Account Number</th>
-          <td>{{ user?.accountNos[0].accountNo }}</td>
-        </tr>
-        <tr>
-          <th>Balance</th>
-          <td>
-            {{ user?.accountNos[0].accountBalance | currency: "&#8358;" }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <ion-content>
+    <div class="table">
+      <table>
+        <tbody>
+          <tr>
+            <th>Account Name</th>
+            <td>{{ user?.firstName }} {{ user?.lastName }}</td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>{{ user?.email }}</td>
+          </tr>
+          <tr>
+            <th>Mobile Number</th>
+            <td>{{ user?.phone }}</td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>{{ user?.email }}</td>
+          </tr>
+          <tr>
+            <th>Account Number</th>
+            <td>{{ user?.accountNos[0].accountNo }}</td>
+          </tr>
+          <tr>
+            <th>Balance</th>
+            <td>
+              {{ user?.accountNos[0].accountBalance | currency: "&#8358;" }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ion-content>
 </div>

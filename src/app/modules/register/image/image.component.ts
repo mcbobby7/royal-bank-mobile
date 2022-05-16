@@ -201,7 +201,7 @@ export class ImageComponent implements OnInit {
         (res: any) => {
           console.log(res);
 
-          if (res.message === 'Uploaded Successfully') {
+          if (res.status) {
             console.log(res);
             this.loading = false;
             this.onboardingForm.patchValue({

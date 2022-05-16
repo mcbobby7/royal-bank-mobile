@@ -57,11 +57,11 @@ export class DashboardTemplateComponent implements OnInit {
     //   link: '/action/profile',
     //   icon: 'assets/icon/setting.png',
     // },
-    {
-      name: 'Profile',
-      link: '/action/profile',
-      icon: 'assets/icon/bills.png',
-    },
+    // {
+    //   name: 'Profile',
+    //   link: '/action/profile',
+    //   icon: 'assets/icon/bills.png',
+    // },
   ];
 
   constructor(private router: Router, public toast: ToastrService) {

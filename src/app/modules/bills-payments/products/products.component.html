@@ -125,6 +125,19 @@
       </div>
 
       <div *ngIf="newReq">
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Select Account</label>
+          <select [(ngModel)]="accNum" name="account" id="" class="input">
+            <option
+              *ngFor="let data of user.accountNos"
+              [value]="data.accountNo"
+            >
+              {{ data.accountNo }} ({{
+                data.accountBalance | currency: "&#8358;"
+              }})
+            </option>
+          </select>
+        </div>
         <div class="row" style="padding: 5px">
           <label *ngIf="typeCode === 1" for="">Decoder Number</label>
           <label *ngIf="typeCode === 2 || typeCode === 4" for=""
@@ -177,7 +190,7 @@
 
         <div class="row" style="padding: 5px">
           <label for="">Select Bundle</label>
-          <select [(ngModel)]="productCode" name="bank" id="" class="input">
+          <select [(ngModel)]="productCode" name="product" id="" class="input">
             <!-- <option value="">-- Select Type --</option> -->
             <option *ngFor="let data of products" [value]="data.productCode">
               {{ data.productTitle }} ({{

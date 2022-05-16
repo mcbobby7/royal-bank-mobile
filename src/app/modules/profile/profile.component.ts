@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../core/http/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,36 +11,21 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user'));
-
-  userForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    middleName: new FormControl(''),
-    userName: new FormControl('a'),
-    phone: new FormControl('875'),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    createBankAccount: new FormControl(true),
-    dob: new FormControl(''),
-    refCode: new FormControl(''),
-    verified: new FormControl(false),
-    accountType: new FormControl(''),
-    companyType: new FormControl(''),
-    passportUrl: new FormControl(''),
-    hasBVN: new FormControl(false),
-    stage: new FormControl(1),
-    isFinal: new FormControl(false),
-    bvn: new FormControl(''),
-  });
+  loading = false;
   show: boolean;
   page = 'select';
   age = 'select';
-  accountForm = new FormGroup({
-    password: new FormControl(''),
-    confirmPass: new FormControl(''),
-    code: new FormControl(''),
-  });
-  constructor(private router: Router) {}
+  bvn = '';
+  firstName;
+  middleName;
+  lastName;
+  data: any = {};
+  success = false;
+  constructor(
+    private router: Router,
+    public toast: ToastrService,
+    private auth: AuthService
+  ) {}
 
   ngOnInit() {}
 
@@ -48,5 +35,83 @@ export class ProfileComponent implements OnInit {
   change(mode) {
     this.page = mode;
   }
-  next() {}
+
+  fetchBvn() {
+    console.log(this.bvn);
+    if (this.bvn.length === 11) {
+      this.loading = true;
+
+      const data = {
+        bvn: this.bvn,
+        show_detail: true,
+      };
+      this.auth.post(data, 'Nibss.BvnService.ValidateBvn').subscribe(
+        (res: any) => {
+          this.loading = false;
+          console.log(res);
+
+          if (res.status === '00') {
+            console.log(res);
+            this.success = true;
+            this.data = res.data;
+            const name = res.data.fullName.split(' ');
+            this.firstName = name[0];
+            this.middleName = name[1];
+            this.lastName = name[2];
+          } else {
+            this.toast.error(res.data.responseMessage, 'Error');
+          }
+        },
+        (err) => {
+          this.toast.error('Check your internet connection', 'Error');
+          this.loading = false;
+        }
+      );
+    } else {
+      this.success = false;
+      this.data = {};
+      this.firstName = '';
+      this.middleName = '';
+      this.lastName = '';
+      return;
+    }
+  }
+
+  update() {
+    this.loading = true;
+    if (this.data === {}) {
+      this.toast.error('No record, please try again', 'Error');
+      return;
+    }
+    const data = {
+      Id: this.user.userId,
+      FirstName: this.firstName,
+      LastName: this.lastName,
+      MiddleName: this.middleName,
+      Phone: this.data.phoneNo,
+      Email: this.data.emailAddress,
+      BVN: this.bvn,
+      BVNStatus: 'Verified'
+    };
+    this.auth.post(data, 'UserManager.UserService.UpdateProfile').subscribe(
+      (res: any) => {
+        this.loading = false;
+        console.log(res);
+
+        if (res.data.responseCode === '00') {
+          console.log(res);
+          this.toast.success('BVN updated successfully', 'Success');
+          this.user.hasBVN = true;
+          localStorage.setItem('user', JSON.stringify(this.user));
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.toast.error(res.data.responseMessage, 'Error');
+        }
+      },
+      (err) => {
+        this.toast.error('Check your internet connection', 'Error');
+        this.loading = false;
+      }
+    );
+  }
 }
