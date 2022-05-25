@@ -1,5 +1,5 @@
 <ion-content>
-  <div style="height: 40px"></div>
+  <app-loader *ngIf="loading"></app-loader>
   <section style="background-color: #25214f">
     <div
       style="
@@ -43,7 +43,21 @@
         padding-top: 40px;
       "
     >
-      <form [formGroup]="historyForm">
+      <form>
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Select Account</label>
+          <select [(ngModel)]="account" name="account" id="" class="input">
+            <option
+              *ngFor="let data of user.accountNos"
+              [value]="data.accountNo"
+            >
+              {{ data.accountNo }} ({{
+                data.accountBalance | currency: "&#8358;"
+              }})
+            </option>
+          </select>
+        </div>
+
         <div class="form-group row" style="padding: 5px">
           <label for="">Start Date</label>
           <input
@@ -51,6 +65,7 @@
             name="startDate"
             class="input"
             placeholder="100000"
+            [(ngModel)]="startDate"
           />
         </div>
 
@@ -61,14 +76,16 @@
             name="endDate"
             class="input"
             placeholder="100000"
+            [(ngModel)]="endDate"
           />
         </div>
 
         <div class="form-group row" style="padding: 5px">
           <label for="">Transaction Type</label>
-          <select name="transactionType" class="input">
-            <option value="1">Royal Bank</option>
-            <option value="2">Other Banks</option>
+          <select [(ngModel)]="typeId" name="transactionType" class="input">
+            <option *ngFor="let data of types" [value]="data.id">
+              {{ data.name }}
+            </option>
           </select>
         </div>
 
@@ -77,7 +94,7 @@
             class="btn"
             expand="block"
             style="margin-top: 1rem"
-            (click)="next()"
+            (click)="fetchHistory()"
             routerLinkActive="router-link-active"
           >
             View History
@@ -90,39 +107,53 @@
       <ion-card-header style="text-align: left"
         >Your transactions</ion-card-header
       >
-      <ion-card>
-        <ion-card-content *ngIf="counter > 0">
-          <div
-            class="row"
-            style="
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-            "
-          >
-            <span>Channel</span>
-            <span
-              *ngIf="transType === 'credit'"
-              [ngClass]="{ credit: transType === 'credit' }"
-              >+Amount</span
-            >
-            <span
-              *ngIf="transType === 'debit'"
-              [ngClass]="{ debit: transType === 'debit' }"
-              >-Amount</span
-            >
-          </div>
-          <div class="row">
-            <span style="text-align: left">Details</span>
-          </div>
-        </ion-card-content>
 
-        <ion-card-content *ngIf="counter < 1">
-          <div class="row">
-            <span style="text-align: left">No transactions found</span>
-          </div>
+      <div
+        *ngIf="data.length < 1"
+        style="background-color: #f8f8f8; border-radius: 8px"
+      >
+        <ion-card-content>
+          <span style="text-align: left; font-size: 13px"
+            >No transactions found
+          </span>
         </ion-card-content>
-      </ion-card>
+      </div>
+      <div *ngFor="let trans of data">
+        <div class="tran" *ngIf="trans.transactionType !== 'Debit'">
+          <div class="icon">
+            <div class="img"><img src="assets/icon/credict.png" alt="" /></div>
+            <div class="text">
+              <div class="tit">
+                {{ trans?.narration ? trans?.narration : "No Description" }}
+              </div>
+              <!-- <div class="mode">{{ trans?.submittedByUsername }}</div> -->
+              <div class="mode">
+                {{ trans.date[0] }}-{{ trans?.date[1] }}-{{ trans.date[2] }}
+              </div>
+            </div>
+          </div>
+          <div class="amount green">
+            {{ trans.amount | currency: "&#8358;" }}
+          </div>
+        </div>
+        <div class="tran" *ngIf="trans.transactionType === 'Debit'">
+          <div class="icon">
+            <div class="img"><img src="assets/icon/debit.png" alt="" /></div>
+            <div class="text">
+              <div class="tit">
+                {{ trans?.narration ? trans?.narration : "No Description" }}
+              </div>
+              <!-- <div class="mode">{{ trans?.submittedByUsername }}</div> -->
+              <div class="mode">
+                {{ trans.date[0] }}-{{ trans?.date[1] }}-{{ trans.date[2] }}
+              </div>
+            </div>
+          </div>
+          <div class="amount red">
+            -{{ trans.amount | currency: "&#8358;" }}
+          </div>
+        </div>
+      </div>
     </section>
   </section>
 </ion-content>
