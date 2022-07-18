@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/http/services/auth.service';
 import { NavController } from '@ionic/angular';
+import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-image',
@@ -20,7 +21,13 @@ export class ImageComponent implements OnInit {
   loading = true;
   user: any = {};
   base64;
-
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  baseImage = '';
+  image: string;
+  base64Str: any;
+  kbytes: number;
+  type;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -29,6 +36,22 @@ export class ImageComponent implements OnInit {
     public photo: PhotoService
   ) {}
 
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+    console.log(event);
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+  }
+  imageLoaded() {
+    /* show cropper */
+  }
+  cropperReady() {
+    /* cropper ready */
+  }
+  loadImageFailed() {
+    /* show message */
+  }
   getOnboardingStage() {
     if (this.id) {
       this.auth
@@ -99,22 +122,38 @@ export class ImageComponent implements OnInit {
                 CompanyName: res.data.userDetail.companyName
                   ? res.data.userDetail.companyName
                   : '',
+                Gender: res.data.userDetail.gender
+                  ? res.data.userDetail.gender
+                  : '',
               });
               console.log(res);
               console.log(this.onboardingForm.value);
             } else {
               console.log(res);
-              this.router.navigate(['/register/become-royalty']);
+              this.router.navigate(['/register/become-royalty'], {
+                state: {
+                  mode: this.router?.getCurrentNavigation()?.extras?.state
+                    ?.mode,
+                },
+              });
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register/become-royalty']);
+            this.router.navigate(['/register/become-royalty'], {
+              state: {
+                mode: this.type,
+              },
+            });
             this.toast.error('Please try again', 'Error');
           }
         );
     } else {
-      this.router.navigate(['/register/become-royalty']);
+      this.router.navigate(['/register/become-royalty'], {
+        state: {
+          mode: this.type,
+        },
+      });
     }
     this.loading = false;
 
@@ -155,6 +194,9 @@ export class ImageComponent implements OnInit {
 
   ngOnInit(): void {
     // register form
+    this.type = this.router?.getCurrentNavigation()?.extras?.state?.mode;
+    console.log('type', this.type);
+
     this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
       Id: new FormControl(+this.id),
@@ -180,13 +222,14 @@ export class ImageComponent implements OnInit {
       TinNumber: new FormControl(''),
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
+      Gender: new FormControl(''),
     });
     // console.log(this.onboardingForm.value);
   }
 
   uploadPhoto() {
     this.loading = true;
-    const photo = this.photo.selectedImage;
+    const photo = this.croppedImage;
     const first = photo.split(',');
     const mainImage = first[1];
     const extension = first[0].split('image/');
@@ -226,12 +269,36 @@ export class ImageComponent implements OnInit {
       );
   }
 
+  crop() {
+    this.uploadPhoto();
+
+    console.log('selected', this.calculateImageSize(this.photo.selectedImage));
+    console.log('main', this.calculateImageSize(this.croppedImage));
+  }
+  calculateImageSize(base64String) {
+    let padding;
+    let inBytes;
+    let base64StringLength;
+    if (base64String.endsWith('==')) {
+      padding = 2;
+    } else if (base64String.endsWith('=')) {
+      padding = 1;
+    } else {
+      padding = 0;
+    }
+
+    base64StringLength = base64String.length;
+    inBytes = (base64StringLength / 4) * 3 - padding;
+    this.kbytes = inBytes / 1000;
+    return this.kbytes;
+  }
   async takePhoto() {
     const res = await this.photo.addNewToGallery();
     if (this.photo.selectedImage) {
       console.log(this.photo.selectedImage);
+      this.baseImage = this.photo.selectedImage;
 
-      this.uploadPhoto();
+      this.page = 'crop';
     } else {
       this.page = 'fail';
     }
@@ -240,6 +307,10 @@ export class ImageComponent implements OnInit {
     this.page = 'take';
   }
   next() {
-    this.router.navigate(['/register/done']);
+    this.router.navigate(['/register/done'], {
+      state: {
+        mode: this.type,
+      },
+    });
   }
 }

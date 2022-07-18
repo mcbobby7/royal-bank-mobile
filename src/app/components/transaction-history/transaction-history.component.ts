@@ -1,17 +1,43 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../core/http/services/auth.service';
-
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+  group,
+  query,
+  stagger,
+  keyframes,
+} from '@angular/animations';
 @Component({
   selector: 'app-transaction-history',
   templateUrl: './transaction-history.component.html',
   styleUrls: ['./transaction-history.component.scss'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateY(100%)' }),
+        animate('500ms ease-in', style({ transform: 'translateY(-0%)' })),
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ transform: 'translateY(-100%)' })),
+      ]),
+    ]),
+  ],
 })
 export class TransactionHistoryComponent implements OnInit {
   show = false;
   user = JSON.parse(localStorage.getItem('user'));
   data: any = [];
   loading = false;
-  constructor(private auth: AuthService) {}
+  details: any = {};
+  tran: any = {};
+  visible = false;
+  constructor(private auth: AuthService, private toast: ToastrService) {}
 
   ngOnInit() {
     setInterval(() => {
@@ -24,7 +50,11 @@ export class TransactionHistoryComponent implements OnInit {
   }
 
   getTransactions() {
-    if (this.user.accountNos.length === 0) {
+    if (
+      !this.user ||
+      !this.user.accountNos ||
+      this.user.accountNos.length === 0
+    ) {
       return;
     }
     const data = {
@@ -49,5 +79,38 @@ export class TransactionHistoryComponent implements OnInit {
           this.loading = false;
         }
       );
+  }
+  setTrans(transaction) {
+    this.loading = true;
+    const payload = {
+      accountId: +this.user.accountNos[0].accountId,
+      transactionId: transaction.transactionId,
+    };
+    this.auth
+      .post(payload, 'Cba.BankingService.FetchTransactionDetails')
+      .subscribe(
+        (res: any) => {
+          this.loading = false;
+          console.log(res);
+
+          if (res.data.responseCode === '00') {
+            this.details = res.data.data;
+            this.tran = transaction;
+            this.setVissible();
+          } else {
+            this.toast.error(res.data.responseMessage, 'Error');
+          }
+        },
+        (err) => {
+          this.toast.error('Failed to fetch transaction types', 'Error');
+          // this.router.navigate(['/dashboard']);
+          this.loading = false;
+        }
+      );
+
+    console.log(transaction);
+  }
+  setVissible() {
+    this.visible = !this.visible;
   }
 }

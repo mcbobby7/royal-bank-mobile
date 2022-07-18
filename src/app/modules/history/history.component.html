@@ -3,6 +3,7 @@
   <section style="background-color: #25214f">
     <div
       style="
+        padding: 20px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -10,13 +11,17 @@
         justify-content: center;
         background-color: #25214f;
         color: #fff;
-        padding: 20px 30px;
         padding-top: 40px;
+        margin-top: 40px;
       "
     >
       <div
         style="
-          background-color: #d9ac0b;
+          background: linear-gradient(
+            180deg,
+            #ffe278 0%,
+            rgba(255, 226, 120, 0.55) 100%
+          );
           padding: 20px 30px;
           text-align: left;
           width: 100%;
@@ -26,11 +31,24 @@
           color: #25214f;
         "
       >
-        <div style="font-size: 26px">
-          {{ user?.accountNos[0]?.accountBalance | currency: "&#8358;" }}
-        </div>
         <div style="font-size: 15px">
           {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}
+        </div>
+        <div
+          style="
+            border: 1px solid #25214f;
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+          "
+        >
+          <div>Balance:</div>
+          <div style="font-size: 20px">
+            {{ user?.accountNos[0]?.accountBalance | currency: "&#8358;" }}
+          </div>
         </div>
       </div>
     </div>
@@ -103,7 +121,7 @@
       </form>
     </section>
 
-    <section style="background-color: white">
+    <section style="background-color: white; padding: 0 5%">
       <ion-card-header style="text-align: left"
         >Your transactions</ion-card-header
       >
@@ -118,16 +136,16 @@
           </span>
         </ion-card-content>
       </div>
-      <div *ngFor="let trans of data">
-        <div class="tran" *ngIf="trans.transactionType !== 'Debit'">
-          <div class="icon">
-            <div class="img"><img src="assets/icon/credict.png" alt="" /></div>
-            <div class="text">
-              <div class="tit">
+      <div *ngFor="let trans of data" (click)="setTrans(trans)">
+        <div class="tra" *ngIf="trans.transactionType !== 'Debit'">
+          <div class="ico">
+            <div class="im"><img src="assets/icon/credict.png" alt="" /></div>
+            <div class="tex">
+              <div class="ti">
                 {{ trans?.narration ? trans?.narration : "No Description" }}
               </div>
-              <!-- <div class="mode">{{ trans?.submittedByUsername }}</div> -->
-              <div class="mode">
+              <div class="mod">{{ trans?.submittedByUsername }}</div>
+              <div class="mod">
                 {{ trans.date[0] }}-{{ trans?.date[1] }}-{{ trans.date[2] }}
               </div>
             </div>
@@ -136,15 +154,15 @@
             {{ trans.amount | currency: "&#8358;" }}
           </div>
         </div>
-        <div class="tran" *ngIf="trans.transactionType === 'Debit'">
-          <div class="icon">
-            <div class="img"><img src="assets/icon/debit.png" alt="" /></div>
-            <div class="text">
-              <div class="tit">
+        <div class="tra" *ngIf="trans.transactionType === 'Debit'">
+          <div class="ico">
+            <div class="im"><img src="assets/icon/debit.png" alt="" /></div>
+            <div class="tex">
+              <div class="ti">
                 {{ trans?.narration ? trans?.narration : "No Description" }}
               </div>
-              <!-- <div class="mode">{{ trans?.submittedByUsername }}</div> -->
-              <div class="mode">
+              <div class="mod">{{ trans?.submittedByUsername }}</div>
+              <div class="mod">
                 {{ trans.date[0] }}-{{ trans?.date[1] }}-{{ trans.date[2] }}
               </div>
             </div>
@@ -156,4 +174,95 @@
       </div>
     </section>
   </section>
+</ion-content>
+<ion-content *ngIf="visible">
+  <div
+    class="mas"
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    "
+  >
+    <div class="overlay" (click)="setVissible()" [@slideInOut]></div>
+    <div
+      style="
+        background-color: white;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+      "
+      [@slideInOut]
+    >
+      <div class="head">
+        <div
+          (click)="setVissible()"
+          style="
+            color: white;
+            font-size: 30px;
+            position: absolute;
+            left: 20px;
+            top: 70px;
+          "
+        >
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </div>
+        <div class="date">
+          {{ details?.transferDate[0] }}-{{ details?.transferDate[1] }}-{{
+            details?.transferDate[2]
+          }}
+        </div>
+        <div class="card"><ion-icon name="card"></ion-icon></div>
+        <div
+          style="font-size: 12px; padding-top: 10px"
+          *ngIf="details?.isRoyalTransfer"
+        >
+          Royal Transfer
+        </div>
+        <div
+          style="font-size: 12px; padding-top: 10px"
+          *ngIf="!details?.isRoyalTransfer"
+        >
+          Others
+        </div>
+        <div class="date">
+          <span *ngIf="tran.transactionType !== 'Credit'">-</span
+          >{{ tran?.amount | currency: "&#8358;" }}
+        </div>
+      </div>
+      <div class="bod">
+        <table>
+          <tbody>
+            <tr *ngIf="details?.senderAcctName">
+              <th style="padding: 10px">From</th>
+              <td style="padding: 10px">{{ details?.senderAcctName }}</td>
+            </tr>
+            <tr *ngIf="details?.receiverAcctName">
+              <th style="padding: 10px">To</th>
+              <td style="padding: 10px">{{ details?.receiverAcctName }}</td>
+            </tr>
+            <tr>
+              <th style="padding: 10px">Naration</th>
+              <td style="padding: 10px">
+                {{ details?.transferDescription }}
+              </td>
+            </tr>
+            <!-- <tr>
+              <th style="padding: 10px">Refrence</th>
+              <td style="padding: 10px">{{ tran?.paymentDetailData.receiptNumber }}</td>
+            </tr> -->
+            <!-- <tr>
+              <th style="padding: 10px">Receipt Number</th>
+              <td style="padding: 10px">
+                {{ tran?.paymentDetailData?.receiptNumber }}
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </ion-content>

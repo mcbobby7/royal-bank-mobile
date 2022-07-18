@@ -44,11 +44,14 @@ export class AirtimeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.user.accountNos.length);
+
     this.fetchData();
-    this.accNum = this.user.accountNos[0].accountNo;
+    this.accNum = this.user.accountNos[0]
+      ? this.user.accountNos[0].accountNo
+      : '';
   }
   fetchData() {
-    console.log();
     try {
       this.auth
         .post({ VasCategoryId: 4 }, 'Cba.ValueAddedService.FetchTypes')

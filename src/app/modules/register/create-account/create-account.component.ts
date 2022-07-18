@@ -17,7 +17,7 @@ export class CreateAccountComponent implements OnInit {
   onboardingForm!: FormGroup;
   loading = true;
   user: any = {};
-
+  type;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -95,22 +95,38 @@ export class CreateAccountComponent implements OnInit {
                 CompanyName: res.data.userDetail.companyName
                   ? res.data.userDetail.companyName
                   : '',
+                Gender: res.data.userDetail.gender
+                  ? res.data.userDetail.gender
+                  : '',
               });
               console.log(res);
               console.log(this.onboardingForm.value);
             } else {
               console.log(res);
-              this.router.navigate(['/register/become-royalty']);
+              this.router.navigate(['/register/become-royalty'], {
+                state: {
+                  mode: this.router?.getCurrentNavigation()?.extras?.state
+                    ?.mode,
+                },
+              });
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register/become-royalty']);
+            this.router.navigate(['/register/become-royalty'], {
+              state: {
+                mode: this.type,
+              },
+            });
             this.toast.error('Please try again', 'Error');
           }
         );
     } else {
-      this.router.navigate(['/register/become-royalty']);
+      this.router.navigate(['/register/become-royalty'], {
+        state: {
+          mode: this.type,
+        },
+      });
     }
     return;
   }
@@ -151,7 +167,11 @@ export class CreateAccountComponent implements OnInit {
             this.loading = false;
             // this.data = res.data;
             localStorage.setItem('stageId', res.data.data.id);
-            this.router.navigate(['/register/email/2']);
+            this.router.navigate(['/register/email/2'], {
+              state: {
+                mode: this.type,
+              },
+            });
 
             // deal with register
             console.log(res);
@@ -167,6 +187,9 @@ export class CreateAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.type = this.router?.getCurrentNavigation()?.extras?.state?.mode;
+    console.log('type', this.type);
+
     // register form
     this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
@@ -193,6 +216,7 @@ export class CreateAccountComponent implements OnInit {
       TinNumber: new FormControl(''),
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
+      Gender: new FormControl(''),
     });
     // console.log(this.onboardingForm.value);
   }

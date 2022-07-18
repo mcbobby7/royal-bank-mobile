@@ -19,7 +19,7 @@ export class RoyalSetupComponent implements OnInit {
   onboardingForm!: FormGroup;
   loading = true;
   user: any = {};
-
+  type;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -97,22 +97,38 @@ export class RoyalSetupComponent implements OnInit {
                 CompanyName: res.data.userDetail.companyName
                   ? res.data.userDetail.companyName
                   : '',
+                Gender: res.data.userDetail.gender
+                  ? res.data.userDetail.gender
+                  : '',
               });
               console.log(res);
               console.log(this.onboardingForm.value);
             } else {
               console.log(res);
-              this.router.navigate(['/register/become-royalty']);
+              this.router.navigate(['/register/become-royalty'], {
+                state: {
+                  mode: this.router?.getCurrentNavigation()?.extras?.state
+                    ?.mode,
+                },
+              });
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register/become-royalty']);
+            this.router.navigate(['/register/become-royalty'], {
+              state: {
+                mode: this.type,
+              },
+            });
             this.toast.error('Please try again', 'Error');
           }
         );
     } else {
-      this.router.navigate(['/register/become-royalty']);
+      this.router.navigate(['/register/become-royalty'], {
+        state: {
+          mode: this.type,
+        },
+      });
     }
     return;
   }
@@ -157,7 +173,11 @@ export class RoyalSetupComponent implements OnInit {
             this.loading = false;
             // this.data = res.data;
             localStorage.setItem('stageId', res.data.data.id);
-            this.router.navigate(['/register/bvn/2']);
+            this.router.navigate(['/register/image'], {
+              state: {
+                mode: this.type,
+              },
+            });
 
             // deal with register
             console.log(res);
@@ -174,6 +194,9 @@ export class RoyalSetupComponent implements OnInit {
 
   ngOnInit(): void {
     // register form
+    this.type = this.router?.getCurrentNavigation()?.extras?.state?.mode;
+    console.log('type', this.type);
+
     this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
       Id: new FormControl(+this.id),
@@ -199,9 +222,9 @@ export class RoyalSetupComponent implements OnInit {
       TinNumber: new FormControl(''),
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
-      // CompanyType: new FormControl(''),
+      Gender: new FormControl(''),
     });
-    // console.log(this.onboardingForm.value);
+    console.log(this.onboardingForm.value);
   }
   goBack() {
     this.navController.back();
@@ -210,6 +233,10 @@ export class RoyalSetupComponent implements OnInit {
     this.show = !this.show;
   }
   next() {
-    this.router.navigate(['/register/bvn/2']);
+    this.router.navigate(['/register/bvn/2'], {
+      state: {
+        mode: this.type,
+      },
+    });
   }
 }

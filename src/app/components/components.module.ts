@@ -45,6 +45,10 @@ import { ResetPinComponent } from '../modules/account-info/reset-pin/reset-pin.c
 import { RequestCardComponent } from '../modules/account-info/request-card/request-card.component';
 import { LoanPage } from '../modules/loan/loan.page';
 import { SupportComponent } from '../modules/support/support.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { NubanRegisterComponent } from '../modules/register/nuban-register/nuban-register.component';
+import { ResetPasswordComponent } from '../modules/reset-password/reset-password.component';
+import { DocumentUploadComponent } from '../modules/document-upload/document-upload.component';
 
 const components = [
   SupportComponent,
@@ -85,13 +89,16 @@ const components = [
   AirtimeComponent,
   CabletvComponent,
   LimitComponent,
+  ResetPasswordComponent,
+  DocumentUploadComponent,
   // TransferPage,
   ProductsComponent,
   PinComponent,
   BillsPaymentsPage,
+  NubanRegisterComponent,
 ];
 
-const materialModules = [RouterModule];
+const materialModules = [RouterModule, ImageCropperModule];
 
 @NgModule({
   declarations: [...components],

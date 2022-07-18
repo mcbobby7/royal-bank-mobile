@@ -20,6 +20,7 @@ export class BecomeRoyaltyComponent implements OnInit {
   loading = true;
   show = false;
   imageSrc = 'assets/icon/hey.png';
+  type;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -95,6 +96,9 @@ export class BecomeRoyaltyComponent implements OnInit {
                 CompanyName: res.data.userDetail.companyName
                   ? res.data.userDetail.companyName
                   : '',
+                Gender: res.data.userDetail.gender
+                  ? res.data.userDetail.gender
+                  : '',
               });
               console.log(res);
             } else {
@@ -109,12 +113,20 @@ export class BecomeRoyaltyComponent implements OnInit {
             this.loading = false;
 
             localStorage.setItem('stageId', '');
-            this.router.navigate(['/register']);
+            this.router.navigate(['/register'], {
+              state: {
+                mode: this.type,
+              },
+            });
             this.toast.error('Please try again', 'Error');
           }
         );
     } else {
-      this.router.navigate(['/register/become-royalty']);
+      this.router.navigate(['/register/become-royalty'], {
+        state: {
+          mode: this.type,
+        },
+      });
 
       this.id = '';
       this.loading = false;
@@ -135,7 +147,11 @@ export class BecomeRoyaltyComponent implements OnInit {
 
             this.data = res.data;
             localStorage.setItem('stageId', res.data.data.id);
-            this.router.navigate(['/register/select-account']);
+            this.router.navigate(['/register/select-account'], {
+              state: {
+                mode: this.type,
+              },
+            });
 
             // deal with register
             console.log(res);
@@ -152,6 +168,9 @@ export class BecomeRoyaltyComponent implements OnInit {
 
   ngOnInit(): void {
     // register form
+    this.type = this.router?.getCurrentNavigation()?.extras?.state?.mode;
+    console.log('type', this.type);
+
     this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
       Id: new FormControl(+this.id),
@@ -177,10 +196,22 @@ export class BecomeRoyaltyComponent implements OnInit {
       TinNumber: new FormControl(''),
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
+      Gender: new FormControl(''),
     });
     // console.log(this.onboardingForm.value);
   }
   next() {
-    this.router.navigate(['/register/select-account']);
+    this.router.navigate(['/register/select-account'], {
+      state: {
+        mode: 'new',
+      },
+    });
+  }
+  nuban() {
+    this.router.navigate(['/register/nuban'], {
+      state: {
+        mode: 'nuban',
+      },
+    });
   }
 }

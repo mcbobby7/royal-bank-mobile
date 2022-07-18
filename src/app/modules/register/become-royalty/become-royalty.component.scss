@@ -108,3 +108,12 @@ img {
   width: 70vw;
   margin: auto;
 }
+.btn2 {
+  --background: #fee178;
+  --color: #25214f;
+  text-transform: capitalize;
+  height: 3.5rem;
+  font-weight: 300;
+  font-size: 1.2rem;
+  --background-activated: #fee178;
+}

@@ -19,7 +19,7 @@ export class VerifyEmailComponent implements OnInit {
   onboardingForm: FormGroup;
   loading = true;
   user: any = {};
-
+  type;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -98,27 +98,46 @@ export class VerifyEmailComponent implements OnInit {
                 CompanyName: res.data.userDetail.companyName
                   ? res.data.userDetail.companyName
                   : '',
+                Gender: res.data.userDetail.gender
+                  ? res.data.userDetail.gender
+                  : '',
               });
               console.log(res);
               this.sendOtp();
             } else {
               console.log(res);
-              this.router.navigate(['/register/become-royalty']);
+              this.router.navigate(['/register/become-royalty'], {
+                state: {
+                  mode: this.router?.getCurrentNavigation()?.extras?.state
+                    ?.mode,
+                },
+              });
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register/become-royalty']);
+            this.router.navigate(['/register/become-royalty'], {
+              state: {
+                mode: this.type,
+              },
+            });
             this.toast.error('Please try again', 'Error');
           }
         );
     } else {
-      this.router.navigate(['/register/become-royalty']);
+      this.router.navigate(['/register/become-royalty'], {
+        state: {
+          mode: this.type,
+        },
+      });
     }
     return;
   }
 
   ngOnInit(): void {
+    this.type = this.router?.getCurrentNavigation()?.extras?.state?.mode;
+    console.log('type', this.type);
+
     // register form
     this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
@@ -145,6 +164,7 @@ export class VerifyEmailComponent implements OnInit {
       TinNumber: new FormControl(''),
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
+      Gender: new FormControl(''),
     });
     // console.log(this.onboardingForm.value);
   }
@@ -205,9 +225,17 @@ export class VerifyEmailComponent implements OnInit {
                     localStorage.setItem('stageId', res.data.data.id);
 
                     if (this.route.snapshot.params.mode === '3') {
-                      this.router.navigate(['/register/phone/098897776667/3']);
+                      this.router.navigate(['/register/image-done'], {
+                        state: {
+                          mode: this.type,
+                        },
+                      });
                     } else {
-                      this.router.navigate(['/register/phone/098897776667/2']);
+                      this.router.navigate(['/register/image'], {
+                        state: {
+                          mode: this.type,
+                        },
+                      });
                     }
                     // deal with register
                     console.log(res);

@@ -33,23 +33,34 @@ ion-content {
 
 .icons {
   // font-size: 30px;
-  height: 40px;
-  width: 40px;
+  height: 60px;
+  // width: 40px;
   color: #25214f !important;
   margin-bottom: 3px !important;
 }
 
 .icons-bg {
-  width: 100px;
+  width: 43%;
   height: 100px;
   border-radius: 5px;
-  background-color: #f8f8f8;
+  background-color: white;
   padding: 10px;
-  margin: 5px;
+  margin: 3%;
   display: flex;
-  flex-direction: column;
-  justify-content: center !important;
+  flex-direction: row;
+  justify-content: space-between !important;
   text-align: center;
   align-items: center !important;
   cursor: pointer;
+  color: #25214f;
+  border: 1px solid #dde3f7;
+}
+.name {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+  text-align: left;
+  color: #25214f;
+  font-weight: 700px;
 }

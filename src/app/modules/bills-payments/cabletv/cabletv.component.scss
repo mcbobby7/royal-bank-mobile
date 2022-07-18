@@ -10,12 +10,12 @@
 
 ion-toggle {
   --height: 15px;
-  --background-checked:#25214f;
+  --background-checked: #25214f;
 }
 
 .inner-icon {
-// font-size: 20px;
-color: #d9ac0b;
+  // font-size: 20px;
+  color: #fee178;
 }
 
 .icon-container {
@@ -31,7 +31,6 @@ color: #d9ac0b;
   padding: 10px;
   // background-color: #d5d4d4;
 }
-
 
 .header {
   color: #25214f;
@@ -93,11 +92,17 @@ ion-content {
 }
 
 ion-button {
-  --background:#d9ac0b; --color:#fff !important;
+  --background: #fee178;
+  --color: #fff !important;
 }
 
 .active {
-  width: 100%; --border-radius: none; --background:#25214f; --color:#fff; --color-activated:#fff; --background-activated:#d9ac0b;
+  width: 100%;
+  --border-radius: none;
+  --background: #25214f;
+  --color: #fff;
+  --color-activated: #fff;
+  --background-activated: #fee178;
 }
 
 .form-inline > * {
@@ -140,25 +145,23 @@ label {
 }
 
 .img {
-
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 .btn2 {
-  --background: #d9ac0b;
-  --color: #fff;
+  --background: #fee178;
+  --color: #25214f;
   text-transform: capitalize;
   height: 3.5rem;
   font-weight: 300;
   font-size: 1.2rem;
-  --background-activated: #d9ac0b;
+  --background-activated: #fee178;
 }
 
 // ion-button {
 //   --border-radius: 15px;
 // }
-
 
 .content {
   font-family: Mulish !important;

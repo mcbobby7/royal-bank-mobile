@@ -6,14 +6,20 @@ const routes: Routes = [
   {
     path: '',
     component: RegisterComponent,
-    children: [
-    ],
+    children: [],
   },
   {
     path: 'become-royalty',
     loadChildren: () =>
       import('./become-royalty/become-royalty.module').then(
         (m) => m.BecomeRoyaltyModule
+      ),
+  },
+  {
+    path: 'nuban',
+    loadChildren: () =>
+      import('./nuban-register/nuban-register.module').then(
+        (m) => m.NubanRegisterModule
       ),
   },
   {

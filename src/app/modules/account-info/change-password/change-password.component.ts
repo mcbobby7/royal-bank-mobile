@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/http/services/auth.service';
 
@@ -24,7 +25,11 @@ export class ChangePasswordComponent implements OnInit {
     confirmPassword: new FormControl(''),
   });
 
-  constructor(public toast: ToastrService, private auth: AuthService) {}
+  constructor(
+    public toast: ToastrService,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -76,6 +81,7 @@ export class ChangePasswordComponent implements OnInit {
           if (res.data.responseCode === '00') {
             this.toast.success('Password Updated', 'Success');
             this.pass = false;
+            this.router.navigate(['/dashboard']);
             // deal with register
           } else {
             this.toast.error(res.data.responseMessage, 'Error');

@@ -34,6 +34,10 @@ export class RequestCardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.user.accountNos.length < 1) {
+      this.toast.error('No account number available', 'Error');
+      this.router.navigate(['/dashboard']);
+    }
     const user = JSON.parse(localStorage.getItem('user'));
     this.accNum = this.user.accountNos[0].accountNo;
     this.photo = user.photo ? user.photo : 'assets/icon/hey.png';

@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   imageSrc = 'assets/icon/hey.png';
   data: any;
   loginForm!: FormGroup;
+  user;
   constructor(
     private auth: AuthService,
     public toast: ToastrService,
@@ -59,6 +60,7 @@ export class LoginComponent implements OnInit {
           console.log(res.data.profile);
 
           localStorage.setItem('token', res.data.token);
+          this.loginForm.reset();
           this.router.navigate(['/dashboard']);
         } else {
           this.toast.error(res.data.responseMessage, 'Error');
@@ -70,9 +72,21 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+  forgot() {
+    this.router.navigate(['/forgot-passowrd']);
+  }
 
   ngOnInit(): void {
     // login form
+    const user = localStorage.getItem('user');
+    const users = user ? JSON.parse(user) : null;
+    setInterval(() => {
+      this.user = users ? users : null;
+    }, 500);
+
+    if (this.user) {
+      this.router.navigate(['/dashboard']);
+    }
     this.loginForm = new FormGroup({
       email: new FormControl(''),
       password: new FormControl(''),

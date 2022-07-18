@@ -14,6 +14,7 @@ import { Storage } from '@capacitor/storage';
 export class PhotoService {
   public photos: any[] = [];
   public selectedImage = '';
+  public path;
 
   constructor() {}
   public async addNewToGallery() {
@@ -23,7 +24,11 @@ export class PhotoService {
       source: CameraSource.Camera,
       quality: 100,
     });
+    console.log('capturedPhoto', capturedPhoto);
+
     const savedImageFile = await this.savePicture(capturedPhoto);
+    console.log('savedImageFile', savedImageFile);
+
     this.photos.unshift(savedImageFile);
     return await this.savePicture(capturedPhoto);
   }

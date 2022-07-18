@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../core/http/services/auth.service';
 import { IOnboarding } from '../../../core/interfaces/user';
 import { ToastrService } from 'ngx-toastr';
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -20,10 +22,13 @@ export class DetailsComponent implements OnInit {
   onboardingForm!: FormGroup;
   loading = true;
   confirmPass;
+  path = 'phone';
+  type;
   constructor(
     private auth: AuthService,
     private router: Router,
-    public toast: ToastrService
+    public toast: ToastrService,
+    public alertController: AlertController
   ) {}
 
   getOnboardingStage() {
@@ -95,23 +100,39 @@ export class DetailsComponent implements OnInit {
                 CompanyName: res.data.userDetail.companyName
                   ? res.data.userDetail.companyName
                   : '',
+                Gender: res.data.userDetail.gender
+                  ? res.data.userDetail.gender
+                  : 'Male',
               });
               console.log(res);
             } else {
               console.log(res);
-              this.router.navigate(['/register/become-royalty']);
+              this.router.navigate(['/register/become-royalty'], {
+                state: {
+                  mode: this.router?.getCurrentNavigation()?.extras?.state
+                    ?.mode,
+                },
+              });
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register/become-royalty']);
+            this.router.navigate(['/register/become-royalty'], {
+              state: {
+                mode: this.type,
+              },
+            });
             this.toast.error('Please try again', 'Error');
           }
         );
     } else {
       this.id = '';
       this.loading = false;
-      this.router.navigate(['/register/become-royalty']);
+      this.router.navigate(['/register/become-royalty'], {
+        state: {
+          mode: this.type,
+        },
+      });
     }
     return;
   }
@@ -158,11 +179,30 @@ export class DetailsComponent implements OnInit {
     if (this.sanitize() === false) {
       return;
     }
+    if (this.onboardingForm.value.Phone.length === 14) {
+      this.onboardingForm.patchValue({
+        Phone: this.onboardingForm.value.Phone.substring(1),
+      });
+    } else if (this.onboardingForm.value.Phone.length === 11) {
+      this.onboardingForm.patchValue({
+        Phone: '234' + this.onboardingForm.value.Phone.substring(1),
+      });
+    } else if (this.onboardingForm.value.Phone.length === 10) {
+      this.onboardingForm.patchValue({
+        Phone: '234' + this.onboardingForm.value.Phone,
+      });
+    } else if (this.onboardingForm.value.Phone.length === 13) {
+      this.onboardingForm.patchValue({
+        Phone: this.onboardingForm.value.Phone,
+      });
+    } else {
+      this.toast.error('Please provide a valid mobile number', 'Error');
+      return false;
+    }
     this.onboardingForm.patchValue({
       UserName: this.onboardingForm.value.Email,
       Stage: 5,
     });
-    this.loading = true;
     console.log(this.onboardingForm.value);
     this.loading = true;
     this.auth
@@ -172,15 +212,32 @@ export class DetailsComponent implements OnInit {
           this.loading = false;
           if (res.data.responseCode === '00') {
             console.log(res.data.data.id);
-            this.loading = false;
             // this.data = res.data;
             localStorage.setItem('stageId', res.data.data.id);
-            this.router.navigate(['/register/email/1']);
+            if (this.path === 'phone') {
+              this.router.navigate(
+                [`/register/phone/${this.onboardingForm.value.Phone}/2`],
+                {
+                  state: {
+                    mode: this.type,
+                  },
+                }
+              );
+            } else {
+              this.router.navigate(['/register/email/1'], {
+                state: {
+                  mode: this.type,
+                },
+              });
+            }
 
             // deal with register
             console.log(res);
           } else {
-            this.toast.error(res.data.responseMessage, 'Error');
+            this.loading = false;
+            this.alert(res.data.responseMessage, 'Error');
+
+            console.log('why you aint working');
           }
         },
         (err) => {
@@ -190,8 +247,55 @@ export class DetailsComponent implements OnInit {
       );
   }
 
+  async presentAlertPrompt() {
+    if (!this.onboardingForm.value.terms) {
+      this.toast.error('You have to accept our terms and service', 'Error');
+      return false;
+    }
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Verify Details',
+      // subHeader: 'Subtitle',
+      message: 'How would you like to receive OTP to verify your details?',
+      buttons: [
+        {
+          text: 'SMS',
+          handler: () => {
+            console.log('phone Ok');
+            this.path = 'phone';
+            this.register();
+          },
+        },
+        {
+          text: 'Email',
+          handler: () => {
+            console.log('phone Ok');
+            this.path = 'email';
+            this.register();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async alert(message, mode) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: mode,
+      // subHeader: 'Subtitle',
+      message,
+    });
+
+    await alert.present();
+  }
+
   ngOnInit(): void {
     // register form
+    this.type = this.router?.getCurrentNavigation()?.extras?.state?.mode;
+    console.log('type', this.type);
+
     this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
       Id: new FormControl(+this.id),
@@ -217,6 +321,8 @@ export class DetailsComponent implements OnInit {
       TinNumber: new FormControl(''),
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
+      Gender: new FormControl('Male'),
+      terms: new FormControl(false),
     });
     // console.log(this.onboardingForm.value);
   }
@@ -231,6 +337,10 @@ export class DetailsComponent implements OnInit {
     this.page = mode;
   }
   next() {
-    this.router.navigate(['/register/email/2']);
+    this.router.navigate(['/register/email/2'], {
+      state: {
+        mode: this.type,
+      },
+    });
   }
 }

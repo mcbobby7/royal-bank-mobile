@@ -18,13 +18,16 @@
         justify-content: center;
         background-color: #25214f;
         color: #fff;
-        padding: 20px 30px;
         padding-top: 40px;
       "
     >
       <div
         style="
-          background-color: #d9ac0b;
+          background: linear-gradient(
+            180deg,
+            #ffe278 0%,
+            rgba(255, 226, 120, 0.55) 100%
+          );
           padding: 20px 30px;
           text-align: left;
           width: 100%;
@@ -34,11 +37,24 @@
           color: #25214f;
         "
       >
-        <div style="font-size: 26px">
-          {{ user?.accountNos[0]?.accountBalance | currency: "&#8358;" }}
-        </div>
         <div style="font-size: 15px">
           {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}
+        </div>
+        <div
+          style="
+            border: 1px solid #25214f;
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+          "
+        >
+          <div>Balance:</div>
+          <div style="font-size: 20px">
+            {{ user?.accountNos[0]?.accountBalance | currency: "&#8358;" }}
+          </div>
         </div>
       </div>
     </div>
@@ -63,7 +79,7 @@
         <ion-button
           (click)="toggleRequest(true)"
           [ngClass]="{active: selectedBtn === true}"
-          style="width: 100%; --border-radius: none"
+          style="width: 100%; --border-radius: none; color: #25214f"
         >
           New
         </ion-button>
@@ -246,7 +262,7 @@
             <ion-button
               *ngIf="data.status"
               size="small"
-              style="--background: #d9ac0b; --color: #25214f"
+              style="--background: #fee178; --color: #25214f"
               (click)="repay(data.loanKey)"
               >View Repayment Schedule</ion-button
             >

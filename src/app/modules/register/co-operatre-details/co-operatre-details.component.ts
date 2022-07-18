@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/http/services/auth.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-co-operatre-details',
@@ -13,18 +14,20 @@ import { AuthService } from '../../../core/http/services/auth.service';
 export class CoOperatreDetailsComponent implements OnInit {
   imageSrc = 'assets/icon/hey.png';
   show = false;
-  page = 'select';
+  page = 'use';
   confirmPass: '';
   id: any = localStorage.getItem('stageId');
   onboardingForm!: FormGroup;
   loading = true;
   user: any = {};
-
+  path = 'phone';
+  type;
   constructor(
     private auth: AuthService,
     private router: Router,
     public toast: ToastrService,
-    public navController: NavController
+    public navController: NavController,
+    public alertController: AlertController
   ) {}
 
   getOnboardingStage() {
@@ -97,22 +100,38 @@ export class CoOperatreDetailsComponent implements OnInit {
                 CompanyName: res.data.userDetail.companyName
                   ? res.data.userDetail.companyName
                   : '',
+                Gender: res.data.userDetail.gender
+                  ? res.data.userDetail.gender
+                  : 'Male',
               });
               console.log(res);
               console.log(this.onboardingForm.value);
             } else {
               console.log(res);
-              this.router.navigate(['/register/become-royalty']);
+              this.router.navigate(['/register/become-royalty'], {
+                state: {
+                  mode: this.router?.getCurrentNavigation()?.extras?.state
+                    ?.mode,
+                },
+              });
               this.toast.error('please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register/become-royalty']);
+            this.router.navigate(['/register/become-royalty'], {
+              state: {
+                mode: this.type,
+              },
+            });
             this.toast.error('Please try again', 'Error');
           }
         );
     } else {
-      this.router.navigate(['/register/become-royalty']);
+      this.router.navigate(['/register/become-royalty'], {
+        state: {
+          mode: this.type,
+        },
+      });
     }
     return;
   }
@@ -136,12 +155,31 @@ export class CoOperatreDetailsComponent implements OnInit {
     if (this.sanitize() === false) {
       return;
     }
+    if (this.onboardingForm.value.Phone.length === 14) {
+      this.onboardingForm.patchValue({
+        Phone: this.onboardingForm.value.Phone.substring(1),
+      });
+    } else if (this.onboardingForm.value.Phone.length === 11) {
+      this.onboardingForm.patchValue({
+        Phone: '234' + this.onboardingForm.value.Phone.substring(1),
+      });
+    } else if (this.onboardingForm.value.Phone.length === 10) {
+      this.onboardingForm.patchValue({
+        Phone: '234' + this.onboardingForm.value.Phone,
+      });
+    } else if (this.onboardingForm.value.Phone.length === 13) {
+      this.onboardingForm.patchValue({
+        Phone: this.onboardingForm.value.Phone,
+      });
+    } else {
+      this.toast.error('Please provide a valid mobile number', 'Error');
+      return false;
+    }
     this.onboardingForm.patchValue({
       UserName: this.onboardingForm.value.Email,
     });
-    this.loading = true;
+    // this.loading = true;
     console.log(this.onboardingForm.value);
-    this.loading = true;
     this.auth
       .post(this.onboardingForm.value, 'UserManager.UserService.UpdateUser')
       .subscribe(
@@ -152,12 +190,31 @@ export class CoOperatreDetailsComponent implements OnInit {
             this.loading = false;
             // this.data = res.data;
             localStorage.setItem('stageId', res.data.data.id);
-            this.router.navigate(['/register/email/3']);
+            if (this.path === 'phone') {
+              this.router.navigate(
+                [`/register/phone/${this.onboardingForm.value.Phone}/3`],
+                {
+                  state: {
+                    mode: this.router?.getCurrentNavigation()?.extras?.state
+                      ?.mode,
+                  },
+                }
+              );
+            } else {
+              this.router.navigate(['/register/email/3'], {
+                state: {
+                  mode: this.router?.getCurrentNavigation()?.extras?.state
+                    ?.mode,
+                },
+              });
+            }
 
             // deal with register
             console.log(res);
           } else {
-            this.toast.error(res.data.responseMessage, 'Error');
+            this.loading = false;
+            this.alert(res.data.responseMessage, 'Error');
+            console.log(res);
           }
         },
         (err) => {
@@ -167,8 +224,60 @@ export class CoOperatreDetailsComponent implements OnInit {
       );
   }
 
+  async alert(message, mode) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: mode,
+      // subHeader: 'Subtitle',
+      message,
+      buttons: [
+        {
+          text: 'Ok',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertPrompt() {
+    if (!this.onboardingForm.value.terms) {
+      this.toast.error('You have to accept our terms and service', 'Error');
+      return false;
+    }
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Verify Details',
+      // subHeader: 'Subtitle',
+      message: 'How would you like to receive OTP to verify your details?',
+      buttons: [
+        {
+          text: 'SMS',
+          handler: () => {
+            console.log('phone Ok');
+            this.path = 'phone';
+            this.register();
+          },
+        },
+        {
+          text: 'Email',
+          handler: () => {
+            console.log('phone Ok');
+            this.path = 'email';
+            this.register();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   ngOnInit(): void {
     // register form
+    this.type = this.router?.getCurrentNavigation()?.extras?.state?.mode;
+    console.log('type', this.type);
+
     this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
       Id: new FormControl(+this.id),
@@ -194,6 +303,8 @@ export class CoOperatreDetailsComponent implements OnInit {
       TinNumber: new FormControl(''),
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
+      Gender: new FormControl('Male'),
+      terms: new FormControl(false),
     });
     // console.log(this.onboardingForm.value);
   }
@@ -205,6 +316,32 @@ export class CoOperatreDetailsComponent implements OnInit {
     this.show = !this.show;
   }
   next() {
-    this.router.navigate(['/register/email/3']);
+    this.router.navigate(['/register/email/3'], {
+      state: {
+        mode: this.type,
+      },
+    });
+  }
+
+  sanitize2() {
+    if (!this.onboardingForm.value.FirstName) {
+      this.toast.error('First name is required', 'Error');
+      return false;
+    }
+    if (!this.onboardingForm.value.LastName) {
+      this.toast.error('Last name is required', 'Error');
+      return false;
+    }
+    if (!this.onboardingForm.value.MiddleName) {
+      this.toast.error('Middle name is required', 'Error');
+      return false;
+    }
+  }
+
+  change(mode) {
+    if (this.sanitize2() === false) {
+      return;
+    }
+    this.page = mode;
   }
 }

@@ -101,12 +101,28 @@
       </ion-button>
       <app-loader *ngIf="loading"></app-loader>
     </div>
-    <div style="margin: 15px 0; font-size: 14px; color: #676767">
+    <div
+      style="
+        margin: 15px 0;
+        font-size: 14px;
+        color: #676767;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+      "
+    >
       <span
         >Don't have an account?
-        <span style="color: #25214f; font-weight: 700" (click)="register()"
+        <span
+          style="color: #fee178; font-weight: 700; margin-top: 20px"
+          (click)="register()"
           >Sign Up</span
         ></span
+      >
+      <span
+        style="color: #25214f; font-weight: 700; margin-top: 10px"
+        (click)="forgot()"
+        >Forgot Password</span
       >
     </div>
   </form>

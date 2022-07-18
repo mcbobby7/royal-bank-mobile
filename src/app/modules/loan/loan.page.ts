@@ -3,6 +3,7 @@ import { AuthService } from '../../core/http/services/auth.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-loan',
@@ -18,6 +19,10 @@ export class LoanPage implements OnInit {
   history = [];
   repaySchedules = [];
   show = false;
+  bvn = '';
+  fullName = '';
+  dateOfBirth = '';
+  phoneNumber = '';
   tenures = [
     { name: '6 months', value: 6 },
     { name: '12 months', value: 12 },
@@ -43,8 +48,11 @@ export class LoanPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.bvn);
+    this.bvn = this.user.bvn;
     this.fetchLoanTypes();
     this.fetchHistory();
+    this.fetchBvn();
     // let   user = JSON.parse(localStorage.getItem('user'));
     this.account = this.user.accountNos[0].accountNo;
   }
@@ -80,12 +88,11 @@ export class LoanPage implements OnInit {
       : '';
     this.auth
       .post(
-        { loanCustomerId: customerId },
+        { customerKey: customerId, accountNo: this.account },
         'Loan.LoanService.FetchCustomerLoans'
       )
       .subscribe(
         (res: any) => {
-          this.loading = false;
           console.log(res);
 
           if (res.status === '00') {
@@ -93,9 +100,7 @@ export class LoanPage implements OnInit {
           } else {
           }
         },
-        (err) => {
-          this.loading = false;
-        }
+        (err) => {}
       );
   }
 
@@ -162,6 +167,60 @@ export class LoanPage implements OnInit {
         }
       );
   }
+  checkEligible() {
+    this.loading = true;
+    const data = {
+      bvn: this.bvn,
+      fullName: this.fullName,
+      dateOfBirth: moment(this.dateOfBirth).format('YYYY-MM-DD'),
+      phoneNumber: this.phoneNumber,
+      productTypeKey: this.productCode,
+    };
+    this.auth.post(data, 'Loan.LoanService.FetchLoanEligibility').subscribe(
+      (res: any) => {
+        this.loading = false;
+        console.log(res);
+
+        if (res.data[0].offerEligibilityStatus === 'Eligible') {
+          this.fetchSchedule();
+          this.transType = 1;
+        } else {
+          this.toast.error('Not Eligible for this offer', 'Error');
+        }
+      },
+      (err) => {
+        this.loading = false;
+        this.toast.error('Unable to check Eligibility', 'Error');
+        this.loading = false;
+      }
+    );
+  }
+
+  fetchBvn() {
+    console.log(this.bvn);
+
+    const data = {
+      bvn: this.bvn,
+      show_detail: true,
+    };
+    this.auth.post(data, 'Nibss.BvnService.ValidateBvn').subscribe(
+      (res: any) => {
+        console.log(res);
+
+        if (res.data.bvn) {
+          this.fullName = res.data.fullName;
+          this.dateOfBirth = res.data.dateOfBirth;
+          this.phoneNumber = res.data.phoneNo;
+        } else {
+        }
+      },
+      (err) => {
+        this.toast.error('Failed to fetch BVN data', 'Error');
+        this.router.navigate(['/dashboard']);
+      }
+    );
+  }
+
   next() {
     if (!this.account) {
       this.toast.error('Account is required', 'Error');
@@ -183,8 +242,7 @@ export class LoanPage implements OnInit {
       this.toast.error('Date is required', 'Error');
       return true;
     }
-    this.fetchSchedule();
-    this.transType = 1;
+    this.checkEligible();
   }
   submit() {
     this.loading = true;
@@ -193,6 +251,7 @@ export class LoanPage implements OnInit {
     //   this.loading = false;
     // }, 3000);
     const data = {
+      UserId: +this.user.userId,
       AccountNo: this.account,
       Principal: this.principal,
       Tenure: this.tenure,
@@ -200,12 +259,13 @@ export class LoanPage implements OnInit {
       ProductTypeKey: this.productCode,
       AdditionalComment: this.comment,
     };
+
     this.auth.post(data, 'Loan.LoanService.SubmitLoanApplication').subscribe(
       (res: any) => {
         this.loading = false;
         console.log(res);
 
-        if (res.status === '00') {
+        if (res.data.status) {
           this.toast.success(res.data.message, 'Success');
           this.show = false;
           this.transType = 0;

@@ -13,174 +13,395 @@
       </ion-buttons>
     </section>
 
-    <section class="row">
-      <div style="border-radius: 8px; margin: 10px 4px">
-        <div class="has">Let’s get started</div>
-        <div class="hassub">
-          Enter your email or phone number and password to continue
+    <div
+      style="
+        height: 90vh;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        padding-bottom: 40px;
+      "
+      *ngIf="page === 'select'"
+    >
+      <div>
+        <section class="row">
+          <h3>Your BVN data</h3>
+        </section>
+        <div
+          style="background-color: #f8f8f8; border-radius: 8px; padding: 10px"
+        >
+          <table>
+            <tbody style="font-size: 14px; text-align: left">
+              <tr>
+                <th style="padding: 10px 5px">First Name</th>
+                <td style="padding: 10px 5px">{{ user.firstName }}</td>
+              </tr>
+              <tr>
+                <th style="padding: 10px 5px">Last Name</th>
+                <td style="padding: 10px 5px">{{ user.lastName }}</td>
+              </tr>
+              <tr>
+                <th style="padding: 10px 5px">Middle Name</th>
+                <td style="padding: 10px 5px">{{ user.middleName }}</td>
+              </tr>
+              <tr>
+                <th style="padding: 10px 5px">Phone #</th>
+                <td style="padding: 10px 5px">{{ user.phoneNo }}</td>
+              </tr>
+              <tr>
+                <th style="padding: 10px 5px">Email</th>
+                <td style="padding: 10px 5px">{{ user.emailAddress }}</td>
+              </tr>
+              <tr>
+                <th style="padding: 10px 5px">DOB</th>
+                <td style="padding: 10px 5px">{{ user.dob | date }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
+      <section
+        style="
+          display: flex;
+          flex-direction: column;
+          align-content: space-between;
+        "
+      >
+        <ion-button class="btn" expand="block" (click)="change('use')">
+          Use & Continue
+        </ion-button>
+
+        <ion-button
+          class="btn2"
+          expand="block"
+          style="margin-top: 1rem"
+          (click)="change('edit')"
+        >
+          Edit & Continue
+        </ion-button>
+      </section>
+    </div>
+
+    <section
+      style="
+        height: 90vh;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        padding-bottom: 40px;
+      "
+      *ngIf="page === 'use'"
+    >
+      <div>
+        <section class="row">
+          <h3>Create Account</h3>
+        </section>
+
+        <section class="central-image" style="margin-top: -50px">
+          <ion-img [src]="imageSrc" class="img"></ion-img>
+        </section>
+
+        <section
+          style="
+            text-align: center;
+            margin-top: -80px;
+            display: flex;
+            flex-direction: column;
+            align-content: space-between;
+          "
+        >
+          <section class="we" style="margin-top: 4rem">
+            <span class="sub-title"
+              >Hey, you already know my name, tell me your’s so I can help you
+              setup your <br /><span style="color: #25214f; font-weight: 600">
+                Royal Basic Account</span
+              >
+            </span>
+          </section>
+        </section>
+      </div>
+      <section class="row">
+        <form [formGroup]="onboardingForm">
+          <div class="form-group row" style="padding: 5px">
+            <label class="label">First Name</label>
+            <div
+              style="
+                border: 0.800000011920929px solid #ced4da;
+                border-radius: 3px;
+                background-color: #ced4da;
+                position: relative;
+              "
+            >
+              <input
+                type="text"
+                placeholder="Kelvin"
+                required
+                style="border: none"
+                class="input"
+                formControlName="FirstName"
+              />
+            </div>
+          </div>
+
+          <div class="form-group row" style="padding: 5px">
+            <label class="label">Last Name</label>
+            <div
+              style="
+                border: 0.800000011920929px solid #ced4da;
+                border-radius: 3px;
+                background-color: #ced4da;
+                position: relative;
+              "
+            >
+              <input
+                type="text"
+                placeholder="Chukwuma"
+                required
+                style="border: none"
+                class="input"
+                formControlName="LastName"
+              />
+            </div>
+          </div>
+
+          <div class="form-group row" style="padding: 5px">
+            <label class="label">Middle Name</label>
+            <div
+              style="
+                border: 0.800000011920929px solid #ced4da;
+                border-radius: 3px;
+                background-color: #ced4da;
+                position: relative;
+              "
+            >
+              <input
+                type="text"
+                placeholder="Adekunle"
+                required
+                style="border: none"
+                class="input"
+                formControlName="MiddleName"
+              />
+            </div>
+          </div>
+
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Select Gender</label>
+            <select formControlName="Gender" name="gender" id="" class="input">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <ion-button
+              class="btn"
+              expand="block"
+              style="margin-top: 1rem"
+              (click)="change('add')"
+              routerLinkActive="router-link-active"
+            >
+              Next
+            </ion-button>
+          </div>
+        </form>
+      </section>
     </section>
 
-    <section class="row">
-      <h5 style="text-align: left; color: black">
-        Enter your password to continue
-      </h5>
-      <form [formGroup]="onboardingForm">
-        <div class="form-group row" style="padding: 5px">
-          <label for="">Email</label>
-          <input
-            type="text"
-            formControlName="Email"
-            name="email"
-            class="input"
-            placeholder="ciroma.kelvin@gmail.com"
-          />
+    <section
+      style="
+        height: 90vh;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        padding-bottom: 40px;
+      "
+      *ngIf="page === 'add'"
+    >
+      <section class="row">
+        <div style="border-radius: 8px; margin: 10px 4px">
+          <div class="has">Let’s get started</div>
+          <div class="hassub">
+            Enter your email or phone number and password to continue
+          </div>
         </div>
-        <div class="form-group row" style="padding: 5px">
-          <label for="">Phone</label>
-          <div class="phoneField">
-            <!-- <input
+      </section>
+
+      <section class="row">
+        <h5 style="text-align: left; color: black">
+          Enter your password to continue
+        </h5>
+        <form [formGroup]="onboardingForm">
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Email</label>
+            <input
+              type="text"
+              formControlName="Email"
+              name="email"
+              class="input"
+              placeholder="ciroma.kelvin@gmail.com"
+            />
+          </div>
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Phone</label>
+            <div class="phoneField">
+              <!-- <input
               type="text"
               name="text"
               class="input dialField"
               placeholder="+234"
             /> -->
+              <input
+                formControlName="Phone"
+                type="text"
+                name="text"
+                class="input"
+                placeholder="08012345678"
+              />
+            </div>
+          </div>
+          <div class="form-group row" style="padding: 5px">
+            <label class="label">Password</label>
+            <div
+              style="
+                border: 0.800000011920929px solid #ced4da;
+                border-radius: 3px;
+                background-color: #ced4da;
+                position: relative;
+              "
+            >
+              <input
+                [type]="show ? 'text' : 'password'"
+                placeholder="Password"
+                id="password"
+                name="password"
+                required
+                style="border: none"
+                formControlName="Password"
+                class="input"
+              />
+              <ion-icon
+                (click)="viewpassword()"
+                *ngIf="!show"
+                icon="eye-off-outline"
+                style="
+                  font-size: 32px;
+                  color: #676767;
+                  cursor: pointer;
+                  background-color: transparent;
+                  position: absolute;
+                  right: 20px;
+                  top: 10px;
+                "
+              ></ion-icon>
+              <ion-icon
+                (click)="viewpassword()"
+                *ngIf="show"
+                icon="eye-outline"
+                style="
+                  font-size: 32px;
+                  color: #676767;
+                  cursor: pointer;
+                  background-color: transparent;
+                  position: absolute;
+                  right: 20px;
+                  top: 10px;
+                "
+              ></ion-icon>
+            </div>
+          </div>
+
+          <div class="form-group row" style="padding: 5px">
+            <label class="label">Confirm Password</label>
+            <div
+              style="
+                border: 0.800000011920929px solid #ced4da;
+                border-radius: 3px;
+                background-color: #ced4da;
+                position: relative;
+              "
+            >
+              <input
+                [type]="show ? 'text' : 'password'"
+                placeholder="Password"
+                id="password"
+                name="password"
+                required
+                style="border: none"
+                class="input"
+                [(ngModel)]="confirmPass"
+                [ngModelOptions]="{ standalone: true }"
+              />
+              <ion-icon
+                (click)="viewpassword()"
+                *ngIf="!show"
+                icon="eye-off-outline"
+                style="
+                  font-size: 32px;
+                  color: #676767;
+                  cursor: pointer;
+                  background-color: transparent;
+                  position: absolute;
+                  right: 20px;
+                  top: 10px;
+                "
+              ></ion-icon>
+              <ion-icon
+                (click)="viewpassword()"
+                *ngIf="show"
+                icon="eye-outline"
+                style="
+                  font-size: 32px;
+                  color: #676767;
+                  cursor: pointer;
+                  background-color: transparent;
+                  position: absolute;
+                  right: 20px;
+                  top: 10px;
+                "
+              ></ion-icon>
+            </div>
+          </div>
+
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Referal Code (optional)</label>
             <input
-              formControlName="Phone"
+              formControlName="RefCode"
               type="text"
               name="text"
               class="input"
-              placeholder="08012345678"
+              placeholder="63653757"
             />
           </div>
-        </div>
-        <div class="form-group row" style="padding: 5px">
-          <label class="label">Password</label>
+
           <div
+            class="form-group row"
             style="
-              border: 0.800000011920929px solid #ced4da;
-              border-radius: 3px;
-              background-color: #ced4da;
-              position: relative;
+              padding: 5px;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
             "
           >
-            <input
-              [type]="show ? 'text' : 'password'"
-              placeholder="Password"
-              id="password"
-              name="password"
-              required
-              style="border: none"
-              formControlName="Password"
-              class="input"
-            />
-            <ion-icon
-              (click)="viewpassword()"
-              *ngIf="!show"
-              icon="eye-off-outline"
-              style="
-                font-size: 32px;
-                color: #676767;
-                cursor: pointer;
-                background-color: transparent;
-                position: absolute;
-                right: 20px;
-                top: 10px;
-              "
-            ></ion-icon>
-            <ion-icon
-              (click)="viewpassword()"
-              *ngIf="show"
-              icon="eye-outline"
-              style="
-                font-size: 32px;
-                color: #676767;
-                cursor: pointer;
-                background-color: transparent;
-                position: absolute;
-                right: 20px;
-                top: 10px;
-              "
-            ></ion-icon>
+            <ion-checkbox slot="end" formControlName="terms"></ion-checkbox>
+            <ion-label style="margin-left: 10px"
+              >I accept terms of service and privacy policy</ion-label
+            >
           </div>
-        </div>
 
-        <div class="form-group row" style="padding: 5px">
-          <label class="label">Confirm Password</label>
-          <div
-            style="
-              border: 0.800000011920929px solid #ced4da;
-              border-radius: 3px;
-              background-color: #ced4da;
-              position: relative;
-            "
-          >
-            <input
-              [type]="show ? 'text' : 'password'"
-              placeholder="Password"
-              id="password"
-              name="password"
-              required
-              style="border: none"
-              class="input"
-              [(ngModel)]="confirmPass"
-              [ngModelOptions]="{ standalone: true }"
-            />
-            <ion-icon
-              (click)="viewpassword()"
-              *ngIf="!show"
-              icon="eye-off-outline"
-              style="
-                font-size: 32px;
-                color: #676767;
-                cursor: pointer;
-                background-color: transparent;
-                position: absolute;
-                right: 20px;
-                top: 10px;
-              "
-            ></ion-icon>
-            <ion-icon
-              (click)="viewpassword()"
-              *ngIf="show"
-              icon="eye-outline"
-              style="
-                font-size: 32px;
-                color: #676767;
-                cursor: pointer;
-                background-color: transparent;
-                position: absolute;
-                right: 20px;
-                top: 10px;
-              "
-            ></ion-icon>
+          <div class="form-group">
+            <ion-button
+              class="btn"
+              expand="block"
+              style="margin-top: 1rem"
+              (click)="presentAlertPrompt()"
+              routerLinkActive="router-link-active"
+            >
+              Next
+            </ion-button>
           </div>
-        </div>
-
-        <div class="form-group row" style="padding: 5px">
-          <label for="">Referal Code (optional)</label>
-          <input
-            formControlName="RefCode"
-            type="text"
-            name="text"
-            class="input"
-            placeholder="63653757"
-          />
-        </div>
-
-        <div class="form-group">
-          <ion-button
-            class="btn"
-            expand="block"
-            style="margin-top: 1rem"
-            (click)="register()"
-            routerLinkActive="router-link-active"
-          >
-            Next
-          </ion-button>
-        </div>
-      </form>
+        </form>
+      </section>
     </section>
   </section>
 </ion-content>

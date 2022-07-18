@@ -19,7 +19,7 @@ export class VerifyPhoneComponent implements OnInit {
   onboardingForm: FormGroup;
   loading = true;
   user: any = {};
-
+  type;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -97,29 +97,48 @@ export class VerifyPhoneComponent implements OnInit {
                 CompanyName: res.data.userDetail.companyName
                   ? res.data.userDetail.companyName
                   : '',
+                Gender: res.data.userDetail.gender
+                  ? res.data.userDetail.gender
+                  : '',
               });
               this.user = res.data.userDetail;
               this.sendOtp();
               console.log(res);
             } else {
               console.log(res);
-              this.router.navigate(['/register/become-royalty']);
+              this.router.navigate(['/register/become-royalty'], {
+                state: {
+                  mode: this.router?.getCurrentNavigation()?.extras?.state
+                    ?.mode,
+                },
+              });
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register/become-royalty']);
+            this.router.navigate(['/register/become-royalty'], {
+              state: {
+                mode: this.type,
+              },
+            });
             this.toast.error('Please try again', 'Error');
           }
         );
     } else {
-      this.router.navigate(['/register/become-royalty']);
+      this.router.navigate(['/register/become-royalty'], {
+        state: {
+          mode: this.type,
+        },
+      });
     }
     return;
   }
 
   ngOnInit(): void {
     // register form
+    this.type = this.router?.getCurrentNavigation()?.extras?.state?.mode;
+    console.log('type', this.type);
+
     this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
       Id: new FormControl(+this.id),
@@ -145,6 +164,7 @@ export class VerifyPhoneComponent implements OnInit {
       TinNumber: new FormControl(''),
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
+      Gender: new FormControl(''),
     });
     // console.log(this.onboardingForm.value);
   }
@@ -202,13 +222,33 @@ export class VerifyPhoneComponent implements OnInit {
                     localStorage.setItem('stageId', res.data.data.id);
 
                     if (this.route.snapshot.params.mode === '1') {
-                      this.router.navigate(['/register/bvn-success/1']);
+                      this.router.navigate(['/register/bvn-success/1'], {
+                        state: {
+                          mode: this.router?.getCurrentNavigation()?.extras
+                            ?.state?.mode,
+                        },
+                      });
                     } else if (this.route.snapshot.params.mode === '2') {
-                      this.router.navigate(['/register/image']);
+                      this.router.navigate(['/register/image'], {
+                        state: {
+                          mode: this.router?.getCurrentNavigation()?.extras
+                            ?.state?.mode,
+                        },
+                      });
                     } else if (this.route.snapshot.params.mode === '3') {
-                      this.router.navigate(['/register/image-done']);
+                      this.router.navigate(['/register/image-done'], {
+                        state: {
+                          mode: this.router?.getCurrentNavigation()?.extras
+                            ?.state?.mode,
+                        },
+                      });
                     } else if (this.route.snapshot.params.mode === '4') {
-                      this.router.navigate(['/register/bvn-success/2']);
+                      this.router.navigate(['/register/bvn-success/2'], {
+                        state: {
+                          mode: this.router?.getCurrentNavigation()?.extras
+                            ?.state?.mode,
+                        },
+                      });
                     }
                     // deal with register
                     console.log(res);
@@ -249,13 +289,29 @@ export class VerifyPhoneComponent implements OnInit {
   }
   next() {
     if (this.route.snapshot.params.mode === '1') {
-      this.router.navigate(['/register/bvn-success/1']);
+      this.router.navigate(['/register/bvn-success/1'], {
+        state: {
+          mode: this.type,
+        },
+      });
     } else if (this.route.snapshot.params.mode === '2') {
-      this.router.navigate(['/register/image']);
+      this.router.navigate(['/register/image'], {
+        state: {
+          mode: this.type,
+        },
+      });
     } else if (this.route.snapshot.params.mode === '3') {
-      this.router.navigate(['/register/image-done']);
+      this.router.navigate(['/register/image-done'], {
+        state: {
+          mode: this.type,
+        },
+      });
     } else if (this.route.snapshot.params.mode === '4') {
-      this.router.navigate(['/register/bvn-success/2']);
+      this.router.navigate(['/register/bvn-success/2'], {
+        state: {
+          mode: this.type,
+        },
+      });
     }
   }
 }

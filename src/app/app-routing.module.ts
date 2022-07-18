@@ -87,6 +87,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'upload-document',
+        loadChildren: () =>
+          import('./modules/document-upload/document-upload.module').then(
+            (m) => m.DocumentUploadModule
+          ),
+      },
+      {
         path: 'loan',
         loadChildren: () =>
           import('./modules/loan/loan.module').then((m) => m.LoanPageModule),
@@ -138,6 +145,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/register/register.module').then(
         (m) => m.RegisterModule
+      ),
+  },
+
+  {
+    path: 'forgot-passowrd',
+    loadChildren: () =>
+      import('./modules/reset-password/reset-password.module').then(
+        (m) => m.ResetPasswordModule
       ),
   },
   // {

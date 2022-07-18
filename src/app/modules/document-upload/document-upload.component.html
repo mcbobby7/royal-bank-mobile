@@ -1,0 +1,137 @@
+<ion-content>
+  <div style="height: 40px"></div>
+  <app-loader *ngIf="loading"></app-loader>
+  <section style="background-color: #25214f">
+    <div
+      style="
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #25214f;
+        color: #fff;
+        padding-top: 40px;
+      "
+    >
+      <div
+        style="
+          background: linear-gradient(
+            180deg,
+            #ffe278 0%,
+            rgba(255, 226, 120, 0.55) 100%
+          );
+          padding: 20px 30px;
+          text-align: left;
+          width: 100%;
+          max-width: 400px;
+          margin: auto;
+          border-radius: 10px;
+          color: #25214f;
+        "
+      >
+        <div style="font-size: 15px">
+          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}
+        </div>
+        <div
+          style="
+            border: 1px solid #25214f;
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+          "
+        >
+          <div>Balance:</div>
+          <div style="font-size: 20px">
+            {{ user?.accountNos[0]?.accountBalance | currency: "&#8358;" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div
+    style="
+      font-size: 20px;
+      text-align: center;
+      font-weight: 600;
+      margin-top: 30px;
+      color: #25214f;
+    "
+  >
+    Upload Documents
+  </div>
+
+  <section class="upload">
+    <div style="margin-bottom: 15px">
+      <div class="groupAll">
+        <fieldset class="group">
+          <label>{{ fileName || "Select CAC Document" }}</label>
+
+          <div class="custom-file fileInputProfileWrap">
+            <input
+              *ngIf="!isImageSaved"
+              type="file"
+              (change)="fileChangeEvent($event, 'CAC')"
+              class="fileInputProfile"
+            />
+          </div>
+        </fieldset>
+        <span *ngIf="imageError" style="color: red">{{ imageError }}</span>
+      </div>
+      <a class="btn btn-danger" (click)="removeImage()" *ngIf="isImageSaved"
+        >Remove</a
+      >
+    </div>
+
+    <div
+      class="form-group row"
+      style="padding: 5px; display: flex; flex-direction: column"
+    >
+      <label style="margin-bottom: 10px" for="">Type of ID</label>
+      <select [(ngModel)]="type" name="id" id="" class="input">
+        <option *ngFor="let data of types" [value]="data">
+          {{ data }}
+        </option>
+      </select>
+    </div>
+
+    <div style="margin-top: 20px">
+      <div class="groupAll">
+        <fieldset class="group">
+          <label>{{ fileName1 || "Select Valid ID" }}</label>
+          <div class="custom-file fileInputProfileWrap">
+            <input
+              *ngIf="!isImageSaved1"
+              type="file"
+              (change)="fileChangeEvent($event, 'ID')"
+              class="fileInputProfile"
+            />
+          </div>
+        </fieldset>
+        <span *ngIf="imageError1" style="color: red">{{ imageError1 }}</span>
+      </div>
+      <a class="btn btn-danger" (click)="removeImage1()" *ngIf="isImageSaved1"
+        >Remove</a
+      >
+    </div>
+  </section>
+
+  <div
+    class="form-group"
+    style="width: 80vw; max-width: 400px; margin: auto; margin-bottom: 40px"
+  >
+    <ion-button
+      class="btn"
+      expand="block"
+      style="margin-top: 1rem; font-family: Mulish !important"
+      (click)="upload()"
+    >
+      Upload
+    </ion-button>
+  </div>
+</ion-content>

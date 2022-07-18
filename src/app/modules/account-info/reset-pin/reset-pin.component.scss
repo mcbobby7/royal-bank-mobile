@@ -21,6 +21,16 @@ ion-content {
   font-size: 1.2rem;
   --background-activated: #25214f;
 }
+.btn2 {
+  --background: #fee178;
+  --color: #25214f;
+  color: #25214f;
+  text-transform: capitalize;
+  height: 3.5rem;
+  font-weight: 300;
+  font-size: 1.2rem;
+  --background-activated: #fee178;
+}
 
 input {
   height: 15px;
@@ -37,7 +47,7 @@ input {
   --background: #25214f;
   --color: #fff;
   --color-activated: #fff;
-  --background-activated: #d9ac0b;
+  --background-activated: #fee178;
 }
 
 .form-inline > * {
@@ -67,7 +77,7 @@ ion-button {
 }
 
 ion-button {
-  --background: #d9ac0b;
+  --background: #fee178;
   --color: #25214f;
   --background-activated: #25214f;
   --color-activated: #fff;
@@ -82,7 +92,7 @@ ion-toggle {
 
 .inner-icon {
   // font-size: 20px;
-  color: #d9ac0b;
+  color: #fee178;
 }
 
 span {

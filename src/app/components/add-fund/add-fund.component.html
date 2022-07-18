@@ -51,8 +51,8 @@
             <td>{{ user?.phone }}</td>
           </tr>
           <tr>
-            <th>Email</th>
-            <td>{{ user?.email }}</td>
+            <th>Gender</th>
+            <td>{{ user?.gender }}</td>
           </tr>
           <tr>
             <th>Account Number</th>
@@ -63,6 +63,20 @@
             <td>
               {{ user?.accountNos[0].accountBalance | currency: "&#8358;" }}
             </td>
+          </tr>
+          <tr *ngIf="user?.bvn">
+            <th>BVN</th>
+            <td>{{ user?.bvn }}</td>
+          </tr>
+
+          <tr *ngIf="user?.tin">
+            <th>TIN</th>
+            <td>{{ user?.tin }}</td>
+          </tr>
+
+          <tr *ngIf="user?.rc">
+            <th>RC Number</th>
+            <td>{{ user?.rc }}</td>
           </tr>
         </tbody>
       </table>

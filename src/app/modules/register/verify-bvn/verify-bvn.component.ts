@@ -19,7 +19,7 @@ export class VerifyBvnComponent implements OnInit {
   onboardingForm: FormGroup;
   loading = true;
   phone;
-
+  type;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -98,21 +98,37 @@ export class VerifyBvnComponent implements OnInit {
                 CompanyName: res.data.userDetail.companyName
                   ? res.data.userDetail.companyName
                   : '',
+                Gender: res.data.userDetail.gender
+                  ? res.data.userDetail.gender
+                  : '',
               });
               console.log(res);
             } else {
               console.log(res);
-              this.router.navigate(['/register/become-royalty']);
+              this.router.navigate(['/register/become-royalty'], {
+                state: {
+                  mode: this.router?.getCurrentNavigation()?.extras?.state
+                    ?.mode,
+                },
+              });
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register/become-royalty']);
+            this.router.navigate(['/register/become-royalty'], {
+              state: {
+                mode: this.type,
+              },
+            });
             this.toast.error('Please try again', 'Error');
           }
         );
     } else {
-      this.router.navigate(['/register/become-royalty']);
+      this.router.navigate(['/register/become-royalty'], {
+        state: {
+          mode: this.type,
+        },
+      });
     }
     this.loading = false;
   }
@@ -140,6 +156,7 @@ export class VerifyBvnComponent implements OnInit {
               Phone: res.data.phoneNo,
               Email: res.data.emailAddress,
               DOB: res.data.dateOfBirth,
+              Gender: res.data.gender,
             });
 
             this.register();
@@ -172,17 +189,33 @@ export class VerifyBvnComponent implements OnInit {
               if (this.mode === 'basic') {
                 this.page = 'verify';
               } else {
-                this.router.navigate(['/register/details']);
+                this.router.navigate(['/register/details'], {
+                  state: {
+                    mode: this.type,
+                  },
+                });
               }
             } else {
               if (this.route.snapshot.params.mode === '4') {
-                this.router.navigate([`/register/phone/${this.phone}/4`]);
+                this.router.navigate([`/register/phone/${this.phone}/4`], {
+                  state: {
+                    mode: this.type,
+                  },
+                });
                 return;
               } else if (this.route.snapshot.params.mode === '2') {
-                this.router.navigate([`/register/phone/${this.phone}/4`]);
+                this.router.navigate([`/register/phone/${this.phone}/4`], {
+                  state: {
+                    mode: this.type,
+                  },
+                });
                 return;
               }
-              this.router.navigate([`/register/phone/${this.phone}/1`]);
+              this.router.navigate([`/register/phone/${this.phone}/1`], {
+                state: {
+                  mode: this.type,
+                },
+              });
             }
 
             // deal with register
@@ -200,6 +233,13 @@ export class VerifyBvnComponent implements OnInit {
 
   ngOnInit(): void {
     // register form
+    this.type = this.router?.getCurrentNavigation()?.extras?.state?.mode;
+    console.log('type', this.type);
+
+    let mode = '';
+    mode = this.router?.getCurrentNavigation()?.extras?.state?.mode;
+    console.log('mode', mode);
+
     this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
       Id: new FormControl(+this.id),
@@ -225,6 +265,7 @@ export class VerifyBvnComponent implements OnInit {
       TinNumber: new FormControl(''),
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
+      Gender: new FormControl(''),
     });
     // console.log(this.onboardingForm.value);
   }
@@ -258,7 +299,11 @@ export class VerifyBvnComponent implements OnInit {
     if (this.mode === 'basic') {
       this.page = 'verify';
     } else {
-      this.router.navigate(['/register/details']);
+      this.router.navigate(['/register/details'], {
+        state: {
+          mode: this.type,
+        },
+      });
     }
   }
 
@@ -267,12 +312,24 @@ export class VerifyBvnComponent implements OnInit {
   }
   verify() {
     if (this.route.snapshot.params.mode === '4') {
-      this.router.navigate(['/register/phone/08161808893/4']);
+      this.router.navigate(['/register/phone/08161808893/4'], {
+        state: {
+          mode: this.type,
+        },
+      });
       return;
     } else if (this.route.snapshot.params.mode === '2') {
-      this.router.navigate(['/register/phone/08161808893/4']);
+      this.router.navigate(['/register/phone/08161808893/4'], {
+        state: {
+          mode: this.type,
+        },
+      });
       return;
     }
-    this.router.navigate(['/register/phone/08161808893/1']);
+    this.router.navigate(['/register/phone/08161808893/1'], {
+      state: {
+        mode: this.type,
+      },
+    });
   }
 }

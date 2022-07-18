@@ -76,6 +76,82 @@
       height: 90vh;
       padding-bottom: 40px;
     "
+    *ngIf="page === 'crop'"
+  >
+    <div>
+      <!-- <section
+        style="
+          text-align: center;
+          margin-top: -80px;
+          display: flex;
+          flex-direction: column;
+          align-content: space-between;
+        "
+      >
+        <section class="we" style="margin-top: 4rem">
+          All done {{ user.firstName }}
+        </section>
+        <section style="font-size: 14px; text-align: center; margin-top: 10px">
+          Your information all checked out.
+        </section>
+        <div
+          style="
+            background: #f8f8f8;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+          "
+        >
+          <div class="td">Upload your picture</div>
+          <div class="bd">Show us that beautiful</div>
+          <div class="bdp">
+            Picture must be taken in a well lit and clear background
+          </div>
+        </div>
+      </section> -->
+    </div>
+    <div class="card-body">
+      <div class="row" style="margin-top: 15px">
+        <div class="text-center col-md-8" style="text-align: center">
+          <h3>Crop Image</h3>
+          <h5>Make sure your face is vissible</h5>
+          <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [imageBase64]="baseImage"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 4"
+            [resizeToWidth]="256"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()"
+          ></image-cropper>
+        </div>
+      </div>
+    </div>
+    <section class="central-image row">
+      <div class="form-group">
+        <ion-button
+          (click)="crop()"
+          class="btn"
+          expand="block"
+          style="margin-top: 0"
+        >
+          Done
+        </ion-button>
+      </div>
+    </section>
+  </div>
+
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      height: 90vh;
+      padding-bottom: 40px;
+    "
     *ngIf="page === 'success'"
   >
     <div>

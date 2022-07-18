@@ -9,12 +9,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BalanceComponent implements OnInit {
   show = false;
-  user = JSON.parse(localStorage.getItem('user'));
+  user;
   data = null;
   constructor(private auth: AuthService, public toast: ToastrService) {}
 
   ngOnInit() {
     console.log(this.user);
+    const user = localStorage.getItem('user');
+    const users = user ? JSON.parse(user) : null;
+    this.user = users;
 
     setInterval(() => {
       this.getBalance();
@@ -27,11 +30,11 @@ export class BalanceComponent implements OnInit {
 
   getBalance() {
     this.user = JSON.parse(localStorage.getItem('user'));
-    if (this.user.accountNos.length === 0) {
+    if (this.user?.accountNos?.length === 0) {
       return;
     }
     const data = {
-      clientId: +this.user.accountNos[0].clientId,
+      clientId: +this.user?.accountNos[0]?.clientId,
       accountId: null,
     };
     this.auth.post(data, 'Cba.BankingService.FetchAccount').subscribe(
@@ -40,10 +43,10 @@ export class BalanceComponent implements OnInit {
 
         if (res.data.responseCode === '00') {
           this.data = res.data.data;
-          for (let i = 0; i < this.user.accountNos.length; i++) {
-            for (let j = 0; i < this.data.length; j++) {
+          for (let i = 0; i < this.user?.accountNos?.length; i++) {
+            for (let j = 0; i < this.data?.length; j++) {
               if (
-                this.user.accountNos[i].accountNo === this.data[j].accountNo
+                this.user?.accountNos[i]?.accountNo === this.data[j].accountNo
               ) {
                 console.log(this.user.accountNos[i].accountNo);
                 console.log(this.user.accountNos[i].accountBalance);

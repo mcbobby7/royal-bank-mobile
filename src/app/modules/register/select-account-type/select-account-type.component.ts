@@ -16,6 +16,7 @@ export class SelectAccountTypeComponent implements OnInit {
   id: any = localStorage.getItem('stageId');
   onboardingForm!: FormGroup;
   loading = true;
+  type;
 
   constructor(
     private auth: AuthService,
@@ -94,16 +95,28 @@ export class SelectAccountTypeComponent implements OnInit {
                 CompanyName: res.data.userDetail.companyName
                   ? res.data.userDetail.companyName
                   : '',
+                Gender: res.data.userDetail.gender
+                  ? res.data.userDetail.gender
+                  : '',
               });
               console.log(res);
             } else {
               console.log(res);
-              this.router.navigate(['/register/become-royalty']);
+              this.router.navigate(['/register/become-royalty'], {
+                state: {
+                  mode: this.router?.getCurrentNavigation()?.extras?.state
+                    ?.mode,
+                },
+              });
               this.toast.error('Please try again', 'Error');
             }
           },
           (err) => {
-            this.router.navigate(['/register/become-royalty']);
+            this.router.navigate(['/register/become-royalty'], {
+              state: {
+                mode: this.type,
+              },
+            });
             this.toast.error('Please try again', 'Error');
           }
         );
@@ -134,9 +147,21 @@ export class SelectAccountTypeComponent implements OnInit {
             // this.data = res.data;
             localStorage.setItem('stageId', res.data.data.id);
             if (this.mode === 'Royal Basic') {
-              this.router.navigate(['/register/bvn/1']);
+              console.log(
+                this.type,
+                this.router?.getCurrentNavigation()?.extras?.state?.mode
+              );
+              this.router.navigate(['/register/bvn/1'], {
+                state: {
+                  mode: this.type,
+                },
+              });
             } else {
-              this.router.navigate(['/register/cop-details']);
+              this.router.navigate(['/register/cop-details'], {
+                state: {
+                  mode: this.type,
+                },
+              });
             }
 
             // deal with register
@@ -154,6 +179,9 @@ export class SelectAccountTypeComponent implements OnInit {
 
   ngOnInit(): void {
     // register form
+    this.type = this.router?.getCurrentNavigation()?.extras?.state?.mode;
+    console.log('type', this.type);
+
     this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
       Id: new FormControl(+this.id),
@@ -179,6 +207,7 @@ export class SelectAccountTypeComponent implements OnInit {
       TinNumber: new FormControl(''),
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
+      Gender: new FormControl(''),
     });
     this.onboardingForm.patchValue({
       AccountType: this.mode,
@@ -199,12 +228,29 @@ export class SelectAccountTypeComponent implements OnInit {
       AccountType: mode,
     });
     console.log(this.onboardingForm.value);
+    console.log(
+      'main mode',
+      this.router?.getCurrentNavigation()?.extras?.state?.mode
+    );
   }
   next() {
+    console.log(
+      'main mode',
+      this.router?.getCurrentNavigation()?.extras?.state?.mode
+    );
+
     if (this.mode === 'basic') {
-      this.router.navigate(['/register/bvn/1']);
+      this.router.navigate(['/register/bvn/1'], {
+        state: {
+          mode: this.type,
+        },
+      });
     } else {
-      this.router.navigate(['/register/cop-details']);
+      this.router.navigate(['/register/cop-details'], {
+        state: {
+          mode: this.type,
+        },
+      });
     }
   }
 }

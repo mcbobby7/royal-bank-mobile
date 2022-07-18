@@ -24,6 +24,7 @@ export class DoneComponent implements OnInit {
   user: any = {};
   loading = true;
   setBack = false;
+  type;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -69,7 +70,7 @@ export class DoneComponent implements OnInit {
                 Password: res.data.userDetail.password
                   ? res.data.userDetail.password
                   : '',
-                CreateBankAccount: true,
+                CreateBankAccount: this.type === 'nuban' ? false : true,
                 DOB: res.data.userDetail.dob ? res.data.userDetail.dob : '',
                 RefCode: res.data.userDetail.refCode
                   ? res.data.userDetail.refCode
@@ -102,6 +103,9 @@ export class DoneComponent implements OnInit {
                 CompanyName: res.data.userDetail.companyName
                   ? res.data.userDetail.companyName
                   : '',
+                Gender: res.data.userDetail.gender
+                  ? res.data.userDetail.gender
+                  : '',
               });
               console.log(res);
               console.log(this.onboardingForm.value);
@@ -113,11 +117,19 @@ export class DoneComponent implements OnInit {
           },
           (err) => {
             this.reloadCurrentRoute();
-            this.router.navigate(['/register/become-royalty']);
+            this.router.navigate(['/register/become-royalty'], {
+              state: {
+                mode: this.type,
+              },
+            });
           }
         );
     } else {
-      this.router.navigate(['/register/become-royalty']);
+      this.router.navigate(['/register/become-royalty'], {
+        state: {
+          mode: this.type,
+        },
+      });
     }
 
     return;
@@ -138,7 +150,11 @@ export class DoneComponent implements OnInit {
   reloadCurrentRoute() {
     const currentUrl = this.router.url;
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl]);
+      this.router.navigate([currentUrl], {
+        state: {
+          mode: this.type,
+        },
+      });
     });
   }
 
@@ -173,9 +189,12 @@ export class DoneComponent implements OnInit {
                   if (res.data.responseCode === '00') {
                     localStorage.setItem('stageId', '');
                   } else {
+                    this.msg = 'Unable to create channel';
                   }
                 },
-                (err) => console.error(err.message)
+                (err) => {
+                  this.msg = 'Unable to create channel';
+                }
               );
             console.log(res);
           } else {
@@ -195,10 +214,17 @@ export class DoneComponent implements OnInit {
       );
   }
   back() {
-    this.router.navigate(['/register/select-account']);
+    this.router.navigate(['/register/select-account'], {
+      state: {
+        mode: this.type,
+      },
+    });
   }
 
   ngOnInit() {
+    this.type = this.router?.getCurrentNavigation()?.extras?.state?.mode;
+    console.log('type', this.type);
+
     this.getOnboardingStage();
     this.onboardingForm = new FormGroup({
       Id: new FormControl(+this.id),
@@ -209,7 +235,7 @@ export class DoneComponent implements OnInit {
       Phone: new FormControl('875'),
       Email: new FormControl(''),
       Password: new FormControl(''),
-      CreateBankAccount: new FormControl(true),
+      CreateBankAccount: new FormControl(this.type === 'nuban' ? false : true),
       DOB: new FormControl(''),
       RefCode: new FormControl(''),
       Verified: new FormControl(true),
@@ -224,6 +250,7 @@ export class DoneComponent implements OnInit {
       TinNumber: new FormControl(''),
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
+      Gender: new FormControl(''),
     });
   }
   sign() {

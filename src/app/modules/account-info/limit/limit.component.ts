@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/http/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-limit',
@@ -17,9 +18,17 @@ export class LimitComponent implements OnInit {
   pass = false;
   limitInter;
   limitIntra;
-  constructor(public toast: ToastrService, private auth: AuthService) {}
+  constructor(
+    public toast: ToastrService,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    if (this.user.accountNos.length < 1) {
+      this.toast.error('No account number available', 'Error');
+      this.router.navigate(['/dashboard']);
+    }
     const user = JSON.parse(localStorage.getItem('user'));
     this.photo = user.photo ? user.photo : 'assets/icon/hey.png';
     this.auth
@@ -77,6 +86,9 @@ export class LimitComponent implements OnInit {
           if (res.data.responseCode === '00') {
             this.toast.success('Limit Updated', 'Success');
             this.pass = false;
+            localStorage.setItem('limit', 'true');
+            this.router.navigate(['/dashboard']);
+
             // deal with register
           } else {
             this.toast.error(res.data.responseMessage, 'Error');

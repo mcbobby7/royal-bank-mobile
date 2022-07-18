@@ -17,7 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Uid } from '@ionic-native/uid/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-
+import { NgIdleModule } from '@ng-idle/core';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 @NgModule({
   declarations: [AppComponent, DashboardPage, TransferPage, WithdrawComponent],
   entryComponents: [],
@@ -32,6 +33,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
     ComponentsModule,
     BrowserAnimationsModule,
     FormsModule,
+    // NgIdleModule.forRoot(),
+    NgIdleKeepaliveModule.forRoot(),
   ],
   providers: [
     Uid,

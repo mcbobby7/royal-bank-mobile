@@ -4,11 +4,32 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+  group,
+  query,
+  stagger,
+  keyframes,
+} from '@angular/animations';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateY(100%)' }),
+        animate('500ms ease-in', style({ transform: 'translateY(-0%)' })),
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ transform: 'translateY(-100%)' })),
+      ]),
+    ]),
+  ],
 })
 export class HistoryComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user'));
@@ -19,7 +40,9 @@ export class HistoryComponent implements OnInit {
   endDate;
   startDate;
   data = [];
-
+  visible = false;
+  tran: any = {};
+  details: any = {};
   transType = 'debit';
   counter = 0;
   historyForm = new FormGroup({
@@ -37,6 +60,47 @@ export class HistoryComponent implements OnInit {
     // let   user = JSON.parse(localStorage.getItem('user'));
     this.account = this.user.accountNos[0].accountNo;
     this.fetchTransTypes();
+  }
+
+  setTrans(transaction) {
+    let id;
+    for (let i = 0; i < this.user.accountNos.length; i++) {
+      if (this.account === this.user.accountNos[i].accountNo) {
+        id = this.user.accountNos[i].accountId;
+      }
+    }
+
+    this.loading = true;
+    const payload = {
+      accountId: id,
+      transactionId: transaction.transactionId,
+    };
+    this.auth
+      .post(payload, 'Cba.BankingService.FetchTransactionDetails')
+      .subscribe(
+        (res: any) => {
+          this.loading = false;
+          console.log(res);
+
+          if (res.data.responseCode === '00') {
+            this.details = res.data.data;
+            this.tran = transaction;
+            this.setVissible();
+          } else {
+            this.toast.error(res.data.responseMessage, 'Error');
+          }
+        },
+        (err) => {
+          this.toast.error('Failed to fetch transaction types', 'Error');
+          // this.router.navigate(['/dashboard']);
+          this.loading = false;
+        }
+      );
+
+    console.log(transaction);
+  }
+  setVissible() {
+    this.visible = !this.visible;
   }
 
   fetchTransTypes() {
@@ -78,8 +142,8 @@ export class HistoryComponent implements OnInit {
         {
           accountId: accId.toString(),
           transactionType: this.typeId.toString(),
-          fromDate: moment(this.endDate).format('DD MMM YYYY'),
-          toDate: moment(this.startDate).format('DD MMM YYYY'),
+          fromDate: moment(this.startDate).format('DD MMM YYYY'),
+          toDate: moment(this.endDate).format('DD MMM YYYY'),
         },
         'Cba.BankingService.FetchAccountTransactionsByDateAndType'
       )

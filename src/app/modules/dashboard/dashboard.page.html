@@ -93,7 +93,7 @@
   <!-- <section style="margin-top: 50px">
     <div
       style="
-        color: #d9ac0b;
+        color: #FEE178 ;
         font-size: 20px;
         margin-top: 15px;
         padding-bottom: 15px;
@@ -103,8 +103,34 @@
       Your account is limied
     </div>
   </section> -->
+  <section
+    *ngIf="user.accountType !== 'Royal Basic' && upload !== 'true'"
+    style="margin-top: 10px"
+    [routerLink]="['/action/upload-document']"
+  >
+    <div style="background-color: #f8f8f8; border-radius: 8px">
+      <ion-card-header class="header"
+        >Upload Documents for Verification</ion-card-header
+      >
+      <ion-card-content
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+        "
+      >
+        <span style="font-size: 12px; width: 80%"
+          >Upload you CAC document with a valid ID card
+        </span>
+        <ion-img
+          src="assets/icon/card.png"
+          style="width: 34px; height: 34px; width: 18%"
+        ></ion-img>
+      </ion-card-content>
+    </div>
+  </section>
 
-  <section style="margin-top: 10px">
+  <section style="margin-top: 10px" *ngIf="!limit">
     <div
       style="background-color: #f8f8f8; border-radius: 8px"
       [routerLink]="['/action/account-info/limit']"
@@ -117,9 +143,16 @@
           justify-content: space-around;
         "
       >
-        <span style="font-size: 13px; width: 80%"
+        <span
+          style="font-size: 13px; width: 80%"
+          *ngIf="user.accountType === 'Royal Basic'"
           >This account is perfect for Individuals, Students, Freelancers,
         </span>
+        <span
+          *ngIf="user.accountType !== 'Royal Basic'"
+          style="font-size: 13px; width: 80%"
+          >The account is perfect for business owners</span
+        >
         <ion-img
           src="assets/icon/upward-arrow.png"
           style="width: 34px; height: 34px; width: 18%"
@@ -129,7 +162,7 @@
   </section>
 
   <section
-    *ngIf="user.hasBVN === false"
+    *ngIf="user.hasBVN === false || user.hasBVN === 'false'"
     style="margin-top: 10px"
     [routerLink]="['/action/profile']"
   >

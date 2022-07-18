@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
           this.loading = false;
           console.log(res);
 
-          if (res.status === '00') {
+          if (res.data.bvn) {
             console.log(res);
             this.success = true;
             this.data = res.data;
@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
             this.middleName = name[1];
             this.lastName = name[2];
           } else {
-            this.toast.error(res.data.responseMessage, 'Error');
+            this.toast.error('BVN not found', 'Error');
           }
         },
         (err) => {
@@ -91,7 +91,9 @@ export class ProfileComponent implements OnInit {
       Phone: this.data.phoneNo,
       Email: this.data.emailAddress,
       BVN: this.bvn,
-      BVNStatus: 'Verified'
+      BVNStatus: 'Verified',
+      DOB: this.data.dateOfBirth,
+      Gender: this.data.gender,
     };
     this.auth.post(data, 'UserManager.UserService.UpdateProfile').subscribe(
       (res: any) => {

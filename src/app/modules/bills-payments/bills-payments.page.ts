@@ -31,7 +31,20 @@ export class BillsPaymentsPage implements OnInit {
       (data: any) => {
         this.loading = false;
         if (data.status === '00') {
-          this.billCategories = data.data;
+          let res = [];
+          res = data.data;
+          // for (let i = 0; i < res.length; i++) {
+          //   if (res[i].code === 'Data') {
+          //     res[i].icon = `assets/icon/dataIcon.png`;
+          //   } else if (res[i].code === 'Utility') {
+          //     res[i].icon = `assets/icon/utilityIcon.png`;
+          //   } else {
+          //     res[i].icon = `assets/icon/${res[i].code}.svg`;
+          //   }
+          // }
+          this.billCategories = res;
+          console.log(res);
+
           console.log(this.billCategories);
         } else {
           this.loading = false;

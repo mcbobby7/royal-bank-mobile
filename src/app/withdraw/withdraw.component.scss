@@ -15,7 +15,7 @@ ion-toggle {
 
 .inner-icon {
   // font-size: 20px;
-  color: #d9ac0b;
+  color: #fee178;
 }
 
 .icon-container {
@@ -92,7 +92,7 @@ ion-content {
 }
 
 ion-button {
-  --background: #d9ac0b;
+  --background: #fee178;
   --color: #fff !important;
 }
 
@@ -102,7 +102,7 @@ ion-button {
   --background: #25214f;
   --color: #fff;
   --color-activated: #fff;
-  --background-activated: #d9ac0b;
+  --background-activated: #fee178;
 }
 
 .form-inline > * {
@@ -150,13 +150,13 @@ label {
   margin-right: auto;
 }
 .btn2 {
-  --background: #d9ac0b;
-  --color: #fff;
+  --background: #fee178;
+  --color: #25214f;
   text-transform: capitalize;
   height: 3.5rem;
   font-weight: 300;
   font-size: 1.2rem;
-  --background-activated: #d9ac0b;
+  --background-activated: #fee178;
 }
 
 // ion-button {

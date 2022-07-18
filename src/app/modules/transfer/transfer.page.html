@@ -18,13 +18,16 @@
         justify-content: center;
         background-color: #25214f;
         color: #fff;
-        padding: 20px 30px;
         padding-top: 40px;
       "
     >
       <div
         style="
-          background-color: #d9ac0b;
+          background: linear-gradient(
+            180deg,
+            #ffe278 0%,
+            rgba(255, 226, 120, 0.55) 100%
+          );
           padding: 20px 30px;
           text-align: left;
           width: 100%;
@@ -34,11 +37,24 @@
           color: #25214f;
         "
       >
-        <div style="font-size: 26px">
-          {{ user?.accountNos[0]?.accountBalance | currency: "&#8358;" }}
-        </div>
         <div style="font-size: 15px">
           {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}
+        </div>
+        <div
+          style="
+            border: 1px solid #25214f;
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+          "
+        >
+          <div>Balance:</div>
+          <div style="font-size: 20px">
+            {{ user?.accountNos[0]?.accountBalance | currency: "&#8358;" }}
+          </div>
         </div>
       </div>
     </div>
@@ -57,23 +73,102 @@
           font-family: Mulish !important;
           display: flex;
           flex-direction: row;
-          justify-content: space-around;
+          justify-content: space-between;
+          align-items: center;
           cursor: pointer;
           margin: 1.5rem 0.5rem;
+          background-color: #25214f;
+          color: white;
+          padding: 15px 10px;
+          border-radius: 30px;
         "
         (click)="transactionType(1)"
       >
-        <div class="icon-container">
-          <ion-icon name="caret-up-circle" class="inner-icon"></ion-icon>
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <div class="icon-container">
+            <img
+              style="width: 50px; height: 50px"
+              src="assets/icon/royalT.png"
+              alt=""
+            />
+          </div>
+          <div style="margin-left: 15px">
+            <div style="margin: auto; font-size: 16px; margin-bottom: 10px">
+              Make a new transfer
+            </div>
+            <div style="margin: auto; font-size: 11px">
+              Send money to Royal account
+            </div>
+          </div>
         </div>
-        <span style="margin: auto; font-size: 20px">Send to Royal Bank</span>
-        <ion-icon
-          name="caret-forward"
-          style="margin: auto; font-size: 20px; color: #25214f"
-        ></ion-icon>
+
+        <img
+          style="width: 30px; height: 30px"
+          src="assets/icon/ar.png"
+          alt=""
+        />
       </div>
 
       <div
+        style="
+          font-family: Mulish !important;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+          margin: 1.5rem 0.5rem;
+          background: linear-gradient(
+            180deg,
+            #ffe278 0%,
+            rgba(255, 226, 120, 0.55) 100%
+          );
+          color: #25214f;
+          padding: 15px 10px;
+          border-radius: 30px;
+        "
+        (click)="transactionType(2)"
+      >
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <div class="icon-container">
+            <img
+              style="width: 50px; height: 50px; border-radius: 50%"
+              src="assets/icon/otherT.png"
+              alt=""
+            />
+          </div>
+          <div style="margin-left: 15px">
+            <div style="margin: auto; font-size: 16px; margin-bottom: 10px">
+              Make a new transfer
+            </div>
+            <div style="margin: auto; font-size: 11px">
+              Send money to Royal account
+            </div>
+          </div>
+        </div>
+
+        <img
+          style="width: 30px; height: 30px"
+          src="assets/icon/otherArrow.png"
+          alt=""
+        />
+      </div>
+
+      <!-- <div
         style="
           font-family: Mulish !important;
           display: flex;
@@ -92,7 +187,7 @@
           name="caret-forward"
           style="margin: auto; font-size: 20px; color: #25214f"
         ></ion-icon>
-      </div>
+      </div> -->
     </section>
 
     <section *ngIf="transType === 1 || transType === 2">
@@ -254,16 +349,18 @@
               "
               *ngFor="let data of benes"
             >
-              <ion-card-content style="display: flex; flex-direction: row">
+              <ion-card-content
+                style="display: flex; flex-direction: row; align-items: center"
+                (click)="use(data)"
+              >
                 <ion-icon
-                  name="trash"
+                  name="person"
                   style="
                     margin-right: 10px;
-                    font-size: 25px;
+                    font-size: 20px;
                     color: #25214f;
                     width: 10%;
                   "
-                  (click)="delete(data.accNumber)"
                 ></ion-icon>
                 <div
                   style="
@@ -279,11 +376,11 @@
                   <span style="text-align: left">{{ data.accNumber }} </span>
                 </div>
                 <ion-icon
-                  (click)="use(data)"
-                  name="caret-forward"
+                  (click)="delete(data.accNumber)"
+                  name="trash"
                   style="
                     margin: auto;
-                    font-size: 30px;
+                    font-size: 20px;
                     color: #25214f;
                     width: 10%;
                   "
@@ -373,7 +470,7 @@
         >
       </div>
       <ion-button
-        style="margin-top: 30px; background-color: #d9ac0b"
+        style="margin-top: 30px; background-color: #fee178"
         class="btn2"
         expand="block"
         (click)="show = true"
@@ -460,7 +557,7 @@
           "
         >
           <ion-button
-            style="background-color: #d9ac0b"
+            style="background-color: #fee178"
             class="btn"
             expand="block"
             (click)="create()"

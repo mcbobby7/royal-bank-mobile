@@ -175,7 +175,7 @@ export class TransferPage implements OnInit {
   }
 
   debounce(e) {
-    if (e.length === 9) {
+    if (e.length === 10) {
       if (!this.bankCode && this.transType === 2) {
         this.toast.error('please select a bank', 'Error');
         return;
