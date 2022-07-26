@@ -96,6 +96,7 @@ const components = [
   PinComponent,
   BillsPaymentsPage,
   NubanRegisterComponent,
+  CreateAccountComponent,
 ];
 
 const materialModules = [RouterModule, ImageCropperModule];

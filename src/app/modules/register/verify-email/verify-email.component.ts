@@ -63,7 +63,7 @@ export class VerifyEmailComponent implements OnInit {
                 Password: res.data.userDetail.password
                   ? res.data.userDetail.password
                   : '',
-                CreateBankAccount: true,
+                CreateBankAccount: false,
                 DOB: res.data.userDetail.dob ? res.data.userDetail.dob : '',
                 RefCode: res.data.userDetail.refCode
                   ? res.data.userDetail.refCode
@@ -149,7 +149,7 @@ export class VerifyEmailComponent implements OnInit {
       Phone: new FormControl(''),
       Email: new FormControl(''),
       Password: new FormControl(''),
-      CreateBankAccount: new FormControl(true),
+      CreateBankAccount: new FormControl(false),
       DOB: new FormControl(''),
       RefCode: new FormControl(''),
       Verified: new FormControl(true),

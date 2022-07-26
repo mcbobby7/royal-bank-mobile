@@ -1,0 +1,22 @@
+.my-custom-menu {
+  --width: 500px;
+}
+
+ion-header ion-toolbar {
+  --background: #ffffff;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  height: 100%;
+}
+
+ion-header ion-menu-button {
+  color: #374957;
+}
+
+.userImg {
+  border-radius: 50% !important;
+  overflow: hidden;
+  width: 50px !important;
+  height: 50px !important;
+}
+/*# sourceMappingURL=dashboard-template.component.css.map */

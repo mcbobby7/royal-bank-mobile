@@ -17,7 +17,9 @@ export class LimitComponent implements OnInit {
   loading = false;
   pass = false;
   limitInter;
+  limitInterTemp;
   limitIntra;
+  limitIntraTemp;
   constructor(
     public toast: ToastrService,
     private auth: AuthService,
@@ -45,7 +47,9 @@ export class LimitComponent implements OnInit {
 
           if (res.status === '00') {
             this.limitInter = res.data.data[0].interLimit;
+            this.limitInterTemp = res.data.data[0].interLimit;
             this.limitIntra = res.data.data[0].intraLimit;
+            this.limitIntraTemp = res.data.data[0].intraLimit;
             console.log(this.limitInter, this.limitIntra);
 
             // deal with register
@@ -63,6 +67,13 @@ export class LimitComponent implements OnInit {
     if (!this.limitIntra) {
       this.toast.error('All inputs are required', 'Error');
       return true;
+    }
+    if (
+      this.limitIntra > this.limitIntraTemp ||
+      this.limitInter > this.limitInterTemp
+    ) {
+      this.toast.error('Amount entered greater than maximum limit', 'Error');
+      return false;
     }
     this.pass = true;
   }

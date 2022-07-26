@@ -23,8 +23,8 @@
 
     <section class="row">
       <form [formGroup]="onboardingForm">
-        <div class="form-group row" style="padding: 5px">
-          <label for="">Company Type</label>
+        <!-- <div class="form-group row" style="padding: 5px">
+          <label for=""></label>
           <input
             formControlName="CompanyType"
             type="text"
@@ -32,6 +32,19 @@
             class="input"
             placeholder=""
           />
+        </div> -->
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Company Type</label>
+          <select
+            formControlName="CompanyType"
+            name="companyType"
+            id=""
+            class="input"
+          >
+            <option *ngFor="let data of companyType" [value]="data">
+              {{ data }}
+            </option>
+          </select>
         </div>
         <div class="form-group row" style="padding: 5px">
           <label for="">Company Name</label>

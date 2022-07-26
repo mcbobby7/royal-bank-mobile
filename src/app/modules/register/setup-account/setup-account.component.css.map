@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAC;EACV,WAAW,EAAE,iBAAiB;EAC9B,aAAa,CAAA,KAAC;EACd,eAAe,CAAA,KAAC;CACjB",
+    "sources": [
+        "setup-account.component.scss"
+    ],
+    "names": [],
+    "file": "setup-account.component.css"
+}

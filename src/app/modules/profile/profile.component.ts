@@ -78,6 +78,10 @@ export class ProfileComponent implements OnInit {
   }
 
   update() {
+    if (this.user.bvn) {
+      this.toast.error('BVN already updated', 'Error');
+      return false;
+    }
     this.loading = true;
     if (this.data === {}) {
       this.toast.error('No record, please try again', 'Error');
@@ -104,6 +108,13 @@ export class ProfileComponent implements OnInit {
           console.log(res);
           this.toast.success('BVN updated successfully', 'Success');
           this.user.hasBVN = true;
+          this.user.bvn = this.bvn;
+          this.user.firstName = this.firstName;
+          this.user.lastName = this.lastName;
+          this.user.middleName = this.middleName;
+          this.user.phone = this.data.phoneNo;
+          this.user.email = this.data.emailAddress;
+          this.user.dob = this.data.dateOfBirth;
           localStorage.setItem('user', JSON.stringify(this.user));
           this.router.navigate(['/dashboard']);
         } else {

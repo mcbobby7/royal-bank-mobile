@@ -70,6 +70,114 @@ export class ResetPinComponent implements OnInit {
 
     // this.submit();
   }
+
+  isUpper(str) {
+    return /[A-Z]/.test(str);
+  }
+  isLower(str) {
+    return /[a-z]/.test(str);
+  }
+  checkCharacter(str) {
+    return /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(str);
+  }
+  checkLength1(event, type) {
+    if (event.length > 4) {
+      this.toast.error('Please only 4 digits are allowed', 'Error');
+      // if (type === 'pin') {
+      //   this.pin = this.pin.slice(0, -1);
+      //   console.log(this.pin);
+      //   return;
+      // }
+      // if (type === 'pinNew') {
+      //   this.pinNew = this.pinNew.slice(0, -1);
+      //   console.log(this.pinNew);
+      //   return;
+      // }
+      // if (type === 'pinConfirm') {
+      //   this.pinConfirm = this.pinConfirm.slice(0, -1);
+      //   console.log(this.pinConfirm);
+      //   return;
+      // }
+      return;
+    }
+    if (this.checkCharacter(event)) {
+      this.toast.error('Special characters not allowed', 'Error');
+      // if (type === 'pin') {
+      //   this.pin = this.pin.slice(0, -1);
+      //   console.log(this.pin);
+      //   return;
+      // }
+      // if (type === 'pinNew') {
+      //   this.pinNew = this.pinNew.slice(0, -1);
+      //   console.log(this.pinNew);
+      //   return;
+      // }
+      // if (type === 'pinConfirm') {
+      //   this.pinConfirm = this.pinConfirm.slice(0, -1);
+      //   console.log(this.pinConfirm);
+      //   return;
+      // }
+      return false;
+    }
+    if (this.isUpper(event)) {
+      this.toast.error('Characters not allowed', 'Error');
+      // if (type === 'pin') {
+      //   this.pin = this.pin.slice(0, -1);
+      //   console.log(this.pin);
+      //   return;
+      // }
+      // if (type === 'pinNew') {
+      //   this.pinNew = this.pinNew.slice(0, -1);
+      //   console.log(this.pinNew);
+      //   return;
+      // }
+      // if (type === 'pinConfirm') {
+      //   this.pinConfirm = this.pinConfirm.slice(0, -1);
+      //   console.log(this.pinConfirm);
+      //   return;
+      // }
+      return false;
+    }
+    if (this.isLower(event)) {
+      this.toast.error('Characters not allowed', 'Error');
+      // if (type === 'pin') {
+      //   this.pin = this.pin.slice(0, -1);
+      //   console.log(this.pin);
+      //   return;
+      // }
+      // if (type === 'pinNew') {
+      //   this.pinNew = this.pinNew.slice(0, -1);
+      //   console.log(this.pinNew);
+      //   return;
+      // }
+      // if (type === 'pinConfirm') {
+      //   this.pinConfirm = this.pinConfirm.slice(0, -1);
+      //   console.log(this.pinConfirm);
+      //   return;
+      // }
+      return false;
+    }
+    if (type === 'pin') {
+      this.pin = event;
+      console.log(this.pin);
+      return;
+    }
+    if (type === 'pinNew') {
+      this.pinNew = event;
+      console.log(this.pinNew);
+      return;
+    }
+    if (type === 'pinConfirm') {
+      this.pinConfirm = event;
+      console.log(this.pinConfirm);
+      return;
+    }
+
+    // this.pin =
+  }
+  checkLength(event) {
+    console.log(event);
+  }
   load() {
     this.loading = !this.loading;
   }

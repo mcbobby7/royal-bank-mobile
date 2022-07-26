@@ -1,0 +1,48 @@
+.header {
+  color: #25214f;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+section {
+  text-align: center;
+}
+
+ion-content {
+  font-family: Mulish !important;
+  --padding-end: 20px;
+  --padding-start: 20px;
+}
+
+.btn {
+  --background: #25214f;
+  --color: #fff;
+  text-transform: capitalize;
+  height: 3.5rem;
+  font-weight: 300;
+  font-size: 1.2rem;
+  --background-activated: #25214f;
+}
+
+.active {
+  background-color: #e0feea;
+}
+
+.notActive {
+  background-color: #f8f8f8;
+}
+
+.card {
+  width: 90vw;
+  border-radius: 10px;
+  margin: 20px auto;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
+}
+
+.tsx {
+  width: 85%;
+  font-size: 14px;
+  float: left;
+}
+/*# sourceMappingURL=select-account-type.component.css.map */

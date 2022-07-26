@@ -48,10 +48,51 @@
       <div style="font-size: 25px; text-align: center; padding-bottom: 20px">
         Update Limit
       </div>
+      <div
+        style="
+          width: 90vw;
+          margin: auto;
+          background-color: #e8e8e8;
+          padding: 20px;
+          margin-bottom: 30px;
+        "
+      >
+        <div
+          style="
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+          "
+        >
+          <div class="name">Max Local Limit :</div>
+          <div class="tit">{{ limitInterTemp | currency: "&#8358;" }}</div>
+        </div>
+        <div
+          style="
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+          "
+        >
+          <div class="name">Max Intra Bank Limit :</div>
+          <div class="tit">{{ limitIntraTemp | currency: "&#8358;" }}</div>
+        </div>
+      </div>
       <form>
         <div class="form-group row" style="padding: 5px">
           <label for="">Select Local Limit</label>
-          <select
+          <input
+            [(ngModel)]="limitInter"
+            [value]="limitInter"
+            name="account"
+            id=""
+            [ngModelOptions]="{ standalone: true }"
+            class="input"
+            type="number"
+          />
+          <!-- <select
             [(ngModel)]="limitInter"
             [value]="limitInter"
             name="account"
@@ -65,12 +106,21 @@
             <option value="10000000">&#8358;10,000.000.00</option>
             <option value="20000000">&#8358;20,000.000.00</option>
             <option value="50000">&#8358;50.000.00</option>
-          </select>
+          </select> -->
         </div>
 
         <div class="form-group row" style="padding: 5px">
           <label for="">Select Intra Bank Limit</label>
-          <select
+          <input
+            [(ngModel)]="limitIntra"
+            [value]="limitIntra"
+            name="account"
+            id=""
+            [ngModelOptions]="{ standalone: true }"
+            class="input"
+            type="number"
+          />
+          <!-- <select
             [(ngModel)]="limitIntra"
             [value]="limitIntra"
             name="account"
@@ -82,7 +132,7 @@
             <option value="30000">&#8358;30.000.00</option>
             <option value="20000">&#8358;20.000.00</option>
             <option value="10000">&#8358;10.000.00</option>
-          </select>
+          </select> -->
         </div>
 
         <!-- <div class="form-group row" style="padding: 5px">

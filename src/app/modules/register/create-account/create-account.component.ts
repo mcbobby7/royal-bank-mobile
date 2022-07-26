@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -18,12 +18,62 @@ export class CreateAccountComponent implements OnInit {
   loading = true;
   user: any = {};
   type;
+  path = '';
+  isEmail = false;
+  isPhone = false;
+  password;
+  showDetails: boolean;
+  check = [];
+
   constructor(
     private auth: AuthService,
     private router: Router,
     public toast: ToastrService,
-    public navController: NavController
+    public navController: NavController,
+    public alertController: AlertController
   ) {}
+
+  isUpper(str) {
+    return /[A-Z]/.test(str);
+  }
+  isLower(str) {
+    return /[a-z]/.test(str);
+  }
+  checkNumber(str) {
+    return /[0-9]/.test(str);
+  }
+  checkLength(str) {
+    if (str.length >= 6) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkStrength(event) {
+    console.log(event);
+    const upper = this.isUpper(event);
+    const lower = this.isLower(event);
+    const isNumber = this.checkNumber(event);
+    const length = this.checkLength(event);
+
+    const res = [];
+    if (upper) {
+      res.push(1);
+    }
+    if (lower) {
+      res.push(1);
+    }
+    if (isNumber) {
+      res.push(1);
+    }
+    if (length) {
+      res.push(1);
+    }
+
+    this.check = res;
+    console.log(this.check);
+  }
 
   getOnboardingStage() {
     if (this.id) {
@@ -58,7 +108,7 @@ export class CreateAccountComponent implements OnInit {
                 Password: res.data.userDetail.password
                   ? res.data.userDetail.password
                   : '',
-                CreateBankAccount: true,
+                CreateBankAccount: false,
                 DOB: res.data.userDetail.dob ? res.data.userDetail.dob : '',
                 RefCode: res.data.userDetail.refCode
                   ? res.data.userDetail.refCode
@@ -130,6 +180,9 @@ export class CreateAccountComponent implements OnInit {
     }
     return;
   }
+  onStrengthChanged(strength: number) {
+    console.log('password strength = ', strength);
+  }
   sanitize() {
     if (this.onboardingForm.value.Password !== this.confirmPass) {
       this.toast.error('Paasword must match confirm password', 'Error');
@@ -141,6 +194,10 @@ export class CreateAccountComponent implements OnInit {
     }
     if (!this.onboardingForm.value.Phone) {
       this.toast.error('Mobile number is required', 'Error');
+      return false;
+    }
+    if (!this.onboardingForm.value.Email) {
+      this.toast.error('Email number is required', 'Error');
       return false;
     }
   }
@@ -167,11 +224,22 @@ export class CreateAccountComponent implements OnInit {
             this.loading = false;
             // this.data = res.data;
             localStorage.setItem('stageId', res.data.data.id);
-            this.router.navigate(['/register/email/2'], {
-              state: {
-                mode: this.type,
-              },
-            });
+            if (this.path === 'phone') {
+              this.router.navigate(
+                [`/register/phone/${this.onboardingForm.value.Phone}/2`],
+                {
+                  state: {
+                    mode: this.type,
+                  },
+                }
+              );
+            } else {
+              this.router.navigate(['/register/email/1'], {
+                state: {
+                  mode: this.type,
+                },
+              });
+            }
 
             // deal with register
             console.log(res);
@@ -201,7 +269,7 @@ export class CreateAccountComponent implements OnInit {
       Phone: new FormControl('875'),
       Email: new FormControl(''),
       Password: new FormControl(''),
-      CreateBankAccount: new FormControl(true),
+      CreateBankAccount: new FormControl(false),
       DOB: new FormControl(''),
       RefCode: new FormControl(''),
       Verified: new FormControl(false),
@@ -217,14 +285,60 @@ export class CreateAccountComponent implements OnInit {
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
       Gender: new FormControl(''),
+      terms: new FormControl(false),
     });
     // console.log(this.onboardingForm.value);
   }
+  async presentAlertPrompt() {
+    if (this.check.length < 4) {
+      this.toast.error(
+        'password should contain lowercase, uppercase, number and minimum of 6 characters',
+        'Error'
+      );
+      return;
+    }
+    if (!this.onboardingForm.value.terms) {
+      this.toast.error('You have to accept our terms and service', 'Error');
+      return false;
+    }
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Verify Details',
+      // subHeader: 'Subtitle',
+      message: 'How would you like to receive OTP to verify your details?',
+      buttons: [
+        {
+          text: 'SMS',
+          handler: () => {
+            console.log('phone Ok');
+            this.path = 'phone';
+            this.register();
+          },
+        },
+        {
+          text: 'Email',
+          handler: () => {
+            console.log('phone Ok');
+            this.path = 'email';
+            this.register();
+          },
+        },
+      ],
+    });
 
+    await alert.present();
+  }
   viewpassword() {
     this.show = !this.show;
   }
   change(mode) {
+    if (this.onboardingForm.value.Email) {
+      this.isEmail = true;
+    }
+    if (this.onboardingForm.value.Phone) {
+      this.isPhone = true;
+    }
+
     this.page = mode;
   }
   next() {

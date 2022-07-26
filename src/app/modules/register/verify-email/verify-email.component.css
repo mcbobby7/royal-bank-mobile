@@ -1,0 +1,140 @@
+.header {
+  color: #25214f;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+section {
+  text-align: center;
+}
+
+.btn {
+  --background: #25214f;
+  --color: #fff;
+  text-transform: capitalize;
+  height: 3.5rem;
+  font-weight: 300;
+  font-size: 1.2rem;
+  --background-activated: #25214f;
+}
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  padding-bottom: 1rem;
+  border-radius: 5px;
+}
+
+input {
+  height: 32px;
+  width: 100%;
+  border: 0.800000011920929px solid #ced4da;
+  border-radius: 5px;
+  background-color: #d5d4d4;
+  padding: 25px;
+}
+
+ion-content {
+  font-family: Mulish !important;
+  --padding-end: 20px;
+  --padding-start: 20px;
+}
+
+.form-inline [fullWidth] {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.form-inline > * {
+  margin: 0 1.5rem 1.5rem 0;
+}
+
+.input {
+  height: 3.2rem;
+  background: #e8e8e8;
+  border: 1px solid #b6b6b6;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 8px;
+}
+
+label {
+  color: #676767 !important;
+  font-style: normal !important;
+  text-align: left;
+}
+
+.title {
+  color: #25214f;
+  font-weight: 800;
+}
+
+.central-image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.sub-title {
+  color: #676767;
+  text-align: center;
+}
+
+.link {
+  color: #25214f;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+}
+
+.btn2 {
+  --background: #fee178;
+  --color: #25214f;
+  text-transform: capitalize;
+  height: 3.5rem;
+  font-weight: 300;
+  font-size: 1.2rem;
+  --background-activated: #25214f;
+}
+
+.img {
+  height: 290px;
+  width: 230px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.icon {
+  height: 50px;
+  width: 50px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*# sourceMappingURL=verify-email.component.css.map */

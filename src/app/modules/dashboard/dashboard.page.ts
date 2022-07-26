@@ -49,7 +49,7 @@ export class DashboardPage implements OnInit {
       this.upload = localStorage.getItem('upload');
       this.user = users;
     }, 500);
-    if (this.user.accountNos.length < 1) {
+    if (this.user?.accountNos?.length < 1) {
       this.presentAlertPrompt();
     }
     if (!this.user) {

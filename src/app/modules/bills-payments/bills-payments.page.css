@@ -1,0 +1,90 @@
+.top-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+}
+
+.userImg {
+  width: 50px;
+  height: 50px;
+}
+
+.info {
+  background-color: #25214f;
+  height: 2rem;
+  width: 100%;
+  margin: 1rem;
+}
+
+.header {
+  color: #25214f;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.card-items {
+  padding: 10px;
+}
+
+ion-content {
+  font-family: Mulish !important;
+}
+
+.icons {
+  height: 60px;
+  color: #25214f !important;
+  margin-bottom: 3px !important;
+}
+
+.icons-bg {
+  width: 43%;
+  height: 100px;
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px;
+  margin: 3%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify !important;
+      -ms-flex-pack: justify !important;
+          justify-content: space-between !important;
+  text-align: center;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  cursor: pointer;
+  color: #25214f;
+  border: 1px solid #dde3f7;
+}
+
+.name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  text-align: left;
+  color: #25214f;
+  font-weight: 700px;
+}
+/*# sourceMappingURL=bills-payments.page.css.map */

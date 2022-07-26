@@ -24,12 +24,56 @@ export class DetailsComponent implements OnInit {
   confirmPass;
   path = 'phone';
   type;
+  check = [];
+
   constructor(
     private auth: AuthService,
     private router: Router,
     public toast: ToastrService,
     public alertController: AlertController
   ) {}
+
+  isUpper(str) {
+    return /[A-Z]/.test(str);
+  }
+  isLower(str) {
+    return /[a-z]/.test(str);
+  }
+  checkNumber(str) {
+    return /[0-9]/.test(str);
+  }
+  checkLength(str) {
+    if (str.length >= 6) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkStrength(event) {
+    console.log(event);
+    const upper = this.isUpper(event);
+    const lower = this.isLower(event);
+    const isNumber = this.checkNumber(event);
+    const length = this.checkLength(event);
+
+    const res = [];
+    if (upper) {
+      res.push(1);
+    }
+    if (lower) {
+      res.push(1);
+    }
+    if (isNumber) {
+      res.push(1);
+    }
+    if (length) {
+      res.push(1);
+    }
+
+    this.check = res;
+    console.log(this.check);
+  }
 
   getOnboardingStage() {
     if (this.id) {
@@ -63,7 +107,7 @@ export class DetailsComponent implements OnInit {
                 Password: res.data.userDetail.password
                   ? res.data.userDetail.password
                   : '',
-                CreateBankAccount: true,
+                CreateBankAccount: false,
                 DOB: res.data.userDetail.dob ? res.data.userDetail.dob : '',
                 RefCode: res.data.userDetail.refCode
                   ? res.data.userDetail.refCode
@@ -248,6 +292,13 @@ export class DetailsComponent implements OnInit {
   }
 
   async presentAlertPrompt() {
+    if (this.check.length < 4) {
+      this.toast.error(
+        'password should contain lowercase, uppercase, number and minimum of 6 characters',
+        'Error'
+      );
+      return;
+    }
     if (!this.onboardingForm.value.terms) {
       this.toast.error('You have to accept our terms and service', 'Error');
       return false;
@@ -306,7 +357,7 @@ export class DetailsComponent implements OnInit {
       Phone: new FormControl('875'),
       Email: new FormControl(''),
       Password: new FormControl(''),
-      CreateBankAccount: new FormControl(true),
+      CreateBankAccount: new FormControl(false),
       DOB: new FormControl(''),
       RefCode: new FormControl(''),
       Verified: new FormControl(false),

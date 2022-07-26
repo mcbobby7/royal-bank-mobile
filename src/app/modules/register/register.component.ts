@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
       Phone: new FormControl('875'),
       Email: new FormControl(''),
       Password: new FormControl(''),
-      CreateBankAccount: new FormControl(true),
+      CreateBankAccount: new FormControl(false),
       DOB: new FormControl(''),
       RefCode: new FormControl(''),
       Verified: new FormControl(false),

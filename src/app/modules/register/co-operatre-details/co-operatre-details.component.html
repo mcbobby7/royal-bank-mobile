@@ -279,6 +279,7 @@
                 style="border: none"
                 formControlName="Password"
                 class="input"
+                (ngModelChange)="checkStrength($event)"
               />
               <ion-icon
                 (click)="viewpassword()"
@@ -308,6 +309,43 @@
                   top: 10px;
                 "
               ></ion-icon>
+            </div>
+            <div style="font-size: 13px; text-align: left">
+              password should contain lowercase, uppercase, number and minimum
+              of 6 characters
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: row;
+                margin-top: 10px;
+                background-color: red;
+              "
+            >
+              <div
+                style="width: 25%; height: 3px"
+                [style.background-color]="check[0] ? 'green' : 'red'"
+              ></div>
+              <div
+                style="width: 25%; height: 3px"
+                [style.background-color]="check[1] ? 'green' : 'red'"
+              ></div>
+              <div
+                style="width: 25%; height: 3px"
+                [style.background-color]="
+                  check[2] ? 'green' : check[1] ? 'rgb(217, 217, 12)' : 'red'
+                "
+              ></div>
+              <div
+                style="width: 25%; height: 3px"
+                [style.background-color]="
+                  check[3]
+                    ? 'green'
+                    : check[1] || check[2]
+                    ? 'rgb(217, 217, 12)'
+                    : 'red'
+                "
+              ></div>
             </div>
           </div>
 

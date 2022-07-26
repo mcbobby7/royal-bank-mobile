@@ -1,0 +1,39 @@
+.all {
+  width: 85vw;
+  margin: auto;
+}
+
+.head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.line {
+  width: 85vw;
+  height: 1px;
+  background-color: #ccc8c8;
+  margin: 10px 0;
+}
+
+.subs {
+  font-size: 13px;
+  padding: 5px 0;
+  color: #25214f;
+}
+
+.phone {
+  margin: 15px 0;
+}
+
+td,
+th {
+  text-align: left;
+  padding: 5px;
+  font-size: 13px;
+  color: #25214f;
+}
+/*# sourceMappingURL=support.component.css.map */

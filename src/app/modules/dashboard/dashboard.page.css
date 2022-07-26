@@ -1,0 +1,57 @@
+.top-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+}
+
+section {
+  font-family: Mulish !important;
+}
+
+.userImg {
+  width: 50px;
+  height: 50px;
+}
+
+.info {
+  background-color: #25214f;
+  height: 2rem;
+  width: 100%;
+  margin: 1rem;
+}
+
+.header {
+  color: #181530;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.card-items {
+  padding: 10px;
+}
+
+ion-content {
+  font-family: Mulish !important;
+  --padding-end: 20px;
+  --padding-start: 20px;
+}
+
+.icons {
+  font-size: 30px;
+}
+
+.icons-bg {
+  border-radius: 50%;
+  background-color: #f8f8f8;
+  padding: 20px;
+}
+/*# sourceMappingURL=dashboard.page.css.map */

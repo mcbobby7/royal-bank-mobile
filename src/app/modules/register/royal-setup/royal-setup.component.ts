@@ -20,6 +20,12 @@ export class RoyalSetupComponent implements OnInit {
   loading = true;
   user: any = {};
   type;
+  companyType = [
+    'Limited liability company',
+    'Corporation',
+    'Sole proprietorship',
+    'Partnership',
+  ];
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -60,7 +66,7 @@ export class RoyalSetupComponent implements OnInit {
                 Password: res.data.userDetail.password
                   ? res.data.userDetail.password
                   : '',
-                CreateBankAccount: true,
+                CreateBankAccount: false,
                 DOB: res.data.userDetail.dob ? res.data.userDetail.dob : '',
                 RefCode: res.data.userDetail.refCode
                   ? res.data.userDetail.refCode
@@ -73,7 +79,7 @@ export class RoyalSetupComponent implements OnInit {
                   : '',
                 CompanyType: res.data.userDetail.companyType
                   ? res.data.userDetail.companyType
-                  : '',
+                  : 'Corporation',
                 PassportUrl: res.data.userDetail.passportUrl
                   ? res.data.userDetail.passportUrl
                   : '',
@@ -207,7 +213,7 @@ export class RoyalSetupComponent implements OnInit {
       Phone: new FormControl('875'),
       Email: new FormControl(''),
       Password: new FormControl(''),
-      CreateBankAccount: new FormControl(true),
+      CreateBankAccount: new FormControl(false),
       DOB: new FormControl(''),
       RefCode: new FormControl(''),
       Verified: new FormControl(false),

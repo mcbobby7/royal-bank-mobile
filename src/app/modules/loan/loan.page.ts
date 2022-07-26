@@ -50,9 +50,12 @@ export class LoanPage implements OnInit {
   ngOnInit() {
     console.log(this.bvn);
     this.bvn = this.user.bvn;
+    this.phoneNumber = this.user.phone;
+    this.dateOfBirth = this.user.dob;
+    this.fullName = this.user.firstName + ' ' + this.user.lastName;
     this.fetchLoanTypes();
     this.fetchHistory();
-    this.fetchBvn();
+    // this.fetchBvn();
     // let   user = JSON.parse(localStorage.getItem('user'));
     this.account = this.user.accountNos[0].accountNo;
   }
@@ -196,30 +199,30 @@ export class LoanPage implements OnInit {
     );
   }
 
-  fetchBvn() {
-    console.log(this.bvn);
+  // fetchBvn() {
+  //   console.log(this.bvn);
 
-    const data = {
-      bvn: this.bvn,
-      show_detail: true,
-    };
-    this.auth.post(data, 'Nibss.BvnService.ValidateBvn').subscribe(
-      (res: any) => {
-        console.log(res);
+  //   const data = {
+  //     bvn: this.bvn,
+  //     show_detail: true,
+  //   };
+  //   this.auth.post(data, 'Nibss.BvnService.ValidateBvn').subscribe(
+  //     (res: any) => {
+  //       console.log(res);
 
-        if (res.data.bvn) {
-          this.fullName = res.data.fullName;
-          this.dateOfBirth = res.data.dateOfBirth;
-          this.phoneNumber = res.data.phoneNo;
-        } else {
-        }
-      },
-      (err) => {
-        this.toast.error('Failed to fetch BVN data', 'Error');
-        this.router.navigate(['/dashboard']);
-      }
-    );
-  }
+  //       if (res.data.bvn) {
+  //         this.fullName = res.data.fullName;
+  //         this.dateOfBirth = res.data.dateOfBirth;
+  //         this.phoneNumber = res.data.phoneNo;
+  //       } else {
+  //       }
+  //     },
+  //     (err) => {
+  //       this.toast.error('Failed to fetch BVN data', 'Error');
+  //       this.router.navigate(['/dashboard']);
+  //     }
+  //   );
+  // }
 
   next() {
     if (!this.account) {
@@ -266,7 +269,7 @@ export class LoanPage implements OnInit {
         console.log(res);
 
         if (res.data.status) {
-          this.toast.success(res.data.message, 'Success');
+          this.toast.success('Loan request submitted successfully', 'Success');
           this.show = false;
           this.transType = 0;
           localStorage.setItem('loanAccID', res.data.loanAccountId);

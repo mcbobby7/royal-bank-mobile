@@ -83,6 +83,6 @@ export class BalanceComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
-    this.toast.info('Account number', 'Copied to clipboard');
+    this.toast.success('Account number', 'Copied to clipboard');
   }
 }

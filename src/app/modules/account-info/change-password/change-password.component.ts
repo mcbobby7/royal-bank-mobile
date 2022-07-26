@@ -19,6 +19,7 @@ export class ChangePasswordComponent implements OnInit {
   password;
   passwordNew;
   passwordConfirm;
+  check = [];
   passwordResetForm = new FormGroup({
     oldPassword: new FormControl(''),
     newPassword: new FormControl(''),
@@ -30,6 +31,48 @@ export class ChangePasswordComponent implements OnInit {
     private auth: AuthService,
     private router: Router
   ) {}
+
+  isUpper(str) {
+    return /[A-Z]/.test(str);
+  }
+  isLower(str) {
+    return /[a-z]/.test(str);
+  }
+  checkNumber(str) {
+    return /[0-9]/.test(str);
+  }
+  checkLength(str) {
+    if (str.length >= 6) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkStrength(event) {
+    console.log(event);
+    const upper = this.isUpper(event);
+    const lower = this.isLower(event);
+    const isNumber = this.checkNumber(event);
+    const length = this.checkLength(event);
+
+    const res = [];
+    if (upper) {
+      res.push(1);
+    }
+    if (lower) {
+      res.push(1);
+    }
+    if (isNumber) {
+      res.push(1);
+    }
+    if (length) {
+      res.push(1);
+    }
+
+    this.check = res;
+    console.log(this.check);
+  }
 
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -48,6 +91,13 @@ export class ChangePasswordComponent implements OnInit {
     this.pass = false;
   }
   display() {
+    if (this.check.length < 4) {
+      this.toast.error(
+        'password should contain lowercase, uppercase, number and minimum of 6 characters',
+        'Error'
+      );
+      return;
+    }
     if (!this.password) {
       this.toast.error('Password is required', 'Error');
       return;
@@ -68,8 +118,8 @@ export class ChangePasswordComponent implements OnInit {
       .post(
         {
           UserId: +this.user.userId,
-          CurrentPassword: 'p@ssw0rd',
-          NewPassword: 'p@ssw0rd',
+          CurrentPassword: this.password,
+          NewPassword: this.passwordNew,
         },
         'UserManager.UserService.ChangePassword'
       )

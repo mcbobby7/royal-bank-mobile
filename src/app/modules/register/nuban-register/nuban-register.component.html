@@ -8,6 +8,7 @@
       flex-direction: column;
       height: 100vh;
     "
+    *ngIf="page === 'account'"
   >
     <section class="row">
       <div style="border-radius: 8px; margin: 10px 4px">
@@ -31,18 +32,280 @@
             (ngModelChange)="fetchUser($event)"
           />
         </div>
+      </form>
+    </section>
+  </section>
 
-        <!-- <div class="form-group">
+  <section
+    style="display: flex; justify-content: center; flex-direction: column"
+    *ngIf="page === 'details'"
+  >
+    <section class="row">
+      <h5 style="text-align: left; color: black">
+        Enter your details to continue
+      </h5>
+      <form [formGroup]="onboardingForm">
+        <div class="form-group row" style="padding: 5px">
+          <label for="">First Name</label>
+          <div class="input" style="text-align: left; padding: 15px 25px">
+            {{ onboardingForm?.value?.FirstName }}
+          </div>
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Middle Name</label>
+          <input
+            formControlName="MiddleName"
+            type="text"
+            name="ref"
+            class="input"
+            placeholder="Ade"
+          />
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Last Name </label>
+          <div class="input" style="text-align: left; padding: 15px 25px">
+            {{ onboardingForm?.value?.LastName }}
+          </div>
+        </div>
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Email</label>
+          <div class="input" style="text-align: left; padding: 15px 25px">
+            {{ onboardingForm?.value?.Email }}
+          </div>
+        </div>
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Phone Number</label>
+          <div class="input" style="text-align: left; padding: 15px 25px">
+            {{ onboardingForm?.value?.Phone }}
+          </div>
+        </div>
+        <div class="form-group row" style="padding: 5px">
+          <label class="label">Password</label>
+          <div
+            style="
+              border: 0.800000011920929px solid #ced4da;
+              border-radius: 3px;
+              background-color: #ced4da;
+              position: relative;
+            "
+          >
+            <input
+              [type]="show ? 'text' : 'password'"
+              formControlName="Password"
+              placeholder="Password"
+              id="password"
+              name="password"
+              required
+              style="border: none"
+              class="input"
+              (ngModelChange)="checkStrength($event)"
+            />
+            <ion-icon
+              (click)="viewpassword()"
+              *ngIf="!show"
+              icon="eye-off-outline"
+              style="
+                font-size: 32px;
+                color: #676767;
+                cursor: pointer;
+                background-color: transparent;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+              "
+            ></ion-icon>
+            <ion-icon
+              (click)="viewpassword()"
+              *ngIf="show"
+              icon="eye-outline"
+              style="
+                font-size: 32px;
+                color: #676767;
+                cursor: pointer;
+                background-color: transparent;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+              "
+            ></ion-icon>
+          </div>
+          <div style="font-size: 13px; text-align: left">
+            password should contain lowercase, uppercase, number and minimum of
+            6 characters
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              margin-top: 10px;
+              background-color: red;
+            "
+          >
+            <div
+              style="width: 25%; height: 3px"
+              [style.background-color]="check[0] ? 'green' : 'red'"
+            ></div>
+            <div
+              style="width: 25%; height: 3px"
+              [style.background-color]="check[1] ? 'green' : 'red'"
+            ></div>
+            <div
+              style="width: 25%; height: 3px"
+              [style.background-color]="
+                check[2] ? 'green' : check[1] ? 'rgb(217, 217, 12)' : 'red'
+              "
+            ></div>
+            <div
+              style="width: 25%; height: 3px"
+              [style.background-color]="
+                check[3]
+                  ? 'green'
+                  : check[1] || check[2]
+                  ? 'rgb(217, 217, 12)'
+                  : 'red'
+              "
+            ></div>
+          </div>
+        </div>
+
+        <div class="form-group row" style="padding: 5px">
+          <label class="label">Confirm Password</label>
+          <div
+            style="
+              border: 0.800000011920929px solid #ced4da;
+              border-radius: 3px;
+              background-color: #ced4da;
+              position: relative;
+            "
+          >
+            <input
+              [type]="show ? 'text' : 'password'"
+              placeholder="Password"
+              id="password"
+              name="password"
+              required
+              style="border: none"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="confirmPass"
+              class="input"
+            />
+            <ion-icon
+              (click)="viewpassword()"
+              *ngIf="!show"
+              icon="eye-off-outline"
+              style="
+                font-size: 32px;
+                color: #676767;
+                cursor: pointer;
+                background-color: transparent;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+              "
+            ></ion-icon>
+            <ion-icon
+              (click)="viewpassword()"
+              *ngIf="show"
+              icon="eye-outline"
+              style="
+                font-size: 32px;
+                color: #676767;
+                cursor: pointer;
+                background-color: transparent;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+              "
+            ></ion-icon>
+          </div>
+        </div>
+        <ng-container
+          *ngIf="onboardingForm.value.AccountType !== 'Royal Basic'"
+        >
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Company Type</label>
+            <input
+              formControlName="CompanyType"
+              type="text"
+              name="ref"
+              class="input"
+              placeholder="IT"
+            />
+          </div>
+
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Company Name</label>
+            <input
+              formControlName="CompanyName"
+              type="text"
+              name="ref"
+              class="input"
+              placeholder="Abys LTD"
+            />
+          </div>
+
+          <div class="form-group row" style="padding: 5px">
+            <label for="">RC Number</label>
+            <input
+              formControlName="RCNumber"
+              type="text"
+              name="ref"
+              class="input"
+              placeholder="22333223"
+            />
+          </div>
+
+          <div class="form-group row" style="padding: 5px">
+            <label for="">Tax Identification Number</label>
+            <input
+              formControlName="TinNumber"
+              type="text"
+              name="ref"
+              class="input"
+              placeholder="65764566"
+            />
+          </div>
+        </ng-container>
+
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Referal Code (optional)</label>
+          <input
+            formControlName="RefCode"
+            type="text"
+            name="ref"
+            class="input"
+            placeholder="22333223"
+          />
+        </div>
+
+        <div
+          class="form-group row"
+          style="
+            padding: 5px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          "
+        >
+          <ion-checkbox slot="end" formControlName="terms"></ion-checkbox>
+          <ion-label style="margin-left: 10px"
+            >I accept terms of service and privacy policy</ion-label
+          >
+        </div>
+
+        <div class="form-group">
           <ion-button
             class="btn"
             expand="block"
             style="margin-top: 1rem"
-            (click)="change('add')"
+            (click)="presentAlertPrompt()"
             routerLinkActive="router-link-active"
           >
             Next
           </ion-button>
-        </div> -->
+        </div>
       </form>
     </section>
   </section>

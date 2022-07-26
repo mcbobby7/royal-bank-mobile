@@ -1,0 +1,155 @@
+.overlay {
+  z-index: 999;
+  position: fixed;
+  /* Sit on top of the page content */
+  width: 100%;
+  /* Full width (cover the whole page) */
+  height: 100%;
+  /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mas {
+  z-index: 1000;
+  position: fixed;
+  /* Sit on top of the page content */
+  width: 100vw;
+  /* Full width (cover the whole page) */
+  height: 100vh;
+  /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.tran {
+  background-color: #f8f8f8;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 5px 0;
+}
+
+.tran .icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.tran .icon .text {
+  padding: 0 10px;
+}
+
+.tran .icon .text .tit {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0 3px;
+}
+
+.tran .icon .text .mode {
+  font-size: 11px;
+  color: #8d8d88;
+  padding: 0 3px;
+}
+
+.tran .amount {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tran .red {
+  color: #d54b4b;
+}
+
+.tran .green {
+  color: #127e12;
+}
+
+.head {
+  background-color: #25214f;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+.bod {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 60px;
+  padding-top: 20px;
+}
+
+.card {
+  background-color: #fff8f83c;
+  padding: 10px 20px;
+  font-size: 40px;
+  border-radius: 10px;
+}
+
+.date {
+  margin: 20px;
+}
+
+table {
+  margin: 40px 0;
+  padding: 20px;
+  width: 95%;
+  margin: auto;
+}
+
+th,
+td {
+  text-align: left;
+  padding-left: 20px;
+}
+
+tr {
+  border-bottom: 1px solid #a19b9b;
+}
+/*# sourceMappingURL=transaction-history.component.css.map */

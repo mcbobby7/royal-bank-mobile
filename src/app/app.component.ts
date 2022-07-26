@@ -4,6 +4,9 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { ToastrService } from 'ngx-toastr';
+import { Platform } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -18,8 +21,13 @@ export class AppComponent implements OnInit {
     private idle: Idle,
     private keepalive: Keepalive,
     private router: Router,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private platform: Platform,
+    private splashScreen: SplashScreen
   ) {
+    this.platform.ready().then(() => {
+      this.splashScreen.hide();
+    });
     StatusBar.setOverlaysWebView({ overlay: false });
     const setStatusBarStyleDark = async () => {
       await StatusBar.setStyle({ style: Style.Light });
@@ -46,7 +54,7 @@ export class AppComponent implements OnInit {
       console.log('timed out');
       this.reset();
       if (this.user) {
-        this.logout();
+        // this.logout();
         console.log('logout');
       }
     });

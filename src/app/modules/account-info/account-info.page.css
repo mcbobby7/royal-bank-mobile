@@ -1,0 +1,54 @@
+.icon-container {
+  border-radius: 10%;
+  background-color: #25214f;
+  padding: 10px;
+}
+
+ion-button {
+  --background: #fee178;
+  --color: #25214f;
+  --background-activated: #25214f;
+  --color-activated: #fff;
+  --background-hover: #25214f;
+  --color-hover: #fff;
+}
+
+ion-toggle {
+  --height: 15px;
+  --background-checked: #25214f;
+}
+
+.inner-icon {
+  color: #fee178;
+}
+
+span {
+  font-family: Mulish !important;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -ms-flex-item-align: center !important;
+      align-self: center !important;
+}
+
+ion-content {
+  font-family: Mulish !important;
+}
+
+.items {
+  padding-left: 20px;
+  font-size: 20px;
+  width: 100%;
+}
+
+ion-popover {
+  --width: 22.5rem;
+}
+
+.userImg {
+  border-radius: 50% !important;
+  overflow: hidden;
+  width: 50px !important;
+  height: 50px !important;
+}
+/*# sourceMappingURL=account-info.page.css.map */

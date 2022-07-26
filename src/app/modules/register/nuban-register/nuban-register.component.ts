@@ -13,7 +13,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class NubanRegisterComponent implements OnInit {
   imageSrc = 'assets/icon/hey.png';
-  page = 'finish';
+  page = 'account';
   show = false;
   data: any;
   stage = 1;
@@ -25,6 +25,8 @@ export class NubanRegisterComponent implements OnInit {
   path = 'phone';
   account: string;
   type;
+  user;
+  check = [];
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -33,10 +35,59 @@ export class NubanRegisterComponent implements OnInit {
   ) {}
 
   // register method
+  isUpper(str) {
+    return /[A-Z]/.test(str);
+  }
+  isLower(str) {
+    return /[a-z]/.test(str);
+  }
+  checkNumber(str) {
+    return /[0-9]/.test(str);
+  }
+  checkLength(str) {
+    if (str.length >= 6) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkStrength(event) {
+    console.log(event);
+    const upper = this.isUpper(event);
+    const lower = this.isLower(event);
+    const isNumber = this.checkNumber(event);
+    const length = this.checkLength(event);
+
+    const res = [];
+    if (upper) {
+      res.push(1);
+    }
+    if (lower) {
+      res.push(1);
+    }
+    if (isNumber) {
+      res.push(1);
+    }
+    if (length) {
+      res.push(1);
+    }
+
+    this.check = res;
+    console.log(this.check);
+  }
   sanitize() {
     console.log(this.confirmPass);
     console.log(this.onboardingForm.value);
 
+    if (this.onboardingForm.value.Password !== this.confirmPass) {
+      this.toast.error('Paasword must match confirm password', 'Error');
+      return false;
+    }
+    if (!this.onboardingForm.value.Password) {
+      this.toast.error('Paasword is required', 'Error');
+      return false;
+    }
     if (!this.onboardingForm.value.Phone) {
       this.toast.error('Mobile number is required', 'Error');
       return false;
@@ -45,6 +96,150 @@ export class NubanRegisterComponent implements OnInit {
       this.toast.error('Email is required', 'Error');
       return false;
     }
+    if (!this.onboardingForm.value.FirstName) {
+      this.toast.error('First name is required', 'Error');
+      return false;
+    }
+    if (!this.onboardingForm.value.LastName) {
+      this.toast.error('Last name is required', 'Error');
+      return false;
+    }
+    if (!this.onboardingForm.value.MiddleName) {
+      this.toast.error('Middle name is required', 'Error');
+      return false;
+    }
+
+    if (this.onboardingForm.value.AccountType !== 'Royal Basic') {
+      if (!this.onboardingForm.value.TinNumber) {
+        this.toast.error('Tin Number is required', 'Error');
+        return false;
+      }
+      if (!this.onboardingForm.value.RCNumber) {
+        this.toast.error('RC Number is required', 'Error');
+        return false;
+      }
+      if (!this.onboardingForm.value.CompanyName) {
+        this.toast.error('Company Name is required', 'Error');
+        return false;
+      }
+    }
+
+    if (!this.onboardingForm.value.terms) {
+      this.toast.error('Accept privacy and policy to continue', 'Error');
+      return false;
+    }
+  }
+
+  getOnboardingStage() {
+    const id = localStorage.getItem('stageId');
+    const ids = id ? JSON.parse(id) : null;
+    if (ids) {
+      this.loading = true;
+      this.auth
+        .post({ UserId: ids }, 'UserManager.UserService.FetchUserDetail')
+        .subscribe(
+          (res: any) => {
+            this.loading = false;
+            if (res.data.responseCode === '00') {
+              // this.process = res.data.userDetail;
+              this.user = res.data.userDetail;
+              this.onboardingForm.patchValue({
+                Id: +this.id,
+                FirstName: res.data.userDetail.firstName
+                  ? res.data.userDetail.firstName
+                  : '',
+                LastName: res.data.userDetail.lastName
+                  ? res.data.userDetail.lastName
+                  : '',
+                MiddleName: res.data.userDetail.middleName
+                  ? res.data.userDetail.middleName
+                  : '',
+                UserName: res.data.userDetail.userName
+                  ? res.data.userDetail.userName
+                  : '',
+                Phone: res.data.userDetail.phoneNo
+                  ? res.data.userDetail.phoneNo
+                  : '',
+                Email: res.data.userDetail.emailAddress
+                  ? res.data.userDetail.emailAddress
+                  : '',
+                Password: res.data.userDetail.password
+                  ? res.data.userDetail.password
+                  : '',
+                CreateBankAccount: false,
+                DOB: res.data.userDetail.dob ? res.data.userDetail.dob : '',
+                RefCode: res.data.userDetail.refCode
+                  ? res.data.userDetail.refCode
+                  : '',
+                Verified: res.data.userDetail.verified
+                  ? res.data.userDetail.verified
+                  : false,
+                AccountType: res.data.userDetail.accountType
+                  ? res.data.userDetail.accountType
+                  : '',
+                CompanyType: res.data.userDetail.companyType
+                  ? res.data.userDetail.companyType
+                  : '',
+                PassportUrl: res.data.userDetail.passportUrl
+                  ? res.data.userDetail.passportUrl
+                  : '',
+                HasBVN: res.data.userDetail.hasBVN
+                  ? res.data.userDetail.hasBVN
+                  : false,
+                Stage: 2,
+                IsFinal: res.data.userDetail.isFinal
+                  ? res.data.userDetail.isFinal
+                  : false,
+                BVN: res.data.userDetail.bvn ? res.data.userDetail.bvn : '',
+                Shares: res.data.userDetail.shares
+                  ? res.data.userDetail.shares
+                  : false,
+                TinNumber: res.data.userDetail.tinNumber
+                  ? res.data.userDetail.tinNumber
+                  : '',
+                RCNumber: res.data.userDetail.rcNumber
+                  ? res.data.userDetail.rcNumber
+                  : '',
+                CompanyName: res.data.userDetail.companyName
+                  ? res.data.userDetail.companyName
+                  : '',
+                Gender: res.data.userDetail.gender
+                  ? res.data.userDetail.gender
+                  : '',
+              });
+              console.log(res);
+              console.log(this.onboardingForm.value);
+              this.page = 'details';
+            } else {
+              console.log(res);
+              this.router.navigate(['/register/become-royalty'], {
+                state: {
+                  mode: this.router?.getCurrentNavigation()?.extras?.state
+                    ?.mode,
+                },
+              });
+              this.toast.error('Please try again', 'Error');
+            }
+          },
+          (err) => {
+            this.router.navigate(['/register/become-royalty'], {
+              state: {
+                mode: this.type,
+              },
+            });
+            this.toast.error('Please try again', 'Error');
+          }
+        );
+    } else {
+      this.router.navigate(['/register/become-royalty'], {
+        state: {
+          mode: this.type,
+        },
+      });
+    }
+    this.loading = false;
+
+    return;
   }
   // sanitize2() {
   //   if (!this.onboardingForm.value.FirstName) {
@@ -62,7 +257,7 @@ export class NubanRegisterComponent implements OnInit {
   // }
 
   // register method
-  register() {
+  register(type) {
     if (this.onboardingForm.value.Phone.length === 14) {
       this.onboardingForm.patchValue({
         Phone: this.onboardingForm.value.Phone.substring(1),
@@ -89,8 +284,9 @@ export class NubanRegisterComponent implements OnInit {
     });
     console.log(this.onboardingForm.value);
     this.loading = true;
+    const mode = type === 1 ? 'CreateUser' : 'UpdateUser';
     this.auth
-      .post(this.onboardingForm.value, 'UserManager.UserService.CreateUser')
+      .post(this.onboardingForm.value, `UserManager.UserService.${mode}`)
       .subscribe(
         (res: any) => {
           this.loading = false;
@@ -98,15 +294,35 @@ export class NubanRegisterComponent implements OnInit {
             console.log(res.data.data.id);
             // this.data = res.data;
             localStorage.setItem('stageId', res.data.data.id);
-            if (this.onboardingForm.value.AccountType === 'Royal Basic') {
-              this.router.navigate(['/register/bvn/1'], {
-                state: { mode: 'nuban' },
-              });
+            if (type === 1) {
+              this.page = 'details';
             } else {
-              this.router.navigate(['/register/cop-details'], {
-                state: { mode: 'nuban' },
-              });
+              if (this.path === 'phone') {
+                this.router.navigate(
+                  [`/register/phone/${this.onboardingForm.value.Phone}/1`],
+                  {
+                    state: {
+                      mode: this.type,
+                    },
+                  }
+                );
+              } else {
+                this.router.navigate([`/register/email/1`], {
+                  state: {
+                    mode: this.type,
+                  },
+                });
+              }
             }
+            // if (this.onboardingForm.value.AccountType === 'Royal Basic') {
+            //   this.router.navigate(['/register/bvn/1'], {
+            //     state: { mode: 'nuban' },
+            //   });
+            // } else {
+            //   this.router.navigate(['/register/cop-details'], {
+            //     state: { mode: 'nuban' },
+            //   });
+            // }
             console.log(res);
           } else {
             this.loading = false;
@@ -123,6 +339,13 @@ export class NubanRegisterComponent implements OnInit {
   }
 
   async presentAlertPrompt() {
+    if (this.check.length < 4) {
+      this.toast.error(
+        'password should contain lowercase, uppercase, number and minimum of 6 characters',
+        'Error'
+      );
+      return;
+    }
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Verify Details',
@@ -134,7 +357,7 @@ export class NubanRegisterComponent implements OnInit {
           handler: () => {
             console.log('phone Ok');
             this.path = 'phone';
-            this.register();
+            this.register(2);
           },
         },
         {
@@ -142,7 +365,33 @@ export class NubanRegisterComponent implements OnInit {
           handler: () => {
             console.log('phone Ok');
             this.path = 'email';
-            this.register();
+            this.register(2);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async continue() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Continue Registration',
+      // subHeader: 'Subtitle',
+      message: 'do you want to continue from where you stopped?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            console.log('phone Ok');
+            this.getOnboardingStage();
+          },
+        },
+        {
+          text: 'No',
+          handler: () => {
+            console.log('phone Ok');
           },
         },
       ],
@@ -164,6 +413,15 @@ export class NubanRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     // register form
+    const id = localStorage.getItem('stageId');
+    const ids = id ? id : null;
+    console.log('id', id);
+
+    if (ids) {
+      console.log('yes');
+
+      this.continue();
+    }
     this.type = this.router?.getCurrentNavigation()?.extras?.state?.mode;
     console.log('type', this.type);
 
@@ -176,7 +434,7 @@ export class NubanRegisterComponent implements OnInit {
       Phone: new FormControl('875'),
       Email: new FormControl(''),
       Password: new FormControl(''),
-      CreateBankAccount: new FormControl(true),
+      CreateBankAccount: new FormControl(false),
       DOB: new FormControl(''),
       RefCode: new FormControl(''),
       Verified: new FormControl(false),
@@ -192,6 +450,7 @@ export class NubanRegisterComponent implements OnInit {
       RCNumber: new FormControl(''),
       CompanyName: new FormControl(''),
       Gender: new FormControl('Male'),
+      terms: new FormControl(false),
     });
     // console.log(this.onboardingForm.value);
   }
@@ -216,13 +475,9 @@ export class NubanRegisterComponent implements OnInit {
                 FirstName: res.data.data.data.clientDetails.firstname,
                 LastName: res.data.data.data.clientDetails.lastname,
                 Phone: res.data.data.data.clientDetails.mobileNumber,
-                AccountType:
-                  res.data.data.data.clientDetails.clientTier.tierName ===
-                  'Tier 1'
-                    ? 'Royal Basic'
-                    : 'Royal Corporate',
+                AccountType: res.data.data.data.accountType,
               });
-              this.register();
+              this.register(1);
               console.log(this.onboardingForm.value);
             } else {
               this.toast.error('Account not found', 'Error');
@@ -248,6 +503,6 @@ export class NubanRegisterComponent implements OnInit {
     this.page = mode;
   }
   next() {
-    this.router.navigate(['/register/email/2']);
+    this.register(2);
   }
 }

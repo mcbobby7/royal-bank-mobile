@@ -125,6 +125,23 @@
         </div>
         <span class="items">Reset/Change PIN</span>
       </div>
+      <div
+        *ngIf="upload"
+        style="
+          font-family: Mulish !important;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          cursor: pointer;
+          margin: 1.5rem 0.5rem;
+        "
+        (click)="viewDoc()"
+      >
+        <div class="icon-container">
+          <ion-icon name="document-attach" class="inner-icon"></ion-icon>
+        </div>
+        <span class="items">Documents</span>
+      </div>
     </section>
   </section>
 
@@ -175,4 +192,28 @@
       </div>
   </form>
   </section> -->
+  <div class="mod" *ngIf="view" (click)="viewDoc()">
+    <div class="doc">
+      <ion-icon
+        (click)="viewDoc()"
+        style="
+          font-size: 30px;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          color: #25214f;
+        "
+        name="close-circle-outline"
+      ></ion-icon>
+      <div class="head">Uploaded Documents</div>
+      <div class="document">
+        <ion-icon name="document-attach" class="icn"></ion-icon>
+        <div class="name">CAC Document</div>
+      </div>
+      <div class="document">
+        <ion-icon name="document-attach" class="icn"></ion-icon>
+        <div class="name">{{documentName}}</div>
+      </div>
+    </div>
+  </div>
 </ion-content>

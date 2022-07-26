@@ -11,6 +11,9 @@ export class AccountInfoPage implements OnInit {
   user = JSON.parse(localStorage.getItem('user'));
   photo;
   show = false;
+  documentName = localStorage.getItem('uploadID');
+  view = false;
+  upload = localStorage.getItem('upload');
 
   constructor() {}
 
@@ -28,5 +31,8 @@ export class AccountInfoPage implements OnInit {
   }
   close() {
     this.show = !this.show;
+  }
+  viewDoc() {
+    this.view = !this.view;
   }
 }

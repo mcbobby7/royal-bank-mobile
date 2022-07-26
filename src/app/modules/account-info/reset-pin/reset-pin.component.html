@@ -54,37 +54,40 @@
           class="form-group row"
           style="padding: 5px"
         >
-          <label for="">Old Pin</label>
+          <label for="">Old Pin (4 digits)</label>
           <input
-            type="number"
+            type="text"
             name="pin"
             class="input"
             placeholder=" Old pin"
             [(ngModel)]="pin"
             [ngModelOptions]="{ standalone: true }"
+            (ngModelChange)="checkLength1($event, 'pin')"
           />
         </div>
 
         <div class="form-group row" style="padding: 5px">
-          <label for="">New Pin</label>
+          <label for="">New Pin (4 digits)</label>
           <input
-            type="number"
+            type="text"
             name="newPassword"
             class="input"
-            placeholder="New pin"
+            placeholder="4 digits pin"
             [(ngModel)]="pinNew"
             [ngModelOptions]="{ standalone: true }"
+            (ngModelChange)="checkLength1($event, 'pinNew')"
           />
         </div>
 
         <div class="form-group row" style="padding: 5px">
-          <label for="">Confirm New Pin</label>
+          <label for="">Confirm New Pin (4 digits)</label>
           <input
-            type="number"
+            type="text"
             name="confirmPassword"
             class="input"
-            placeholder="Confirm New pin"
+            placeholder="Confirm pin"
             [(ngModel)]="pinConfirm"
+            (ngModelChange)="checkLength1($event, 'pinConfirm')"
             [ngModelOptions]="{ standalone: true }"
           />
         </div>

@@ -10,7 +10,7 @@
 
 .inner-icon {
   // font-size: 20px;
-  color: #fee178;
+  color: #d9ac0b;
 }
 
 .icon-container {
@@ -173,13 +173,13 @@ label {
 }
 
 .btn2 {
-  --background: #fee178;
+  --background: #d9ac0b;
   --color: #25214f;
   text-transform: capitalize;
   height: 3.5rem;
   font-weight: 300;
   font-size: 1.2rem;
-  --background-activated: #fee178;
+  --background-activated: #d9ac0b;
 }
 
 ion-button {
@@ -191,19 +191,19 @@ ion-button {
 
 // ion-button:active {
 //   width: 100%; --border-radius: none;
-//   --background:#FEE178 ;
+//   --background:#D9AC0B ;
 //   --color:#fff;
 //   --color-activated:#fff;
-//   --background-activated:#FEE178 ;
+//   --background-activated:#D9AC0B ;
 // }
 
 .active {
   width: 100%;
   --border-radius: none;
-  --background: #fee178 !important;
+  --background: #d9ac0b !important;
   --color: #fff;
   --color-activated: #25214f;
-  --background-activated: #fee178 !important;
+  --background-activated: #d9ac0b !important;
 }
 
 .content {

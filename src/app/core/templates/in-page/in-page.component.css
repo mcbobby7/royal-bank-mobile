@@ -1,0 +1,11 @@
+ion-header ion-toolbar {
+  --background: #25214f;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  height: 100%;
+}
+
+ion-header ion-menu-button {
+  color: white;
+}
+/*# sourceMappingURL=in-page.component.css.map */

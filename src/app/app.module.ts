@@ -12,6 +12,7 @@ import { DashboardPage } from './modules/dashboard/dashboard.page';
 import { TransferPage } from './modules/transfer/transfer.page';
 import { WithdrawComponent } from './withdraw/withdraw.component';
 import { FormsModule } from '@angular/forms';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,8 @@ import { Uid } from '@ionic-native/uid/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { NgIdleModule } from '@ng-idle/core';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+// import { Ng9PasswordStrengthBarModule } from 'ng9-password-strength-bar';
+
 @NgModule({
   declarations: [AppComponent, DashboardPage, TransferPage, WithdrawComponent],
   entryComponents: [],
@@ -33,12 +36,14 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
     ComponentsModule,
     BrowserAnimationsModule,
     FormsModule,
+    // Ng9PasswordStrengthBarModule,
     // NgIdleModule.forRoot(),
     NgIdleKeepaliveModule.forRoot(),
   ],
   providers: [
     Uid,
     AndroidPermissions,
+    SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent],

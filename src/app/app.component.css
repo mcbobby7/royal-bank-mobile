@@ -1,0 +1,21 @@
+ion-content {
+  font-family: Mulish !important;
+  --padding-end: 20px;
+  --padding-start: 20px;
+}
+
+li span div a button section table p {
+  font-family: Mulish !important;
+}
+
+ion-button {
+  font-family: Mulish !important;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-left: 50px;
+}
+/*# sourceMappingURL=app.component.css.map */

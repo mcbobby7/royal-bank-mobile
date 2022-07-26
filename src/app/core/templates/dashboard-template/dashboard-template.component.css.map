@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,eAAe,CAAC;EACd,OAAO,CAAA,MAAC;CACT;;AAED,AACE,UADQ,CACR,WAAW,CAAC;EAEV,YAAY,CAAA,QAAC;EAEb,UAAU,EAAE,eAAe;EAC3B,MAAM,EAAE,IAAI;CACb;;AAPH,AAQE,UARQ,CAQR,eAAe,CAAC;EACd,KAAK,EAAE,OAAO;CACf;;AAGH,AAAA,QAAQ,CAAC;EACP,aAAa,EAAE,cAAc;EAC7B,QAAQ,EAAE,MAAM;EAChB,KAAK,EAAE,eAAe;EACtB,MAAM,EAAE,eAAe;CACxB",
+    "sources": [
+        "dashboard-template.component.scss"
+    ],
+    "names": [],
+    "file": "dashboard-template.component.css"
+}

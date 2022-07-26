@@ -243,8 +243,12 @@ export class DocumentUploadComponent implements OnInit {
         console.log(res);
         this.loading = false;
         if (res.data.responseCode === '00') {
-          this.toast.success('Files uploaded successfully', 'Success');
+          this.toast.success(
+            'Files uploaded successfully, contact bank support for verification status',
+            'Success'
+          );
           localStorage.setItem('upload', 'true');
+          localStorage.setItem('uploadID', this.type);
           this.router.navigate(['/dashboard']);
         } else {
           this.toast.error(res.data.responseMessage, 'Error');

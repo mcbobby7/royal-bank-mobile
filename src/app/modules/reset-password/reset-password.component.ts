@@ -24,6 +24,7 @@ export class ResetPasswordComponent implements OnInit {
   otp;
   password;
   confirmPassword;
+  check = [];
   constructor(
     private auth: AuthService,
     public toast: ToastrService,
@@ -31,6 +32,48 @@ export class ResetPasswordComponent implements OnInit {
   ) {}
   viewpassword() {
     this.show = !this.show;
+  }
+
+  isUpper(str) {
+    return /[A-Z]/.test(str);
+  }
+  isLower(str) {
+    return /[a-z]/.test(str);
+  }
+  checkNumber(str) {
+    return /[0-9]/.test(str);
+  }
+  checkLength(str) {
+    if (str.length >= 6) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkStrength(event) {
+    console.log(event);
+    const upper = this.isUpper(event);
+    const lower = this.isLower(event);
+    const isNumber = this.checkNumber(event);
+    const length = this.checkLength(event);
+
+    const res = [];
+    if (upper) {
+      res.push(1);
+    }
+    if (lower) {
+      res.push(1);
+    }
+    if (isNumber) {
+      res.push(1);
+    }
+    if (length) {
+      res.push(1);
+    }
+
+    this.check = res;
+    console.log(this.check);
   }
   // getUsers() {
   //   this.auth.getUsers().subscribe(
@@ -46,6 +89,13 @@ export class ResetPasswordComponent implements OnInit {
     //   this.router.navigate(['/dashboard']);
     //   this.loading = false;
     // }, 3000);
+    if (this.check.length < 4) {
+      this.toast.error(
+        'password should contain lowercase, uppercase, number and minimum of 6 characters',
+        'Error'
+      );
+      return;
+    }
     if (this.password != this.confirmPassword) {
       this.toast.error('Password must match confirm password', 'Error');
       return;

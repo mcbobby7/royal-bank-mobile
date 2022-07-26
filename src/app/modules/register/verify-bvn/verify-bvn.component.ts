@@ -61,7 +61,7 @@ export class VerifyBvnComponent implements OnInit {
                 Password: res.data.userDetail.password
                   ? res.data.userDetail.password
                   : '',
-                CreateBankAccount: true,
+                CreateBankAccount: false,
                 DOB: res.data.userDetail.dob ? res.data.userDetail.dob : '',
                 RefCode: res.data.userDetail.refCode
                   ? res.data.userDetail.refCode
@@ -143,7 +143,9 @@ export class VerifyBvnComponent implements OnInit {
       .subscribe(
         (res: any) => {
           this.loading = false;
-          if (res.status === '00') {
+          console.log(res);
+
+          if (res.data.bvn) {
             console.log(res);
             const fulname = res.data.fullName.split(' ');
             this.phone = res.data.phoneNo;
@@ -196,26 +198,26 @@ export class VerifyBvnComponent implements OnInit {
                 });
               }
             } else {
-              if (this.route.snapshot.params.mode === '4') {
-                this.router.navigate([`/register/phone/${this.phone}/4`], {
-                  state: {
-                    mode: this.type,
-                  },
-                });
-                return;
-              } else if (this.route.snapshot.params.mode === '2') {
-                this.router.navigate([`/register/phone/${this.phone}/4`], {
-                  state: {
-                    mode: this.type,
-                  },
-                });
-                return;
-              }
-              this.router.navigate([`/register/phone/${this.phone}/1`], {
+              // if (this.route.snapshot.params.mode === '4') {
+              this.router.navigate([`register/bvn-success/1`], {
                 state: {
                   mode: this.type,
                 },
               });
+              return;
+              // } else if (this.route.snapshot.params.mode === '2') {
+              //   this.router.navigate([`/register/phone/${this.phone}/4`], {
+              //     state: {
+              //       mode: this.type,
+              //     },
+              //   });
+              //   return;
+              // }
+              // this.router.navigate([`/register/phone/${this.phone}/1`], {
+              //   state: {
+              //     mode: this.type,
+              //   },
+              // });
             }
 
             // deal with register
@@ -250,7 +252,7 @@ export class VerifyBvnComponent implements OnInit {
       Phone: new FormControl(''),
       Email: new FormControl(''),
       Password: new FormControl(''),
-      CreateBankAccount: new FormControl(true),
+      CreateBankAccount: new FormControl(false),
       DOB: new FormControl(''),
       RefCode: new FormControl(''),
       Verified: new FormControl(false),
