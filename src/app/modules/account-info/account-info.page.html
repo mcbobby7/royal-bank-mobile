@@ -1,6 +1,7 @@
 <ion-content>
   <section style="margin-top: 30px; background-color: #25214f">
     <app-add-fund (exit)="close()" *ngIf="show"></app-add-fund>
+    <app-loader *ngIf="loading"></app-loader>
 
     <section>
       <div
@@ -40,158 +41,61 @@
         padding-top: 60px;
       "
     >
-      <div
-        style="
-          font-family: Mulish !important;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          cursor: pointer;
-          margin: 1.5rem 0.5rem;
-        "
-        [routerLink]="['change-password']"
-      >
-        <div class="icon-container">
-          <ion-icon name="lock-closed-sharp" class="inner-icon"></ion-icon>
-        </div>
+      <div class="inBoth" [routerLink]="['change-password']">
+        <ion-icon name="lock-closed-sharp" class="inner-icon"></ion-icon>
         <span class="items">Change Password</span>
+        <img
+          style="width: 30px; height: 30px"
+          src="assets/icon/ar.png"
+          alt=""
+        />
       </div>
 
-      <!-- <div
-        style="
-          font-family: Mulish !important;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          cursor: pointer;
-          margin: 1.5rem 0.5rem;
-        "
-        (click)="enableBiomterics()"
-      >
-        <div class="icon-container">
-          <ion-icon name="finger-print-sharp" class="inner-icon"></ion-icon>
-        </div>
-        <span class="items">Biometric Login</span>
-        <ion-toggle></ion-toggle>
-      </div> -->
-
-      <div
-        style="
-          font-family: Mulish !important;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          cursor: pointer;
-          margin: 1.5rem 0.5rem;
-        "
-        [routerLink]="['limit']"
-      >
-        <div class="icon-container">
-          <ion-icon name="wallet-sharp" class="inner-icon"></ion-icon>
-        </div>
+      <div class="inBoth" [routerLink]="['limit']">
+        <ion-icon name="wallet-sharp" class="inner-icon"></ion-icon>
         <span class="items">Increase Limit</span>
+        <img
+          style="width: 30px; height: 30px"
+          src="assets/icon/ar.png"
+          alt=""
+        />
       </div>
 
-      <div
-        style="
-          font-family: Mulish !important;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          cursor: pointer;
-          margin: 1.5rem 0.5rem;
-        "
-        [routerLink]="['request-card']"
-      >
-        <div class="icon-container">
-          <ion-icon name="card" class="inner-icon"></ion-icon>
-        </div>
+      <div class="inBoth" [routerLink]="['request-card']">
+        <ion-icon name="card" class="inner-icon"></ion-icon>
         <span class="items">Request For Card</span>
+        <img
+          style="width: 30px; height: 30px"
+          src="assets/icon/ar.png"
+          alt=""
+        />
+      </div>
+
+      <div class="inBoth" [routerLink]="['reset-pin']">
+        <ion-icon name="settings-sharp" class="inner-icon"></ion-icon>
+        <span class="items">Reset/Change PIN</span>
+        <img
+          style="width: 30px; height: 30px"
+          src="assets/icon/ar.png"
+          alt=""
+        />
       </div>
 
       <div
-        style="
-          font-family: Mulish !important;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          cursor: pointer;
-          margin: 1.5rem 0.5rem;
-        "
-        [routerLink]="['reset-pin']"
+        class="inBoth"
+        (click)="checkDoc()"
+        *ngIf="user.accountType !== 'Royal Basic' && uploaded !== 'true'"
       >
-        <div class="icon-container">
-          <ion-icon name="settings-sharp" class="inner-icon"></ion-icon>
-        </div>
-        <span class="items">Reset/Change PIN</span>
-      </div>
-      <div
-        *ngIf="upload"
-        style="
-          font-family: Mulish !important;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          cursor: pointer;
-          margin: 1.5rem 0.5rem;
-        "
-        (click)="viewDoc()"
-      >
-        <div class="icon-container">
-          <ion-icon name="document-attach" class="inner-icon"></ion-icon>
-        </div>
-        <span class="items">Documents</span>
+        <ion-icon name="document-attach" class="inner-icon"></ion-icon>
+        <span class="items">Uploaded Documents</span>
+        <img
+          style="width: 30px; height: 30px"
+          src="assets/icon/ar.png"
+          alt=""
+        />
       </div>
     </section>
   </section>
-
-  <!-- <section *ngIf="option ===2">
-    <form [formGroup]="passwordForm">
-      <div class="form-group row" style="padding: 5px">
-        <label for="">Old Password</label>
-        <input
-          type="password"
-          name="password"
-          class="input"
-          placeholder="1234567890"
-        />
-      </div>
-
-      <div class="form-group row" style="padding: 5px">
-        <label for="">Amount</label>
-        <input
-          type="text"
-          name="amount"
-          class="input"
-          placeholder="100000"
-        />
-      </div>
-  </form>
-  </section> -->
-
-  <!-- <section *ngIf="option ===3">
-    <form [formGroup]="passwordForm">
-      <div class="form-group row" style="padding: 5px">
-        <label for="">Old Password</label>
-        <input
-          type="password"
-          name="password"
-          class="input"
-          placeholder="1234567890"
-        />
-      </div>
-
-      <div class="form-group row" style="padding: 5px">
-        <label for="">Amount</label>
-        <input
-          type="text"
-          name="amount"
-          class="input"
-          placeholder="100000"
-        />
-      </div>
-  </form>
-  </section> -->
   <div class="mod" *ngIf="view" (click)="viewDoc()">
     <div class="doc">
       <ion-icon
@@ -206,14 +110,17 @@
         name="close-circle-outline"
       ></ion-icon>
       <div class="head">Uploaded Documents</div>
-      <div class="document">
+      <div class="document" *ngFor="let doc of documents">
         <ion-icon name="document-attach" class="icn"></ion-icon>
-        <div class="name">CAC Document</div>
+        <div style="display: flex; flex-direction: column; text-align: right">
+          <div class="name">{{doc.name}}</div>
+          <div class="name" style="font-size: 14px">{{doc.fileName}}</div>
+        </div>
       </div>
-      <div class="document">
+      <!-- <div class="document">
         <ion-icon name="document-attach" class="icn"></ion-icon>
         <div class="name">{{documentName}}</div>
-      </div>
+      </div> -->
     </div>
   </div>
 </ion-content>

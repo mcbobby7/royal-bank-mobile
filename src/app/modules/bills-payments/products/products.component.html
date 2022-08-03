@@ -23,11 +23,7 @@
     >
       <div
         style="
-          background: linear-gradient(
-            180deg,
-            #ffe278 0%,
-            rgba(255, 226, 120, 0.55) 100%
-          );
+          background-color: #d9ac0b;
           padding: 20px 30px;
           text-align: left;
           width: 100%;
@@ -76,25 +72,32 @@
           display: flex;
           flex-direction: row;
           justify-content: space-around;
+          align-items: center;
           cursor: pointer;
-          margin: 1.5rem 0.5rem;
+          margin: 1rem 0.5rem;
+          color: white;
+          background-color: #25214f;
+          border-radius: 10px;
+          padding: 10px;
         "
         (click)="transactionType(2, data.code)"
       >
-        <div class="icon-container">
-          <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
-          <ion-icon name="phone-portrait" class="inner-icon"></ion-icon>
-        </div>
+        <ion-icon name="snow-outline" class="inner-icon"></ion-icon>
         <span
           style="
             margin: auto;
             text-align: left;
             padding-left: 20px;
-            font-size: 20px;
+            font-size: 16px;
             width: 100%;
           "
           >{{ data.name }}</span
         >
+        <img
+          style="width: 30px; height: 30px"
+          src="assets/icon/ar.png"
+          alt=""
+        />
       </div>
     </section>
 

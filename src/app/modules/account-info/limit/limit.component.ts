@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/http/services/auth.service';
 import { Router } from '@angular/router';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-limit',
@@ -20,11 +21,40 @@ export class LimitComponent implements OnInit {
   limitInterTemp;
   limitIntra;
   limitIntraTemp;
+  formattedAmount = this.currencyPipe.transform('0', '₦');
+  formattedAmount1 = this.currencyPipe.transform('0', '₦');
   constructor(
     public toast: ToastrService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private currencyPipe: CurrencyPipe
   ) {}
+
+  transformAmount(element) {
+    this.formattedAmount = Number(
+      this.formattedAmount.replace(/[^0-9.-]+/g, '')
+    ).toString();
+    this.formattedAmount = this.currencyPipe.transform(
+      this.formattedAmount,
+      '₦'
+    );
+
+    element.target.value = this.formattedAmount;
+    this.limitInter = Number(this.formattedAmount.replace(/[^0-9.-]+/g, ''));
+  }
+
+  transformAmount1(element) {
+    this.formattedAmount1 = Number(
+      this.formattedAmount1.replace(/[^0-9.-]+/g, '')
+    ).toString();
+    this.formattedAmount1 = this.currencyPipe.transform(
+      this.formattedAmount1,
+      '₦'
+    );
+
+    element.target.value = this.formattedAmount1;
+    this.limitIntra = Number(this.formattedAmount1.replace(/[^0-9.-]+/g, ''));
+  }
 
   ngOnInit() {
     if (this.user.accountNos.length < 1) {
@@ -51,7 +81,14 @@ export class LimitComponent implements OnInit {
             this.limitIntra = res.data.data[0].intraLimit;
             this.limitIntraTemp = res.data.data[0].intraLimit;
             console.log(this.limitInter, this.limitIntra);
-
+            this.formattedAmount1 = this.currencyPipe.transform(
+              res.data.data[0].intraLimit,
+              '₦'
+            );
+            this.formattedAmount = this.currencyPipe.transform(
+              res.data.data[0].interLimit,
+              '₦'
+            );
             // deal with register
           } else {
           }

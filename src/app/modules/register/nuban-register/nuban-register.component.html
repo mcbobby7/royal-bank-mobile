@@ -221,53 +221,74 @@
             ></ion-icon>
           </div>
         </div>
-        <ng-container
-          *ngIf="onboardingForm.value.AccountType !== 'Royal Basic'"
+
+        <div class="form-group row" style="padding: 5px">
+          <label for="">Gender</label>
+          <select formControlName="Gender" name="Gender" id="" class="input">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+
+        <div
+          class="form-group row"
+          style="padding: 5px"
+          *ngIf="whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'"
         >
-          <div class="form-group row" style="padding: 5px">
-            <label for="">Company Type</label>
-            <input
-              formControlName="CompanyType"
-              type="text"
-              name="ref"
-              class="input"
-              placeholder="IT"
-            />
-          </div>
+          <label for="">Company Type</label>
+          <input
+            formControlName="CompanyType"
+            type="text"
+            name="ref"
+            class="input"
+            placeholder="IT"
+          />
+        </div>
 
-          <div class="form-group row" style="padding: 5px">
-            <label for="">Company Name</label>
-            <input
-              formControlName="CompanyName"
-              type="text"
-              name="ref"
-              class="input"
-              placeholder="Abys LTD"
-            />
-          </div>
+        <div
+          class="form-group row"
+          style="padding: 5px"
+          *ngIf="whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'"
+        >
+          <label for="">Company Name</label>
+          <input
+            formControlName="CompanyName"
+            type="text"
+            name="ref"
+            class="input"
+            placeholder="Abys LTD"
+          />
+        </div>
 
-          <div class="form-group row" style="padding: 5px">
-            <label for="">RC Number</label>
-            <input
-              formControlName="RCNumber"
-              type="text"
-              name="ref"
-              class="input"
-              placeholder="22333223"
-            />
-          </div>
+        <div
+          class="form-group row"
+          style="padding: 5px"
+          *ngIf="whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'"
+        >
+          <label for="">RC Number</label>
+          <input
+            formControlName="RCNumber"
+            type="text"
+            name="ref"
+            class="input"
+            placeholder="22333223"
+          />
+        </div>
 
-          <div class="form-group row" style="padding: 5px">
-            <label for="">Tax Identification Number</label>
-            <input
-              formControlName="TinNumber"
-              type="text"
-              name="ref"
-              class="input"
-              placeholder="65764566"
-            />
-          </div>
-        </ng-container>
+        <div
+          class="form-group row"
+          style="padding: 5px"
+          *ngIf="whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'"
+        >
+          <label for="">Tax Identification Number</label>
+          <input
+            formControlName="TinNumber"
+            type="text"
+            name="ref"
+            class="input"
+            placeholder="65764566"
+          />
+        </div>
 
         <div class="form-group row" style="padding: 5px">
           <label for="">Referal Code (optional)</label>

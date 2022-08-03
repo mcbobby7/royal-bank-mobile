@@ -32,11 +32,12 @@ import {
 export class TransactionHistoryComponent implements OnInit {
   show = false;
   user = JSON.parse(localStorage.getItem('user'));
-  data: any = [];
+  data: any = JSON.parse(localStorage.getItem('transactions'));
   loading = false;
   details: any = {};
   tran: any = {};
   visible = false;
+  transType: string;
   constructor(private auth: AuthService, private toast: ToastrService) {}
 
   ngOnInit() {
@@ -67,9 +68,14 @@ export class TransactionHistoryComponent implements OnInit {
           console.log(res);
 
           this.loading = false;
-          this.data = res.data.data;
-          console.log(this.data);
           if (res.data.responseCode === '00') {
+            if (JSON.stringify(this.data) !== JSON.stringify(res.data.data)) {
+              this.data = res.data.data;
+              localStorage.setItem(
+                'transactions',
+                JSON.stringify(res.data.data)
+              );
+            }
           } else {
             console.log(res);
           }
@@ -96,13 +102,14 @@ export class TransactionHistoryComponent implements OnInit {
           if (res.data.responseCode === '00') {
             this.details = res.data.data;
             this.tran = transaction;
+            this.transType = transaction.transactionType;
             this.setVissible();
           } else {
             this.toast.error(res.data.responseMessage, 'Error');
           }
         },
         (err) => {
-          this.toast.error('Failed to fetch transaction types', 'Error');
+          this.toast.error('Failed to fetch transaction', 'Error');
           // this.router.navigate(['/dashboard']);
           this.loading = false;
         }

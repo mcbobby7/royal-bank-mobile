@@ -224,29 +224,25 @@ export class VerifyPhoneComponent implements OnInit {
                     if (this.route.snapshot.params.mode === '1') {
                       this.router.navigate(['/register/bvn-success/1'], {
                         state: {
-                          mode: this.router?.getCurrentNavigation()?.extras
-                            ?.state?.mode,
+                          mode: this.type,
                         },
                       });
                     } else if (this.route.snapshot.params.mode === '2') {
                       this.router.navigate(['/register/image'], {
                         state: {
-                          mode: this.router?.getCurrentNavigation()?.extras
-                            ?.state?.mode,
+                          mode: this.type,
                         },
                       });
                     } else if (this.route.snapshot.params.mode === '3') {
                       this.router.navigate(['/register/image-done'], {
                         state: {
-                          mode: this.router?.getCurrentNavigation()?.extras
-                            ?.state?.mode,
+                          mode: this.type,
                         },
                       });
                     } else if (this.route.snapshot.params.mode === '4') {
                       this.router.navigate(['/register/bvn-success/2'], {
                         state: {
-                          mode: this.router?.getCurrentNavigation()?.extras
-                            ?.state?.mode,
+                          mode: this.type,
                         },
                       });
                     }

@@ -31,6 +31,7 @@ export class DashboardPage implements OnInit {
   accountBalance = '';
   loading = false;
   user: any = JSON.parse(localStorage.getItem('user'));
+  bvn = true;
 
   constructor(
     private auth: AuthService,
@@ -47,6 +48,7 @@ export class DashboardPage implements OnInit {
       this.isCard = localStorage.getItem('card');
       this.limit = localStorage.getItem('limit');
       this.upload = localStorage.getItem('upload');
+      this.bvn = JSON.parse(localStorage.getItem('bvn'));
       this.user = users;
     }, 500);
     if (this.user?.accountNos?.length < 1) {

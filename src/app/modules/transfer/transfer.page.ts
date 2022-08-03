@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../core/http/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-transfer',
@@ -31,6 +32,7 @@ export class TransferPage implements OnInit {
   banks = [];
   limitInter;
   limitIntra;
+  formattedAmount = this.currencyPipe.transform('0', '₦');
   user = JSON.parse(localStorage.getItem('user'));
   benes = localStorage.getItem('benAccs')
     ? JSON.parse(localStorage.getItem('benAccs'))
@@ -39,8 +41,22 @@ export class TransferPage implements OnInit {
   constructor(
     private auth: AuthService,
     public toast: ToastrService,
-    private router: Router
+    private router: Router,
+    private currencyPipe: CurrencyPipe
   ) {}
+
+  transformAmount(element) {
+    this.formattedAmount = Number(
+      this.formattedAmount.replace(/[^0-9.-]+/g, '')
+    ).toString();
+    this.formattedAmount = this.currencyPipe.transform(
+      this.formattedAmount,
+      '₦'
+    );
+
+    element.target.value = this.formattedAmount;
+    this.amount = Number(this.formattedAmount.replace(/[^0-9.-]+/g, ''));
+  }
 
   ngOnInit() {
     console.log(this.user);

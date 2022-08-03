@@ -65,7 +65,7 @@
             justify-content: space-between;
           "
         >
-          <div class="name">Max Local Limit :</div>
+          <div class="name">To Royal Bank :</div>
           <div class="tit">{{ limitInterTemp | currency: "&#8358;" }}</div>
         </div>
         <div
@@ -76,21 +76,23 @@
             justify-content: space-between;
           "
         >
-          <div class="name">Max Intra Bank Limit :</div>
+          <div class="name">To Other Banks :</div>
           <div class="tit">{{ limitIntraTemp | currency: "&#8358;" }}</div>
         </div>
       </div>
       <form>
         <div class="form-group row" style="padding: 5px">
-          <label for="">Select Local Limit</label>
+          <label for="">To Royal Bank</label>
           <input
-            [(ngModel)]="limitInter"
-            [value]="limitInter"
+            [(ngModel)]="formattedAmount"
+            [value]="formattedAmount"
             name="account"
             id=""
             [ngModelOptions]="{ standalone: true }"
             class="input"
-            type="number"
+            type="text"
+            CurrencyPipe
+            (blur)="transformAmount($event)"
           />
           <!-- <select
             [(ngModel)]="limitInter"
@@ -110,15 +112,17 @@
         </div>
 
         <div class="form-group row" style="padding: 5px">
-          <label for="">Select Intra Bank Limit</label>
+          <label for="">To Other Banks</label>
           <input
-            [(ngModel)]="limitIntra"
-            [value]="limitIntra"
+            [(ngModel)]="formattedAmount1"
+            [value]="formattedAmount1"
             name="account"
             id=""
             [ngModelOptions]="{ standalone: true }"
             class="input"
-            type="number"
+            type="text"
+            CurrencyPipe
+            (blur)="transformAmount1($event)"
           />
           <!-- <select
             [(ngModel)]="limitIntra"

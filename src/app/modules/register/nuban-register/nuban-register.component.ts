@@ -27,6 +27,8 @@ export class NubanRegisterComponent implements OnInit {
   type;
   user;
   check = [];
+  newUser;
+  whatIs;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -108,8 +110,15 @@ export class NubanRegisterComponent implements OnInit {
       this.toast.error('Middle name is required', 'Error');
       return false;
     }
+    if (!this.onboardingForm.value.Gender) {
+      this.toast.error('Gender is required', 'Error');
+      return false;
+    }
 
-    if (this.onboardingForm.value.AccountType !== 'Royal Basic') {
+    if (
+      this.whatIs === 'ROYAL CORPORATE' ||
+      this.whatIs === 'Royal Corporate'
+    ) {
       if (!this.onboardingForm.value.TinNumber) {
         this.toast.error('Tin Number is required', 'Error');
         return false;
@@ -130,115 +139,96 @@ export class NubanRegisterComponent implements OnInit {
     }
   }
 
-  getOnboardingStage() {
-    const id = localStorage.getItem('stageId');
-    const ids = id ? JSON.parse(id) : null;
-    if (ids) {
-      this.loading = true;
-      this.auth
-        .post({ UserId: ids }, 'UserManager.UserService.FetchUserDetail')
-        .subscribe(
-          (res: any) => {
-            this.loading = false;
-            if (res.data.responseCode === '00') {
-              // this.process = res.data.userDetail;
-              this.user = res.data.userDetail;
-              this.onboardingForm.patchValue({
-                Id: +this.id,
-                FirstName: res.data.userDetail.firstName
-                  ? res.data.userDetail.firstName
-                  : '',
-                LastName: res.data.userDetail.lastName
-                  ? res.data.userDetail.lastName
-                  : '',
-                MiddleName: res.data.userDetail.middleName
-                  ? res.data.userDetail.middleName
-                  : '',
-                UserName: res.data.userDetail.userName
-                  ? res.data.userDetail.userName
-                  : '',
-                Phone: res.data.userDetail.phoneNo
-                  ? res.data.userDetail.phoneNo
-                  : '',
-                Email: res.data.userDetail.emailAddress
-                  ? res.data.userDetail.emailAddress
-                  : '',
-                Password: res.data.userDetail.password
-                  ? res.data.userDetail.password
-                  : '',
-                CreateBankAccount: false,
-                DOB: res.data.userDetail.dob ? res.data.userDetail.dob : '',
-                RefCode: res.data.userDetail.refCode
-                  ? res.data.userDetail.refCode
-                  : '',
-                Verified: res.data.userDetail.verified
-                  ? res.data.userDetail.verified
-                  : false,
-                AccountType: res.data.userDetail.accountType
-                  ? res.data.userDetail.accountType
-                  : '',
-                CompanyType: res.data.userDetail.companyType
-                  ? res.data.userDetail.companyType
-                  : '',
-                PassportUrl: res.data.userDetail.passportUrl
-                  ? res.data.userDetail.passportUrl
-                  : '',
-                HasBVN: res.data.userDetail.hasBVN
-                  ? res.data.userDetail.hasBVN
-                  : false,
-                Stage: 2,
-                IsFinal: res.data.userDetail.isFinal
-                  ? res.data.userDetail.isFinal
-                  : false,
-                BVN: res.data.userDetail.bvn ? res.data.userDetail.bvn : '',
-                Shares: res.data.userDetail.shares
-                  ? res.data.userDetail.shares
-                  : false,
-                TinNumber: res.data.userDetail.tinNumber
-                  ? res.data.userDetail.tinNumber
-                  : '',
-                RCNumber: res.data.userDetail.rcNumber
-                  ? res.data.userDetail.rcNumber
-                  : '',
-                CompanyName: res.data.userDetail.companyName
-                  ? res.data.userDetail.companyName
-                  : '',
-                Gender: res.data.userDetail.gender
-                  ? res.data.userDetail.gender
-                  : '',
-              });
-              console.log(res);
-              console.log(this.onboardingForm.value);
-              this.page = 'details';
-            } else {
-              console.log(res);
-              this.router.navigate(['/register/become-royalty'], {
-                state: {
-                  mode: this.router?.getCurrentNavigation()?.extras?.state
-                    ?.mode,
-                },
-              });
-              this.toast.error('Please try again', 'Error');
-            }
-          },
-          (err) => {
-            this.router.navigate(['/register/become-royalty'], {
-              state: {
-                mode: this.type,
-              },
+  getOnboardingStage(id: any) {
+    this.loading = true;
+    this.auth
+      .post({ UserId: id }, 'UserManager.UserService.FetchUserDetail')
+      .subscribe(
+        (res: any) => {
+          this.loading = false;
+          if (res.data.responseCode === '00') {
+            this.page = 'details';
+            // this.process = res.data.userDetail;
+            this.user = res.data.userDetail;
+            this.onboardingForm.patchValue({
+              Id: +this.id,
+              FirstName: res.data.userDetail.firstName
+                ? res.data.userDetail.firstName
+                : '',
+              LastName: res.data.userDetail.lastName
+                ? res.data.userDetail.lastName
+                : '',
+              MiddleName: res.data.userDetail.middleName
+                ? res.data.userDetail.middleName
+                : '',
+              UserName: res.data.userDetail.userName
+                ? res.data.userDetail.userName
+                : '',
+              Phone: res.data.userDetail.phoneNo
+                ? res.data.userDetail.phoneNo
+                : '',
+              Email: res.data.userDetail.emailAddress
+                ? res.data.userDetail.emailAddress
+                : '',
+              Password: res.data.userDetail.password
+                ? res.data.userDetail.password
+                : '',
+              CreateBankAccount: false,
+              DOB: res.data.userDetail.dob ? res.data.userDetail.dob : '',
+              RefCode: res.data.userDetail.refCode
+                ? res.data.userDetail.refCode
+                : '',
+              Verified: res.data.userDetail.verified
+                ? res.data.userDetail.verified
+                : false,
+              AccountType: res.data.userDetail.accountType
+                ? res.data.userDetail.accountType
+                : '',
+              CompanyType: res.data.userDetail.companyType
+                ? res.data.userDetail.companyType
+                : '',
+              PassportUrl: res.data.userDetail.passportUrl
+                ? res.data.userDetail.passportUrl
+                : '',
+              HasBVN: res.data.userDetail.hasBVN
+                ? res.data.userDetail.hasBVN
+                : false,
+              Stage: 2,
+              IsFinal: res.data.userDetail.isFinal
+                ? res.data.userDetail.isFinal
+                : false,
+              BVN: res.data.userDetail.bvn ? res.data.userDetail.bvn : '',
+              Shares: res.data.userDetail.shares
+                ? res.data.userDetail.shares
+                : false,
+              TinNumber: res.data.userDetail.tinNumber
+                ? res.data.userDetail.tinNumber
+                : '',
+              RCNumber: res.data.userDetail.rcNumber
+                ? res.data.userDetail.rcNumber
+                : '',
+              CompanyName: res.data.userDetail.companyName
+                ? res.data.userDetail.companyName
+                : '',
+              Gender: res.data.userDetail.gender
+                ? res.data.userDetail.gender
+                : '',
             });
+            this.whatIs = res.data.userDetail.accountType;
+            console.log(' account type', res.data.userDetail.accountType);
+            console.log(res);
+            console.log(this.onboardingForm.value);
+            this.page = 'details';
+          } else {
+            console.log(res);
+            this.continue();
             this.toast.error('Please try again', 'Error');
           }
-        );
-    } else {
-      this.router.navigate(['/register/become-royalty'], {
-        state: {
-          mode: this.type,
         },
-      });
-    }
-    this.loading = false;
-
+        (err) => {
+          this.toast.error('Please try again', 'Error');
+        }
+      );
     return;
   }
   // sanitize2() {
@@ -302,14 +292,14 @@ export class NubanRegisterComponent implements OnInit {
                   [`/register/phone/${this.onboardingForm.value.Phone}/1`],
                   {
                     state: {
-                      mode: this.type,
+                      mode: 'nuban',
                     },
                   }
                 );
               } else {
                 this.router.navigate([`/register/email/1`], {
                   state: {
-                    mode: this.type,
+                    mode: 'nuban',
                   },
                 });
               }
@@ -385,7 +375,7 @@ export class NubanRegisterComponent implements OnInit {
           text: 'Yes',
           handler: () => {
             console.log('phone Ok');
-            this.getOnboardingStage();
+            this.getOnboardingStage(this.id);
           },
         },
         {
@@ -465,21 +455,15 @@ export class NubanRegisterComponent implements OnInit {
         .post({ accountNo: e }, 'Cba.BankingService.SearchByNuban')
         .subscribe(
           (res: any) => {
-            this.loading = false;
             console.log(res);
 
             if (res.data.responseCode === '00') {
-              this.onboardingForm.patchValue({
-                Email: res.data.data.data.clientDetails.emailAddress,
-                UserName: res.data.data.data.clientDetails.emailAddress,
-                FirstName: res.data.data.data.clientDetails.firstname,
-                LastName: res.data.data.data.clientDetails.lastname,
-                Phone: res.data.data.data.clientDetails.mobileNumber,
-                AccountType: res.data.data.data.accountType,
-              });
-              this.register(1);
-              console.log(this.onboardingForm.value);
+              this.newUser = res.data;
+              this.whatIs = res.data.data.data.accountType;
+              this.saveExistingUser(res.data.data.data);
+              console.log('account type', this.whatIs);
             } else {
+              this.loading = false;
               this.toast.error('Account not found', 'Error');
             }
           },
@@ -491,6 +475,34 @@ export class NubanRegisterComponent implements OnInit {
     } else {
       return;
     }
+  }
+
+  saveExistingUser(data: any) {
+    this.auth
+      .post(data, 'UserManager.UserService.SaveExistingCustomer')
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+
+          if (res.data.responseCode === '00') {
+            this.newUser = res.data;
+            this.getOnboardingStage(res.data.data.id);
+            localStorage.setItem('stageId', res.data.data.id);
+            this.onboardingForm.patchValue({
+              Id: res.data.data.id,
+            });
+            this.id = res.data.data.id;
+            console.log(this.onboardingForm.value);
+          } else {
+            this.loading = false;
+            this.toast.error(res.data.responseMessage, 'Error');
+          }
+        },
+        (err) => {
+          this.toast.error('Check your internet connection', 'Error');
+          this.loading = false;
+        }
+      );
   }
 
   viewpassword() {

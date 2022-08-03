@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-loan',
@@ -23,6 +24,7 @@ export class LoanPage implements OnInit {
   fullName = '';
   dateOfBirth = '';
   phoneNumber = '';
+  formattedAmount = this.currencyPipe.transform('0', '₦');
   tenures = [
     { name: '6 months', value: 6 },
     { name: '12 months', value: 12 },
@@ -44,8 +46,21 @@ export class LoanPage implements OnInit {
   constructor(
     private auth: AuthService,
     public toast: ToastrService,
-    private router: Router
+    private router: Router,
+    private currencyPipe: CurrencyPipe
   ) {}
+  transformAmount(element) {
+    this.formattedAmount = Number(
+      this.formattedAmount.replace(/[^0-9.-]+/g, '')
+    ).toString();
+    this.formattedAmount = this.currencyPipe.transform(
+      this.formattedAmount,
+      '₦'
+    );
+
+    element.target.value = this.formattedAmount;
+    this.principal = Number(this.formattedAmount.replace(/[^0-9.-]+/g, ''));
+  }
 
   ngOnInit() {
     console.log(this.bvn);

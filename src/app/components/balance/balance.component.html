@@ -31,7 +31,7 @@
         "
         >{{ user.firstName }} {{ user.lastName }}</span
       >
-      <span *ngIf="data">
+      <span>
         <span
           class="card-items"
           style="
@@ -40,11 +40,11 @@
             font-weight: 800;
             color: #fff;
           "
-          *ngIf="show"
+          *ngIf="show === 'true'"
           >{{ user.accountNos[0]?.accountBalance | currency: "&#8358;" }}</span
         >
       </span>
-      <span *ngIf="!data">
+      <!-- <span *ngIf="!data">
         <span
           class="card-items"
           style="
@@ -53,10 +53,10 @@
             font-weight: 800;
             color: #fff;
           "
-          *ngIf="show"
+          *ngIf="show === 'true'"
           >&#8358;0.00</span
         >
-      </span>
+      </span> -->
       <span
         class="card-items"
         style="
@@ -65,7 +65,7 @@
           font-weight: 800;
           color: #fff;
         "
-        *ngIf="!show"
+        *ngIf="!show || show === 'false'"
         >**********</span
       >
       <div
@@ -85,13 +85,13 @@
       </div>
       <div style="text-align: right !important; margin-top: -10px !important">
         <ion-icon
-          *ngIf="!show"
+          *ngIf="!show || show === 'false'"
           (click)="viewBalance()"
           style="font-size: 22px; color: #fff; cursor: pointer; right: 20px"
           name="eye-off-outline"
         ></ion-icon>
         <ion-icon
-          *ngIf="show"
+          *ngIf="show === 'true'"
           (click)="viewBalance()"
           style="font-size: 22px; color: #fff; cursor: pointer; right: 20px"
           name="eye-outline"

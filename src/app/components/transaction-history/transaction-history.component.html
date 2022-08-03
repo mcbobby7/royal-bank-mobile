@@ -10,13 +10,13 @@
   </ion-card-content>
 </div>
 <div *ngIf="!loading">
-  <div *ngFor="let trans of data">
+  <div *ngFor="let trans of data" (click)="setTrans(trans)">
     <div class="tran" *ngIf="trans.transactionType !== 'Debit'">
       <div class="icon">
         <div class="img"><img src="assets/icon/credict.png" alt="" /></div>
         <div class="text">
           <div class="tit">
-            {{ trans?.bankName }}
+            {{ trans?.narration }}
           </div>
           <!-- <div class="mode">{{ trans?.submittedByUsername }}</div> -->
           <div class="mode">
@@ -64,6 +64,7 @@
       style="
         background-color: white;
         width: 100vw;
+        height: 86vh;
         z-index: 1000;
         display: flex;
         flex-direction: column;
@@ -84,7 +85,8 @@
           <ion-icon name="close-circle-outline"></ion-icon>
         </div>
         <div class="date">
-          {{ details.date | date }} {{ details.date | date: "shortTime" }}
+          {{ details?.transferDate | date }}
+          {{ details?.transferDate | date: "shortTime" }}
         </div>
         <div class="card"><ion-icon name="card"></ion-icon></div>
         <div
@@ -100,8 +102,8 @@
           Others
         </div>
         <div class="date">
-          <span *ngIf="details.transactionType !== 'Credit'">-</span
-          >{{ details?.amount | currency: "&#8358;" }}
+          <span *ngIf="transType !== 'Credit'">-</span
+          >{{ tran?.amount | currency: "&#8358;" }}
         </div>
       </div>
       <div class="bod">
@@ -135,7 +137,7 @@
 
             <tr>
               <th style="padding: 10px">Transaction Type</th>
-              <td style="padding: 10px">{{ details?.transactionType }}</td>
+              <td style="padding: 10px">{{ transType }}</td>
             </tr>
             <!-- <tr>
               <th style="padding: 10px">Refrence</th>

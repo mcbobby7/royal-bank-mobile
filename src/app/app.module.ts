@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './components/components.module';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardPage } from './modules/dashboard/dashboard.page';
@@ -44,6 +44,7 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
     Uid,
     AndroidPermissions,
     SplashScreen,
+    CurrencyPipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent],

@@ -17,11 +17,7 @@
     >
       <div
         style="
-          background: linear-gradient(
-            180deg,
-            #ffe278 0%,
-            rgba(255, 226, 120, 0.55) 100%
-          );
+          background-color: #d9ac0b;
           padding: 20px 30px;
           text-align: left;
           width: 100%;
@@ -234,7 +230,7 @@
           Others
         </div>
         <div class="date">
-          <span *ngIf="details.transactionType !== 'Credit'">-</span
+          <span *ngIf="tranType !== 'Credit'">-</span
           >{{ tran?.amount | currency: "&#8358;" }}
         </div>
       </div>
@@ -269,7 +265,7 @@
 
             <tr>
               <th style="padding: 10px">Transaction Type</th>
-              <td style="padding: 10px">{{ details?.transactionType }}</td>
+              <td style="padding: 10px">{{ tranType }}</td>
             </tr>
             <!-- <tr>
               <th style="padding: 10px">Refrence</th>

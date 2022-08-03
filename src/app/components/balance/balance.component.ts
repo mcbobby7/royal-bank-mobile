@@ -8,8 +8,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./balance.component.scss'],
 })
 export class BalanceComponent implements OnInit {
-  show = false;
-  user;
+  show = localStorage.getItem('showBalance');
+  user = JSON.parse(localStorage.getItem('user'));
   data = null;
   constructor(private auth: AuthService, public toast: ToastrService) {}
 
@@ -25,7 +25,13 @@ export class BalanceComponent implements OnInit {
     this.getBalance();
   }
   viewBalance() {
-    this.show = !this.show;
+    if (localStorage.getItem('showBalance') === 'true') {
+      localStorage.setItem('showBalance', 'false');
+      this.show = 'false';
+    } else {
+      localStorage.setItem('showBalance', 'true');
+      this.show = 'true';
+    }
   }
 
   getBalance() {

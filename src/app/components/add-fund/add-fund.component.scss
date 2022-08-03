@@ -22,13 +22,17 @@
   bottom: 0;
   left: 0;
   z-index: 100;
-  background-color: white;
+  background-color: #25214f;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   padding-top: 20px;
   width: 100vw;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
 }
 .title {
   font-size: 20px;
+  color: white;
+  font-weight: 700;
 }
 
 
@@ -36,6 +40,9 @@
   font-size: 13px;
   text-align: left;
   max-width: 700px;
+  background-color: #25214f;
+  color: white;
+
   margin: auto;
   td, th {
     padding: 10px 0;

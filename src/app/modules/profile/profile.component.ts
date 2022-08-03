@@ -116,6 +116,7 @@ export class ProfileComponent implements OnInit {
           this.user.email = this.data.emailAddress;
           this.user.dob = this.data.dateOfBirth;
           localStorage.setItem('user', JSON.stringify(this.user));
+          localStorage.setItem('bvn', 'true');
           this.router.navigate(['/dashboard']);
         } else {
           this.toast.error(res.data.responseMessage, 'Error');

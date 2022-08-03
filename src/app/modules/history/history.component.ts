@@ -45,6 +45,7 @@ export class HistoryComponent implements OnInit {
   details: any = {};
   transType = 'debit';
   counter = 0;
+  tranType: string;
   historyForm = new FormGroup({
     startDate: new FormControl(''),
     endDate: new FormControl(''),
@@ -85,13 +86,14 @@ export class HistoryComponent implements OnInit {
           if (res.data.responseCode === '00') {
             this.details = res.data.data;
             this.tran = transaction;
+            this.tranType = transaction.transactionType;
             this.setVissible();
           } else {
             this.toast.error(res.data.responseMessage, 'Error');
           }
         },
         (err) => {
-          this.toast.error('Failed to fetch transaction types', 'Error');
+          this.toast.error('Failed to fetch transaction', 'Error');
           // this.router.navigate(['/dashboard']);
           this.loading = false;
         }

@@ -27,6 +27,8 @@ export class AppComponent implements OnInit {
   ) {
     this.platform.ready().then(() => {
       this.splashScreen.hide();
+      document.body.setAttribute('dark-theme', 'light');
+      document.body.classList.toggle('dark', false);
     });
     StatusBar.setOverlaysWebView({ overlay: false });
     const setStatusBarStyleDark = async () => {

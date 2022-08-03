@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class ChooseSigninComponent implements OnInit {
   source1 = 'assets/icon/royalL.png';
   source = 'assets/icon/royalty.png';
-  imageSrc = 'assets/icon/phone.jpg';
+  imageSrc = 'assets/icon/phone.png';
 
   constructor(public router: Router) {}
 
