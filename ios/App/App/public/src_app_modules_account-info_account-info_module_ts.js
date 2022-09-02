@@ -11,14 +11,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AccountInfoPageRoutingModule": () => (/* binding */ AccountInfoPageRoutingModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 52816);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 52816);
 /* harmony import */ var _account_info_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./account-info.page */ 9054);
 /* harmony import */ var _change_password_change_password_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./change-password/change-password.component */ 32406);
 /* harmony import */ var _limit_limit_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./limit/limit.component */ 40995);
 /* harmony import */ var _reset_pin_reset_pin_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reset-pin/reset-pin.component */ 28229);
 /* harmony import */ var _request_card_request_card_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./request-card/request-card.component */ 90201);
+/* harmony import */ var _upload_image_upload_image_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./upload-image/upload-image.component */ 84648);
+
 
 
 
@@ -48,13 +50,17 @@ const routes = [
         path: 'request-card',
         component: _request_card_request_card_component__WEBPACK_IMPORTED_MODULE_4__.RequestCardComponent,
     },
+    {
+        path: 'profile-image',
+        component: _upload_image_upload_image_component__WEBPACK_IMPORTED_MODULE_5__.UploadImageComponent,
+    },
 ];
 let AccountInfoPageRoutingModule = class AccountInfoPageRoutingModule {
 };
-AccountInfoPageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.NgModule)({
-        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_7__.RouterModule.forChild(routes)],
-        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_7__.RouterModule],
+AccountInfoPageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.NgModule)({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_8__.RouterModule.forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_8__.RouterModule],
     })
 ], AccountInfoPageRoutingModule);
 

@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../core/http/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-airtime',
@@ -27,29 +28,64 @@ export class AirtimeComponent implements OnInit {
   submitCode;
   accNum;
   show = false;
+  saveBene;
+  mode: string;
+  dataType = '';
+  formattedAmount;
+  amount;
   user = JSON.parse(localStorage.getItem('user'));
-  benes = localStorage.getItem('benNums')
-    ? JSON.parse(localStorage.getItem('benNums'))
+  benes = localStorage.getItem('benes')
+    ? JSON.parse(localStorage.getItem('benes'))
     : [];
   beneficiaryForm = new FormGroup({
     beneficiaryAccount: new FormControl(''),
     amount: new FormControl(''),
     narration: new FormControl(''),
   });
+  amounts: any = [100, 300, 500, 1000, 3000, 5000];
 
   constructor(
     private auth: AuthService,
     public toast: ToastrService,
-    private router: Router
+    private router: Router,
+    private currencyPipe: CurrencyPipe
   ) {}
 
   ngOnInit() {
+    this.getBen();
     console.log(this.user.accountNos.length);
 
     this.fetchData();
     this.accNum = this.user.accountNos[0]
       ? this.user.accountNos[0].accountNo
       : '';
+  }
+  transformAmount(element) {
+    this.formattedAmount = Number(
+      this.formattedAmount.replace(/[^0-9.-]+/g, '')
+    ).toString();
+    this.formattedAmount = this.currencyPipe.transform(
+      this.formattedAmount,
+      '₦'
+    );
+
+    element.target.value = this.formattedAmount;
+    this.amount = Number(this.formattedAmount.replace(/[^0-9.-]+/g, ''));
+  }
+  setAmount(data) {
+    const event: any = {
+      target: {
+        value: data,
+      },
+    };
+    this.formattedAmount = data;
+
+    this.formattedAmount = this.currencyPipe.transform(
+      this.formattedAmount,
+      '₦'
+    );
+    this.amount = Number(this.formattedAmount.replace(/[^0-9.-]+/g, ''));
+    // this.transformAmount(event);
   }
   fetchData() {
     try {
@@ -119,10 +155,66 @@ export class AirtimeComponent implements OnInit {
       );
   }
 
-  transactionType(e, code) {
+  getBen() {
+    this.auth
+      .post(
+        {
+          UserId: +this.user.userId,
+        },
+        'Cba.BankingService.FetchAllBeneficiary'
+      )
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res.data.responseCode === '00') {
+            // deal with register
+
+            this.benes = res.data.data.sort((a, b) => b.id - a.id);
+            this.benes = this.benes.filter(
+              (ben) => ben.name === 'Airtime/Data'
+            );
+            localStorage.setItem(
+              'benes',
+              JSON.stringify(res.data.data.sort((a, b) => b.id - a.id))
+            );
+          } else {
+          }
+        },
+        (err) => {}
+      );
+  }
+
+  addBen() {
+    this.auth
+      .post(
+        {
+          Name: 'Airtime/Data',
+          AccountName: this.dataType,
+          AccountNumber: this.phoneNumber,
+          Company: this.dataType + '/' + this.productCode,
+          UserId: +this.user.userId,
+        },
+        'Cba.BankingService.AddBeneficiary'
+      )
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res.data.responseCode === '00') {
+            this.getBen();
+            // deal with register
+          } else {
+          }
+        },
+        (err) => {}
+      );
+  }
+
+  transactionType(e, code, mode) {
     this.fetchProduct(code);
     console.log('This is the code:', code);
     this.transType = e;
+    this.dataType = code;
+    this.mode = mode;
   }
   adds() {
     if (this.user.hasBVN === false) {
@@ -152,21 +244,39 @@ export class AirtimeComponent implements OnInit {
     });
     localStorage.setItem('benNums', JSON.stringify(this.benes));
   }
-  delete(phone) {
+  delete(number) {
     console.log(this.benes);
-
-    const data = [];
-    for (let i = 0; i < this.benes.length; i++) {
-      if (this.benes[i].phoneNumber !== phone) {
-        data.push(this.benes[i]);
-      }
-    }
-    this.benes = data;
-    localStorage.setItem('benNums', JSON.stringify(this.benes));
-    console.log(this.benes);
+    this.loading = true;
+    this.auth
+      .post(
+        {
+          Id: number,
+        },
+        'Cba.BankingService.RemoveBeneficiary'
+      )
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res.data.responseCode === '00') {
+            this.loading = false;
+            // deal with register
+            const data = [];
+            for (let i = 0; i < this.benes.length; i++) {
+              if (this.benes[i].id !== number) {
+                data.push(this.benes[i]);
+              }
+            }
+            this.benes = data;
+          } else {
+          }
+        },
+        (err) => {}
+      );
   }
 
   use(num) {
+    console.log(num);
+
     this.phoneNumber = num;
     this.newReq = true;
   }
@@ -217,7 +327,10 @@ export class AirtimeComponent implements OnInit {
                     VasTypeCode: payload.vasTypeCode,
                     ProductCode: payload.productCode,
                     RefNo: this.phoneNumber,
-                    Amount: +payload.productPrice,
+                    Amount:
+                      this.mode === 'data'
+                        ? +payload.productPrice
+                        : this.amount,
                     CustomerAccountNo: this.accNum,
                   },
                   'Cba.ValueAddedService.PostTransaction'
@@ -228,8 +341,21 @@ export class AirtimeComponent implements OnInit {
                     console.log(res);
 
                     if (res.data.status === '200') {
+                      if (this.saveBene) {
+                        for (let i = 0; i < this.benes.length; i++) {
+                          if (
+                            this.benes[i].accountNumber === this.phoneNumber
+                          ) {
+                            return;
+                          }
+                        }
+                        this.addBen();
+                      }
                       this.toast.success('Transaction Successfull', 'Success');
                       this.show = false;
+                      this.phoneNumber = '';
+                      this.productCode = '';
+                      this.amount = null;
                       // deal with register
                     } else {
                       this.toast.error('Error please try again', 'Error');

@@ -6,6 +6,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { LimitComponent } from './limit/limit.component';
 import { ResetPinComponent } from './reset-pin/reset-pin.component';
 import { RequestCardComponent } from './request-card/request-card.component';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'request-card',
     component: RequestCardComponent,
+  },
+  {
+    path: 'profile-image',
+    component: UploadImageComponent,
   },
 ];
 

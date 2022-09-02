@@ -11,6 +11,7 @@ export class BalanceComponent implements OnInit {
   show = localStorage.getItem('showBalance');
   user = JSON.parse(localStorage.getItem('user'));
   data = null;
+  url = '';
   constructor(private auth: AuthService, public toast: ToastrService) {}
 
   ngOnInit() {

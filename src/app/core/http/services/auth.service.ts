@@ -18,6 +18,8 @@ export class AuthService {
   baseUrl = 'https://bankingsandboxapi.azurewebsites.net/api/v1/proxy';
   fileUrl = 'https://fileservice01.azurewebsites.net/api/Files/Upload';
   notificationBaseUrl = 'https://notificationservice01.azurewebsites.net';
+  documentUrl =
+    'https://fileservice01.azurewebsites.net/api/Files/RoyalDocumentUpload';
   imei;
   headers = {
     headers: new HttpHeaders({
@@ -91,6 +93,12 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
+  documentUpload(data: any): Observable<void> {
+    console.log(data);
+    return this.httpClient
+      .post<void>(this.documentUrl, data, this.headers)
+      .pipe(catchError(this.handleError));
+  }
   async getImei() {
     const { hasPermission } = await this.androidPermissions.checkPermission(
       this.androidPermissions.PERMISSION.READ_PHONE_STATE

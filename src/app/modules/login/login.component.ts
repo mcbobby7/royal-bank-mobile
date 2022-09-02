@@ -3,6 +3,12 @@ import { AuthService } from '../../core/http/services/auth.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import {
+  AvailableResult,
+  BiometryType,
+  NativeBiometric,
+} from 'capacitor-native-biometric';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -19,11 +25,11 @@ export class LoginComponent implements OnInit {
   imageSrc = 'assets/icon/hey.png';
   data: any;
   loginForm!: FormGroup;
-  user;
   constructor(
     private auth: AuthService,
     public toast: ToastrService,
-    private router: Router
+    private router: Router,
+    public alertController: AlertController
   ) {}
   viewpassword() {
     this.show = !this.show;
@@ -58,6 +64,11 @@ export class LoginComponent implements OnInit {
           this.data = res.data;
           localStorage.setItem('user', JSON.stringify(res.data.profile));
           console.log(res.data.profile);
+          this.deleteCredential();
+          this.setCredential(
+            this.loginForm.value.email,
+            this.loginForm.value.password
+          );
 
           localStorage.setItem('token', res.data.token);
           this.loginForm.reset();
@@ -78,21 +89,112 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     // login form
-    const user = localStorage.getItem('user');
-    const users = user ? JSON.parse(user) : null;
-    setInterval(() => {
-      this.user = users ? users : null;
-    }, 500);
-
-    if (this.user) {
-      this.router.navigate(['/dashboard']);
-    }
     this.loginForm = new FormGroup({
       email: new FormControl(''),
       password: new FormControl(''),
     });
+    this.checkCredential();
   }
   register() {
     this.router.navigate(['/register']);
+  }
+
+  setCredential(username: string, password: string) {
+    NativeBiometric.setCredentials({
+      username,
+      password,
+      server: 'www.royalbankng.com',
+    }).then();
+  }
+
+  deleteCredential() {
+    NativeBiometric.deleteCredentials({
+      server: 'www.royalbankng.com',
+    });
+  }
+
+  checkCredential() {
+    NativeBiometric.isAvailable().then((result: AvailableResult) => {
+      const isAvailable = result.isAvailable;
+      // alert('RESULT ' + JSON.stringify(result));
+      console.log('resuklt', result);
+
+      if (isAvailable) {
+        NativeBiometric.getCredentials({
+          server: 'www.royalbankng.com',
+        })
+          .then((credentials) => {
+            console.log('creden', credentials);
+
+            if (!credentials.password || !credentials.username) {
+              this.presentAlertPromptFirst();
+              return false;
+            }
+
+            NativeBiometric.verifyIdentity({
+              reason: 'Verify your identity',
+              title: 'Verify your identity',
+              subtitle: '',
+              description: '',
+            })
+              .then(() => {
+                this.loginForm.patchValue({
+                  email: credentials.username,
+                  password: credentials.password,
+                });
+                this.login();
+              })
+              .catch((err) => {
+                this.presentAlertPrompt();
+              });
+          })
+          .catch((err) => {
+            this.presentAlertPromptFirst();
+          });
+      } else {
+        this.presentAlertPromptFirst();
+        return false;
+      }
+    });
+  }
+
+  async presentAlertPrompt() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Error',
+      // subHeader: 'Subtitle',
+      message:
+        'Unable to use biometric at the moment, you can still login using email and password',
+      buttons: [
+        {
+          text: 'Close',
+          handler: () => {},
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertPromptFirst() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Note',
+      // subHeader: 'Subtitle',
+      message:
+        'Unable to use biometric at the moment, you have to manually login for the first time, before you can use Biometrics',
+      buttons: [
+        {
+          text: 'Close',
+          handler: () => {},
+        },
+        {
+          text: 'Ok',
+          handler: () => {},
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

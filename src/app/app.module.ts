@@ -20,6 +20,8 @@ import { Uid } from '@ionic-native/uid/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { NgIdleModule } from '@ng-idle/core';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { AuthGuard } from './core/guards/auth.guard';
+import { UnAuthGuard } from './core/guards/UnAuth.guard';
 // import { Ng9PasswordStrengthBarModule } from 'ng9-password-strength-bar';
 
 @NgModule({
@@ -41,6 +43,8 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
     NgIdleKeepaliveModule.forRoot(),
   ],
   providers: [
+    AuthGuard,
+    UnAuthGuard,
     Uid,
     AndroidPermissions,
     SplashScreen,

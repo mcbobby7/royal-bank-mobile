@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { PinComponent } from './components/pin/pin.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { UnAuthGuard } from './core/guards/UnAuth.guard';
 import { DashboardTemplateComponent } from './core/templates/dashboard-template/dashboard-template.component';
 import { InPageComponent } from './core/templates/in-page/in-page.component';
 import { CabletvComponent } from './modules/bills-payments/cabletv/cabletv.component';
@@ -10,8 +11,8 @@ import { DashboardPage } from './modules/dashboard/dashboard.page';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./modules/welcome/welcome.module').then((m) => m.WelcomeModule),
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
   },
   {
     path: 'ds',
@@ -142,6 +143,7 @@ const routes: Routes = [
   },
   {
     path: 'register',
+    canActivate: [UnAuthGuard],
     loadChildren: () =>
       import('./modules/register/register.module').then(
         (m) => m.RegisterModule
@@ -150,6 +152,7 @@ const routes: Routes = [
 
   {
     path: 'forgot-passowrd',
+    canActivate: [UnAuthGuard],
     loadChildren: () =>
       import('./modules/reset-password/reset-password.module').then(
         (m) => m.ResetPasswordModule
@@ -162,6 +165,7 @@ const routes: Routes = [
   // },
   {
     path: 'choose-signin',
+    canActivate: [UnAuthGuard],
     loadChildren: () =>
       import('./modules/choose-signin/choose-signin.module').then(
         (m) => m.ChooseSigninModule
@@ -174,6 +178,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [UnAuthGuard],
     loadChildren: () =>
       import('./modules/login/login.module').then((m) => m.LoginModule),
   },

@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.royalbank.starter',
+  appId: 'io.royalbankng.com',
   appName: 'Royal Bank',
   webDir: 'www',
   bundledWebRuntime: false,

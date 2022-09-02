@@ -239,6 +239,21 @@
             *ngIf="transType === 2"
           >
             <label for="">Bank</label>
+            <div
+              class="input"
+              style="text-align: left; padding: 15px 25px"
+              (click)="setVissible()"
+            >
+              {{bankName ? bankName : "Select Bank"}}
+            </div>
+          </div>
+
+          <!-- <div
+            class="form-group row"
+            style="padding: 5px"
+            *ngIf="transType === 2"
+          >
+            <label for="">Bank</label>
             <select
               [(ngModel)]="bankCode"
               (change)="chnageBank($event)"
@@ -250,7 +265,7 @@
                 {{data.name}}
               </option>
             </select>
-          </div>
+          </div> -->
           <div class="form-group row" style="padding: 5px; position: relative">
             <label for="">Beneficiary Account </label>
             <input
@@ -267,6 +282,12 @@
               [style.color]="showName ? 'red' : 'green'"
             >
               {{name}}
+            </div>
+            <div
+              style="position: absolute; bottom: -15px; right: 20px"
+              *ngIf="nameLoading"
+            >
+              loading...
             </div>
           </div>
 
@@ -365,12 +386,14 @@
                   "
                 >
                   <span style="text-align: left; font-weight: 800"
-                    >{{ data.name }} ({{data.bankName}})
+                    >{{ data.accountName }} ({{data.company}})
                   </span>
-                  <span style="text-align: left">{{ data.accNumber }} </span>
+                  <span style="text-align: left"
+                    >{{ data.accountNumber }}
+                  </span>
                 </div>
                 <ion-icon
-                  (click)="delete(data.accNumber)"
+                  (click)="delete(data.id)"
                   name="trash"
                   style="
                     margin: auto;
@@ -496,37 +519,40 @@
           display: flex;
           flex-direction: column;
           justify-content: space-evenly;
-          height: 70vh;
+          width: 300px;
+          height: 400px;
+          background-color: white;
+          margin: auto;
         "
+        id="recipt"
+        #recipt
       >
         <div>
-          <div>
-            <!-- <div
-            style="
-              text-align: center;
-              font-size: 25px;
-              font-weight: 500;
-              border-bottom: 2px solid #25214f;
-              width: 130px;
-              margin: auto;
-            "
-          >
-            Successful
-          </div> -->
-          </div>
+          <div></div>
           <div
             style="
               display: flex;
               justify-content: center;
               align-items: center;
               margin: auto;
+              padding: 30px;
+              background-color: white;
             "
           >
-            <ion-img
-              [src]="imageSrc"
-              style="width: 200px; margin: auto; height: 200px"
-              class="img"
-            ></ion-img>
+            <div
+              style="
+                width: 100vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: -20px;
+              "
+            >
+              <img
+                [src]="imageSrc"
+                style="width: 230px; margin: auto; height: 200px"
+              />
+            </div>
           </div>
           <section
             style="
@@ -535,6 +561,8 @@
               text-align: left;
               width: 300px;
               margin: 20px auto;
+              background-color: white;
+              color: black;
             "
           >
             You have successfully transfered {{amount | currency: "&#8358;"}} to
@@ -543,23 +571,99 @@
             Account Number: {{benAcc}}
           </section>
         </div>
-        <section
-          style="
-            display: flex;
-            flex-direction: column;
-            align-content: space-between;
-          "
-        >
-          <ion-button
-            style="background-color: #fee178"
-            class="btn"
-            expand="block"
-            (click)="create()"
-          >
-            Go To Dashboard
-          </ion-button>
-        </section>
       </div>
+      <section
+        style="
+          display: flex;
+          flex-direction: column;
+          align-content: space-between;
+        "
+      >
+        <ion-button
+          style="background-color: #25214f"
+          class="btn"
+          expand="block"
+          (click)="getReciept()"
+        >
+          Share
+        </ion-button>
+        <ion-button
+          style="background-color: #d9ac0b"
+          class="btn2"
+          expand="block"
+          (click)="create()"
+        >
+          Go To Dashboard
+        </ion-button>
+        <!-- <img [src]="url" style="width: 500px" /> -->
+      </section>
     </section>
   </section>
+</ion-content>
+
+<ion-content class="mas" *ngIf="visible">
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    "
+  >
+    <div class="overlay" (click)="setVissible()" [@slideInOut]></div>
+    <div
+      style="
+        background-color: white;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        padding-top: 50px;
+      "
+      [@slideInOut]
+    >
+      <div class="head">
+        <div
+          (click)="setVissible()"
+          style="
+            color: #25214f;
+            font-size: 30px;
+            position: absolute;
+            left: 10px;
+            top: 60px;
+          "
+        >
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </div>
+        <div
+          class="form-group row"
+          style="padding: 5px; margin: 20px; margin-top: 40px"
+        >
+          <input
+            type="text"
+            name="bankName"
+            class="input"
+            [(ngModel)]="searchBank"
+            placeholder="Bank Name"
+            (ngModelChange)="refchg($event)"
+          />
+        </div>
+        <div class="bankNames">
+          <div
+            class="bank"
+            *ngFor="let bank of searchBankTemp"
+            (click)="setBank(bank)"
+          >
+            <span style="font-size: 14px">{{bank.name}}</span>
+            <img
+              style="width: 30px; height: 30px"
+              src="assets/icon/otherArrow.png"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

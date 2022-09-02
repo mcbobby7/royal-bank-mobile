@@ -4,9 +4,11 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { ToastrService } from 'ngx-toastr';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-
+import { Location } from '@angular/common';
+import { Plugins } from '@capacitor/core';
+const { App } = Plugins;
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -23,7 +25,9 @@ export class AppComponent implements OnInit {
     private router: Router,
     private toast: ToastrService,
     private platform: Platform,
-    private splashScreen: SplashScreen
+    private splashScreen: SplashScreen,
+    private location: Location,
+    public alertController: AlertController
   ) {
     this.platform.ready().then(() => {
       this.splashScreen.hide();
@@ -39,13 +43,8 @@ export class AppComponent implements OnInit {
       color: '#ffffff',
     });
 
-    // sets an idle timeout of 10 seconds.
-    idle.setIdle(10);
-
-    // sets a timeout period of 10 seconds. after 20 seconds of inactivity, the user will timed out.
-    idle.setTimeout(20);
-
-    // sets the default interrupts, in this case, things like clicks, scrolls, touches to the document
+    idle.setIdle(50);
+    idle.setTimeout(50);
     idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 
     idle.onIdleEnd.subscribe(() => (this.idleState = 'No longer idle.'));
@@ -56,7 +55,7 @@ export class AppComponent implements OnInit {
       console.log('timed out');
       this.reset();
       if (this.user) {
-        // this.logout();
+        this.logout();
         console.log('logout');
       }
     });
@@ -71,14 +70,78 @@ export class AppComponent implements OnInit {
 
     this.reset();
   }
+
+  async showExitConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Close Royal Bank App',
+      message: 'Do you want to close the app?',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('Application exit prevented!');
+          },
+        },
+        {
+          text: 'Exit',
+          handler: () => {
+            App.exitApp();
+            this.clearData();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async showExitAndLogoutConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Close Royal Bank App',
+      message: 'Do you want to close the app and logout?',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('Application exit prevented!');
+          },
+        },
+        {
+          text: 'Exit',
+          handler: () => {
+            App.exitApp();
+            this.clearData();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   reset() {
     this.idle.watch();
     this.idleState = 'Started.';
     this.timedOut = false;
   }
   ngOnInit() {
+    const session = localStorage.getItem('sessionMin')
+      ? new Date(localStorage.getItem('sessionMin'))
+      : new Date();
+    if (new Date().getTime() - session.getTime() > 120000) {
+      this.logout();
+    }
+    const neDate = new Date();
+    localStorage.setItem('sessionMin', neDate.toString());
+
     this.reset();
     setInterval(() => {
+      const date = new Date();
+      localStorage.setItem('sessionMin', date.toString());
       this.user = localStorage.getItem('token');
     }, 500);
   }
@@ -87,5 +150,9 @@ export class AppComponent implements OnInit {
     localStorage.setItem('token', '');
     this.router.navigate(['/login']);
     this.toast.error('Invalid session timed-out', 'Error');
+  }
+  clearData() {
+    localStorage.setItem('user', '');
+    localStorage.setItem('token', '');
   }
 }

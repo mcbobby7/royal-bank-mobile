@@ -117,7 +117,13 @@
 
         <div class="form-group row" style="padding: 5px">
           <label for="">Loan Tenure</label>
-          <select [(ngModel)]="tenure" name="tenure" id="" class="input">
+          <select
+            [(ngModel)]="tenure"
+            name="tenure"
+            id=""
+            class="input"
+            (change)="dateTenure($event)"
+          >
             <option *ngFor="let ten of tenures" [value]="ten.value">
               {{ten.name}}
             </option>
@@ -144,8 +150,10 @@
             name="date"
             style="width: 100%"
             class="input"
+            (change)="dateChange($event)"
           />
         </div>
+
         <div class="form-group row" style="padding: 5px">
           <label for="">Comment</label>
           <input
@@ -155,6 +163,23 @@
             class="input"
             placeholder=""
           />
+        </div>
+
+        <div
+          class="form-group row"
+          style="
+            padding: 5px;
+            border: 1px dotted grey;
+            background-color: white;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            margin-top: 20px;
+          "
+        >
+          <span for="">End Date : </span>
+          <span>{{ endDate | date }}</span>
         </div>
 
         <div class="form-group">
@@ -230,11 +255,11 @@
               </tr>
 
               <!-- <tr>
-                <th>Outstanding Intrest</th>
+                <th>Outstanding Interest</th>
                 <td>{{data.interestOutstanding | currency: "&#8358;"}}</td>
               </tr>
               <tr>
-                <th>Intrest Paid</th>
+                <th>Interest Paid</th>
                 <td>{{data.interestPaid | currency: "&#8358;"}}</td>
               </tr>
               <tr>
@@ -292,7 +317,7 @@
             <td>{{data.principalRepayment | currency: "&#8358;"}}</td>
           </tr>
           <tr>
-            <th>Intrest Repayment</th>
+            <th>Interest Repayment</th>
             <td>{{data.interestRepayment | currency: "&#8358;"}}</td>
           </tr>
           <tr>
@@ -345,7 +370,7 @@
             <td>{{data.principalRepayment | currency: "&#8358;"}}</td>
           </tr>
           <tr>
-            <th>Intrest Repayment</th>
+            <th>Interest Repayment</th>
             <td>{{data.interestRepayment | currency: "&#8358;"}}</td>
           </tr>
           <tr>

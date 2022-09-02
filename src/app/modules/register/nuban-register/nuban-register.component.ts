@@ -29,6 +29,12 @@ export class NubanRegisterComponent implements OnInit {
   check = [];
   newUser;
   whatIs;
+  companyType = [
+    'Limited liability company',
+    'Corporation',
+    'Sole proprietorship',
+    'Partnership',
+  ];
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -329,6 +335,9 @@ export class NubanRegisterComponent implements OnInit {
   }
 
   async presentAlertPrompt() {
+    if (!this.sanitize) {
+      return;
+    }
     if (this.check.length < 4) {
       this.toast.error(
         'password should contain lowercase, uppercase, number and minimum of 6 characters',

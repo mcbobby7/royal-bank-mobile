@@ -1,0 +1,248 @@
+<ion-content>
+  <app-loader *ngIf="loading"></app-loader>
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      height: 90vh;
+      padding-bottom: 40px;
+    "
+    *ngIf="page === 'take'"
+  >
+    <div
+      style="
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <section
+        style="
+          text-align: center;
+          margin-top: -80px;
+          display: flex;
+          flex-direction: column;
+          align-content: space-between;
+        "
+      >
+        <div
+          style="
+            background: #f8f8f8;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+          "
+        >
+          <div class="td">Upload your picture</div>
+          <div class="bd">Show us that wonderful face of yours</div>
+          <div class="bdp">
+            Picture must be taken in a well lit and clear background
+          </div>
+        </div>
+      </section>
+    </div>
+    <section class="central-image row">
+      <div class="form-group">
+        <ion-button
+          class="btn"
+          expand="block"
+          style="margin-top: 1rem"
+          (click)="takePhoto()"
+          routerLinkActive="router-link-active"
+        >
+          Take a Picture
+        </ion-button>
+      </div>
+    </section>
+  </div>
+
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      height: 90vh;
+      padding-bottom: 40px;
+    "
+    *ngIf="page === 'crop'"
+  >
+    <div>
+      <!-- <section
+        style="
+          text-align: center;
+          margin-top: -80px;
+          display: flex;
+          flex-direction: column;
+          align-content: space-between;
+        "
+      >
+        <section class="we" style="margin-top: 4rem">
+          All done {{ user.firstName }}
+        </section>
+        <section style="font-size: 14px; text-align: center; margin-top: 10px">
+          Your information all checked out.
+        </section>
+        <div
+          style="
+            background: #f8f8f8;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+          "
+        >
+          <div class="td">Upload your picture</div>
+          <div class="bd">Show us that beautiful</div>
+          <div class="bdp">
+            Picture must be taken in a well lit and clear background
+          </div>
+        </div>
+      </section> -->
+    </div>
+    <div class="card-body">
+      <div class="row" style="margin-top: 15px">
+        <div class="text-center col-md-8" style="text-align: center">
+          <h3>Crop Image</h3>
+          <h5>Make sure your face is visible</h5>
+          <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [imageBase64]="baseImage"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 4"
+            [resizeToWidth]="256"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()"
+          ></image-cropper>
+        </div>
+      </div>
+    </div>
+    <section class="central-image row">
+      <div class="form-group">
+        <ion-button
+          (click)="crop()"
+          class="btn"
+          expand="block"
+          style="margin-top: 0"
+        >
+          Done
+        </ion-button>
+      </div>
+    </section>
+  </div>
+
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      height: 90vh;
+      padding-bottom: 40px;
+    "
+    *ngIf="page === 'success'"
+  >
+    <div>
+      <section
+        class="central-image"
+        style="
+          width: 291px;
+          margin: auto;
+          display: flex;
+          flex-direction: column;
+        "
+      >
+        <ion-img
+          style="width: 140px; height: 140px; margin-top: 100px"
+          class="img"
+          src="assets/icon/good.png"
+        ></ion-img>
+      </section>
+
+      <section
+        style="
+          text-align: center;
+          margin-top: -20px;
+          display: flex;
+          flex-direction: column;
+          align-content: space-between;
+        "
+      >
+        <section class="we" style="margin-top: 4rem">
+          Image captured successfully
+        </section>
+      </section>
+    </div>
+    <section class="central-image row">
+      <div class="form-group">
+        <ion-button
+          class="btn"
+          expand="block"
+          style="margin-top: 1rem"
+          (click)="next()"
+          routerLinkActive="router-link-active"
+        >
+          Continue
+        </ion-button>
+      </div>
+    </section>
+  </div>
+
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      height: 100vh;
+      padding-bottom: 40px;
+    "
+    *ngIf="page === 'fail'"
+  >
+    <div>
+      <section
+        class="central-image"
+        style="
+          width: 291px;
+          margin: auto;
+          display: flex;
+          flex-direction: column;
+        "
+      >
+        <ion-img
+          style="width: 140px; height: 140px; margin-top: 100px"
+          class="img"
+          src="assets/icon/bad.png"
+        ></ion-img>
+      </section>
+
+      <section
+        style="
+          text-align: center;
+          margin-top: -20px;
+          display: flex;
+          flex-direction: column;
+          align-content: space-between;
+        "
+      >
+        <section class="we" style="margin-top: 4rem">
+          There was an error with your captured image
+        </section>
+      </section>
+    </div>
+    <section class="central-image row">
+      <div class="form-group">
+        <ion-button
+          class="btn"
+          expand="block"
+          style="margin-top: 1rem"
+          (click)="retake()"
+          routerLinkActive="router-link-active"
+        >
+          Retake
+        </ion-button>
+      </div>
+    </section>
+  </div>
+</ion-content>

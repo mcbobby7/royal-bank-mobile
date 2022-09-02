@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/http/services/auth.service';
@@ -26,11 +27,14 @@ export class DocumentUploadComponent implements OnInit {
   isImageSaved1: boolean;
   cardImageBase641: string;
   fileName1: string;
+  isCAC = false;
+  isId = false;
 
   constructor(
     private auth: AuthService,
     public toast: ToastrService,
-    private router: Router
+    private router: Router,
+    public alertController: AlertController
   ) {}
 
   ngOnInit() {
@@ -107,61 +111,39 @@ export class DocumentUploadComponent implements OnInit {
         if (type === 'CAC') {
           this.cardImageBase64 = data;
           this.isImageSaved = true;
+          this.presentAlertPrompt(type);
         } else {
           this.cardImageBase641 = data;
           this.isImageSaved1 = true;
+          this.presentAlertPrompt(type);
         }
       });
-
-      // const reader = new FileReader();
-      // reader.onload = (e: any) => {
-      //   const image = new Image();
-      //   image.src = e.target.result;
-      //   image.onload = (rs: any) => {
-      //     const img_height = rs.currentTarget.height;
-      //     const img_width = rs.currentTarget.width;
-
-      //     console.log(img_height, img_width);
-
-      //     if (img_height > max_height && img_width > max_width) {
-      //       if (type === 'CAC') {
-      //         this.imageError =
-      //           'Maximum dimentions allowed ' +
-      //           max_height +
-      //           '*' +
-      //           max_width +
-      //           'px';
-      //       } else {
-      //         this.imageError1 =
-      //           'Maximum dimentions allowed ' +
-      //           max_height +
-      //           '*' +
-      //           max_width +
-      //           'px';
-      //       }
-
-      //       return false;
-      //     } else {
-      //     const imgBase64Path = e.target.result;
-      //     console.log(imgBase64Path);
-
-      //     if (type === 'CAC') {
-      //       this.cardImageBase64 = imgBase64Path;
-      //       this.isImageSaved = true;
-      //     } else {
-      //       this.cardImageBase641 = imgBase64Path;
-      //       this.isImageSaved1 = true;
-      //     }
-
-      //     // this.previewImagePath = imgBase64Path;
-      //     // }
-      //   };
-      // };
-
-      // reader.readAsDataURL(fileInput.target.files[0]);
     }
   }
+  async presentAlertPrompt(type) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Upload File',
+      // subHeader: 'Subtitle',
+      message: 'Are you sure you want to upload this file?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('phone Ok');
+          },
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.upload(type);
+          },
+        },
+      ],
+    });
 
+    await alert.present();
+  }
   removeImage() {
     this.cardImageBase64 = null;
     this.isImageSaved = false;
@@ -173,91 +155,149 @@ export class DocumentUploadComponent implements OnInit {
     this.isImageSaved1 = false;
     this.fileName1 = null;
   }
+  // getUrl(data) {
+  //   this.auth.post(data, 'Cba.BankingService.DocumentUpload').subscribe(
+  //     (res: any) => {
+  //       console.log(res);
+  //       this.loading = false;
+  //       if (res.data.responseCode === '00') {
+  //         this.upload1();
+  //       } else {
+  //         this.toast.error(res.data.responseMessage, 'Error');
+  //       }
+  //     },
+  //     (err) => {
+  //       this.toast.error('Error please try again', 'Error');
+  //       this.loading = false;
+  //     }
+  //   );
+  // }
 
-  upload() {
-    if (!this.cardImageBase64) {
-      this.toast.error(`Select a valid CAC pdf document`, 'Error');
-      return false;
-    }
-    if (!this.cardImageBase641) {
-      this.toast.error(`Select a valid  ID pdf document`, 'Error');
-      return false;
-    }
-    if (!this.type) {
-      this.toast.error(`Type of ID is required`, 'Error');
-      return false;
-    }
+  upload(type) {
+    // if (!this.cardImageBase64) {
+    //   this.toast.error(`Select a valid CAC pdf document`, 'Error');
+    //   return false;
+    // }
+    // if (!this.cardImageBase641) {
+    //   this.toast.error(`Select a valid  ID pdf document`, 'Error');
+    //   return false;
+    // }
+    // if (!this.type) {
+    //   this.toast.error(`Type of ID is required`, 'Error');
+    //   return false;
+    // }
+    console.log(type);
+
     this.loading = true;
-    const first = this.cardImageBase64.split(',');
+    let first: any;
+    if (type === 'CAC') {
+      first = this.cardImageBase64.split(',');
+    } else {
+      first = this.cardImageBase641.split(',');
+    }
+    // const first = this.cardImageBase64.split(',');
     const mainImage = first[1];
 
     const data = {
       ClientId: this.user.clientId,
-      Name: 'CAC Document',
-      FileName: this.fileName,
+      Name: type === 'CAC' ? 'CAC Document' : this.type,
+      FileName: type === 'CAC' ? this.fileName : this.fileName1,
       Base64String: mainImage,
-      Description: 'CAC Document Upload',
+      Description: type === 'CAC' ? 'CAC Document Upload' : 'ID Upload',
     };
-    this.auth.post(data, 'Cba.BankingService.DocumentUpload').subscribe(
+    this.auth.documentUpload(data).subscribe(
       (res: any) => {
         console.log(res);
         this.loading = false;
-        if (res.data.responseCode === '00') {
-          this.upload1();
+        if (res.status) {
+          this.save(res.result);
         } else {
           this.toast.error(res.data.responseMessage, 'Error');
+          this.cardImageBase64 = '';
+          this.cardImageBase641 = '';
+          this.fileName = '';
+          this.fileName1 = '';
         }
       },
       (err) => {
         this.toast.error('Error please try again', 'Error');
         this.loading = false;
+        this.cardImageBase64 = '';
+        this.cardImageBase641 = '';
+        this.fileName = '';
+        this.fileName1 = '';
       }
     );
   }
 
-  upload1() {
-    if (!this.cardImageBase64) {
-      this.toast.error(`CAC document cannot be empty`, 'Error');
-      return false;
-    }
-    if (!this.cardImageBase641) {
-      this.toast.error(`Valid ID cannot be empty`, 'Error');
-      return false;
-    }
-    if (!this.type) {
-      this.toast.error(`Type of ID is required`, 'Error');
-      return false;
-    }
+  save(result: any) {
+    // if (!this.cardImageBase64) {
+    //   this.toast.error(`CAC document cannot be empty`, 'Error');
+    //   return false;
+    // }
+    // if (!this.cardImageBase641) {
+    //   this.toast.error(`Valid ID cannot be empty`, 'Error');
+    //   return false;
+    // }
+    // if (!this.type) {
+    //   this.toast.error(`Type of ID is required`, 'Error');
+    //   return false;
+    // }
     this.loading = true;
-    const first = this.cardImageBase641.split(',');
-    const mainImage = first[1];
-    const data = {
-      ClientId: this.user.clientId,
-      Name: this.type,
-      FileName: this.fileName1,
-      Base64String: mainImage,
-      Description: this.type + ' ' + 'Upload',
-    };
-    this.auth.post(data, 'Cba.BankingService.DocumentUpload').subscribe(
+    // const first = this.cardImageBase641.split(',');
+    // const mainImage = first[1];
+    // const data = {
+    //   ClientId: this.user.clientId,
+    //   Name: this.type,
+    //   FileName: this.fileName1,
+    //   Base64String: mainImage,
+    //   Description: this.type + ' ' + 'Upload',
+    // };
+    this.auth.post(result, 'Cba.BankingService.DocumentUpload').subscribe(
       (res: any) => {
         console.log(res);
         this.loading = false;
         if (res.data.responseCode === '00') {
-          this.toast.success(
-            'Files uploaded successfully, contact bank support for verification status',
-            'Success'
-          );
+          // this.toast.success(
+          //   'Files uploaded successfully, contact bank support for verification status',
+          //   'Success'
+          // );
           localStorage.setItem('upload', 'true');
           localStorage.setItem('uploadID', this.type);
-          this.router.navigate(['/dashboard']);
+          if (result.name === 'CAC Document') {
+            this.toast.success('CAC document uploaded successfully', 'Success');
+            this.isCAC = true;
+          } else {
+            this.toast.success('ID uploaded successfully', 'Success');
+            this.isId = true;
+          }
         } else {
           this.toast.error(res.data.responseMessage, 'Error');
+          this.cardImageBase64 = '';
+          this.cardImageBase641 = '';
+          this.fileName = '';
+          this.fileName1 = '';
         }
       },
       (err) => {
         this.toast.error('Error please try again', 'Error');
         this.loading = false;
+        this.cardImageBase64 = '';
+        this.cardImageBase641 = '';
+        this.fileName = '';
+        this.fileName1 = '';
       }
     );
+  }
+  done() {
+    if (!this.fileName) {
+      this.toast.error('CAC document has not been uploaded yet', 'Error');
+      return;
+    }
+    if (!this.fileName1) {
+      this.toast.error('ID has not been uploaded yet', 'Error');
+      return;
+    }
+    this.router.navigate(['/dashboard']);
   }
 }

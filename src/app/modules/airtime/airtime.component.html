@@ -92,7 +92,7 @@
           border-radius: 10px;
           padding: 10px;
         "
-        (click)="transactionType(2, data.code)"
+        (click)="transactionType(2, data.code, 'data')"
       >
         <!-- <div class="icon-container"> -->
         <!-- <ion-icon name="send" class="inner-icon"></ion-icon> -->
@@ -142,7 +142,7 @@
           border-radius: 10px;
           padding: 10px;
         "
-        (click)="transactionType(2, data.code)"
+        (click)="transactionType(2, data.code, 'airtime')"
       >
         <ion-icon name="call-outline" class="inner-icon"></ion-icon>
         <span
@@ -225,7 +225,11 @@
           />
         </div>
 
-        <div class="form-group row" style="padding: 5px">
+        <div
+          class="form-group row"
+          style="padding: 5px"
+          *ngIf="mode === 'data'"
+        >
           <label for="">Select Bundle</label>
           <select [(ngModel)]="productCode" name="bank" id="" class="input">
             <!-- <option value="">-- Select Type --</option> -->
@@ -235,6 +239,58 @@
               }})
             </option>
           </select>
+        </div>
+        <div
+          *ngIf="mode === 'airtime'"
+          style="display: flex; flex-wrap: wrap; justify-content: space-evenly"
+        >
+          <div
+            *ngFor="let data of amounts"
+            (click)="setAmount(data)"
+            style="
+              border: 2px solid #d9ac0b;
+              padding: 10px 15px;
+              width: 30%;
+              display: flex;
+              justify-content: center;
+              margin-top: 20px;
+            "
+          >
+            {{ data | currency: "&#8358;" }}
+          </div>
+        </div>
+
+        <div
+          class="form-group row"
+          style="padding: 5px"
+          *ngIf="mode === 'airtime'"
+        >
+          <label for="">Amount</label>
+          <input
+            type="text"
+            [(ngModel)]="formattedAmount"
+            name="amount"
+            class="input"
+            placeholder="100000"
+            CurrencyPipe
+            (blur)="transformAmount($event)"
+          />
+        </div>
+
+        <div
+          class="form-group row"
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 5px;
+          "
+        >
+          <label>Save Beneficiary</label>
+          <ion-toggle
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="saveBene"
+          ></ion-toggle>
         </div>
 
         <div class="form-group">
@@ -251,44 +307,6 @@
       </div>
 
       <div *ngIf="!newReq">
-        <div
-          (click)="new()"
-          style="
-            margin: 20px 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          "
-        >
-          Add <ion-icon name="add"></ion-icon>
-        </div>
-        <div *ngIf="add">
-          <input
-            type="text"
-            class="input"
-            placeholder="name"
-            name="name"
-            style="margin-bottom: 10px"
-            [(ngModel)]="name"
-          />
-          <input
-            type="text"
-            class="input"
-            placeholder="Number"
-            name="number"
-            [(ngModel)]="benNum"
-          />
-          <ion-button
-            class="btn"
-            expand="block"
-            style="margin-top: 1rem"
-            (click)="adds()"
-          >
-            Add
-          </ion-button>
-        </div>
-
         <div class="row-one">
           <span style="text-align: left" *ngIf="benes.length === 0"
             >No beneficiary found</span
@@ -300,7 +318,7 @@
               margin-top: 5px;
             "
             *ngFor="let data of benes"
-            (click)="use(data.phoneNumber)"
+            (click)="use(data.accountNumber)"
           >
             <ion-card-content style="display: flex; flex-direction: row">
               <ion-icon
@@ -324,7 +342,7 @@
                 <span style="text-align: left; font-weight: 800"
                   >{{ data.name }}
                 </span>
-                <span style="text-align: left">{{ data.phoneNumber }} </span>
+                <span style="text-align: left">{{ data.accountNumber }} </span>
               </div>
               <ion-icon
                 name="trash"
@@ -334,7 +352,7 @@
                   color: #25214f;
                   width: 10%;
                 "
-                (click)="delete(data.phoneNumber)"
+                (click)="delete(data.id)"
               ></ion-icon>
             </ion-card-content>
           </div>

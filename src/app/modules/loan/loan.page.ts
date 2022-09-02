@@ -24,6 +24,8 @@ export class LoanPage implements OnInit {
   fullName = '';
   dateOfBirth = '';
   phoneNumber = '';
+  endDate = '';
+  errData = [];
   formattedAmount = this.currencyPipe.transform('0', '₦');
   tenures = [
     { name: '6 months', value: 6 },
@@ -70,9 +72,36 @@ export class LoanPage implements OnInit {
     this.fullName = this.user.firstName + ' ' + this.user.lastName;
     this.fetchLoanTypes();
     this.fetchHistory();
+    if (!this.bvn) {
+      this.errData.push('BVN');
+    }
+    if (!this.phoneNumber) {
+      this.errData.push('phone number');
+    }
+    if (!this.dateOfBirth) {
+      this.errData.push('DOB');
+    }
+    if (!this.fullName) {
+      this.errData.push('Full Name');
+    }
     // this.fetchBvn();
     // let   user = JSON.parse(localStorage.getItem('user'));
     this.account = this.user.accountNos[0].accountNo;
+  }
+
+  getEndDate(date) {
+    const newDate = date;
+    const ten = this.tenure.toString().split(' ');
+    newDate.setMonth(newDate.getMonth() + +ten[0]);
+    this.endDate = newDate;
+  }
+  dateChange(event) {
+    const date = new Date(event.target.value);
+    this.getEndDate(date);
+  }
+  dateTenure(event) {
+    const date = new Date(this.date);
+    this.getEndDate(date);
   }
 
   transactionType(e) {
@@ -187,6 +216,16 @@ export class LoanPage implements OnInit {
   }
   checkEligible() {
     this.loading = true;
+
+    if (this.errData.length > 0) {
+      let missing = '';
+      for (let i = 0; i < this.errData.length; i++) {
+        missing = missing + ' ' + this.errData[i] + ',';
+      }
+      this.toast.error(`Your account is missing ${missing}`, 'Error');
+      this.loading = false;
+      return;
+    }
     const data = {
       bvn: this.bvn,
       fullName: this.fullName,

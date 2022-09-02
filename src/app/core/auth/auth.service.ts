@@ -18,4 +18,16 @@ export class AuthService {
   getUserId() {
     return this.user;
   }
+  public getAuth() {
+    const token = localStorage.getItem('token')
+      ? localStorage.getItem('token')
+      : null;
+    console.log('token', token);
+
+    if (token) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

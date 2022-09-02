@@ -219,3 +219,35 @@ img {
   --background-activated: #25214f;
   color: white;
 }
+.bankNames {
+  display: flex;
+  flex-direction: column;
+}
+.bank {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  border-bottom: 1px solid #aaa7a7;
+}
+// .overlay {
+//   z-index: 999;
+//   position: fixed; /* Sit on top of the page content */
+//   width: 100%; /* Full width (cover the whole page) */
+//   height: 100%; /* Full height (cover the whole page) */
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background-color: rgba(0, 0, 0, 0.5);
+// }
+.mas {
+  z-index: 1000;
+  position: fixed; /* Sit on top of the page content */
+  width: 100vw; /* Full width (cover the whole page) */
+  height: 100vh; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

@@ -16,10 +16,9 @@
   justify-content: center;
   align-items: center;
   align-content: space-between;
-  row-gap: 30px;
   height: 50vh;
   position: fixed;
-  bottom: 0;
+  bottom: 0px;
   left: 0;
   z-index: 100;
   background-color: #25214f;
@@ -33,6 +32,7 @@
   font-size: 20px;
   color: white;
   font-weight: 700;
+  margin-bottom: 20px;
 }
 
 
@@ -42,7 +42,7 @@
   max-width: 700px;
   background-color: #25214f;
   color: white;
-
+  margin: 20px 0;
   margin: auto;
   td, th {
     padding: 10px 0;

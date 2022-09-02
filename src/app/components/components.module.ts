@@ -49,6 +49,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { NubanRegisterComponent } from '../modules/register/nuban-register/nuban-register.component';
 import { ResetPasswordComponent } from '../modules/reset-password/reset-password.component';
 import { DocumentUploadComponent } from '../modules/document-upload/document-upload.component';
+import { UploadImageComponent } from '../modules/account-info/upload-image/upload-image.component';
 
 const components = [
   SupportComponent,
@@ -97,6 +98,7 @@ const components = [
   BillsPaymentsPage,
   NubanRegisterComponent,
   CreateAccountComponent,
+  UploadImageComponent,
 ];
 
 const materialModules = [RouterModule, ImageCropperModule];

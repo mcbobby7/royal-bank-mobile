@@ -182,7 +182,7 @@
           >
             <input
               [type]="show ? 'text' : 'password'"
-              placeholder="Password"
+              placeholder="confirm Password"
               id="password"
               name="password"
               required
@@ -236,13 +236,16 @@
           *ngIf="whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'"
         >
           <label for="">Company Type</label>
-          <input
+          <select
             formControlName="CompanyType"
-            type="text"
-            name="ref"
+            name="companyType"
+            id=""
             class="input"
-            placeholder="IT"
-          />
+          >
+            <option *ngFor="let data of companyType" [value]="data">
+              {{ data }}
+            </option>
+          </select>
         </div>
 
         <div

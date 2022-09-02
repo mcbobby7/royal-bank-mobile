@@ -15,6 +15,9 @@ export class DashboardTemplateComponent implements OnInit {
   imageSrc = 'assets/icon/royalL.png';
   user = JSON.parse(localStorage.getItem('user'));
   photo;
+  date: any = new Date();
+  hour = this.date.getHours();
+  time = this.hour < 12 ? 'Morning' : this.hour < 18 ? 'Afternoon' : 'Evening';
 
   nav = [
     // {

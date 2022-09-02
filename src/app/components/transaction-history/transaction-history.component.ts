@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ElementRef,
+  ViewChild,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../core/http/services/auth.service';
@@ -13,6 +20,9 @@ import {
   stagger,
   keyframes,
 } from '@angular/animations';
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+import { FileSharer } from '@byteowls/capacitor-filesharer';
 @Component({
   selector: 'app-transaction-history',
   templateUrl: './transaction-history.component.html',
@@ -30,6 +40,8 @@ import {
   ],
 })
 export class TransactionHistoryComponent implements OnInit {
+  @ViewChild('recipt', { static: false }) recipt: ElementRef;
+
   show = false;
   user = JSON.parse(localStorage.getItem('user'));
   data: any = JSON.parse(localStorage.getItem('transactions'));
@@ -38,7 +50,12 @@ export class TransactionHistoryComponent implements OnInit {
   tran: any = {};
   visible = false;
   transType: string;
-  constructor(private auth: AuthService, private toast: ToastrService) {}
+  url = '';
+  constructor(
+    private auth: AuthService,
+    private toast: ToastrService,
+    private change: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     setInterval(() => {
@@ -46,6 +63,49 @@ export class TransactionHistoryComponent implements OnInit {
     }, 60000);
     this.getTransactions();
   }
+
+  downloadButtonClick(url) {
+    const photo = url;
+    const first = photo.split(',');
+    const mainImage = first[1];
+    const extension = first[0].split('image/');
+    const mainExtension = extension[1].split(';')[0];
+
+    FileSharer.share({
+      filename: 'royal-receipt.png',
+      base64Data: mainImage,
+      contentType: `image/${mainExtension}`,
+    })
+      .then(() => {
+        // do sth
+        console.log('done');
+      })
+      .catch((error) => {
+        console.error('File sharing failed', error.message);
+      });
+  }
+
+  getReciept() {
+    this.change.detectChanges();
+    console.log('node', this.recipt.nativeElement);
+    // console.log('node', this.recipt.nativeElement);
+
+    htmlToImage
+      .toPng(this.recipt.nativeElement)
+      .then((dataUrl) => {
+        this.change.detectChanges();
+        this.url = dataUrl;
+        console.log('url', dataUrl);
+        this.downloadButtonClick(dataUrl);
+        // const img = new Image();
+        // img.src = dataUrl;
+        // document.body.appendChild(img);
+      })
+      .catch((error) => {
+        console.error('oops, something went wrong!', error);
+      });
+  }
+
   viewBalance() {
     this.show = !this.show;
   }

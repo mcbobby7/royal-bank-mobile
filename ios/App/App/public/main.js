@@ -11,16 +11,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppRoutingModule": () => (/* binding */ AppRoutingModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 52816);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ 52816);
 /* harmony import */ var _components_pin_pin_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/pin/pin.component */ 71536);
 /* harmony import */ var _core_guards_auth_guard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./core/guards/auth.guard */ 27574);
-/* harmony import */ var _core_templates_dashboard_template_dashboard_template_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core/templates/dashboard-template/dashboard-template.component */ 14973);
-/* harmony import */ var _core_templates_in_page_in_page_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./core/templates/in-page/in-page.component */ 16437);
-/* harmony import */ var _modules_bills_payments_cabletv_cabletv_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/bills-payments/cabletv/cabletv.component */ 92073);
-/* harmony import */ var _modules_support_support_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/support/support.component */ 32774);
-/* harmony import */ var _modules_dashboard_dashboard_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/dashboard/dashboard.page */ 47920);
+/* harmony import */ var _core_guards_UnAuth_guard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core/guards/UnAuth.guard */ 69781);
+/* harmony import */ var _core_templates_dashboard_template_dashboard_template_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./core/templates/dashboard-template/dashboard-template.component */ 14973);
+/* harmony import */ var _core_templates_in_page_in_page_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/templates/in-page/in-page.component */ 16437);
+/* harmony import */ var _modules_bills_payments_cabletv_cabletv_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/bills-payments/cabletv/cabletv.component */ 92073);
+/* harmony import */ var _modules_support_support_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/support/support.component */ 32774);
+/* harmony import */ var _modules_dashboard_dashboard_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/dashboard/dashboard.page */ 47920);
+
 
 
 
@@ -34,7 +36,8 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: '',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_modules_welcome_welcome_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./modules/welcome/welcome.module */ 52008)).then((m) => m.WelcomeModule),
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
     },
     {
         path: 'ds',
@@ -43,18 +46,18 @@ const routes = [
     {
         path: 'dashboard',
         canActivate: [_core_guards_auth_guard__WEBPACK_IMPORTED_MODULE_1__.AuthGuard],
-        component: _core_templates_dashboard_template_dashboard_template_component__WEBPACK_IMPORTED_MODULE_2__.DashboardTemplateComponent,
+        component: _core_templates_dashboard_template_dashboard_template_component__WEBPACK_IMPORTED_MODULE_3__.DashboardTemplateComponent,
         children: [
             {
                 path: '',
-                component: _modules_dashboard_dashboard_page__WEBPACK_IMPORTED_MODULE_6__.DashboardPage,
+                component: _modules_dashboard_dashboard_page__WEBPACK_IMPORTED_MODULE_7__.DashboardPage,
             },
         ],
     },
     {
         path: 'action',
         // canActivate: [AuthGuard],
-        component: _core_templates_in_page_in_page_component__WEBPACK_IMPORTED_MODULE_3__.InPageComponent,
+        component: _core_templates_in_page_in_page_component__WEBPACK_IMPORTED_MODULE_4__.InPageComponent,
         children: [
             {
                 path: 'account-info',
@@ -94,7 +97,7 @@ const routes = [
             },
             {
                 path: 'cable-tv',
-                component: _modules_bills_payments_cabletv_cabletv_component__WEBPACK_IMPORTED_MODULE_4__.CabletvComponent,
+                component: _modules_bills_payments_cabletv_cabletv_component__WEBPACK_IMPORTED_MODULE_5__.CabletvComponent,
             },
             {
                 path: 'transfer',
@@ -118,16 +121,18 @@ const routes = [
             },
             {
                 path: 'support',
-                component: _modules_support_support_component__WEBPACK_IMPORTED_MODULE_5__.SupportComponent,
+                component: _modules_support_support_component__WEBPACK_IMPORTED_MODULE_6__.SupportComponent,
             },
         ],
     },
     {
         path: 'register',
+        canActivate: [_core_guards_UnAuth_guard__WEBPACK_IMPORTED_MODULE_2__.UnAuthGuard],
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_modules_register_register_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./modules/register/register.module */ 51965)).then((m) => m.RegisterModule),
     },
     {
         path: 'forgot-passowrd',
+        canActivate: [_core_guards_UnAuth_guard__WEBPACK_IMPORTED_MODULE_2__.UnAuthGuard],
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_modules_reset-password_reset-password_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./modules/reset-password/reset-password.module */ 99634)).then((m) => m.ResetPasswordModule),
     },
     // {
@@ -137,6 +142,7 @@ const routes = [
     // },
     {
         path: 'choose-signin',
+        canActivate: [_core_guards_UnAuth_guard__WEBPACK_IMPORTED_MODULE_2__.UnAuthGuard],
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_modules_choose-signin_choose-signin_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./modules/choose-signin/choose-signin.module */ 87410)).then((m) => m.ChooseSigninModule),
     },
     {
@@ -145,17 +151,18 @@ const routes = [
     },
     {
         path: 'login',
+        canActivate: [_core_guards_UnAuth_guard__WEBPACK_IMPORTED_MODULE_2__.UnAuthGuard],
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_modules_login_login_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./modules/login/login.module */ 39758)).then((m) => m.LoginModule),
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
-AppRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.NgModule)({
+AppRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.NgModule)({
         imports: [
-            _angular_router__WEBPACK_IMPORTED_MODULE_9__.RouterModule.forRoot(routes, { preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_9__.PreloadAllModules }),
+            _angular_router__WEBPACK_IMPORTED_MODULE_10__.RouterModule.forRoot(routes, { preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_10__.PreloadAllModules }),
         ],
-        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_9__.RouterModule],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_10__.RouterModule],
     })
 ], AppRoutingModule);
 
@@ -174,17 +181,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component.html?ngResource */ 33383);
 /* harmony import */ var _app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.scss?ngResource */ 79259);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 52816);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 52816);
 /* harmony import */ var _capacitor_status_bar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @capacitor/status-bar */ 19326);
 /* harmony import */ var _ng_idle_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ng-idle/core */ 58653);
 /* harmony import */ var _ng_idle_keepalive__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ng-idle/keepalive */ 40576);
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-toastr */ 34101);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-toastr */ 34101);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 93819);
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ 37954);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common */ 36362);
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @capacitor/core */ 26549);
 
 
 
@@ -196,14 +205,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+const { App } = _capacitor_core__WEBPACK_IMPORTED_MODULE_6__.Plugins;
 let AppComponent = class AppComponent {
-    constructor(idle, keepalive, router, toast, platform, splashScreen) {
+    constructor(idle, keepalive, router, toast, platform, splashScreen, location, alertController) {
         this.idle = idle;
         this.keepalive = keepalive;
         this.router = router;
         this.toast = toast;
         this.platform = platform;
         this.splashScreen = splashScreen;
+        this.location = location;
+        this.alertController = alertController;
         this.idleState = 'Not started.';
         this.timedOut = false;
         this.lastPing = null;
@@ -213,18 +227,15 @@ let AppComponent = class AppComponent {
             document.body.classList.toggle('dark', false);
         });
         _capacitor_status_bar__WEBPACK_IMPORTED_MODULE_2__.StatusBar.setOverlaysWebView({ overlay: false });
-        const setStatusBarStyleDark = () => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+        const setStatusBarStyleDark = () => (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             yield _capacitor_status_bar__WEBPACK_IMPORTED_MODULE_2__.StatusBar.setStyle({ style: _capacitor_status_bar__WEBPACK_IMPORTED_MODULE_2__.Style.Light });
         });
         setStatusBarStyleDark();
         _capacitor_status_bar__WEBPACK_IMPORTED_MODULE_2__.StatusBar.setBackgroundColor({
             color: '#ffffff',
         });
-        // sets an idle timeout of 10 seconds.
-        idle.setIdle(10);
-        // sets a timeout period of 10 seconds. after 20 seconds of inactivity, the user will timed out.
-        idle.setTimeout(20);
-        // sets the default interrupts, in this case, things like clicks, scrolls, touches to the document
+        idle.setIdle(50);
+        idle.setTimeout(50);
         idle.setInterrupts(_ng_idle_core__WEBPACK_IMPORTED_MODULE_3__.DEFAULT_INTERRUPTSOURCES);
         idle.onIdleEnd.subscribe(() => (this.idleState = 'No longer idle.'));
         idle.onTimeout.subscribe(() => {
@@ -233,7 +244,7 @@ let AppComponent = class AppComponent {
             console.log('timed out');
             this.reset();
             if (this.user) {
-                // this.logout();
+                this.logout();
                 console.log('logout');
             }
         });
@@ -241,6 +252,59 @@ let AppComponent = class AppComponent {
         idle.onTimeoutWarning.subscribe((countdown) => (this.idleState = 'You will time out in ' + countdown + ' seconds!')); // sets the ping interval to 15 seconds
         keepalive.interval(15);
         this.reset();
+        this.platform.backButton.subscribeWithPriority(10, (processNextHandler) => {
+            console.log('Back press handler!');
+            if (this.location.isCurrentPathEqualTo('/dashboard')) {
+                // Show Exit Alert!
+                console.log('Show Exit Alert!');
+                this.showExitConfirm();
+                processNextHandler();
+            }
+            else {
+                // Navigate to back page
+                console.log('Navigate to back page');
+                this.location.back();
+            }
+        });
+        this.platform.backButton.subscribeWithPriority(5, () => {
+            console.log('Handler called to force close!');
+            this.alertController
+                .getTop()
+                .then((r) => {
+                if (r) {
+                    App.exitApp();
+                }
+            })
+                .catch((e) => {
+                console.log(e);
+            });
+        });
+    }
+    showExitConfirm() {
+        this.alertController
+            .create({
+            header: 'Royal App termination',
+            message: 'Do you want to close the app and logout?',
+            backdropDismiss: false,
+            buttons: [
+                {
+                    text: 'No',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Application exit prevented!');
+                    },
+                },
+                {
+                    text: 'Exit',
+                    handler: () => {
+                        App.exitApp();
+                    },
+                },
+            ],
+        })
+            .then((alert) => {
+            alert.present();
+        });
     }
     reset() {
         this.idle.watch();
@@ -248,10 +312,22 @@ let AppComponent = class AppComponent {
         this.timedOut = false;
     }
     ngOnInit() {
+        const session = localStorage.getItem('sessionMin')
+            ? new Date(localStorage.getItem('sessionMin'))
+            : new Date();
+        if (new Date().getTime() - session.getTime() > 240000) {
+            this.logout();
+        }
+        const neDate = new Date();
+        localStorage.setItem('sessionMin', neDate.toString());
         this.reset();
         setInterval(() => {
             this.user = localStorage.getItem('token');
         }, 500);
+        setInterval(() => {
+            const date = new Date();
+            localStorage.setItem('sessionMin', date.toString());
+        }, 60000);
     }
     logout() {
         localStorage.setItem('user', '');
@@ -263,13 +339,15 @@ let AppComponent = class AppComponent {
 AppComponent.ctorParameters = () => [
     { type: _ng_idle_core__WEBPACK_IMPORTED_MODULE_3__.Idle },
     { type: _ng_idle_keepalive__WEBPACK_IMPORTED_MODULE_4__.Keepalive },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
-    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_8__.ToastrService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.Platform },
-    { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__.SplashScreen }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router },
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_9__.ToastrService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.Platform },
+    { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__.SplashScreen },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_11__.Location },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.AlertController }
 ];
-AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
+AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({
         selector: 'app-root',
         template: _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -291,17 +369,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/platform-browser */ 50318);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/router */ 52816);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/common/http */ 28784);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/forms */ 90587);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/platform-browser */ 50318);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/router */ 52816);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/common/http */ 28784);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/forms */ 90587);
 /* harmony import */ var _components_components_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/components.module */ 45642);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic/angular */ 93819);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/common */ 36362);
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ngx-toastr */ 34101);
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/platform-browser/animations */ 73598);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/common */ 36362);
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ngx-toastr */ 34101);
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular/platform-browser/animations */ 73598);
 /* harmony import */ var _modules_dashboard_dashboard_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/dashboard/dashboard.page */ 47920);
 /* harmony import */ var _modules_transfer_transfer_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/transfer/transfer.page */ 13854);
 /* harmony import */ var _withdraw_withdraw_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./withdraw/withdraw.component */ 87218);
@@ -311,6 +389,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_uid_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/uid/ngx */ 86649);
 /* harmony import */ var _ionic_native_android_permissions_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/android-permissions/ngx */ 61832);
 /* harmony import */ var _ng_idle_keepalive__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ng-idle/keepalive */ 40576);
+/* harmony import */ var _core_guards_auth_guard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./core/guards/auth.guard */ 27574);
+/* harmony import */ var _core_guards_UnAuth_guard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./core/guards/UnAuth.guard */ 69781);
+
+
 
 
 
@@ -335,31 +417,33 @@ __webpack_require__.r(__webpack_exports__);
 // import { Ng9PasswordStrengthBarModule } from 'ng9-password-strength-bar';
 let AppModule = class AppModule {
 };
-AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.NgModule)({
+AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_12__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_13__.NgModule)({
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__.AppComponent, _modules_dashboard_dashboard_page__WEBPACK_IMPORTED_MODULE_1__.DashboardPage, _modules_transfer_transfer_page__WEBPACK_IMPORTED_MODULE_2__.TransferPage, _withdraw_withdraw_component__WEBPACK_IMPORTED_MODULE_3__.WithdrawComponent],
         entryComponents: [],
         imports: [
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__.BrowserModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_13__.IonicModule.forRoot(),
-            ngx_toastr__WEBPACK_IMPORTED_MODULE_14__.ToastrModule.forRoot(),
-            _angular_common__WEBPACK_IMPORTED_MODULE_15__.CommonModule,
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_14__.BrowserModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_15__.IonicModule.forRoot(),
+            ngx_toastr__WEBPACK_IMPORTED_MODULE_16__.ToastrModule.forRoot(),
+            _angular_common__WEBPACK_IMPORTED_MODULE_17__.CommonModule,
             _app_routing_module__WEBPACK_IMPORTED_MODULE_5__.AppRoutingModule,
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_16__.HttpClientModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_17__.ReactiveFormsModule,
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_18__.HttpClientModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_19__.ReactiveFormsModule,
             _components_components_module__WEBPACK_IMPORTED_MODULE_0__.ComponentsModule,
-            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_18__.BrowserAnimationsModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_17__.FormsModule,
+            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_20__.BrowserAnimationsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_19__.FormsModule,
             // Ng9PasswordStrengthBarModule,
             // NgIdleModule.forRoot(),
             _ng_idle_keepalive__WEBPACK_IMPORTED_MODULE_9__.NgIdleKeepaliveModule.forRoot(),
         ],
         providers: [
+            _core_guards_auth_guard__WEBPACK_IMPORTED_MODULE_10__.AuthGuard,
+            _core_guards_UnAuth_guard__WEBPACK_IMPORTED_MODULE_11__.UnAuthGuard,
             _ionic_native_uid_ngx__WEBPACK_IMPORTED_MODULE_7__.Uid,
             _ionic_native_android_permissions_ngx__WEBPACK_IMPORTED_MODULE_8__.AndroidPermissions,
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__.SplashScreen,
-            _angular_common__WEBPACK_IMPORTED_MODULE_15__.CurrencyPipe,
-            { provide: _angular_router__WEBPACK_IMPORTED_MODULE_19__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_13__.IonicRouteStrategy },
+            _angular_common__WEBPACK_IMPORTED_MODULE_17__.CurrencyPipe,
+            { provide: _angular_router__WEBPACK_IMPORTED_MODULE_21__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_15__.IonicRouteStrategy },
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__.AppComponent],
     })
@@ -466,6 +550,7 @@ let BalanceComponent = class BalanceComponent {
         this.show = localStorage.getItem('showBalance');
         this.user = JSON.parse(localStorage.getItem('user'));
         this.data = null;
+        this.url = '';
     }
     ngOnInit() {
         console.log(this.user);
@@ -565,15 +650,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ComponentsModule": () => (/* binding */ ComponentsModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @angular/common */ 36362);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! @angular/router */ 52816);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @angular/common */ 36362);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! @angular/router */ 52816);
 /* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./header/header.component */ 43646);
 /* harmony import */ var _modules_login_login_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/login/login.component */ 60744);
 /* harmony import */ var _modules_register_register_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modules/register/register.component */ 80280);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @ionic/angular */ 93819);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @angular/forms */ 90587);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @angular/forms */ 90587);
 /* harmony import */ var _core_templates_signup_signup_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/templates/signup/signup.component */ 12283);
 /* harmony import */ var _modules_welcome_welcome_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modules/welcome/welcome.component */ 11567);
 /* harmony import */ var _modules_choose_signin_choose_signin_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../modules/choose-signin/choose-signin.component */ 88525);
@@ -612,10 +697,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_account_info_request_card_request_card_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../modules/account-info/request-card/request-card.component */ 90201);
 /* harmony import */ var _modules_loan_loan_page__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../modules/loan/loan.page */ 43274);
 /* harmony import */ var _modules_support_support_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../modules/support/support.component */ 32774);
-/* harmony import */ var ngx_image_cropper__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ngx-image-cropper */ 67545);
+/* harmony import */ var ngx_image_cropper__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ngx-image-cropper */ 67545);
 /* harmony import */ var _modules_register_nuban_register_nuban_register_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../modules/register/nuban-register/nuban-register.component */ 82017);
 /* harmony import */ var _modules_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../modules/reset-password/reset-password.component */ 50978);
 /* harmony import */ var _modules_document_upload_document_upload_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ../modules/document-upload/document-upload.component */ 33552);
+/* harmony import */ var _modules_account_info_upload_image_upload_image_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ../modules/account-info/upload-image/upload-image.component */ 84648);
 
 
 
@@ -654,6 +740,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // import { TransferPage } from '../modules/transfer/transfer.page';
+
 
 
 
@@ -715,22 +802,23 @@ const components = [
     _modules_bills_payments_bills_payments_page__WEBPACK_IMPORTED_MODULE_33__.BillsPaymentsPage,
     _modules_register_nuban_register_nuban_register_component__WEBPACK_IMPORTED_MODULE_41__.NubanRegisterComponent,
     _modules_register_create_account_create_account_component__WEBPACK_IMPORTED_MODULE_9__.CreateAccountComponent,
+    _modules_account_info_upload_image_upload_image_component__WEBPACK_IMPORTED_MODULE_44__.UploadImageComponent,
 ];
-const materialModules = [_angular_router__WEBPACK_IMPORTED_MODULE_44__.RouterModule, ngx_image_cropper__WEBPACK_IMPORTED_MODULE_45__.ImageCropperModule];
+const materialModules = [_angular_router__WEBPACK_IMPORTED_MODULE_45__.RouterModule, ngx_image_cropper__WEBPACK_IMPORTED_MODULE_46__.ImageCropperModule];
 let ComponentsModule = class ComponentsModule {
 };
-ComponentsModule = (0,tslib__WEBPACK_IMPORTED_MODULE_46__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_47__.NgModule)({
+ComponentsModule = (0,tslib__WEBPACK_IMPORTED_MODULE_47__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_48__.NgModule)({
         declarations: [...components],
         entryComponents: [...components],
         imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_48__.CommonModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_49__.CommonModule,
             ...materialModules,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_49__.ReactiveFormsModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_49__.FormsModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_50__.IonicModule.forRoot(),
+            _angular_forms__WEBPACK_IMPORTED_MODULE_50__.ReactiveFormsModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_50__.FormsModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_51__.IonicModule.forRoot(),
         ],
-        exports: [_angular_common__WEBPACK_IMPORTED_MODULE_48__.CommonModule, _ionic_angular__WEBPACK_IMPORTED_MODULE_50__.IonicModule, ...materialModules, ...components],
+        exports: [_angular_common__WEBPACK_IMPORTED_MODULE_49__.CommonModule, _ionic_angular__WEBPACK_IMPORTED_MODULE_51__.IonicModule, ...materialModules, ...components],
     })
 ], ComponentsModule);
 
@@ -983,13 +1071,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TransactionHistoryComponent": () => (/* binding */ TransactionHistoryComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _transaction_history_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./transaction-history.component.html?ngResource */ 36324);
 /* harmony import */ var _transaction_history_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./transaction-history.component.scss?ngResource */ 99710);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ 34101);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ 34101);
 /* harmony import */ var _core_http_services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/http/services/auth.service */ 41194);
-/* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/animations */ 31631);
+/* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/animations */ 31631);
+/* harmony import */ var html_to_image__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! html-to-image */ 24971);
+/* harmony import */ var _byteowls_capacitor_filesharer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @byteowls/capacitor-filesharer */ 58607);
+
+
 
 
 
@@ -998,9 +1090,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let TransactionHistoryComponent = class TransactionHistoryComponent {
-    constructor(auth, toast) {
+    constructor(auth, toast, change) {
         this.auth = auth;
         this.toast = toast;
+        this.change = change;
         this.show = false;
         this.user = JSON.parse(localStorage.getItem('user'));
         this.data = JSON.parse(localStorage.getItem('transactions'));
@@ -1008,12 +1101,50 @@ let TransactionHistoryComponent = class TransactionHistoryComponent {
         this.details = {};
         this.tran = {};
         this.visible = false;
+        this.url = '';
     }
     ngOnInit() {
         setInterval(() => {
             this.getTransactions();
         }, 60000);
         this.getTransactions();
+    }
+    downloadButtonClick(url) {
+        const photo = url;
+        const first = photo.split(',');
+        const mainImage = first[1];
+        const extension = first[0].split('image/');
+        const mainExtension = extension[1].split(';')[0];
+        _byteowls_capacitor_filesharer__WEBPACK_IMPORTED_MODULE_4__.FileSharer.share({
+            filename: 'royal-receipt.png',
+            base64Data: mainImage,
+            contentType: `image/${mainExtension}`,
+        })
+            .then(() => {
+            // do sth
+            console.log('done');
+        })
+            .catch((error) => {
+            console.error('File sharing failed', error.message);
+        });
+    }
+    getReciept() {
+        this.change.detectChanges();
+        console.log('node', this.recipt.nativeElement);
+        // console.log('node', this.recipt.nativeElement);
+        html_to_image__WEBPACK_IMPORTED_MODULE_3__.toPng(this.recipt.nativeElement)
+            .then((dataUrl) => {
+            this.change.detectChanges();
+            this.url = dataUrl;
+            console.log('url', dataUrl);
+            this.downloadButtonClick(dataUrl);
+            // const img = new Image();
+            // img.src = dataUrl;
+            // document.body.appendChild(img);
+        })
+            .catch((error) => {
+            console.error('oops, something went wrong!', error);
+        });
     }
     viewBalance() {
         this.show = !this.show;
@@ -1079,20 +1210,24 @@ let TransactionHistoryComponent = class TransactionHistoryComponent {
 };
 TransactionHistoryComponent.ctorParameters = () => [
     { type: _core_http_services_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_3__.ToastrService }
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__.ToastrService },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.ChangeDetectorRef }
 ];
-TransactionHistoryComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+TransactionHistoryComponent.propDecorators = {
+    recipt: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.ViewChild, args: ['recipt', { static: false },] }]
+};
+TransactionHistoryComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-transaction-history',
         template: _transaction_history_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         animations: [
-            (0,_angular_animations__WEBPACK_IMPORTED_MODULE_6__.trigger)('slideInOut', [
-                (0,_angular_animations__WEBPACK_IMPORTED_MODULE_6__.transition)(':enter', [
-                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_6__.style)({ transform: 'translateY(100%)' }),
-                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_6__.animate)('500ms ease-in', (0,_angular_animations__WEBPACK_IMPORTED_MODULE_6__.style)({ transform: 'translateY(-0%)' })),
+            (0,_angular_animations__WEBPACK_IMPORTED_MODULE_8__.trigger)('slideInOut', [
+                (0,_angular_animations__WEBPACK_IMPORTED_MODULE_8__.transition)(':enter', [
+                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_8__.style)({ transform: 'translateY(100%)' }),
+                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_8__.animate)('500ms ease-in', (0,_angular_animations__WEBPACK_IMPORTED_MODULE_8__.style)({ transform: 'translateY(-0%)' })),
                 ]),
-                (0,_angular_animations__WEBPACK_IMPORTED_MODULE_6__.transition)(':leave', [
-                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_6__.animate)('200ms ease-in', (0,_angular_animations__WEBPACK_IMPORTED_MODULE_6__.style)({ transform: 'translateY(-100%)' })),
+                (0,_angular_animations__WEBPACK_IMPORTED_MODULE_8__.transition)(':leave', [
+                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_8__.animate)('200ms ease-in', (0,_angular_animations__WEBPACK_IMPORTED_MODULE_8__.style)({ transform: 'translateY(-100%)' })),
                 ]),
             ]),
         ],
@@ -1129,6 +1264,18 @@ let AuthService = class AuthService {
     getUserId() {
         return this.user;
     }
+    getAuth() {
+        const token = localStorage.getItem('token')
+            ? localStorage.getItem('token')
+            : null;
+        console.log('token', token);
+        if (token) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 };
 AuthService.ctorParameters = () => [];
 AuthService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
@@ -1136,6 +1283,53 @@ AuthService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
         providedIn: 'root',
     })
 ], AuthService);
+
+
+
+/***/ }),
+
+/***/ 69781:
+/*!*********************************************!*\
+  !*** ./src/app/core/guards/UnAuth.guard.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UnAuthGuard": () => (/* binding */ UnAuthGuard)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ 52816);
+/* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../auth/auth.service */ 88951);
+
+
+
+
+let UnAuthGuard = class UnAuthGuard {
+    constructor(auth, router) {
+        this.auth = auth;
+        this.router = router;
+    }
+    canActivate() {
+        console.log('isAuthenticated', this.auth.getAuth());
+        if (this.auth.getAuth()) {
+            this.router.navigate(['/dashboard']);
+            return false;
+        }
+        return true;
+    }
+};
+UnAuthGuard.ctorParameters = () => [
+    { type: _auth_auth_service__WEBPACK_IMPORTED_MODULE_0__.AuthService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__.Router }
+];
+UnAuthGuard = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
+        providedIn: 'root',
+    })
+], UnAuthGuard);
 
 
 
@@ -1166,8 +1360,9 @@ let AuthGuard = class AuthGuard {
         this.router = router;
     }
     canActivate() {
-        if (!this.auth.isAuthenticated$) {
-            this.router.navigate(['/login']);
+        console.log('isAuthenticated auth', this.auth.getAuth());
+        if (!this.auth.getAuth()) {
+            this.router.navigate(['/welcome']);
             return false;
         }
         return true;
@@ -1220,6 +1415,7 @@ let AuthService = class AuthService {
         this.baseUrl = 'https://bankingsandboxapi.azurewebsites.net/api/v1/proxy';
         this.fileUrl = 'https://fileservice01.azurewebsites.net/api/Files/Upload';
         this.notificationBaseUrl = 'https://notificationservice01.azurewebsites.net';
+        this.documentUrl = 'https://fileservice01.azurewebsites.net/api/Files/RoyalDocumentUpload';
         this.headers = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpHeaders({
                 /* eslint-disable camelcase */
@@ -1277,6 +1473,12 @@ let AuthService = class AuthService {
         console.log(data);
         return this.httpClient
             .post(this.fileUrl, data, this.headers)
+            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.catchError)(this.handleError));
+    }
+    documentUpload(data) {
+        console.log(data);
+        return this.httpClient
+            .post(this.documentUrl, data, this.headers)
             .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.catchError)(this.handleError));
     }
     getImei() {
@@ -2479,6 +2681,231 @@ ResetPinComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
 
 /***/ }),
 
+/***/ 84648:
+/*!*****************************************************************************!*\
+  !*** ./src/app/modules/account-info/upload-image/upload-image.component.ts ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UploadImageComponent": () => (/* binding */ UploadImageComponent)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _upload_image_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./upload-image.component.html?ngResource */ 43762);
+/* harmony import */ var _upload_image_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./upload-image.component.scss?ngResource */ 72998);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _core_services_photo_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../core/services/photo.service */ 26094);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 52816);
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-toastr */ 34101);
+/* harmony import */ var _core_http_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../core/http/services/auth.service */ 41194);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 93819);
+
+
+
+
+
+
+
+
+
+let UploadImageComponent = class UploadImageComponent {
+    constructor(auth, router, toast, navController, photo) {
+        this.auth = auth;
+        this.router = router;
+        this.toast = toast;
+        this.navController = navController;
+        this.photo = photo;
+        this.imageSrc = 'assets/icon/hey.png';
+        this.source = 'assets/icon/royalty.png';
+        this.page = 'take';
+        this.id = localStorage.getItem('stageId');
+        this.loading = false;
+        this.user = JSON.parse(localStorage.getItem('user'));
+        this.imageChangedEvent = '';
+        this.croppedImage = '';
+        this.baseImage = '';
+    }
+    fileChangeEvent(event) {
+        this.imageChangedEvent = event;
+        console.log(event);
+    }
+    imageCropped(event) {
+        this.croppedImage = event.base64;
+    }
+    imageLoaded() {
+        /* show cropper */
+    }
+    cropperReady() {
+        /* cropper ready */
+    }
+    loadImageFailed() {
+        /* show message */
+    }
+    // register method
+    register() {
+        this.loading = true;
+        console.log(this.onboardingForm.value);
+        this.loading = true;
+        this.auth
+            .post(this.onboardingForm.value, 'UserManager.UserService.UpdateUser')
+            .subscribe((res) => {
+            this.loading = false;
+            if (res.data.responseCode === '00') {
+                console.log(res.data.data.id);
+                this.loading = false;
+                // this.data = res.data;
+                localStorage.setItem('stageId', res.data.data.id);
+                this.page = 'success';
+                // deal with register
+                console.log(res);
+            }
+            else {
+                this.toast.error(res.data.responseMessage, 'Error');
+                this.page = 'fail';
+            }
+        }, (err) => {
+            this.toast.error('Error please try Again', 'Error');
+            this.loading = false;
+            this.page = 'fail';
+        });
+    }
+    ngOnInit() {
+        this.takePhoto();
+        // register form
+        // console.log(this.onboardingForm.value);
+    }
+    updateURL(url) {
+        console.log('user', this.user);
+        this.auth
+            .post({
+            Id: this.user.userId,
+            PassportUrl: url,
+        }, 'UserManager.UserService.UpdateProfilePicture')
+            .subscribe((res) => {
+            console.log(res);
+            if (res.data.responseCode === '00') {
+                console.log(res);
+                this.loading = false;
+                this.user.photo = url;
+                localStorage.setItem('user', JSON.stringify(this.user));
+                this.toast.success('Profile updated successfully', 'Success');
+                this.router.navigate(['/dashboard']);
+                // this.data = res.data;
+                // deal with register
+            }
+            else {
+                this.loading = false;
+                this.toast.error('Error try again', 'Error');
+                this.page = 'fail';
+            }
+        }, (err) => {
+            this.toast.error('Error please try Again', 'Error');
+            console.log('error');
+            this.page = 'fail';
+            this.loading = false;
+        });
+    }
+    uploadPhoto() {
+        this.loading = true;
+        const photo = this.croppedImage;
+        const first = photo.split(',');
+        const mainImage = first[1];
+        const extension = first[0].split('image/');
+        const mainExtension = extension[1].split(';')[0];
+        this.auth
+            .fileUpload({
+            FileName: `status.${mainExtension}`,
+            Base64String: mainImage,
+        })
+            .subscribe((res) => {
+            console.log(res);
+            if (res.status) {
+                console.log(res);
+                this.loading = false;
+                this.updateURL(res.result);
+                // this.data = res.data;
+                // deal with register
+            }
+            else {
+                this.loading = false;
+                this.toast.error('Error try again', 'Error');
+                this.page = 'fail';
+            }
+        }, (err) => {
+            this.toast.error('Error please try Again', 'Error');
+            console.log('error');
+            this.page = 'fail';
+            this.loading = false;
+        });
+    }
+    crop() {
+        this.uploadPhoto();
+        console.log('selected', this.calculateImageSize(this.photo.selectedImage));
+        console.log('main', this.calculateImageSize(this.croppedImage));
+    }
+    calculateImageSize(base64String) {
+        let padding;
+        let inBytes;
+        let base64StringLength;
+        if (base64String.endsWith('==')) {
+            padding = 2;
+        }
+        else if (base64String.endsWith('=')) {
+            padding = 1;
+        }
+        else {
+            padding = 0;
+        }
+        base64StringLength = base64String.length;
+        inBytes = (base64StringLength / 4) * 3 - padding;
+        this.kbytes = inBytes / 1000;
+        return this.kbytes;
+    }
+    takePhoto() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const res = yield this.photo.addNewToGallery();
+            if (this.photo.selectedImage) {
+                console.log(this.photo.selectedImage);
+                this.baseImage = this.photo.selectedImage;
+                this.page = 'crop';
+            }
+            else {
+                this.page = 'fail';
+            }
+        });
+    }
+    retake() {
+        this.page = 'take';
+    }
+    next() {
+        this.router.navigate(['/register/done'], {
+            state: {
+                mode: this.type,
+            },
+        });
+    }
+};
+UploadImageComponent.ctorParameters = () => [
+    { type: _core_http_services_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_6__.ToastrService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.NavController },
+    { type: _core_services_photo_service__WEBPACK_IMPORTED_MODULE_2__.PhotoService }
+];
+UploadImageComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+        selector: 'app-upload-image',
+        template: _upload_image_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
+        styles: [_upload_image_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], UploadImageComponent);
+
+
+
+/***/ }),
+
 /***/ 36225:
 /*!******************************************************!*\
   !*** ./src/app/modules/airtime/airtime.component.ts ***!
@@ -2521,9 +2948,10 @@ let AirtimeComponent = class AirtimeComponent {
         this.add = false;
         this.loading = true;
         this.show = false;
+        this.dataType = '';
         this.user = JSON.parse(localStorage.getItem('user'));
-        this.benes = localStorage.getItem('benNums')
-            ? JSON.parse(localStorage.getItem('benNums'))
+        this.benes = localStorage.getItem('benes')
+            ? JSON.parse(localStorage.getItem('benes'))
             : [];
         this.beneficiaryForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormGroup({
             beneficiaryAccount: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl(''),
@@ -2532,6 +2960,7 @@ let AirtimeComponent = class AirtimeComponent {
         });
     }
     ngOnInit() {
+        this.getBen();
         console.log(this.user.accountNos.length);
         this.fetchData();
         this.accNum = this.user.accountNos[0]
@@ -2595,10 +3024,47 @@ let AirtimeComponent = class AirtimeComponent {
             }
         }, (err) => console.error(err.message));
     }
+    getBen() {
+        this.auth
+            .post({
+            UserId: +this.user.userId,
+        }, 'Cba.BankingService.FetchAllBeneficiary')
+            .subscribe((res) => {
+            console.log(res);
+            if (res.data.responseCode === '00') {
+                // deal with register
+                this.benes = res.data.data.sort((a, b) => b.id - a.id);
+                this.benes = this.benes.filter((ben) => ben.name === 'Airtime/Data');
+                localStorage.setItem('benes', JSON.stringify(res.data.data.sort((a, b) => b.id - a.id)));
+            }
+            else {
+            }
+        }, (err) => { });
+    }
+    addBen() {
+        this.auth
+            .post({
+            Name: 'Airtime/Data',
+            AccountName: this.dataType,
+            AccountNumber: this.phoneNumber,
+            Company: this.dataType + '/' + this.productCode,
+            UserId: +this.user.userId,
+        }, 'Cba.BankingService.AddBeneficiary')
+            .subscribe((res) => {
+            console.log(res);
+            if (res.data.responseCode === '00') {
+                this.getBen();
+                // deal with register
+            }
+            else {
+            }
+        }, (err) => { });
+    }
     transactionType(e, code) {
         this.fetchProduct(code);
         console.log('This is the code:', code);
         this.transType = e;
+        this.dataType = code;
     }
     adds() {
         if (this.user.hasBVN === false) {
@@ -2625,19 +3091,32 @@ let AirtimeComponent = class AirtimeComponent {
         });
         localStorage.setItem('benNums', JSON.stringify(this.benes));
     }
-    delete(phone) {
+    delete(number) {
         console.log(this.benes);
-        const data = [];
-        for (let i = 0; i < this.benes.length; i++) {
-            if (this.benes[i].phoneNumber !== phone) {
-                data.push(this.benes[i]);
+        this.loading = true;
+        this.auth
+            .post({
+            Id: number,
+        }, 'Cba.BankingService.RemoveBeneficiary')
+            .subscribe((res) => {
+            console.log(res);
+            if (res.data.responseCode === '00') {
+                this.loading = false;
+                // deal with register
+                const data = [];
+                for (let i = 0; i < this.benes.length; i++) {
+                    if (this.benes[i].id !== number) {
+                        data.push(this.benes[i]);
+                    }
+                }
+                this.benes = data;
             }
-        }
-        this.benes = data;
-        localStorage.setItem('benNums', JSON.stringify(this.benes));
-        console.log(this.benes);
+            else {
+            }
+        }, (err) => { });
     }
     use(num) {
+        console.log(num);
         this.phoneNumber = num;
         this.newReq = true;
     }
@@ -2688,8 +3167,18 @@ let AirtimeComponent = class AirtimeComponent {
                         this.loading = false;
                         console.log(res);
                         if (res.data.status === '200') {
+                            if (this.saveBene) {
+                                for (let i = 0; i < this.benes.length; i++) {
+                                    if (this.benes[i].accountNumber === this.phoneNumber) {
+                                        return;
+                                    }
+                                }
+                                this.addBen();
+                            }
                             this.toast.success('Transaction Successfull', 'Success');
                             this.show = false;
+                            this.phoneNumber = '';
+                            this.productCode = '';
                             // deal with register
                         }
                         else {
@@ -2969,16 +3458,18 @@ let ProductsComponent = class ProductsComponent {
         this.typeCode = 0;
         this.show = false;
         this.user = JSON.parse(localStorage.getItem('user'));
-        this.benes = localStorage.getItem('benNums')
-            ? JSON.parse(localStorage.getItem('benNums'))
+        this.benes = localStorage.getItem('benes')
+            ? JSON.parse(localStorage.getItem('benes'))
             : [];
         this.beneficiaryForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormGroup({
             beneficiaryAccount: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl(''),
             amount: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl(''),
             narration: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl(''),
         });
+        this.dataType = '';
     }
     ngOnInit() {
+        this.getBen();
         this.typeCode = Number(this.route.snapshot.queryParamMap.get('id'))
             ? Number(this.route.snapshot.queryParamMap.get('id'))
             : 6;
@@ -3054,17 +3545,65 @@ let ProductsComponent = class ProductsComponent {
         });
         localStorage.setItem('benNums', JSON.stringify(this.benes));
     }
-    delete(phone) {
-        console.log(this.benes);
-        const data = [];
-        for (let i = 0; i < this.benes.length; i++) {
-            if (this.benes[i].phoneNumber !== phone) {
-                data.push(this.benes[i]);
+    getBen() {
+        this.auth
+            .post({
+            UserId: +this.user.userId,
+        }, 'Cba.BankingService.FetchAllBeneficiary')
+            .subscribe((res) => {
+            console.log(res);
+            if (res.data.responseCode === '00') {
+                // deal with register
+                this.benes = res.data.data.sort((a, b) => b.id - a.id);
+                this.benes = this.benes.filter((ben) => ben.name === 'Airtime/Data');
+                localStorage.setItem('benes', JSON.stringify(res.data.data.sort((a, b) => b.id - a.id)));
             }
-        }
-        this.benes = data;
-        localStorage.setItem('benNums', JSON.stringify(this.benes));
+            else {
+            }
+        }, (err) => { });
+    }
+    addBen() {
+        this.auth
+            .post({
+            Name: 'Airtime/Data',
+            AccountName: this.dataType,
+            AccountNumber: this.phoneNumber,
+            Company: this.dataType + '/' + this.productCode,
+            UserId: +this.user.userId,
+        }, 'Cba.BankingService.AddBeneficiary')
+            .subscribe((res) => {
+            console.log(res);
+            if (res.data.responseCode === '00') {
+                this.getBen();
+                // deal with register
+            }
+            else {
+            }
+        }, (err) => { });
+    }
+    delete(number) {
         console.log(this.benes);
+        this.loading = true;
+        this.auth
+            .post({
+            Id: number,
+        }, 'Cba.BankingService.RemoveBeneficiary')
+            .subscribe((res) => {
+            console.log(res);
+            if (res.data.responseCode === '00') {
+                this.loading = false;
+                // deal with register
+                const data = [];
+                for (let i = 0; i < this.benes.length; i++) {
+                    if (this.benes[i].id !== number) {
+                        data.push(this.benes[i]);
+                    }
+                }
+                this.benes = data;
+            }
+            else {
+            }
+        }, (err) => { });
     }
     use(num) {
         this.phoneNumber = num;
@@ -3117,8 +3656,18 @@ let ProductsComponent = class ProductsComponent {
                         this.loading = false;
                         console.log(res);
                         if (res.data.status === '200') {
+                            if (this.saveBene) {
+                                for (let i = 0; i < this.benes.length; i++) {
+                                    if (this.benes[i].accountNumber === this.phoneNumber) {
+                                        return;
+                                    }
+                                }
+                                this.addBen();
+                            }
                             this.toast.success('Transaction Successfull', 'Success');
                             this.show = false;
+                            this.phoneNumber = '';
+                            this.productCode = '';
                             // deal with register
                         }
                         else {
@@ -3409,14 +3958,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DocumentUploadComponent": () => (/* binding */ DocumentUploadComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _document_upload_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./document-upload.component.html?ngResource */ 66724);
 /* harmony import */ var _document_upload_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./document-upload.component.scss?ngResource */ 2293);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 52816);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 52816);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 93819);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ 97160);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-toastr */ 34101);
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ 34101);
 /* harmony import */ var src_app_core_http_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/core/http/services/auth.service */ 41194);
 
 
@@ -3426,11 +3976,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let DocumentUploadComponent = class DocumentUploadComponent {
-    constructor(auth, toast, router) {
+    constructor(auth, toast, router, alertController) {
         this.auth = auth;
         this.toast = toast;
         this.router = router;
+        this.alertController = alertController;
         this.show = false;
         this.loading = false;
         this.source = 'assets/icon/royalty.png';
@@ -3438,6 +3990,8 @@ let DocumentUploadComponent = class DocumentUploadComponent {
         this.user = JSON.parse(localStorage.getItem('user'));
         this.type = '';
         this.types = ['National ID', 'International Passport'];
+        this.isCAC = false;
+        this.isId = false;
     }
     ngOnInit() {
         this.type = 'National ID';
@@ -3503,53 +4057,40 @@ let DocumentUploadComponent = class DocumentUploadComponent {
                 if (type === 'CAC') {
                     this.cardImageBase64 = data;
                     this.isImageSaved = true;
+                    this.presentAlertPrompt(type);
                 }
                 else {
                     this.cardImageBase641 = data;
                     this.isImageSaved1 = true;
+                    this.presentAlertPrompt(type);
                 }
             });
-            // const reader = new FileReader();
-            // reader.onload = (e: any) => {
-            //   const image = new Image();
-            //   image.src = e.target.result;
-            //   image.onload = (rs: any) => {
-            //     const img_height = rs.currentTarget.height;
-            //     const img_width = rs.currentTarget.width;
-            //     console.log(img_height, img_width);
-            //     if (img_height > max_height && img_width > max_width) {
-            //       if (type === 'CAC') {
-            //         this.imageError =
-            //           'Maximum dimentions allowed ' +
-            //           max_height +
-            //           '*' +
-            //           max_width +
-            //           'px';
-            //       } else {
-            //         this.imageError1 =
-            //           'Maximum dimentions allowed ' +
-            //           max_height +
-            //           '*' +
-            //           max_width +
-            //           'px';
-            //       }
-            //       return false;
-            //     } else {
-            //     const imgBase64Path = e.target.result;
-            //     console.log(imgBase64Path);
-            //     if (type === 'CAC') {
-            //       this.cardImageBase64 = imgBase64Path;
-            //       this.isImageSaved = true;
-            //     } else {
-            //       this.cardImageBase641 = imgBase64Path;
-            //       this.isImageSaved1 = true;
-            //     }
-            //     // this.previewImagePath = imgBase64Path;
-            //     // }
-            //   };
-            // };
-            // reader.readAsDataURL(fileInput.target.files[0]);
         }
+    }
+    presentAlertPrompt(type) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                cssClass: 'my-custom-class',
+                header: 'Upload File',
+                // subHeader: 'Subtitle',
+                message: 'Are you sure you want to upload this file?',
+                buttons: [
+                    {
+                        text: 'No',
+                        handler: () => {
+                            console.log('phone Ok');
+                        },
+                    },
+                    {
+                        text: 'Yes',
+                        handler: () => {
+                            this.upload(type);
+                        },
+                    },
+                ],
+            });
+            yield alert.present();
+        });
     }
     removeImage() {
         this.cardImageBase64 = null;
@@ -3561,91 +4102,154 @@ let DocumentUploadComponent = class DocumentUploadComponent {
         this.isImageSaved1 = false;
         this.fileName1 = null;
     }
-    upload() {
-        if (!this.cardImageBase64) {
-            this.toast.error(`Select a valid CAC pdf document`, 'Error');
-            return false;
-        }
-        if (!this.cardImageBase641) {
-            this.toast.error(`Select a valid  ID pdf document`, 'Error');
-            return false;
-        }
-        if (!this.type) {
-            this.toast.error(`Type of ID is required`, 'Error');
-            return false;
-        }
+    // getUrl(data) {
+    //   this.auth.post(data, 'Cba.BankingService.DocumentUpload').subscribe(
+    //     (res: any) => {
+    //       console.log(res);
+    //       this.loading = false;
+    //       if (res.data.responseCode === '00') {
+    //         this.upload1();
+    //       } else {
+    //         this.toast.error(res.data.responseMessage, 'Error');
+    //       }
+    //     },
+    //     (err) => {
+    //       this.toast.error('Error please try again', 'Error');
+    //       this.loading = false;
+    //     }
+    //   );
+    // }
+    upload(type) {
+        // if (!this.cardImageBase64) {
+        //   this.toast.error(`Select a valid CAC pdf document`, 'Error');
+        //   return false;
+        // }
+        // if (!this.cardImageBase641) {
+        //   this.toast.error(`Select a valid  ID pdf document`, 'Error');
+        //   return false;
+        // }
+        // if (!this.type) {
+        //   this.toast.error(`Type of ID is required`, 'Error');
+        //   return false;
+        // }
+        console.log(type);
         this.loading = true;
-        const first = this.cardImageBase64.split(',');
+        let first;
+        if (type === 'CAC') {
+            first = this.cardImageBase64.split(',');
+        }
+        else {
+            first = this.cardImageBase641.split(',');
+        }
+        // const first = this.cardImageBase64.split(',');
         const mainImage = first[1];
         const data = {
             ClientId: this.user.clientId,
-            Name: 'CAC Document',
-            FileName: this.fileName,
+            Name: type === 'CAC' ? 'CAC Document' : this.type,
+            FileName: type === 'CAC' ? this.fileName : this.fileName1,
             Base64String: mainImage,
-            Description: 'CAC Document Upload',
+            Description: type === 'CAC' ? 'CAC Document Upload' : 'ID Upload',
         };
-        this.auth.post(data, 'Cba.BankingService.DocumentUpload').subscribe((res) => {
+        this.auth.documentUpload(data).subscribe((res) => {
             console.log(res);
             this.loading = false;
-            if (res.data.responseCode === '00') {
-                this.upload1();
+            if (res.status) {
+                this.save(res.result);
             }
             else {
                 this.toast.error(res.data.responseMessage, 'Error');
+                this.cardImageBase64 = '';
+                this.cardImageBase641 = '';
+                this.fileName = '';
+                this.fileName1 = '';
             }
         }, (err) => {
             this.toast.error('Error please try again', 'Error');
             this.loading = false;
+            this.cardImageBase64 = '';
+            this.cardImageBase641 = '';
+            this.fileName = '';
+            this.fileName1 = '';
         });
     }
-    upload1() {
-        if (!this.cardImageBase64) {
-            this.toast.error(`CAC document cannot be empty`, 'Error');
-            return false;
-        }
-        if (!this.cardImageBase641) {
-            this.toast.error(`Valid ID cannot be empty`, 'Error');
-            return false;
-        }
-        if (!this.type) {
-            this.toast.error(`Type of ID is required`, 'Error');
-            return false;
-        }
+    save(result) {
+        // if (!this.cardImageBase64) {
+        //   this.toast.error(`CAC document cannot be empty`, 'Error');
+        //   return false;
+        // }
+        // if (!this.cardImageBase641) {
+        //   this.toast.error(`Valid ID cannot be empty`, 'Error');
+        //   return false;
+        // }
+        // if (!this.type) {
+        //   this.toast.error(`Type of ID is required`, 'Error');
+        //   return false;
+        // }
         this.loading = true;
-        const first = this.cardImageBase641.split(',');
-        const mainImage = first[1];
-        const data = {
-            ClientId: this.user.clientId,
-            Name: this.type,
-            FileName: this.fileName1,
-            Base64String: mainImage,
-            Description: this.type + ' ' + 'Upload',
-        };
-        this.auth.post(data, 'Cba.BankingService.DocumentUpload').subscribe((res) => {
+        // const first = this.cardImageBase641.split(',');
+        // const mainImage = first[1];
+        // const data = {
+        //   ClientId: this.user.clientId,
+        //   Name: this.type,
+        //   FileName: this.fileName1,
+        //   Base64String: mainImage,
+        //   Description: this.type + ' ' + 'Upload',
+        // };
+        this.auth.post(result, 'Cba.BankingService.DocumentUpload').subscribe((res) => {
             console.log(res);
             this.loading = false;
             if (res.data.responseCode === '00') {
-                this.toast.success('Files uploaded successfully, contact bank support for verification status', 'Success');
+                // this.toast.success(
+                //   'Files uploaded successfully, contact bank support for verification status',
+                //   'Success'
+                // );
                 localStorage.setItem('upload', 'true');
                 localStorage.setItem('uploadID', this.type);
-                this.router.navigate(['/dashboard']);
+                if (result.name === 'CAC Document') {
+                    this.toast.success('CAC document uploaded successfully', 'Success');
+                    this.isCAC = true;
+                }
+                else {
+                    this.toast.success('ID uploaded successfully', 'Success');
+                    this.isId = true;
+                }
             }
             else {
                 this.toast.error(res.data.responseMessage, 'Error');
+                this.cardImageBase64 = '';
+                this.cardImageBase641 = '';
+                this.fileName = '';
+                this.fileName1 = '';
             }
         }, (err) => {
             this.toast.error('Error please try again', 'Error');
             this.loading = false;
+            this.cardImageBase64 = '';
+            this.cardImageBase641 = '';
+            this.fileName = '';
+            this.fileName1 = '';
         });
+    }
+    done() {
+        if (!this.fileName) {
+            this.toast.error('CAC document has not been uploaded yet', 'Error');
+            return;
+        }
+        if (!this.fileName1) {
+            this.toast.error('ID has not been uploaded yet', 'Error');
+            return;
+        }
+        this.router.navigate(['/dashboard']);
     }
 };
 DocumentUploadComponent.ctorParameters = () => [
     { type: src_app_core_http_services_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService },
-    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_4__.ToastrService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router }
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__.ToastrService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.AlertController }
 ];
-DocumentUploadComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+DocumentUploadComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
         selector: 'app-document-upload',
         template: _document_upload_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_document_upload_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -3667,17 +4271,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HistoryComponent": () => (/* binding */ HistoryComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _history_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./history.component.html?ngResource */ 42714);
 /* harmony import */ var _history_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./history.component.scss?ngResource */ 56626);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 3184);
 /* harmony import */ var _core_http_services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/http/services/auth.service */ 41194);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 90587);
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ 34101);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 52816);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 90587);
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-toastr */ 34101);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 52816);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ 56908);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/animations */ 31631);
+/* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/animations */ 31631);
+/* harmony import */ var html_to_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! html-to-image */ 24971);
+/* harmony import */ var _byteowls_capacitor_filesharer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @byteowls/capacitor-filesharer */ 58607);
+
+
 
 
 
@@ -3689,10 +4297,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let HistoryComponent = class HistoryComponent {
-    constructor(auth, toast, router) {
+    constructor(auth, toast, router, change) {
         this.auth = auth;
         this.toast = toast;
         this.router = router;
+        this.change = change;
         this.user = JSON.parse(localStorage.getItem('user'));
         this.loading = true;
         this.data = [];
@@ -3701,16 +4310,54 @@ let HistoryComponent = class HistoryComponent {
         this.details = {};
         this.transType = 'debit';
         this.counter = 0;
-        this.historyForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormGroup({
-            startDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(''),
-            endDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(''),
-            transType: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl(''),
+        this.historyForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormGroup({
+            startDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(''),
+            endDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(''),
+            transType: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl(''),
         });
+        this.url = '';
     }
     ngOnInit() {
         // let   user = JSON.parse(localStorage.getItem('user'));
         this.account = this.user.accountNos[0].accountNo;
         this.fetchTransTypes();
+    }
+    downloadButtonClick(url) {
+        const photo = url;
+        const first = photo.split(',');
+        const mainImage = first[1];
+        const extension = first[0].split('image/');
+        const mainExtension = extension[1].split(';')[0];
+        _byteowls_capacitor_filesharer__WEBPACK_IMPORTED_MODULE_5__.FileSharer.share({
+            filename: 'royal-receipt.png',
+            base64Data: mainImage,
+            contentType: `image/${mainExtension}`,
+        })
+            .then(() => {
+            // do sth
+            console.log('done');
+        })
+            .catch((error) => {
+            console.error('File sharing failed', error.message);
+        });
+    }
+    getReciept() {
+        this.change.detectChanges();
+        console.log('node', this.recipt.nativeElement);
+        // console.log('node', this.recipt.nativeElement);
+        html_to_image__WEBPACK_IMPORTED_MODULE_4__.toPng(this.recipt.nativeElement)
+            .then((dataUrl) => {
+            this.change.detectChanges();
+            this.url = dataUrl;
+            console.log('url', dataUrl);
+            this.downloadButtonClick(dataUrl);
+            // const img = new Image();
+            // img.src = dataUrl;
+            // document.body.appendChild(img);
+        })
+            .catch((error) => {
+            console.error('oops, something went wrong!', error);
+        });
     }
     setTrans(transaction) {
         let id;
@@ -3801,21 +4448,25 @@ let HistoryComponent = class HistoryComponent {
 };
 HistoryComponent.ctorParameters = () => [
     { type: _core_http_services_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__.ToastrService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router }
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_7__.ToastrService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_9__.ChangeDetectorRef }
 ];
-HistoryComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+HistoryComponent.propDecorators = {
+    recipt: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__.ViewChild, args: ['recipt', { static: false },] }]
+};
+HistoryComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-history',
         template: _history_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         animations: [
-            (0,_angular_animations__WEBPACK_IMPORTED_MODULE_9__.trigger)('slideInOut', [
-                (0,_angular_animations__WEBPACK_IMPORTED_MODULE_9__.transition)(':enter', [
-                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_9__.style)({ transform: 'translateY(100%)' }),
-                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_9__.animate)('500ms ease-in', (0,_angular_animations__WEBPACK_IMPORTED_MODULE_9__.style)({ transform: 'translateY(-0%)' })),
+            (0,_angular_animations__WEBPACK_IMPORTED_MODULE_11__.trigger)('slideInOut', [
+                (0,_angular_animations__WEBPACK_IMPORTED_MODULE_11__.transition)(':enter', [
+                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_11__.style)({ transform: 'translateY(100%)' }),
+                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_11__.animate)('500ms ease-in', (0,_angular_animations__WEBPACK_IMPORTED_MODULE_11__.style)({ transform: 'translateY(-0%)' })),
                 ]),
-                (0,_angular_animations__WEBPACK_IMPORTED_MODULE_9__.transition)(':leave', [
-                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_9__.animate)('200ms ease-in', (0,_angular_animations__WEBPACK_IMPORTED_MODULE_9__.style)({ transform: 'translateY(-100%)' })),
+                (0,_angular_animations__WEBPACK_IMPORTED_MODULE_11__.transition)(':leave', [
+                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_11__.animate)('200ms ease-in', (0,_angular_animations__WEBPACK_IMPORTED_MODULE_11__.style)({ transform: 'translateY(-100%)' })),
                 ]),
             ]),
         ],
@@ -3875,6 +4526,8 @@ let LoanPage = class LoanPage {
         this.fullName = '';
         this.dateOfBirth = '';
         this.phoneNumber = '';
+        this.endDate = '';
+        this.errData = [];
         this.formattedAmount = this.currencyPipe.transform('0', '₦');
         this.tenures = [
             { name: '6 months', value: 6 },
@@ -3903,9 +4556,35 @@ let LoanPage = class LoanPage {
         this.fullName = this.user.firstName + ' ' + this.user.lastName;
         this.fetchLoanTypes();
         this.fetchHistory();
+        if (!this.bvn) {
+            this.errData.push('BVN');
+        }
+        if (!this.phoneNumber) {
+            this.errData.push('phone number');
+        }
+        if (!this.dateOfBirth) {
+            this.errData.push('DOB');
+        }
+        if (!this.fullName) {
+            this.errData.push('Full Name');
+        }
         // this.fetchBvn();
         // let   user = JSON.parse(localStorage.getItem('user'));
         this.account = this.user.accountNos[0].accountNo;
+    }
+    getEndDate(date) {
+        const newDate = date;
+        const ten = this.tenure.toString().split(' ');
+        newDate.setMonth(newDate.getMonth() + +ten[0]);
+        this.endDate = newDate;
+    }
+    dateChange(event) {
+        const date = new Date(event.target.value);
+        this.getEndDate(date);
+    }
+    dateTenure(event) {
+        const date = new Date(this.date);
+        this.getEndDate(date);
     }
     transactionType(e) {
         this.transType = e;
@@ -3993,6 +4672,15 @@ let LoanPage = class LoanPage {
     }
     checkEligible() {
         this.loading = true;
+        if (this.errData.length > 0) {
+            let missing = '';
+            for (let i = 0; i < this.errData.length; i++) {
+                missing = missing + ' ' + this.errData[i] + ',';
+            }
+            this.toast.error(`Your account is missing ${missing}`, 'Error');
+            this.loading = false;
+            return;
+        }
         const data = {
             bvn: this.bvn,
             fullName: this.fullName,
@@ -4221,14 +4909,6 @@ let LoginComponent = class LoginComponent {
     }
     ngOnInit() {
         // login form
-        const user = localStorage.getItem('user');
-        const users = user ? JSON.parse(user) : null;
-        setInterval(() => {
-            this.user = users ? users : null;
-        }, 500);
-        if (this.user) {
-            this.router.navigate(['/dashboard']);
-        }
         this.loginForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormGroup({
             email: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl(''),
             password: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormControl(''),
@@ -6653,6 +7333,12 @@ let NubanRegisterComponent = class NubanRegisterComponent {
         this.loading = false;
         this.path = 'phone';
         this.check = [];
+        this.companyType = [
+            'Limited liability company',
+            'Corporation',
+            'Sole proprietorship',
+            'Partnership',
+        ];
     }
     // register method
     isUpper(str) {
@@ -6936,6 +7622,9 @@ let NubanRegisterComponent = class NubanRegisterComponent {
     }
     presentAlertPrompt() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            if (!this.sanitize) {
+                return;
+            }
             if (this.check.length < 4) {
                 this.toast.error('password should contain lowercase, uppercase, number and minimum of 6 characters', 'Error');
                 return;
@@ -8936,7 +9625,6 @@ let ResetPasswordComponent = class ResetPasswordComponent {
                 this.toast.success('Password reset Successful', 'Success');
                 this.data = res.data;
                 console.log(res.data);
-                localStorage.setItem('token', res.data.token);
                 this.router.navigate(['/login']);
             }
             else {
@@ -9047,14 +9735,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TransferPage": () => (/* binding */ TransferPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _transfer_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./transfer.page.html?ngResource */ 81131);
 /* harmony import */ var _transfer_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./transfer.page.scss?ngResource */ 96323);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 3184);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 3184);
 /* harmony import */ var _core_http_services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core/http/services/auth.service */ 41194);
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ 34101);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 52816);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 36362);
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ 34101);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 52816);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ 36362);
+/* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/animations */ 31631);
+/* harmony import */ var html_to_image__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! html-to-image */ 24971);
+/* harmony import */ var _byteowls_capacitor_filesharer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @byteowls/capacitor-filesharer */ 58607);
+
+
+
 
 
 
@@ -9064,11 +9758,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let TransferPage = class TransferPage {
-    constructor(auth, toast, router, currencyPipe) {
+    constructor(auth, toast, router, currencyPipe, change) {
         this.auth = auth;
         this.toast = toast;
         this.router = router;
         this.currencyPipe = currencyPipe;
+        this.change = change;
         this.show = false;
         this.loading = false;
         this.source = 'assets/icon/royalty.png';
@@ -9080,11 +9775,65 @@ let TransferPage = class TransferPage {
         this.name = '';
         this.saveBene = false;
         this.banks = [];
+        this.nameLoading = false;
         this.formattedAmount = this.currencyPipe.transform('0', '₦');
         this.user = JSON.parse(localStorage.getItem('user'));
-        this.benes = localStorage.getItem('benAccs')
-            ? JSON.parse(localStorage.getItem('benAccs'))
+        this.benes = localStorage.getItem('benes')
+            ? JSON.parse(localStorage.getItem('benes'))
             : [];
+        this.visible = false;
+        this.searchBank = '';
+        this.searchBankTemp = [];
+        this.url = '';
+    }
+    downloadButtonClick(url) {
+        const photo = url;
+        const first = photo.split(',');
+        const mainImage = first[1];
+        const extension = first[0].split('image/');
+        const mainExtension = extension[1].split(';')[0];
+        _byteowls_capacitor_filesharer__WEBPACK_IMPORTED_MODULE_4__.FileSharer.share({
+            filename: 'royal-receipt.png',
+            base64Data: mainImage,
+            contentType: `image/${mainExtension}`,
+        })
+            .then(() => {
+            // do sth
+            console.log('done');
+        })
+            .catch((error) => {
+            console.error('File sharing failed', error.message);
+        });
+    }
+    getReciept() {
+        this.change.detectChanges();
+        console.log('node', this.recipt.nativeElement);
+        // console.log('node', this.recipt.nativeElement);
+        html_to_image__WEBPACK_IMPORTED_MODULE_3__.toPng(this.recipt.nativeElement)
+            .then((dataUrl) => {
+            this.change.detectChanges();
+            this.url = dataUrl;
+            console.log('url', dataUrl);
+            this.downloadButtonClick(dataUrl);
+            // const img = new Image();
+            // img.src = dataUrl;
+            // document.body.appendChild(img);
+        })
+            .catch((error) => {
+            console.error('oops, something went wrong!', error);
+        });
+    }
+    setVissible() {
+        this.visible = !this.visible;
+    }
+    refchg(value) {
+        console.log(value);
+        this.searchBankTemp = this.banks.filter((t) => t.name.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+    }
+    setBank(bank) {
+        this.bankCode = bank.code;
+        this.bankName = bank.name;
+        this.setVissible();
     }
     transformAmount(element) {
         this.formattedAmount = Number(this.formattedAmount.replace(/[^0-9.-]+/g, '')).toString();
@@ -9093,6 +9842,7 @@ let TransferPage = class TransferPage {
         this.amount = Number(this.formattedAmount.replace(/[^0-9.-]+/g, ''));
     }
     ngOnInit() {
+        this.getBen();
         console.log(this.user);
         this.accNum = this.user.accountNos[0].accountNo;
         this.getBanks();
@@ -9159,23 +9909,11 @@ let TransferPage = class TransferPage {
         if (this.sanitise()) {
             return;
         }
-        this.transType = 4;
-        if (this.saveBene) {
-            for (let i = 0; i < this.benes.length; i++) {
-                console.log(this.benes[i].accNumber);
-                console.log(this.accNum);
-                if (this.benes[i].accNumber === this.benAcc) {
-                    return;
-                }
-            }
-            this.benes.unshift({
-                name: this.name,
-                accNumber: this.benAcc,
-                bankName: this.bankName ? this.bankName : 'Royal Bank',
-                bankCode: this.bankCode,
-            });
-            localStorage.setItem('benAccs', JSON.stringify(this.benes));
+        if (this.accNum === this.benAcc) {
+            this.toast.error('You cant make transfer to your account', 'Error');
+            return false;
         }
+        this.transType = 4;
     }
     back() {
         this.transType = 0;
@@ -9183,26 +9921,63 @@ let TransferPage = class TransferPage {
     chooseBeneficiary(e) {
         console.log('chosen');
     }
-    chnageBank(e) {
-        for (let i = 0; i < this.banks.length; i++) {
-            if (this.banks[i].code === e.target.value) {
-                this.bankCode = this.banks[i].code;
-                this.bankName = this.banks[i].name;
-            }
-        }
-    }
+    // chnageBank(e) {
+    //   for (let i = 0; i < this.banks.length; i++) {
+    //     if (this.banks[i].code === e.target.value) {
+    //       this.bankCode = this.banks[i].code;
+    //       this.bankName = this.banks[i].name;
+    //     }
+    //   }
+    // }
     getBanks() {
         this.auth.post({}, 'Cba.BankingService.FetchBanks').subscribe((res) => {
             console.log(res);
             if (res.status === '00') {
                 // deal with register
-                this.banks = res.data.data;
+                this.banks = res.data.data.sort((a, b) => a.name.localeCompare(b.name));
+                this.searchBankTemp = res.data.data.sort((a, b) => a.name.localeCompare(b.name));
                 this.bankCode = this.banks[0].code;
             }
             else {
                 console.log(res.data.responseMessage);
             }
         }, (err) => console.error(err.message));
+    }
+    getBen() {
+        this.auth
+            .post({
+            UserId: +this.user.userId,
+        }, 'Cba.BankingService.FetchAllBeneficiary')
+            .subscribe((res) => {
+            console.log(res);
+            if (res.data.responseCode === '00') {
+                // deal with register
+                this.benes = res.data.data.sort((a, b) => b.id - a.id);
+                this.benes = this.benes.filter((ben) => ben.name === 'Transfer');
+                localStorage.setItem('benes', JSON.stringify(res.data.data.sort((a, b) => b.id - a.id)));
+            }
+            else {
+            }
+        }, (err) => { });
+    }
+    addBen() {
+        this.auth
+            .post({
+            Name: 'Transfer',
+            AccountName: this.name,
+            AccountNumber: this.benAcc,
+            Company: this.bankName + '/' + this.bankCode,
+            UserId: +this.user.userId,
+        }, 'Cba.BankingService.AddBeneficiary')
+            .subscribe((res) => {
+            console.log(res);
+            if (res.data.responseCode === '00') {
+                // deal with register
+                this.getBen();
+            }
+            else {
+            }
+        }, (err) => { });
     }
     debounce(e) {
         if (e.length === 10) {
@@ -9212,6 +9987,7 @@ let TransferPage = class TransferPage {
             }
             clearTimeout(this.timer);
             this.timer = setTimeout(() => {
+                this.nameLoading = true;
                 this.auth
                     .post({
                     accountNo: e,
@@ -9222,21 +9998,38 @@ let TransferPage = class TransferPage {
                     if (res.status === '00') {
                         // deal with register
                         this.showName = false;
-                        if (!res.data.data.fullName) {
-                            this.name = 'No record found';
-                            this.showName = true;
+                        if (this.transType === 1) {
+                            if (!res.data.data.fullName) {
+                                this.name = 'No record found';
+                                this.showName = true;
+                                this.nameLoading = false;
+                            }
+                            else {
+                                this.name = res.data.data.fullName;
+                                this.nameLoading = false;
+                            }
                         }
                         else {
-                            this.name = res.data.data.fullName;
+                            if (!res.data.data.accountNameField) {
+                                this.name = 'No record found';
+                                this.showName = true;
+                                this.nameLoading = false;
+                            }
+                            else {
+                                this.name = res.data.data.accountNameField;
+                                this.nameLoading = false;
+                            }
                         }
                     }
                     else {
                         this.showName = true;
                         this.name = 'failed, wrong details';
+                        this.nameLoading = false;
                     }
                 }, (err) => {
                     this.showName = true;
                     this.name = 'failed, network error';
+                    this.nameLoading = false;
                 });
             }, 1000);
         }
@@ -9256,24 +10049,41 @@ let TransferPage = class TransferPage {
     }
     delete(number) {
         console.log(this.benes);
-        const data = [];
-        for (let i = 0; i < this.benes.length; i++) {
-            if (this.benes[i].accNumber !== number) {
-                data.push(this.benes[i]);
+        this.loading = true;
+        this.auth
+            .post({
+            Id: number,
+        }, 'Cba.BankingService.RemoveBeneficiary')
+            .subscribe((res) => {
+            console.log(res);
+            this.loading = false;
+            if (res.data.responseCode === '00') {
+                // deal with register
+                const data = [];
+                for (let i = 0; i < this.benes.length; i++) {
+                    if (this.benes[i].id !== number) {
+                        data.push(this.benes[i]);
+                    }
+                }
+                this.benes = data;
             }
-        }
-        this.benes = data;
-        localStorage.setItem('benAccs', JSON.stringify(this.benes));
-        console.log(this.benes);
+            else {
+            }
+        }, (err) => { });
     }
     use(acc) {
         console.log(acc);
-        this.name = acc.name;
-        this.benAcc = acc.accNumber;
-        this.bankName = acc.bankName;
-        this.bankCode = acc.bankCode;
+        this.name = acc.accountName;
+        this.benAcc = acc.accountNumber;
+        this.bankName = acc.company.split('/')[0];
+        this.bankCode = acc.company.split('/')[1];
         this.newReq = true;
         this.showName = false;
+        if (acc.company.split('/')[0] === 'Royal Bank' ||
+            acc.company.split('/')[0] === 'ROYAL BANK') {
+            this.transType = 1;
+        }
+        console.log(acc.company.split('/')[0], acc.company.split('/')[1]);
     }
     transfer() {
         this.loading = true;
@@ -9316,6 +10126,14 @@ let TransferPage = class TransferPage {
                             if (res.data.responseCode === '00') {
                                 this.transType = 3;
                                 this.show = false;
+                                if (this.saveBene) {
+                                    for (let i = 0; i < this.benes.length; i++) {
+                                        if (this.benes[i].accountNumber === this.benAcc) {
+                                            return;
+                                        }
+                                    }
+                                    this.addBen();
+                                }
                                 // deal with register
                             }
                             else {
@@ -9378,14 +10196,29 @@ let TransferPage = class TransferPage {
 };
 TransferPage.ctorParameters = () => [
     { type: _core_http_services_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService },
-    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_3__.ToastrService },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router },
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_5__.CurrencyPipe }
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__.ToastrService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_7__.CurrencyPipe },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_8__.ChangeDetectorRef }
 ];
-TransferPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+TransferPage.propDecorators = {
+    recipt: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__.ViewChild, args: ['recipt', { static: false },] }]
+};
+TransferPage = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
         selector: 'app-transfer',
         template: _transfer_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
+        animations: [
+            (0,_angular_animations__WEBPACK_IMPORTED_MODULE_10__.trigger)('slideInOut', [
+                (0,_angular_animations__WEBPACK_IMPORTED_MODULE_10__.transition)(':enter', [
+                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_10__.style)({ transform: 'translateY(100%)' }),
+                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_10__.animate)('500ms ease-in', (0,_angular_animations__WEBPACK_IMPORTED_MODULE_10__.style)({ transform: 'translateY(-0%)' })),
+                ]),
+                (0,_angular_animations__WEBPACK_IMPORTED_MODULE_10__.transition)(':leave', [
+                    (0,_angular_animations__WEBPACK_IMPORTED_MODULE_10__.animate)('200ms ease-in', (0,_angular_animations__WEBPACK_IMPORTED_MODULE_10__.style)({ transform: 'translateY(-100%)' })),
+                ]),
+            ]),
+        ],
         styles: [_transfer_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], TransferPage);
@@ -10269,7 +11102,7 @@ module.exports = "ion-content {\n  font-family: Mulish !important;\n  --padding-
 /***/ ((module) => {
 
 "use strict";
-module.exports = ".overlay {\n  position: fixed;\n  width: 100vh;\n  height: 100vw;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: rgba(0, 0, 0, 0.5) !important;\n  z-index: 99;\n  cursor: pointer;\n}\n\n.container {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  align-content: space-between;\n  row-gap: 30px;\n  height: 50vh;\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  z-index: 100;\n  background-color: #25214f;\n  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);\n  padding-top: 20px;\n  width: 100vw;\n  border-top-left-radius: 10%;\n  border-top-right-radius: 10%;\n}\n\n.title {\n  font-size: 20px;\n  color: white;\n  font-weight: 700;\n}\n\n.table {\n  font-size: 13px;\n  text-align: left;\n  max-width: 700px;\n  background-color: #25214f;\n  color: white;\n  margin: auto;\n}\n\n.table td, .table th {\n  padding: 10px 0;\n  padding-left: 10px;\n}\n\nion-button {\n  --background: #fff\n  --background-activated: #25214f;\n  --color: #25214f;\n  --color-activateded:#FEE178 ;\n  font-size: 20px;\n  font-weight: 900 !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFkZC1mdW5kLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZUFBQTtFQUNBLFlBQUE7RUFDQSxhQUFBO0VBQ0EsTUFBQTtFQUNBLE9BQUE7RUFDQSxRQUFBO0VBQ0EsU0FBQTtFQUNBLCtDQUFBO0VBQ0EsV0FBQTtFQUNBLGVBQUE7QUFDRjs7QUFDQTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtFQUNBLHVCQUFBO0VBQ0EsbUJBQUE7RUFDQSw0QkFBQTtFQUNBLGFBQUE7RUFDQSxZQUFBO0VBQ0EsZUFBQTtFQUNBLFNBQUE7RUFDQSxPQUFBO0VBQ0EsWUFBQTtFQUNBLHlCQUFBO0VBQ0EseUNBQUE7RUFDQSxpQkFBQTtFQUNBLFlBQUE7RUFDQSwyQkFBQTtFQUNBLDRCQUFBO0FBRUY7O0FBQUE7RUFDRSxlQUFBO0VBQ0EsWUFBQTtFQUNBLGdCQUFBO0FBR0Y7O0FBQ0E7RUFDRSxlQUFBO0VBQ0EsZ0JBQUE7RUFDQSxnQkFBQTtFQUNBLHlCQUFBO0VBQ0EsWUFBQTtFQUVBLFlBQUE7QUFDRjs7QUFBRTtFQUNFLGVBQUE7RUFDQSxrQkFBQTtBQUVKOztBQUdBO0VBQ0U7aUNBQUE7RUFFQSxnQkFBQTtFQUNBLDRCQUFBO0VBQ0EsZUFBQTtFQUNBLDJCQUFBO0FBQUYiLCJmaWxlIjoiYWRkLWZ1bmQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIub3ZlcmxheSB7XHJcbiAgcG9zaXRpb246IGZpeGVkO1xyXG4gIHdpZHRoOiAxMDB2aDtcclxuICBoZWlnaHQ6IDEwMHZ3O1xyXG4gIHRvcDogMDtcclxuICBsZWZ0OiAwO1xyXG4gIHJpZ2h0OiAwO1xyXG4gIGJvdHRvbTogMDtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsMCwwLDAuNSkgIWltcG9ydGFudDtcclxuICB6LWluZGV4OiA5OTtcclxuICBjdXJzb3I6IHBvaW50ZXI7XHJcbn1cclxuLmNvbnRhaW5lciB7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgYWxpZ24tY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICByb3ctZ2FwOiAzMHB4O1xyXG4gIGhlaWdodDogNTB2aDtcclxuICBwb3NpdGlvbjogZml4ZWQ7XHJcbiAgYm90dG9tOiAwO1xyXG4gIGxlZnQ6IDA7XHJcbiAgei1pbmRleDogMTAwO1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICMyNTIxNGY7XHJcbiAgYm94LXNoYWRvdzogMCAzcHggMTBweCByZ2IoMCAwIDAgLyAwLjIpO1xyXG4gIHBhZGRpbmctdG9wOiAyMHB4O1xyXG4gIHdpZHRoOiAxMDB2dztcclxuICBib3JkZXItdG9wLWxlZnQtcmFkaXVzOiAxMCU7XHJcbiAgYm9yZGVyLXRvcC1yaWdodC1yYWRpdXM6IDEwJTtcclxufVxyXG4udGl0bGUge1xyXG4gIGZvbnQtc2l6ZTogMjBweDtcclxuICBjb2xvcjogd2hpdGU7XHJcbiAgZm9udC13ZWlnaHQ6IDcwMDtcclxufVxyXG5cclxuXHJcbi50YWJsZSB7XHJcbiAgZm9udC1zaXplOiAxM3B4O1xyXG4gIHRleHQtYWxpZ246IGxlZnQ7XHJcbiAgbWF4LXdpZHRoOiA3MDBweDtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMjUyMTRmO1xyXG4gIGNvbG9yOiB3aGl0ZTtcclxuXHJcbiAgbWFyZ2luOiBhdXRvO1xyXG4gIHRkLCB0aCB7XHJcbiAgICBwYWRkaW5nOiAxMHB4IDA7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDEwcHg7XHJcbiAgfVxyXG59XHJcblxyXG5cclxuaW9uLWJ1dHRvbiB7XHJcbiAgLS1iYWNrZ3JvdW5kOiAjZmZmXHJcbiAgLS1iYWNrZ3JvdW5kLWFjdGl2YXRlZDogIzI1MjE0ZjtcclxuICAtLWNvbG9yOiAjMjUyMTRmO1xyXG4gIC0tY29sb3ItYWN0aXZhdGVkZWQ6I0ZFRTE3OCA7XHJcbiAgZm9udC1zaXplOiAyMHB4O1xyXG4gIGZvbnQtd2VpZ2h0OiA5MDAgIWltcG9ydGFudDtcclxufVxyXG5cclxuIl19 */";
+module.exports = ".overlay {\n  position: fixed;\n  width: 100vh;\n  height: 100vw;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: rgba(0, 0, 0, 0.5) !important;\n  z-index: 99;\n  cursor: pointer;\n}\n\n.container {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  align-content: space-between;\n  height: 50vh;\n  position: fixed;\n  bottom: 0px;\n  left: 0;\n  z-index: 100;\n  background-color: #25214f;\n  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);\n  padding-top: 20px;\n  width: 100vw;\n  border-top-left-radius: 10%;\n  border-top-right-radius: 10%;\n}\n\n.title {\n  font-size: 20px;\n  color: white;\n  font-weight: 700;\n  margin-bottom: 20px;\n}\n\n.table {\n  font-size: 13px;\n  text-align: left;\n  max-width: 700px;\n  background-color: #25214f;\n  color: white;\n  margin: 20px 0;\n  margin: auto;\n}\n\n.table td, .table th {\n  padding: 10px 0;\n  padding-left: 10px;\n}\n\nion-button {\n  --background: #fff\n  --background-activated: #25214f;\n  --color: #25214f;\n  --color-activateded:#FEE178 ;\n  font-size: 20px;\n  font-weight: 900 !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFkZC1mdW5kLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZUFBQTtFQUNBLFlBQUE7RUFDQSxhQUFBO0VBQ0EsTUFBQTtFQUNBLE9BQUE7RUFDQSxRQUFBO0VBQ0EsU0FBQTtFQUNBLCtDQUFBO0VBQ0EsV0FBQTtFQUNBLGVBQUE7QUFDRjs7QUFDQTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtFQUNBLHVCQUFBO0VBQ0EsbUJBQUE7RUFDQSw0QkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0VBQ0EsV0FBQTtFQUNBLE9BQUE7RUFDQSxZQUFBO0VBQ0EseUJBQUE7RUFDQSx5Q0FBQTtFQUNBLGlCQUFBO0VBQ0EsWUFBQTtFQUNBLDJCQUFBO0VBQ0EsNEJBQUE7QUFFRjs7QUFBQTtFQUNFLGVBQUE7RUFDQSxZQUFBO0VBQ0EsZ0JBQUE7RUFDQSxtQkFBQTtBQUdGOztBQUNBO0VBQ0UsZUFBQTtFQUNBLGdCQUFBO0VBQ0EsZ0JBQUE7RUFDQSx5QkFBQTtFQUNBLFlBQUE7RUFDQSxjQUFBO0VBQ0EsWUFBQTtBQUVGOztBQURFO0VBQ0UsZUFBQTtFQUNBLGtCQUFBO0FBR0o7O0FBRUE7RUFDRTtpQ0FBQTtFQUVBLGdCQUFBO0VBQ0EsNEJBQUE7RUFDQSxlQUFBO0VBQ0EsMkJBQUE7QUFDRiIsImZpbGUiOiJhZGQtZnVuZC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5vdmVybGF5IHtcclxuICBwb3NpdGlvbjogZml4ZWQ7XHJcbiAgd2lkdGg6IDEwMHZoO1xyXG4gIGhlaWdodDogMTAwdnc7XHJcbiAgdG9wOiAwO1xyXG4gIGxlZnQ6IDA7XHJcbiAgcmlnaHQ6IDA7XHJcbiAgYm90dG9tOiAwO1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwwLDAsMC41KSAhaW1wb3J0YW50O1xyXG4gIHotaW5kZXg6IDk5O1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG4uY29udGFpbmVyIHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICBhbGlnbi1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xyXG4gIGhlaWdodDogNTB2aDtcclxuICBwb3NpdGlvbjogZml4ZWQ7XHJcbiAgYm90dG9tOiAwcHg7XHJcbiAgbGVmdDogMDtcclxuICB6LWluZGV4OiAxMDA7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogIzI1MjE0ZjtcclxuICBib3gtc2hhZG93OiAwIDNweCAxMHB4IHJnYigwIDAgMCAvIDAuMik7XHJcbiAgcGFkZGluZy10b3A6IDIwcHg7XHJcbiAgd2lkdGg6IDEwMHZ3O1xyXG4gIGJvcmRlci10b3AtbGVmdC1yYWRpdXM6IDEwJTtcclxuICBib3JkZXItdG9wLXJpZ2h0LXJhZGl1czogMTAlO1xyXG59XHJcbi50aXRsZSB7XHJcbiAgZm9udC1zaXplOiAyMHB4O1xyXG4gIGNvbG9yOiB3aGl0ZTtcclxuICBmb250LXdlaWdodDogNzAwO1xyXG4gIG1hcmdpbi1ib3R0b206IDIwcHg7XHJcbn1cclxuXHJcblxyXG4udGFibGUge1xyXG4gIGZvbnQtc2l6ZTogMTNweDtcclxuICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG4gIG1heC13aWR0aDogNzAwcHg7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogIzI1MjE0ZjtcclxuICBjb2xvcjogd2hpdGU7XHJcbiAgbWFyZ2luOiAyMHB4IDA7XHJcbiAgbWFyZ2luOiBhdXRvO1xyXG4gIHRkLCB0aCB7XHJcbiAgICBwYWRkaW5nOiAxMHB4IDA7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDEwcHg7XHJcbiAgfVxyXG59XHJcblxyXG5cclxuaW9uLWJ1dHRvbiB7XHJcbiAgLS1iYWNrZ3JvdW5kOiAjZmZmXHJcbiAgLS1iYWNrZ3JvdW5kLWFjdGl2YXRlZDogIzI1MjE0ZjtcclxuICAtLWNvbG9yOiAjMjUyMTRmO1xyXG4gIC0tY29sb3ItYWN0aXZhdGVkZWQ6I0ZFRTE3OCA7XHJcbiAgZm9udC1zaXplOiAyMHB4O1xyXG4gIGZvbnQtd2VpZ2h0OiA5MDAgIWltcG9ydGFudDtcclxufVxyXG5cclxuIl19 */";
 
 /***/ }),
 
@@ -10413,6 +11246,17 @@ module.exports = "ion-content {\n  font-family: Mulish !important;\n}\n\n.row {\
 
 "use strict";
 module.exports = "ion-content {\n  font-family: Mulish !important;\n}\n\n.row {\n  display: flex;\n  flex-direction: column;\n  align-content: flex-start;\n  padding-bottom: 1rem;\n  border-radius: 5px;\n}\n\n.btn {\n  --background: #25214f;\n  --color: #fff;\n  text-transform: capitalize;\n  height: 3.5rem;\n  font-weight: 300;\n  font-size: 1.2rem;\n  --background-activated: #25214f;\n}\n\n.btn2 {\n  --background: #d9ac0b;\n  --color: #25214f;\n  color: #25214f;\n  text-transform: capitalize;\n  height: 3.5rem;\n  font-weight: 300;\n  font-size: 1.2rem;\n  --background-activated: #d9ac0b;\n}\n\ninput {\n  height: 15px;\n  width: 100%;\n  border: 0.8000000119px solid #ced4da;\n  border-radius: 5px;\n  background-color: #d5d4d4;\n  padding: 0px 25px;\n}\n\n.active {\n  width: 100%;\n  --border-radius: none;\n  --background: #25214f;\n  --color: #fff;\n  --color-activated: #fff;\n  --background-activated: #d9ac0b;\n}\n\n.form-inline > * {\n  margin: 0 1.5rem 1.5rem 0;\n}\n\n.input {\n  height: 3.2rem;\n  background: #e8e8e8;\n  border: 1px solid #b6b6b6;\n  box-sizing: border-box;\n  border-radius: 8px;\n}\n\nlabel {\n  color: #676767 !important;\n  text-align: left;\n}\n\nion-button {\n  --border-radius: 15px;\n}\n\n.icon-container {\n  border-radius: 10%;\n  background-color: #25214f;\n  padding: 10px;\n}\n\nion-button {\n  --background: #d9ac0b;\n  --color: #25214f;\n  --background-activated: #25214f;\n  --color-activated: #fff;\n  --background-hover: #25214f;\n  --color-hover: #fff;\n}\n\nion-toggle {\n  --height: 15px;\n  --background-checked: #25214f;\n}\n\n.inner-icon {\n  color: #d9ac0b;\n}\n\nspan {\n  font-family: Mulish !important;\n  display: flex !important;\n  align-self: center !important;\n}\n\nion-content {\n  font-family: Mulish !important;\n}\n\n.items {\n  padding-left: 20px;\n  font-size: 20px;\n  width: 100%;\n}\n\nion-popover {\n  --width: 22.5rem;\n}\n\n.userImg {\n  border-radius: 50% !important;\n  overflow: hidden;\n  width: 50px !important;\n  height: 50px !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJlc2V0LXBpbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDhCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSx5QkFBQTtFQUNBLG9CQUFBO0VBR0Esa0JBQUE7QUFERjs7QUFJQTtFQUNFLHFCQUFBO0VBQ0EsYUFBQTtFQUNBLDBCQUFBO0VBQ0EsY0FBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7RUFDQSwrQkFBQTtBQURGOztBQUdBO0VBQ0UscUJBQUE7RUFDQSxnQkFBQTtFQUNBLGNBQUE7RUFDQSwwQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0VBQ0EsK0JBQUE7QUFBRjs7QUFHQTtFQUNFLFlBQUE7RUFDQSxXQUFBO0VBQ0Esb0NBQUE7RUFDQSxrQkFBQTtFQUNBLHlCQUFBO0VBQ0EsaUJBQUE7QUFBRjs7QUFHQTtFQUNFLFdBQUE7RUFDQSxxQkFBQTtFQUNBLHFCQUFBO0VBQ0EsYUFBQTtFQUNBLHVCQUFBO0VBQ0EsK0JBQUE7QUFBRjs7QUFHQTtFQUNFLHlCQUFBO0FBQUY7O0FBR0E7RUFDRSxjQUFBO0VBQ0EsbUJBQUE7RUFDQSx5QkFBQTtFQUNBLHNCQUFBO0VBQ0Esa0JBQUE7QUFBRjs7QUFHQTtFQUNFLHlCQUFBO0VBQ0EsZ0JBQUE7QUFBRjs7QUFHQTtFQUNFLHFCQUFBO0FBQUY7O0FBRUE7RUFDRSxrQkFBQTtFQUNBLHlCQUFBO0VBQ0EsYUFBQTtBQUNGOztBQUVBO0VBQ0UscUJBQUE7RUFDQSxnQkFBQTtFQUNBLCtCQUFBO0VBQ0EsdUJBQUE7RUFDQSwyQkFBQTtFQUNBLG1CQUFBO0FBQ0Y7O0FBRUE7RUFDRSxjQUFBO0VBQ0EsNkJBQUE7QUFDRjs7QUFFQTtFQUVFLGNBQUE7QUFBRjs7QUFHQTtFQUNFLDhCQUFBO0VBRUEsd0JBQUE7RUFDQSw2QkFBQTtBQURGOztBQUdBO0VBQ0UsOEJBQUE7QUFBRjs7QUFLQTtFQUNFLGtCQUFBO0VBQ0EsZUFBQTtFQUNBLFdBQUE7QUFGRjs7QUFLQTtFQUNFLGdCQUFBO0FBRkY7O0FBSUE7RUFDRSw2QkFBQTtFQUNBLGdCQUFBO0VBQ0Esc0JBQUE7RUFDQSx1QkFBQTtBQURGIiwiZmlsZSI6InJlc2V0LXBpbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb250ZW50IHtcclxuICBmb250LWZhbWlseTogTXVsaXNoICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbi5yb3cge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICBhbGlnbi1jb250ZW50OiBmbGV4LXN0YXJ0O1xyXG4gIHBhZGRpbmctYm90dG9tOiAxcmVtO1xyXG4gIC8vIGhlaWdodDogMS4ycmVtO1xyXG4gIC8vIHdpZHRoOiAxLjJyZW07XHJcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG59XHJcblxyXG4uYnRuIHtcclxuICAtLWJhY2tncm91bmQ6ICMyNTIxNGY7XHJcbiAgLS1jb2xvcjogI2ZmZjtcclxuICB0ZXh0LXRyYW5zZm9ybTogY2FwaXRhbGl6ZTtcclxuICBoZWlnaHQ6IDMuNXJlbTtcclxuICBmb250LXdlaWdodDogMzAwO1xyXG4gIGZvbnQtc2l6ZTogMS4ycmVtO1xyXG4gIC0tYmFja2dyb3VuZC1hY3RpdmF0ZWQ6ICMyNTIxNGY7XHJcbn1cclxuLmJ0bjIge1xyXG4gIC0tYmFja2dyb3VuZDogI2Q5YWMwYjtcclxuICAtLWNvbG9yOiAjMjUyMTRmO1xyXG4gIGNvbG9yOiAjMjUyMTRmO1xyXG4gIHRleHQtdHJhbnNmb3JtOiBjYXBpdGFsaXplO1xyXG4gIGhlaWdodDogMy41cmVtO1xyXG4gIGZvbnQtd2VpZ2h0OiAzMDA7XHJcbiAgZm9udC1zaXplOiAxLjJyZW07XHJcbiAgLS1iYWNrZ3JvdW5kLWFjdGl2YXRlZDogI2Q5YWMwYjtcclxufVxyXG5cclxuaW5wdXQge1xyXG4gIGhlaWdodDogMTVweDtcclxuICB3aWR0aDogMTAwJTtcclxuICBib3JkZXI6IDAuODAwMDAwMDExOTIwOTI5cHggc29saWQgI2NlZDRkYTtcclxuICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogI2Q1ZDRkNDtcclxuICBwYWRkaW5nOiAwcHggMjVweDtcclxufVxyXG5cclxuLmFjdGl2ZSB7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgLS1ib3JkZXItcmFkaXVzOiBub25lO1xyXG4gIC0tYmFja2dyb3VuZDogIzI1MjE0ZjtcclxuICAtLWNvbG9yOiAjZmZmO1xyXG4gIC0tY29sb3ItYWN0aXZhdGVkOiAjZmZmO1xyXG4gIC0tYmFja2dyb3VuZC1hY3RpdmF0ZWQ6ICNkOWFjMGI7XHJcbn1cclxuXHJcbi5mb3JtLWlubGluZSA+ICoge1xyXG4gIG1hcmdpbjogMCAxLjVyZW0gMS41cmVtIDA7XHJcbn1cclxuXHJcbi5pbnB1dCB7XHJcbiAgaGVpZ2h0OiAzLjJyZW07XHJcbiAgYmFja2dyb3VuZDogI2U4ZThlODtcclxuICBib3JkZXI6IDFweCBzb2xpZCAjYjZiNmI2O1xyXG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgYm9yZGVyLXJhZGl1czogOHB4O1xyXG59XHJcblxyXG5sYWJlbCB7XHJcbiAgY29sb3I6ICM2NzY3NjcgIWltcG9ydGFudDtcclxuICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG59XHJcblxyXG5pb24tYnV0dG9uIHtcclxuICAtLWJvcmRlci1yYWRpdXM6IDE1cHg7XHJcbn1cclxuLmljb24tY29udGFpbmVyIHtcclxuICBib3JkZXItcmFkaXVzOiAxMCU7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogIzI1MjE0ZjtcclxuICBwYWRkaW5nOiAxMHB4O1xyXG59XHJcblxyXG5pb24tYnV0dG9uIHtcclxuICAtLWJhY2tncm91bmQ6ICNkOWFjMGI7XHJcbiAgLS1jb2xvcjogIzI1MjE0ZjtcclxuICAtLWJhY2tncm91bmQtYWN0aXZhdGVkOiAjMjUyMTRmO1xyXG4gIC0tY29sb3ItYWN0aXZhdGVkOiAjZmZmO1xyXG4gIC0tYmFja2dyb3VuZC1ob3ZlcjogIzI1MjE0ZjtcclxuICAtLWNvbG9yLWhvdmVyOiAjZmZmO1xyXG59XHJcblxyXG5pb24tdG9nZ2xlIHtcclxuICAtLWhlaWdodDogMTVweDtcclxuICAtLWJhY2tncm91bmQtY2hlY2tlZDogIzI1MjE0ZjtcclxufVxyXG5cclxuLmlubmVyLWljb24ge1xyXG4gIC8vIGZvbnQtc2l6ZTogMjBweDtcclxuICBjb2xvcjogI2Q5YWMwYjtcclxufVxyXG5cclxuc3BhbiB7XHJcbiAgZm9udC1mYW1pbHk6IE11bGlzaCAhaW1wb3J0YW50O1xyXG4gIC8vIGZvbnQtc2l6ZTogMTVweCAhaW1wb3J0YW50O1xyXG4gIGRpc3BsYXk6IGZsZXggIWltcG9ydGFudDtcclxuICBhbGlnbi1zZWxmOiBjZW50ZXIgIWltcG9ydGFudDtcclxufVxyXG5pb24tY29udGVudCB7XHJcbiAgZm9udC1mYW1pbHk6IE11bGlzaCAhaW1wb3J0YW50O1xyXG4gIC8vIC0tcGFkZGluZy1lbmQ6IDIwcHg7XHJcbiAgLy8gLS1wYWRkaW5nLXN0YXJ0OiAyMHB4O1xyXG59XHJcblxyXG4uaXRlbXMge1xyXG4gIHBhZGRpbmctbGVmdDogMjBweDtcclxuICBmb250LXNpemU6IDIwcHg7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbn1cclxuXHJcbmlvbi1wb3BvdmVyIHtcclxuICAtLXdpZHRoOiAyMi41cmVtO1xyXG59XHJcbi51c2VySW1nIHtcclxuICBib3JkZXItcmFkaXVzOiA1MCUgIWltcG9ydGFudDtcclxuICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gIHdpZHRoOiA1MHB4ICFpbXBvcnRhbnQ7XHJcbiAgaGVpZ2h0OiA1MHB4ICFpbXBvcnRhbnQ7XHJcbn1cclxuIl19 */";
+
+/***/ }),
+
+/***/ 72998:
+/*!******************************************************************************************!*\
+  !*** ./src/app/modules/account-info/upload-image/upload-image.component.scss?ngResource ***!
+  \******************************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = ".row {\n  display: flex;\n  flex-direction: column;\n  align-content: flex-start;\n  padding-bottom: 1rem;\n  border-radius: 5px;\n}\n\ninput {\n  height: 32px;\n  width: 100%;\n  border: 0.8000000119px solid #ced4da;\n  border-radius: 5px;\n  background-color: #d5d4d4;\n  padding: 25px;\n  outline: none;\n}\n\nlabel {\n  color: #676767;\n}\n\nion-content {\n  font-family: Mulish !important;\n  --padding-end: 20px;\n  --padding-start: 20px;\n}\n\n.btn {\n  --background: #25214f;\n  --color: #fff;\n  text-transform: capitalize;\n  height: 3.5rem;\n  font-weight: 300;\n  font-size: 1.2rem;\n  --background-activated: #25214f;\n}\n\n.form-inline [fullWidth] {\n  flex: 1;\n}\n\n.form-inline > * {\n  margin: 0 1.5rem 1.5rem 0;\n}\n\n.input {\n  height: 3.2rem;\n  background: #e8e8e8;\n  border: 1px solid #b6b6b6;\n  box-sizing: border-box;\n  border-radius: 8px;\n}\n\nlabel {\n  font-weight: 300;\n  font-size: 14px;\n  line-height: 20px;\n  text-align: left;\n  padding-bottom: 5px;\n  color: #676767;\n}\n\n.title {\n  color: #25214f;\n  font-weight: 800;\n}\n\n.central-image {\n  display: flex;\n  flex-direction: column;\n  align-content: center;\n}\n\n.sub-title {\n  font-style: normal;\n  font-weight: 300;\n  font-size: 14px;\n  line-height: 20px;\n  text-align: center;\n  color: #676767;\n  width: 60vw;\n}\n\nimg {\n  height: 291px;\n  width: 230px;\n}\n\n.content {\n  display: flex;\n  flex-direction: column;\n  align-content: space-between;\n}\n\n.img {\n  height: 290px;\n  width: 230px;\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.we {\n  width: 70vw;\n  margin: auto;\n  font-size: 20px;\n  font-weight: 600;\n  color: black;\n}\n\n.td {\n  font-size: 16px;\n  font-weight: 700;\n  text-align: left;\n  color: #25214f;\n  line-height: 20px;\n}\n\n.bd {\n  text-align: left;\n  font-size: 14px;\n  line-height: 20px;\n  color: #837f7f;\n}\n\n.bdp {\n  text-align: left;\n  font-size: 14px;\n  line-height: 20px;\n  color: #25214f;\n  margin-top: 10px;\n  font-weight: 600;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInVwbG9hZC1pbWFnZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtFQUNBLHlCQUFBO0VBQ0Esb0JBQUE7RUFHQSxrQkFBQTtBQURGOztBQUlBO0VBQ0UsWUFBQTtFQUNBLFdBQUE7RUFDQSxvQ0FBQTtFQUNBLGtCQUFBO0VBQ0EseUJBQUE7RUFDQSxhQUFBO0VBQ0EsYUFBQTtBQURGOztBQUlBO0VBQ0UsY0FBQTtBQURGOztBQUlBO0VBQ0UsOEJBQUE7RUFDQSxtQkFBQTtFQUNBLHFCQUFBO0FBREY7O0FBR0E7RUFDRSxxQkFBQTtFQUNBLGFBQUE7RUFDQSwwQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0VBQ0EsK0JBQUE7QUFBRjs7QUFHQTtFQUNFLE9BQUE7QUFBRjs7QUFHQTtFQUNFLHlCQUFBO0FBQUY7O0FBR0E7RUFDRSxjQUFBO0VBQ0EsbUJBQUE7RUFDQSx5QkFBQTtFQUNBLHNCQUFBO0VBQ0Esa0JBQUE7QUFBRjs7QUFHQTtFQUNFLGdCQUFBO0VBQ0EsZUFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxtQkFBQTtFQUNBLGNBQUE7QUFBRjs7QUFFQTtFQUNFLGNBQUE7RUFDQSxnQkFBQTtBQUNGOztBQUVBO0VBQ0UsYUFBQTtFQUNBLHNCQUFBO0VBQ0EscUJBQUE7QUFDRjs7QUFFQTtFQUNFLGtCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSxrQkFBQTtFQUNBLGNBQUE7RUFDQSxXQUFBO0FBQ0Y7O0FBRUE7RUFDRSxhQUFBO0VBQ0EsWUFBQTtBQUNGOztBQUNBO0VBQ0UsYUFBQTtFQUNBLHNCQUFBO0VBQ0EsNEJBQUE7QUFFRjs7QUFDQTtFQUNFLGFBQUE7RUFDQSxZQUFBO0VBQ0EsY0FBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7QUFFRjs7QUFBQTtFQUNFLFdBQUE7RUFDQSxZQUFBO0VBQ0EsZUFBQTtFQUNBLGdCQUFBO0VBQ0EsWUFBQTtBQUdGOztBQURBO0VBQ0UsZUFBQTtFQUNBLGdCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxjQUFBO0VBQ0EsaUJBQUE7QUFJRjs7QUFGQTtFQUNFLGdCQUFBO0VBQ0EsZUFBQTtFQUNBLGlCQUFBO0VBQ0EsY0FBQTtBQUtGOztBQUhBO0VBQ0UsZ0JBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSxjQUFBO0VBQ0EsZ0JBQUE7RUFDQSxnQkFBQTtBQU1GIiwiZmlsZSI6InVwbG9hZC1pbWFnZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5yb3cge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICBhbGlnbi1jb250ZW50OiBmbGV4LXN0YXJ0O1xyXG4gIHBhZGRpbmctYm90dG9tOiAxcmVtO1xyXG4gIC8vIGhlaWdodDogMS4ycmVtO1xyXG4gIC8vIHdpZHRoOiAxLjJyZW07XHJcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG59XHJcblxyXG5pbnB1dCB7XHJcbiAgaGVpZ2h0OiAzMnB4O1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGJvcmRlcjogMC44MDAwMDAwMTE5MjA5MjlweCBzb2xpZCAjY2VkNGRhO1xyXG4gIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZDVkNGQ0O1xyXG4gIHBhZGRpbmc6IDI1cHg7XHJcbiAgb3V0bGluZTogbm9uZTtcclxufVxyXG5cclxubGFiZWwge1xyXG4gIGNvbG9yOiAjNjc2NzY3O1xyXG59XHJcblxyXG5pb24tY29udGVudCB7XHJcbiAgZm9udC1mYW1pbHk6IE11bGlzaCAhaW1wb3J0YW50O1xyXG4gIC0tcGFkZGluZy1lbmQ6IDIwcHg7XHJcbiAgLS1wYWRkaW5nLXN0YXJ0OiAyMHB4O1xyXG59XHJcbi5idG4ge1xyXG4gIC0tYmFja2dyb3VuZDogIzI1MjE0ZjtcclxuICAtLWNvbG9yOiAjZmZmO1xyXG4gIHRleHQtdHJhbnNmb3JtOiBjYXBpdGFsaXplO1xyXG4gIGhlaWdodDogMy41cmVtO1xyXG4gIGZvbnQtd2VpZ2h0OiAzMDA7XHJcbiAgZm9udC1zaXplOiAxLjJyZW07XHJcbiAgLS1iYWNrZ3JvdW5kLWFjdGl2YXRlZDogIzI1MjE0ZjtcclxufVxyXG5cclxuLmZvcm0taW5saW5lIFtmdWxsV2lkdGhdIHtcclxuICBmbGV4OiAxO1xyXG59XHJcblxyXG4uZm9ybS1pbmxpbmUgPiAqIHtcclxuICBtYXJnaW46IDAgMS41cmVtIDEuNXJlbSAwO1xyXG59XHJcblxyXG4uaW5wdXQge1xyXG4gIGhlaWdodDogMy4ycmVtO1xyXG4gIGJhY2tncm91bmQ6ICNlOGU4ZTg7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgI2I2YjZiNjtcclxuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gIGJvcmRlci1yYWRpdXM6IDhweDtcclxufVxyXG5cclxubGFiZWwge1xyXG4gIGZvbnQtd2VpZ2h0OiAzMDA7XHJcbiAgZm9udC1zaXplOiAxNHB4O1xyXG4gIGxpbmUtaGVpZ2h0OiAyMHB4O1xyXG4gIHRleHQtYWxpZ246IGxlZnQ7XHJcbiAgcGFkZGluZy1ib3R0b206IDVweDtcclxuICBjb2xvcjogIzY3Njc2NztcclxufVxyXG4udGl0bGUge1xyXG4gIGNvbG9yOiAjMjUyMTRmO1xyXG4gIGZvbnQtd2VpZ2h0OiA4MDA7XHJcbn1cclxuXHJcbi5jZW50cmFsLWltYWdlIHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgYWxpZ24tY29udGVudDogY2VudGVyO1xyXG59XHJcblxyXG4uc3ViLXRpdGxlIHtcclxuICBmb250LXN0eWxlOiBub3JtYWw7XHJcbiAgZm9udC13ZWlnaHQ6IDMwMDtcclxuICBmb250LXNpemU6IDE0cHg7XHJcbiAgbGluZS1oZWlnaHQ6IDIwcHg7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIGNvbG9yOiAjNjc2NzY3O1xyXG4gIHdpZHRoOiA2MHZ3O1xyXG59XHJcblxyXG5pbWcge1xyXG4gIGhlaWdodDogMjkxcHg7XHJcbiAgd2lkdGg6IDIzMHB4O1xyXG59XHJcbi5jb250ZW50IHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgYWxpZ24tY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxufVxyXG5cclxuLmltZyB7XHJcbiAgaGVpZ2h0OiAyOTBweDtcclxuICB3aWR0aDogMjMwcHg7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XHJcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xyXG59XHJcbi53ZSB7XHJcbiAgd2lkdGg6IDcwdnc7XHJcbiAgbWFyZ2luOiBhdXRvO1xyXG4gIGZvbnQtc2l6ZTogMjBweDtcclxuICBmb250LXdlaWdodDogNjAwO1xyXG4gIGNvbG9yOiBibGFjaztcclxufVxyXG4udGQge1xyXG4gIGZvbnQtc2l6ZTogMTZweDtcclxuICBmb250LXdlaWdodDogNzAwO1xyXG4gIHRleHQtYWxpZ246IGxlZnQ7XHJcbiAgY29sb3I6ICMyNTIxNGY7XHJcbiAgbGluZS1oZWlnaHQ6IDIwcHg7XHJcbn1cclxuLmJkIHtcclxuICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG4gIGZvbnQtc2l6ZTogMTRweDtcclxuICBsaW5lLWhlaWdodDogMjBweDtcclxuICBjb2xvcjogIzgzN2Y3ZjtcclxufVxyXG4uYmRwIHtcclxuICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG4gIGZvbnQtc2l6ZTogMTRweDtcclxuICBsaW5lLWhlaWdodDogMjBweDtcclxuICBjb2xvcjogIzI1MjE0ZjtcclxuICBtYXJnaW4tdG9wOiAxMHB4O1xyXG4gIGZvbnQtd2VpZ2h0OiA2MDA7XHJcbn1cclxuIl19 */";
 
 /***/ }),
 
@@ -10742,7 +11586,7 @@ module.exports = ".all {\n  width: 85vw;\n  margin: auto;\n}\n\n.head {\n  displ
 /***/ ((module) => {
 
 "use strict";
-module.exports = "ion-toggle {\n  --height: 15px;\n  --background-checked: #25214f;\n}\n\n.inner-icon {\n  color: white;\n}\n\n.icon-container {\n  border-radius: 10%;\n  background-color: #25214f;\n  padding: 5px;\n}\n\n.row-one {\n  border: 0.8000000119px solid #ced4da;\n  border-radius: 5px;\n  margin-top: 50px;\n  padding: 10px;\n}\n\n.header {\n  color: #25214f;\n  font-size: 16px;\n  font-weight: 800;\n}\n\nsection {\n  text-align: center;\n}\n\n.phoneField {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n\n.dialField {\n  width: 30% !important;\n}\n\n.numField {\n  width: 65% !important;\n}\n\n.row {\n  display: flex;\n  flex-direction: column;\n  align-content: flex-start;\n  padding-bottom: 1rem;\n  border-radius: 5px;\n}\n\ninput {\n  height: 15px;\n  width: 100%;\n  border: 0.8000000119px solid #ced4da;\n  border-radius: 5px;\n  background-color: #d5d4d4;\n  padding: 0px 25px;\n}\n\nion-content {\n  font-family: Mulish !important;\n}\n\n.form-inline [fullWidth] {\n  flex: 1;\n}\n\nion-button {\n  --background: #d9ac0b;\n  --color: #fff !important;\n  color: #25214f;\n}\n\n.active {\n  width: 100%;\n  --border-radius: none;\n  --background: #25214f;\n  --color: white;\n  --color-activated: white;\n  color: white;\n}\n\n.form-inline > * {\n  margin: 0 1.5rem 1.5rem 0;\n}\n\n.input {\n  height: 3.2rem;\n  background: #e8e8e8;\n  border: 1px solid #b6b6b6;\n  box-sizing: border-box;\n  border-radius: 8px;\n}\n\nlabel {\n  color: #676767 !important;\n  text-align: left;\n}\n\n.title {\n  color: #25214f;\n  font-weight: 800;\n}\n\n.central-image {\n  display: flex;\n  flex-direction: column;\n  align-content: center;\n  margin-top: 30px;\n}\n\n.sub-title {\n  color: #676767;\n  text-align: center;\n}\n\n.link {\n  color: #25214f;\n  font-weight: 500;\n  text-decoration: none;\n}\n\n.img {\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.btn2 {\n  --background: #d9ac0b;\n  --color: #25214f;\n  color: #25214f;\n  text-transform: capitalize;\n  height: 3.5rem;\n  font-weight: 300;\n  font-size: 1.2rem;\n  --background-activated: #d9ac0b;\n}\n\n.content {\n  font-family: Mulish !important;\n  display: flex;\n  flex-direction: column;\n  align-content: space-between;\n}\n\n.img {\n  height: 290px;\n  width: 230px;\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.title {\n  color: #25214f;\n  font-weight: 800;\n}\n\n.central-image {\n  display: flex;\n  flex-direction: column;\n  align-content: center;\n}\n\n.sub-title {\n  color: #676767;\n}\n\nimg {\n  height: 291px;\n  width: 230px;\n}\n\n.tit {\n  font-family: Mulish !important;\n  font-style: normal;\n  font-weight: 800;\n  font-size: 24px;\n  line-height: 30px;\n  text-align: center;\n  color: #25214f;\n}\n\n.subTit {\n  font-family: Mulish !important;\n  font-style: normal;\n  font-weight: 400;\n  font-size: 15px;\n  line-height: 23px;\n  text-align: center;\n  color: #676767;\n  width: 300px;\n  margin-top: 20px;\n  margin-bottom: 40px;\n  margin: auto;\n}\n\n.btn {\n  --background: #25214f;\n  --color: #fff;\n  text-transform: capitalize;\n  height: 3.5rem;\n  font-weight: 300;\n  font-size: 1.2rem;\n  --background-activated: #25214f;\n  color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRyYW5zZmVyLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGNBQUE7RUFDQSw2QkFBQTtBQUNGOztBQUVBO0VBRUUsWUFBQTtBQUFGOztBQUdBO0VBQ0Usa0JBQUE7RUFDQSx5QkFBQTtFQUNBLFlBQUE7QUFBRjs7QUFHQTtFQUNFLG9DQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGFBQUE7QUFBRjs7QUFJQTtFQUNFLGNBQUE7RUFDQSxlQUFBO0VBQ0EsZ0JBQUE7QUFERjs7QUFJQTtFQUNFLGtCQUFBO0FBREY7O0FBSUE7RUFDRSxhQUFBO0VBQ0EsbUJBQUE7RUFDQSw4QkFBQTtBQURGOztBQUlBO0VBQ0UscUJBQUE7QUFERjs7QUFJQTtFQUNFLHFCQUFBO0FBREY7O0FBSUE7RUFDRSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSx5QkFBQTtFQUNBLG9CQUFBO0VBR0Esa0JBQUE7QUFIRjs7QUFNQTtFQUNFLFlBQUE7RUFDQSxXQUFBO0VBQ0Esb0NBQUE7RUFDQSxrQkFBQTtFQUNBLHlCQUFBO0VBQ0EsaUJBQUE7QUFIRjs7QUFZQTtFQUNFLDhCQUFBO0FBVEY7O0FBWUE7RUFDRSxPQUFBO0FBVEY7O0FBWUE7RUFDRSxxQkFBQTtFQUNBLHdCQUFBO0VBQ0EsY0FBQTtBQVRGOztBQVlBO0VBQ0UsV0FBQTtFQUNBLHFCQUFBO0VBQ0EscUJBQUE7RUFDQSxjQUFBO0VBQ0Esd0JBQUE7RUFDQSxZQUFBO0FBVEY7O0FBWUE7RUFDRSx5QkFBQTtBQVRGOztBQVlBO0VBQ0UsY0FBQTtFQUNBLG1CQUFBO0VBQ0EseUJBQUE7RUFDQSxzQkFBQTtFQUNBLGtCQUFBO0FBVEY7O0FBWUE7RUFDRSx5QkFBQTtFQUNBLGdCQUFBO0FBVEY7O0FBV0E7RUFDRSxjQUFBO0VBQ0EsZ0JBQUE7QUFSRjs7QUFXQTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtFQUNBLHFCQUFBO0VBQ0EsZ0JBQUE7QUFSRjs7QUFXQTtFQUNFLGNBQUE7RUFDQSxrQkFBQTtBQVJGOztBQVdBO0VBQ0UsY0FBQTtFQUNBLGdCQUFBO0VBQ0EscUJBQUE7QUFSRjs7QUFXQTtFQUNFLGNBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0FBUkY7O0FBVUE7RUFDRSxxQkFBQTtFQUNBLGdCQUFBO0VBQ0EsY0FBQTtFQUNBLDBCQUFBO0VBQ0EsY0FBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7RUFDQSwrQkFBQTtBQVBGOztBQWNBO0VBQ0UsOEJBQUE7RUFDQSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSw0QkFBQTtBQVhGOztBQWNBO0VBQ0UsYUFBQTtFQUNBLFlBQUE7RUFDQSxjQUFBO0VBQ0EsaUJBQUE7RUFDQSxrQkFBQTtBQVhGOztBQWNBO0VBQ0UsY0FBQTtFQUNBLGdCQUFBO0FBWEY7O0FBY0E7RUFDRSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSxxQkFBQTtBQVhGOztBQWNBO0VBQ0UsY0FBQTtBQVhGOztBQWNBO0VBQ0UsYUFBQTtFQUNBLFlBQUE7QUFYRjs7QUFhQTtFQUNFLDhCQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGVBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0VBQ0EsY0FBQTtBQVZGOztBQVlBO0VBQ0UsOEJBQUE7RUFDQSxrQkFBQTtFQUNBLGdCQUFBO0VBQ0EsZUFBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxjQUFBO0VBQ0EsWUFBQTtFQUNBLGdCQUFBO0VBQ0EsbUJBQUE7RUFDQSxZQUFBO0FBVEY7O0FBV0E7RUFDRSxxQkFBQTtFQUNBLGFBQUE7RUFDQSwwQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0VBQ0EsK0JBQUE7RUFDQSxZQUFBO0FBUkYiLCJmaWxlIjoidHJhbnNmZXIucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLXRvZ2dsZSB7XHJcbiAgLS1oZWlnaHQ6IDE1cHg7XHJcbiAgLS1iYWNrZ3JvdW5kLWNoZWNrZWQ6ICMyNTIxNGY7XHJcbn1cclxuXHJcbi5pbm5lci1pY29uIHtcclxuICAvLyBmb250LXNpemU6IDIwcHg7XHJcbiAgY29sb3I6IHdoaXRlO1xyXG59XHJcblxyXG4uaWNvbi1jb250YWluZXIge1xyXG4gIGJvcmRlci1yYWRpdXM6IDEwJTtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMjUyMTRmO1xyXG4gIHBhZGRpbmc6IDVweDtcclxufVxyXG5cclxuLnJvdy1vbmUge1xyXG4gIGJvcmRlcjogMC44MDAwMDAwMTE5MjA5MjlweCBzb2xpZCAjY2VkNGRhO1xyXG4gIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICBtYXJnaW4tdG9wOiA1MHB4O1xyXG4gIHBhZGRpbmc6IDEwcHg7XHJcbiAgLy8gYmFja2dyb3VuZC1jb2xvcjogI2Q1ZDRkNDtcclxufVxyXG5cclxuLmhlYWRlciB7XHJcbiAgY29sb3I6ICMyNTIxNGY7XHJcbiAgZm9udC1zaXplOiAxNnB4O1xyXG4gIGZvbnQtd2VpZ2h0OiA4MDA7XHJcbn1cclxuXHJcbnNlY3Rpb24ge1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuLnBob25lRmllbGQge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XHJcbn1cclxuXHJcbi5kaWFsRmllbGQge1xyXG4gIHdpZHRoOiAzMCUgIWltcG9ydGFudDtcclxufVxyXG5cclxuLm51bUZpZWxkIHtcclxuICB3aWR0aDogNjUlICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbi5yb3cge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICBhbGlnbi1jb250ZW50OiBmbGV4LXN0YXJ0O1xyXG4gIHBhZGRpbmctYm90dG9tOiAxcmVtO1xyXG4gIC8vIGhlaWdodDogMS4ycmVtO1xyXG4gIC8vIHdpZHRoOiAxLjJyZW07XHJcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG59XHJcblxyXG5pbnB1dCB7XHJcbiAgaGVpZ2h0OiAxNXB4O1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGJvcmRlcjogMC44MDAwMDAwMTE5MjA5MjlweCBzb2xpZCAjY2VkNGRhO1xyXG4gIGJvcmRlci1yYWRpdXM6IDVweDtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZDVkNGQ0O1xyXG4gIHBhZGRpbmc6IDBweCAyNXB4O1xyXG59XHJcblxyXG4vLyBsYWJlbCB7XHJcbi8vICAgY29sb3I6ICMwMDA7XHJcbi8vICAgdGV4dC1hbGlnbjogbGVmdDtcclxuLy8gICBmb250LXdlaWdodDogODAwO1xyXG4vLyB9XHJcblxyXG5pb24tY29udGVudCB7XHJcbiAgZm9udC1mYW1pbHk6IE11bGlzaCAhaW1wb3J0YW50O1xyXG59XHJcblxyXG4uZm9ybS1pbmxpbmUgW2Z1bGxXaWR0aF0ge1xyXG4gIGZsZXg6IDE7XHJcbn1cclxuXHJcbmlvbi1idXR0b24ge1xyXG4gIC0tYmFja2dyb3VuZDogI2Q5YWMwYjtcclxuICAtLWNvbG9yOiAjZmZmICFpbXBvcnRhbnQ7XHJcbiAgY29sb3I6ICMyNTIxNGY7XHJcbn1cclxuXHJcbi5hY3RpdmUge1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIC0tYm9yZGVyLXJhZGl1czogbm9uZTtcclxuICAtLWJhY2tncm91bmQ6ICMyNTIxNGY7XHJcbiAgLS1jb2xvcjogd2hpdGU7XHJcbiAgLS1jb2xvci1hY3RpdmF0ZWQ6IHdoaXRlO1xyXG4gIGNvbG9yOiB3aGl0ZTtcclxufVxyXG5cclxuLmZvcm0taW5saW5lID4gKiB7XHJcbiAgbWFyZ2luOiAwIDEuNXJlbSAxLjVyZW0gMDtcclxufVxyXG5cclxuLmlucHV0IHtcclxuICBoZWlnaHQ6IDMuMnJlbTtcclxuICBiYWNrZ3JvdW5kOiAjZThlOGU4O1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkICNiNmI2YjY7XHJcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcclxuICBib3JkZXItcmFkaXVzOiA4cHg7XHJcbn1cclxuXHJcbmxhYmVsIHtcclxuICBjb2xvcjogIzY3Njc2NyAhaW1wb3J0YW50O1xyXG4gIHRleHQtYWxpZ246IGxlZnQ7XHJcbn1cclxuLnRpdGxlIHtcclxuICBjb2xvcjogIzI1MjE0ZjtcclxuICBmb250LXdlaWdodDogODAwO1xyXG59XHJcblxyXG4uY2VudHJhbC1pbWFnZSB7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG4gIGFsaWduLWNvbnRlbnQ6IGNlbnRlcjtcclxuICBtYXJnaW4tdG9wOiAzMHB4O1xyXG59XHJcblxyXG4uc3ViLXRpdGxlIHtcclxuICBjb2xvcjogIzY3Njc2NztcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuXHJcbi5saW5rIHtcclxuICBjb2xvcjogIzI1MjE0ZjtcclxuICBmb250LXdlaWdodDogNTAwO1xyXG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcclxufVxyXG5cclxuLmltZyB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XHJcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xyXG59XHJcbi5idG4yIHtcclxuICAtLWJhY2tncm91bmQ6ICNkOWFjMGI7XHJcbiAgLS1jb2xvcjogIzI1MjE0ZjtcclxuICBjb2xvcjogIzI1MjE0ZjtcclxuICB0ZXh0LXRyYW5zZm9ybTogY2FwaXRhbGl6ZTtcclxuICBoZWlnaHQ6IDMuNXJlbTtcclxuICBmb250LXdlaWdodDogMzAwO1xyXG4gIGZvbnQtc2l6ZTogMS4ycmVtO1xyXG4gIC0tYmFja2dyb3VuZC1hY3RpdmF0ZWQ6ICNkOWFjMGI7XHJcbn1cclxuXHJcbi8vIGlvbi1idXR0b24ge1xyXG4vLyAgIC0tYm9yZGVyLXJhZGl1czogMTVweDtcclxuLy8gfVxyXG5cclxuLmNvbnRlbnQge1xyXG4gIGZvbnQtZmFtaWx5OiBNdWxpc2ggIWltcG9ydGFudDtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgYWxpZ24tY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxufVxyXG5cclxuLmltZyB7XHJcbiAgaGVpZ2h0OiAyOTBweDtcclxuICB3aWR0aDogMjMwcHg7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XHJcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xyXG59XHJcblxyXG4udGl0bGUge1xyXG4gIGNvbG9yOiAjMjUyMTRmO1xyXG4gIGZvbnQtd2VpZ2h0OiA4MDA7XHJcbn1cclxuXHJcbi5jZW50cmFsLWltYWdlIHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgYWxpZ24tY29udGVudDogY2VudGVyO1xyXG59XHJcblxyXG4uc3ViLXRpdGxlIHtcclxuICBjb2xvcjogIzY3Njc2NztcclxufVxyXG5cclxuaW1nIHtcclxuICBoZWlnaHQ6IDI5MXB4O1xyXG4gIHdpZHRoOiAyMzBweDtcclxufVxyXG4udGl0IHtcclxuICBmb250LWZhbWlseTogTXVsaXNoICFpbXBvcnRhbnQ7XHJcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xyXG4gIGZvbnQtd2VpZ2h0OiA4MDA7XHJcbiAgZm9udC1zaXplOiAyNHB4O1xyXG4gIGxpbmUtaGVpZ2h0OiAzMHB4O1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICBjb2xvcjogIzI1MjE0ZjtcclxufVxyXG4uc3ViVGl0IHtcclxuICBmb250LWZhbWlseTogTXVsaXNoICFpbXBvcnRhbnQ7XHJcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xyXG4gIGZvbnQtd2VpZ2h0OiA0MDA7XHJcbiAgZm9udC1zaXplOiAxNXB4O1xyXG4gIGxpbmUtaGVpZ2h0OiAyM3B4O1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICBjb2xvcjogIzY3Njc2NztcclxuICB3aWR0aDogMzAwcHg7XHJcbiAgbWFyZ2luLXRvcDogMjBweDtcclxuICBtYXJnaW4tYm90dG9tOiA0MHB4O1xyXG4gIG1hcmdpbjogYXV0bztcclxufVxyXG4uYnRuIHtcclxuICAtLWJhY2tncm91bmQ6ICMyNTIxNGY7XHJcbiAgLS1jb2xvcjogI2ZmZjtcclxuICB0ZXh0LXRyYW5zZm9ybTogY2FwaXRhbGl6ZTtcclxuICBoZWlnaHQ6IDMuNXJlbTtcclxuICBmb250LXdlaWdodDogMzAwO1xyXG4gIGZvbnQtc2l6ZTogMS4ycmVtO1xyXG4gIC0tYmFja2dyb3VuZC1hY3RpdmF0ZWQ6ICMyNTIxNGY7XHJcbiAgY29sb3I6IHdoaXRlO1xyXG59XHJcbiJdfQ== */";
+module.exports = "ion-toggle {\n  --height: 15px;\n  --background-checked: #25214f;\n}\n\n.inner-icon {\n  color: white;\n}\n\n.icon-container {\n  border-radius: 10%;\n  background-color: #25214f;\n  padding: 5px;\n}\n\n.row-one {\n  border: 0.8000000119px solid #ced4da;\n  border-radius: 5px;\n  margin-top: 50px;\n  padding: 10px;\n}\n\n.header {\n  color: #25214f;\n  font-size: 16px;\n  font-weight: 800;\n}\n\nsection {\n  text-align: center;\n}\n\n.phoneField {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n\n.dialField {\n  width: 30% !important;\n}\n\n.numField {\n  width: 65% !important;\n}\n\n.row {\n  display: flex;\n  flex-direction: column;\n  align-content: flex-start;\n  padding-bottom: 1rem;\n  border-radius: 5px;\n}\n\ninput {\n  height: 15px;\n  width: 100%;\n  border: 0.8000000119px solid #ced4da;\n  border-radius: 5px;\n  background-color: #d5d4d4;\n  padding: 0px 25px;\n}\n\nion-content {\n  font-family: Mulish !important;\n}\n\n.form-inline [fullWidth] {\n  flex: 1;\n}\n\nion-button {\n  --background: #d9ac0b;\n  --color: #fff !important;\n  color: #25214f;\n}\n\n.active {\n  width: 100%;\n  --border-radius: none;\n  --background: #25214f;\n  --color: white;\n  --color-activated: white;\n  color: white;\n}\n\n.form-inline > * {\n  margin: 0 1.5rem 1.5rem 0;\n}\n\n.input {\n  height: 3.2rem;\n  background: #e8e8e8;\n  border: 1px solid #b6b6b6;\n  box-sizing: border-box;\n  border-radius: 8px;\n}\n\nlabel {\n  color: #676767 !important;\n  text-align: left;\n}\n\n.title {\n  color: #25214f;\n  font-weight: 800;\n}\n\n.central-image {\n  display: flex;\n  flex-direction: column;\n  align-content: center;\n  margin-top: 30px;\n}\n\n.sub-title {\n  color: #676767;\n  text-align: center;\n}\n\n.link {\n  color: #25214f;\n  font-weight: 500;\n  text-decoration: none;\n}\n\n.img {\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.btn2 {\n  --background: #d9ac0b;\n  --color: #25214f;\n  color: #25214f;\n  text-transform: capitalize;\n  height: 3.5rem;\n  font-weight: 300;\n  font-size: 1.2rem;\n  --background-activated: #d9ac0b;\n}\n\n.content {\n  font-family: Mulish !important;\n  display: flex;\n  flex-direction: column;\n  align-content: space-between;\n}\n\n.img {\n  height: 290px;\n  width: 230px;\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n}\n\n.title {\n  color: #25214f;\n  font-weight: 800;\n}\n\n.central-image {\n  display: flex;\n  flex-direction: column;\n  align-content: center;\n}\n\n.sub-title {\n  color: #676767;\n}\n\nimg {\n  height: 291px;\n  width: 230px;\n}\n\n.tit {\n  font-family: Mulish !important;\n  font-style: normal;\n  font-weight: 800;\n  font-size: 24px;\n  line-height: 30px;\n  text-align: center;\n  color: #25214f;\n}\n\n.subTit {\n  font-family: Mulish !important;\n  font-style: normal;\n  font-weight: 400;\n  font-size: 15px;\n  line-height: 23px;\n  text-align: center;\n  color: #676767;\n  width: 300px;\n  margin-top: 20px;\n  margin-bottom: 40px;\n  margin: auto;\n}\n\n.btn {\n  --background: #25214f;\n  --color: #fff;\n  text-transform: capitalize;\n  height: 3.5rem;\n  font-weight: 300;\n  font-size: 1.2rem;\n  --background-activated: #25214f;\n  color: white;\n}\n\n.bankNames {\n  display: flex;\n  flex-direction: column;\n}\n\n.bank {\n  padding: 10px 20px;\n  display: flex;\n  justify-content: space-between;\n  flex-direction: row;\n  border-bottom: 1px solid #aaa7a7;\n}\n\n.mas {\n  z-index: 1000;\n  position: fixed;\n  /* Sit on top of the page content */\n  width: 100vw;\n  /* Full width (cover the whole page) */\n  height: 100vh;\n  /* Full height (cover the whole page) */\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRyYW5zZmVyLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGNBQUE7RUFDQSw2QkFBQTtBQUNGOztBQUVBO0VBRUUsWUFBQTtBQUFGOztBQUdBO0VBQ0Usa0JBQUE7RUFDQSx5QkFBQTtFQUNBLFlBQUE7QUFBRjs7QUFHQTtFQUNFLG9DQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGFBQUE7QUFBRjs7QUFJQTtFQUNFLGNBQUE7RUFDQSxlQUFBO0VBQ0EsZ0JBQUE7QUFERjs7QUFJQTtFQUNFLGtCQUFBO0FBREY7O0FBSUE7RUFDRSxhQUFBO0VBQ0EsbUJBQUE7RUFDQSw4QkFBQTtBQURGOztBQUlBO0VBQ0UscUJBQUE7QUFERjs7QUFJQTtFQUNFLHFCQUFBO0FBREY7O0FBSUE7RUFDRSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSx5QkFBQTtFQUNBLG9CQUFBO0VBR0Esa0JBQUE7QUFIRjs7QUFNQTtFQUNFLFlBQUE7RUFDQSxXQUFBO0VBQ0Esb0NBQUE7RUFDQSxrQkFBQTtFQUNBLHlCQUFBO0VBQ0EsaUJBQUE7QUFIRjs7QUFZQTtFQUNFLDhCQUFBO0FBVEY7O0FBWUE7RUFDRSxPQUFBO0FBVEY7O0FBWUE7RUFDRSxxQkFBQTtFQUNBLHdCQUFBO0VBQ0EsY0FBQTtBQVRGOztBQVlBO0VBQ0UsV0FBQTtFQUNBLHFCQUFBO0VBQ0EscUJBQUE7RUFDQSxjQUFBO0VBQ0Esd0JBQUE7RUFDQSxZQUFBO0FBVEY7O0FBWUE7RUFDRSx5QkFBQTtBQVRGOztBQVlBO0VBQ0UsY0FBQTtFQUNBLG1CQUFBO0VBQ0EseUJBQUE7RUFDQSxzQkFBQTtFQUNBLGtCQUFBO0FBVEY7O0FBWUE7RUFDRSx5QkFBQTtFQUNBLGdCQUFBO0FBVEY7O0FBV0E7RUFDRSxjQUFBO0VBQ0EsZ0JBQUE7QUFSRjs7QUFXQTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtFQUNBLHFCQUFBO0VBQ0EsZ0JBQUE7QUFSRjs7QUFXQTtFQUNFLGNBQUE7RUFDQSxrQkFBQTtBQVJGOztBQVdBO0VBQ0UsY0FBQTtFQUNBLGdCQUFBO0VBQ0EscUJBQUE7QUFSRjs7QUFXQTtFQUNFLGNBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0FBUkY7O0FBVUE7RUFDRSxxQkFBQTtFQUNBLGdCQUFBO0VBQ0EsY0FBQTtFQUNBLDBCQUFBO0VBQ0EsY0FBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7RUFDQSwrQkFBQTtBQVBGOztBQWNBO0VBQ0UsOEJBQUE7RUFDQSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSw0QkFBQTtBQVhGOztBQWNBO0VBQ0UsYUFBQTtFQUNBLFlBQUE7RUFDQSxjQUFBO0VBQ0EsaUJBQUE7RUFDQSxrQkFBQTtBQVhGOztBQWNBO0VBQ0UsY0FBQTtFQUNBLGdCQUFBO0FBWEY7O0FBY0E7RUFDRSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSxxQkFBQTtBQVhGOztBQWNBO0VBQ0UsY0FBQTtBQVhGOztBQWNBO0VBQ0UsYUFBQTtFQUNBLFlBQUE7QUFYRjs7QUFhQTtFQUNFLDhCQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGVBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0VBQ0EsY0FBQTtBQVZGOztBQVlBO0VBQ0UsOEJBQUE7RUFDQSxrQkFBQTtFQUNBLGdCQUFBO0VBQ0EsZUFBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxjQUFBO0VBQ0EsWUFBQTtFQUNBLGdCQUFBO0VBQ0EsbUJBQUE7RUFDQSxZQUFBO0FBVEY7O0FBV0E7RUFDRSxxQkFBQTtFQUNBLGFBQUE7RUFDQSwwQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0VBQ0EsK0JBQUE7RUFDQSxZQUFBO0FBUkY7O0FBVUE7RUFDRSxhQUFBO0VBQ0Esc0JBQUE7QUFQRjs7QUFTQTtFQUNFLGtCQUFBO0VBQ0EsYUFBQTtFQUNBLDhCQUFBO0VBQ0EsbUJBQUE7RUFDQSxnQ0FBQTtBQU5GOztBQW1CQTtFQUNFLGFBQUE7RUFDQSxlQUFBO0VBQWlCLG1DQUFBO0VBQ2pCLFlBQUE7RUFBYyxzQ0FBQTtFQUNkLGFBQUE7RUFBZSx1Q0FBQTtFQUNmLE1BQUE7RUFDQSxPQUFBO0VBQ0EsUUFBQTtFQUNBLFNBQUE7QUFiRiIsImZpbGUiOiJ0cmFuc2Zlci5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tdG9nZ2xlIHtcclxuICAtLWhlaWdodDogMTVweDtcclxuICAtLWJhY2tncm91bmQtY2hlY2tlZDogIzI1MjE0ZjtcclxufVxyXG5cclxuLmlubmVyLWljb24ge1xyXG4gIC8vIGZvbnQtc2l6ZTogMjBweDtcclxuICBjb2xvcjogd2hpdGU7XHJcbn1cclxuXHJcbi5pY29uLWNvbnRhaW5lciB7XHJcbiAgYm9yZGVyLXJhZGl1czogMTAlO1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICMyNTIxNGY7XHJcbiAgcGFkZGluZzogNXB4O1xyXG59XHJcblxyXG4ucm93LW9uZSB7XHJcbiAgYm9yZGVyOiAwLjgwMDAwMDAxMTkyMDkyOXB4IHNvbGlkICNjZWQ0ZGE7XHJcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG4gIG1hcmdpbi10b3A6IDUwcHg7XHJcbiAgcGFkZGluZzogMTBweDtcclxuICAvLyBiYWNrZ3JvdW5kLWNvbG9yOiAjZDVkNGQ0O1xyXG59XHJcblxyXG4uaGVhZGVyIHtcclxuICBjb2xvcjogIzI1MjE0ZjtcclxuICBmb250LXNpemU6IDE2cHg7XHJcbiAgZm9udC13ZWlnaHQ6IDgwMDtcclxufVxyXG5cclxuc2VjdGlvbiB7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59XHJcblxyXG4ucGhvbmVGaWVsZCB7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjogcm93O1xyXG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxufVxyXG5cclxuLmRpYWxGaWVsZCB7XHJcbiAgd2lkdGg6IDMwJSAhaW1wb3J0YW50O1xyXG59XHJcblxyXG4ubnVtRmllbGQge1xyXG4gIHdpZHRoOiA2NSUgIWltcG9ydGFudDtcclxufVxyXG5cclxuLnJvdyB7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG4gIGFsaWduLWNvbnRlbnQ6IGZsZXgtc3RhcnQ7XHJcbiAgcGFkZGluZy1ib3R0b206IDFyZW07XHJcbiAgLy8gaGVpZ2h0OiAxLjJyZW07XHJcbiAgLy8gd2lkdGg6IDEuMnJlbTtcclxuICBib3JkZXItcmFkaXVzOiA1cHg7XHJcbn1cclxuXHJcbmlucHV0IHtcclxuICBoZWlnaHQ6IDE1cHg7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgYm9yZGVyOiAwLjgwMDAwMDAxMTkyMDkyOXB4IHNvbGlkICNjZWQ0ZGE7XHJcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICNkNWQ0ZDQ7XHJcbiAgcGFkZGluZzogMHB4IDI1cHg7XHJcbn1cclxuXHJcbi8vIGxhYmVsIHtcclxuLy8gICBjb2xvcjogIzAwMDtcclxuLy8gICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG4vLyAgIGZvbnQtd2VpZ2h0OiA4MDA7XHJcbi8vIH1cclxuXHJcbmlvbi1jb250ZW50IHtcclxuICBmb250LWZhbWlseTogTXVsaXNoICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbi5mb3JtLWlubGluZSBbZnVsbFdpZHRoXSB7XHJcbiAgZmxleDogMTtcclxufVxyXG5cclxuaW9uLWJ1dHRvbiB7XHJcbiAgLS1iYWNrZ3JvdW5kOiAjZDlhYzBiO1xyXG4gIC0tY29sb3I6ICNmZmYgIWltcG9ydGFudDtcclxuICBjb2xvcjogIzI1MjE0ZjtcclxufVxyXG5cclxuLmFjdGl2ZSB7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgLS1ib3JkZXItcmFkaXVzOiBub25lO1xyXG4gIC0tYmFja2dyb3VuZDogIzI1MjE0ZjtcclxuICAtLWNvbG9yOiB3aGl0ZTtcclxuICAtLWNvbG9yLWFjdGl2YXRlZDogd2hpdGU7XHJcbiAgY29sb3I6IHdoaXRlO1xyXG59XHJcblxyXG4uZm9ybS1pbmxpbmUgPiAqIHtcclxuICBtYXJnaW46IDAgMS41cmVtIDEuNXJlbSAwO1xyXG59XHJcblxyXG4uaW5wdXQge1xyXG4gIGhlaWdodDogMy4ycmVtO1xyXG4gIGJhY2tncm91bmQ6ICNlOGU4ZTg7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgI2I2YjZiNjtcclxuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gIGJvcmRlci1yYWRpdXM6IDhweDtcclxufVxyXG5cclxubGFiZWwge1xyXG4gIGNvbG9yOiAjNjc2NzY3ICFpbXBvcnRhbnQ7XHJcbiAgdGV4dC1hbGlnbjogbGVmdDtcclxufVxyXG4udGl0bGUge1xyXG4gIGNvbG9yOiAjMjUyMTRmO1xyXG4gIGZvbnQtd2VpZ2h0OiA4MDA7XHJcbn1cclxuXHJcbi5jZW50cmFsLWltYWdlIHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgYWxpZ24tY29udGVudDogY2VudGVyO1xyXG4gIG1hcmdpbi10b3A6IDMwcHg7XHJcbn1cclxuXHJcbi5zdWItdGl0bGUge1xyXG4gIGNvbG9yOiAjNjc2NzY3O1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuLmxpbmsge1xyXG4gIGNvbG9yOiAjMjUyMTRmO1xyXG4gIGZvbnQtd2VpZ2h0OiA1MDA7XHJcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG59XHJcblxyXG4uaW1nIHtcclxuICBkaXNwbGF5OiBibG9jaztcclxuICBtYXJnaW4tbGVmdDogYXV0bztcclxuICBtYXJnaW4tcmlnaHQ6IGF1dG87XHJcbn1cclxuLmJ0bjIge1xyXG4gIC0tYmFja2dyb3VuZDogI2Q5YWMwYjtcclxuICAtLWNvbG9yOiAjMjUyMTRmO1xyXG4gIGNvbG9yOiAjMjUyMTRmO1xyXG4gIHRleHQtdHJhbnNmb3JtOiBjYXBpdGFsaXplO1xyXG4gIGhlaWdodDogMy41cmVtO1xyXG4gIGZvbnQtd2VpZ2h0OiAzMDA7XHJcbiAgZm9udC1zaXplOiAxLjJyZW07XHJcbiAgLS1iYWNrZ3JvdW5kLWFjdGl2YXRlZDogI2Q5YWMwYjtcclxufVxyXG5cclxuLy8gaW9uLWJ1dHRvbiB7XHJcbi8vICAgLS1ib3JkZXItcmFkaXVzOiAxNXB4O1xyXG4vLyB9XHJcblxyXG4uY29udGVudCB7XHJcbiAgZm9udC1mYW1pbHk6IE11bGlzaCAhaW1wb3J0YW50O1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICBhbGlnbi1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xyXG59XHJcblxyXG4uaW1nIHtcclxuICBoZWlnaHQ6IDI5MHB4O1xyXG4gIHdpZHRoOiAyMzBweDtcclxuICBkaXNwbGF5OiBibG9jaztcclxuICBtYXJnaW4tbGVmdDogYXV0bztcclxuICBtYXJnaW4tcmlnaHQ6IGF1dG87XHJcbn1cclxuXHJcbi50aXRsZSB7XHJcbiAgY29sb3I6ICMyNTIxNGY7XHJcbiAgZm9udC13ZWlnaHQ6IDgwMDtcclxufVxyXG5cclxuLmNlbnRyYWwtaW1hZ2Uge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICBhbGlnbi1jb250ZW50OiBjZW50ZXI7XHJcbn1cclxuXHJcbi5zdWItdGl0bGUge1xyXG4gIGNvbG9yOiAjNjc2NzY3O1xyXG59XHJcblxyXG5pbWcge1xyXG4gIGhlaWdodDogMjkxcHg7XHJcbiAgd2lkdGg6IDIzMHB4O1xyXG59XHJcbi50aXQge1xyXG4gIGZvbnQtZmFtaWx5OiBNdWxpc2ggIWltcG9ydGFudDtcclxuICBmb250LXN0eWxlOiBub3JtYWw7XHJcbiAgZm9udC13ZWlnaHQ6IDgwMDtcclxuICBmb250LXNpemU6IDI0cHg7XHJcbiAgbGluZS1oZWlnaHQ6IDMwcHg7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIGNvbG9yOiAjMjUyMTRmO1xyXG59XHJcbi5zdWJUaXQge1xyXG4gIGZvbnQtZmFtaWx5OiBNdWxpc2ggIWltcG9ydGFudDtcclxuICBmb250LXN0eWxlOiBub3JtYWw7XHJcbiAgZm9udC13ZWlnaHQ6IDQwMDtcclxuICBmb250LXNpemU6IDE1cHg7XHJcbiAgbGluZS1oZWlnaHQ6IDIzcHg7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIGNvbG9yOiAjNjc2NzY3O1xyXG4gIHdpZHRoOiAzMDBweDtcclxuICBtYXJnaW4tdG9wOiAyMHB4O1xyXG4gIG1hcmdpbi1ib3R0b206IDQwcHg7XHJcbiAgbWFyZ2luOiBhdXRvO1xyXG59XHJcbi5idG4ge1xyXG4gIC0tYmFja2dyb3VuZDogIzI1MjE0ZjtcclxuICAtLWNvbG9yOiAjZmZmO1xyXG4gIHRleHQtdHJhbnNmb3JtOiBjYXBpdGFsaXplO1xyXG4gIGhlaWdodDogMy41cmVtO1xyXG4gIGZvbnQtd2VpZ2h0OiAzMDA7XHJcbiAgZm9udC1zaXplOiAxLjJyZW07XHJcbiAgLS1iYWNrZ3JvdW5kLWFjdGl2YXRlZDogIzI1MjE0ZjtcclxuICBjb2xvcjogd2hpdGU7XHJcbn1cclxuLmJhbmtOYW1lcyB7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG59XHJcbi5iYW5rIHtcclxuICBwYWRkaW5nOiAxMHB4IDIwcHg7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XHJcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcclxuICBib3JkZXItYm90dG9tOiAxcHggc29saWQgI2FhYTdhNztcclxufVxyXG4vLyAub3ZlcmxheSB7XHJcbi8vICAgei1pbmRleDogOTk5O1xyXG4vLyAgIHBvc2l0aW9uOiBmaXhlZDsgLyogU2l0IG9uIHRvcCBvZiB0aGUgcGFnZSBjb250ZW50ICovXHJcbi8vICAgd2lkdGg6IDEwMCU7IC8qIEZ1bGwgd2lkdGggKGNvdmVyIHRoZSB3aG9sZSBwYWdlKSAqL1xyXG4vLyAgIGhlaWdodDogMTAwJTsgLyogRnVsbCBoZWlnaHQgKGNvdmVyIHRoZSB3aG9sZSBwYWdlKSAqL1xyXG4vLyAgIHRvcDogMDtcclxuLy8gICBsZWZ0OiAwO1xyXG4vLyAgIHJpZ2h0OiAwO1xyXG4vLyAgIGJvdHRvbTogMDtcclxuLy8gICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuNSk7XHJcbi8vIH1cclxuLm1hcyB7XHJcbiAgei1pbmRleDogMTAwMDtcclxuICBwb3NpdGlvbjogZml4ZWQ7IC8qIFNpdCBvbiB0b3Agb2YgdGhlIHBhZ2UgY29udGVudCAqL1xyXG4gIHdpZHRoOiAxMDB2dzsgLyogRnVsbCB3aWR0aCAoY292ZXIgdGhlIHdob2xlIHBhZ2UpICovXHJcbiAgaGVpZ2h0OiAxMDB2aDsgLyogRnVsbCBoZWlnaHQgKGNvdmVyIHRoZSB3aG9sZSBwYWdlKSAqL1xyXG4gIHRvcDogMDtcclxuICBsZWZ0OiAwO1xyXG4gIHJpZ2h0OiAwO1xyXG4gIGJvdHRvbTogMDtcclxufVxyXG4iXX0= */";
 
 /***/ }),
 
@@ -10852,7 +11696,7 @@ module.exports = "<div class=\"overlay\" (click)=\"closeDraw()\" [@slideInOut]><
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<app-loader *ngIf=\"loading\"></app-loader>\n<div\n  *ngIf=\"!data || data.length === 0\"\n  style=\"background-color: #f8f8f8; border-radius: 8px\"\n>\n  <ion-card-content>\n    <span style=\"text-align: left; font-size: 13px\"\n      >No transactions today\n    </span>\n  </ion-card-content>\n</div>\n<div *ngIf=\"!loading\">\n  <div *ngFor=\"let trans of data\" (click)=\"setTrans(trans)\">\n    <div class=\"tran\" *ngIf=\"trans.transactionType !== 'Debit'\">\n      <div class=\"icon\">\n        <div class=\"img\"><img src=\"assets/icon/credict.png\" alt=\"\" /></div>\n        <div class=\"text\">\n          <div class=\"tit\">\n            {{ trans?.narration }}\n          </div>\n          <!-- <div class=\"mode\">{{ trans?.submittedByUsername }}</div> -->\n          <div class=\"mode\">\n            {{ trans.date | date }}\n          </div>\n          <div class=\"mode\" style=\"font-size: 11px\">\n            {{ trans.date | date: \"shortTime\" }}\n          </div>\n        </div>\n      </div>\n      <div class=\"amount green\">{{ trans.amount | currency: \"&#8358;\" }}</div>\n    </div>\n    <div class=\"tran\" *ngIf=\"trans.transactionType === 'Debit'\">\n      <div class=\"icon\">\n        <div class=\"img\"><img src=\"assets/icon/debit.png\" alt=\"\" /></div>\n        <div class=\"text\">\n          <div class=\"tit\">\n            {{ trans?.bankName }}\n          </div>\n          <!-- <div class=\"mode\">{{ trans?.submittedByUsername }}</div> -->\n          <div class=\"mode\">\n            {{ trans.date | date }}\n          </div>\n          <div class=\"mode\" style=\"font-size: 11px\">\n            {{ trans.date | date: \"shortTime\" }}\n          </div>\n        </div>\n      </div>\n      <div class=\"amount red\">-{{ trans.amount | currency: \"&#8358;\" }}</div>\n    </div>\n  </div>\n</div>\n<ion-content *ngIf=\"visible\">\n  <div\n    class=\"mas\"\n    style=\"\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      flex-direction: column;\n    \"\n  >\n    <div class=\"overlay\" (click)=\"setVissible()\" [@slideInOut]></div>\n    <div\n      style=\"\n        background-color: white;\n        width: 100vw;\n        height: 86vh;\n        z-index: 1000;\n        display: flex;\n        flex-direction: column;\n      \"\n      [@slideInOut]\n    >\n      <div class=\"head\">\n        <div\n          (click)=\"setVissible()\"\n          style=\"\n            color: white;\n            font-size: 30px;\n            position: absolute;\n            left: 20px;\n            top: 20px;\n          \"\n        >\n          <ion-icon name=\"close-circle-outline\"></ion-icon>\n        </div>\n        <div class=\"date\">\n          {{ details?.transferDate | date }}\n          {{ details?.transferDate | date: \"shortTime\" }}\n        </div>\n        <div class=\"card\"><ion-icon name=\"card\"></ion-icon></div>\n        <div\n          style=\"font-size: 12px; padding-top: 10px\"\n          *ngIf=\"details?.isRoyalTransfer\"\n        >\n          Royal Transfer\n        </div>\n        <div\n          style=\"font-size: 12px; padding-top: 10px\"\n          *ngIf=\"!details?.isRoyalTransfer\"\n        >\n          Others\n        </div>\n        <div class=\"date\">\n          <span *ngIf=\"transType !== 'Credit'\">-</span\n          >{{ tran?.amount | currency: \"&#8358;\" }}\n        </div>\n      </div>\n      <div class=\"bod\">\n        <table>\n          <tbody>\n            <tr>\n              <th style=\"padding: 10px\">From</th>\n              <td style=\"padding: 10px\">{{ details?.senderAcctName }}</td>\n            </tr>\n            <tr>\n              <th style=\"padding: 10px\">To</th>\n              <td style=\"padding: 10px\">{{ details?.receiverAcctName }}</td>\n            </tr>\n\n            <tr>\n              <th style=\"padding: 10px\">Account No.</th>\n              <td style=\"padding: 10px\">{{ details?.receiverAcctNo }}</td>\n            </tr>\n\n            <tr>\n              <th style=\"padding: 10px\">Bank Name</th>\n              <td style=\"padding: 10px\">{{ details?.bankName }}</td>\n            </tr>\n\n            <tr>\n              <th style=\"padding: 10px\">Naration</th>\n              <td style=\"padding: 10px\">\n                {{ details?.transferDescription }}\n              </td>\n            </tr>\n\n            <tr>\n              <th style=\"padding: 10px\">Transaction Type</th>\n              <td style=\"padding: 10px\">{{ transType }}</td>\n            </tr>\n            <!-- <tr>\n              <th style=\"padding: 10px\">Refrence</th>\n              <td style=\"padding: 10px\">{{ tran?.paymentDetailData.receiptNumber }}</td>\n            </tr> -->\n            <!-- <tr>\n              <th style=\"padding: 10px\">Receipt Number</th>\n              <td style=\"padding: 10px\">\n                {{ tran?.paymentDetailData?.receiptNumber }}\n              </td>\n            </tr> -->\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n</ion-content>\n";
+module.exports = "<app-loader *ngIf=\"loading\"></app-loader>\n<div\n  *ngIf=\"!data || data.length === 0\"\n  style=\"background-color: #f8f8f8; border-radius: 8px\"\n>\n  <ion-card-content>\n    <span style=\"text-align: left; font-size: 13px\"\n      >No transactions today\n    </span>\n  </ion-card-content>\n</div>\n<div *ngIf=\"!loading\">\n  <div *ngFor=\"let trans of data\" (click)=\"setTrans(trans)\">\n    <div class=\"tran\" *ngIf=\"trans.transactionType !== 'Debit'\">\n      <div class=\"icon\">\n        <div class=\"img\"><img src=\"assets/icon/credict.png\" alt=\"\" /></div>\n        <div class=\"text\">\n          <div class=\"tit\">\n            {{ trans?.narration }}\n          </div>\n          <!-- <div class=\"mode\">{{ trans?.submittedByUsername }}</div> -->\n          <div class=\"mode\">\n            {{ trans.date | date }}\n          </div>\n          <div class=\"mode\" style=\"font-size: 11px\">\n            {{ trans.date | date: \"shortTime\" }}\n          </div>\n        </div>\n      </div>\n      <div class=\"amount green\">{{ trans.amount | currency: \"&#8358;\" }}</div>\n    </div>\n    <div class=\"tran\" *ngIf=\"trans.transactionType === 'Debit'\">\n      <div class=\"icon\">\n        <div class=\"img\"><img src=\"assets/icon/debit.png\" alt=\"\" /></div>\n        <div class=\"text\">\n          <div class=\"tit\">\n            {{ trans?.bankName }}\n          </div>\n          <!-- <div class=\"mode\">{{ trans?.submittedByUsername }}</div> -->\n          <div class=\"mode\">\n            {{ trans.date | date }}\n          </div>\n          <div class=\"mode\" style=\"font-size: 11px\">\n            {{ trans.date | date: \"shortTime\" }}\n          </div>\n        </div>\n      </div>\n      <div class=\"amount red\">-{{ trans.amount | currency: \"&#8358;\" }}</div>\n    </div>\n  </div>\n</div>\n<ion-content *ngIf=\"visible\">\n  <div\n    class=\"mas\"\n    style=\"\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      flex-direction: column;\n    \"\n  >\n    <div class=\"overlay\" (click)=\"setVissible()\" [@slideInOut]></div>\n    <div\n      style=\"\n        background-color: white;\n        width: 100vw;\n        height: 86vh;\n        z-index: 1000;\n        display: flex;\n        flex-direction: column;\n      \"\n      id=\"recipt\"\n      #recipt\n      [@slideInOut]\n    >\n      <div class=\"head\">\n        <div\n          (click)=\"setVissible()\"\n          style=\"\n            color: white;\n            font-size: 30px;\n            position: absolute;\n            left: 20px;\n            top: 20px;\n          \"\n        >\n          <ion-icon name=\"close-circle-outline\"></ion-icon>\n        </div>\n        <div\n          (click)=\"getReciept()\"\n          style=\"\n            color: white;\n            font-size: 30px;\n            position: absolute;\n            left: 60px;\n            top: 20px;\n          \"\n          *ngIf=\"transType !== 'Credit'\"\n        >\n          <ion-icon name=\"cloud-download-outline\"></ion-icon>\n        </div>\n        <div class=\"date\">\n          {{ details?.transferDate | date }}\n          {{ details?.transferDate | date: \"shortTime\" }}\n        </div>\n        <div class=\"card\"><ion-icon name=\"card\"></ion-icon></div>\n        <div\n          style=\"font-size: 12px; padding-top: 10px\"\n          *ngIf=\"details?.isRoyalTransfer\"\n        >\n          Royal Transfer\n        </div>\n        <div\n          style=\"font-size: 12px; padding-top: 10px\"\n          *ngIf=\"!details?.isRoyalTransfer\"\n        >\n          Others\n        </div>\n        <div class=\"date\">\n          <span *ngIf=\"transType !== 'Credit'\">-</span\n          >{{ tran?.amount | currency: \"&#8358;\" }}\n        </div>\n      </div>\n      <div class=\"bod\">\n        <table>\n          <tbody>\n            <tr>\n              <th style=\"padding: 10px\">From</th>\n              <td style=\"padding: 10px\">{{ details?.senderAcctName }}</td>\n            </tr>\n            <tr>\n              <th style=\"padding: 10px\">To</th>\n              <td style=\"padding: 10px\">{{ details?.receiverAcctName }}</td>\n            </tr>\n\n            <tr>\n              <th style=\"padding: 10px\">Account No.</th>\n              <td style=\"padding: 10px\">{{ details?.receiverAcctNo }}</td>\n            </tr>\n\n            <tr>\n              <th style=\"padding: 10px\">Bank Name</th>\n              <td style=\"padding: 10px\">{{ details?.bankName }}</td>\n            </tr>\n\n            <tr>\n              <th style=\"padding: 10px\">Naration</th>\n              <td style=\"padding: 10px\">\n                {{ details?.transferDescription }}\n              </td>\n            </tr>\n\n            <tr>\n              <th style=\"padding: 10px\">Transaction Type</th>\n              <td style=\"padding: 10px\">{{ transType }}</td>\n            </tr>\n            <!-- <tr>\n              <th style=\"padding: 10px\">Refrence</th>\n              <td style=\"padding: 10px\">{{ tran?.paymentDetailData.receiptNumber }}</td>\n            </tr> -->\n            <!-- <tr>\n              <th style=\"padding: 10px\">Receipt Number</th>\n              <td style=\"padding: 10px\">\n                {{ tran?.paymentDetailData?.receiptNumber }}\n              </td>\n            </tr> -->\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n</ion-content>\n";
 
 /***/ }),
 
@@ -10896,7 +11740,7 @@ module.exports = "<ion-content class=\"content\">\n  <section class=\"row\">\n  
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <section style=\"margin-top: 30px; background-color: #25214f\">\r\n    <app-add-fund (exit)=\"close()\" *ngIf=\"show\"></app-add-fund>\r\n    <app-loader *ngIf=\"loading\"></app-loader>\r\n\r\n    <section>\r\n      <div\r\n        style=\"\r\n          padding: 20px;\r\n          width: 100%;\r\n          display: flex;\r\n          flex-direction: column;\r\n          align-items: center;\r\n          justify-content: center;\r\n          background-color: #25214f;\r\n          color: #fff;\r\n          padding: 20px 30px;\r\n        \"\r\n      >\r\n        <div style=\"border-radius: 50%; margin: 10px 0\">\r\n          <ion-img\r\n            [src]=\"photo\"\r\n            style=\"width: 70px; height: 70px; margin: auto; border-radius: 50%\"\r\n            class=\"userImg\"\r\n          ></ion-img>\r\n        </div>\r\n        <span>{{ user.firstName }} {{ user.lastName }}</span>\r\n\r\n        <ion-button id=\"details\" size=\"small\" (click)=\"show = true\"\r\n          >Show Details</ion-button\r\n        >\r\n      </div>\r\n    </section>\r\n\r\n    <section\r\n      style=\"\r\n        padding: 0 10px;\r\n        border-top-right-radius: 50px;\r\n        border-top-left-radius: 50px;\r\n        background-color: white;\r\n        padding-top: 60px;\r\n      \"\r\n    >\r\n      <div class=\"inBoth\" [routerLink]=\"['change-password']\">\r\n        <ion-icon name=\"lock-closed-sharp\" class=\"inner-icon\"></ion-icon>\r\n        <span class=\"items\">Change Password</span>\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <div class=\"inBoth\" [routerLink]=\"['limit']\">\r\n        <ion-icon name=\"wallet-sharp\" class=\"inner-icon\"></ion-icon>\r\n        <span class=\"items\">Increase Limit</span>\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <div class=\"inBoth\" [routerLink]=\"['request-card']\">\r\n        <ion-icon name=\"card\" class=\"inner-icon\"></ion-icon>\r\n        <span class=\"items\">Request For Card</span>\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <div class=\"inBoth\" [routerLink]=\"['reset-pin']\">\r\n        <ion-icon name=\"settings-sharp\" class=\"inner-icon\"></ion-icon>\r\n        <span class=\"items\">Reset/Change PIN</span>\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <div\r\n        class=\"inBoth\"\r\n        (click)=\"checkDoc()\"\r\n        *ngIf=\"user.accountType !== 'Royal Basic' && uploaded !== 'true'\"\r\n      >\r\n        <ion-icon name=\"document-attach\" class=\"inner-icon\"></ion-icon>\r\n        <span class=\"items\">Uploaded Documents</span>\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n    </section>\r\n  </section>\r\n  <div class=\"mod\" *ngIf=\"view\" (click)=\"viewDoc()\">\r\n    <div class=\"doc\">\r\n      <ion-icon\r\n        (click)=\"viewDoc()\"\r\n        style=\"\r\n          font-size: 30px;\r\n          position: absolute;\r\n          top: 10px;\r\n          right: 10px;\r\n          color: #25214f;\r\n        \"\r\n        name=\"close-circle-outline\"\r\n      ></ion-icon>\r\n      <div class=\"head\">Uploaded Documents</div>\r\n      <div class=\"document\" *ngFor=\"let doc of documents\">\r\n        <ion-icon name=\"document-attach\" class=\"icn\"></ion-icon>\r\n        <div style=\"display: flex; flex-direction: column; text-align: right\">\r\n          <div class=\"name\">{{doc.name}}</div>\r\n          <div class=\"name\" style=\"font-size: 14px\">{{doc.fileName}}</div>\r\n        </div>\r\n      </div>\r\n      <!-- <div class=\"document\">\r\n        <ion-icon name=\"document-attach\" class=\"icn\"></ion-icon>\r\n        <div class=\"name\">{{documentName}}</div>\r\n      </div> -->\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <section style=\"margin-top: 30px; background-color: #25214f\">\r\n    <app-add-fund (exit)=\"close()\" *ngIf=\"show\"></app-add-fund>\r\n    <app-loader *ngIf=\"loading\"></app-loader>\r\n\r\n    <section>\r\n      <div\r\n        style=\"\r\n          padding: 20px;\r\n          width: 100%;\r\n          display: flex;\r\n          flex-direction: column;\r\n          align-items: center;\r\n          justify-content: center;\r\n          background-color: #25214f;\r\n          color: #fff;\r\n          padding: 20px 30px;\r\n        \"\r\n      >\r\n        <div style=\"border-radius: 50%; margin: 10px 0\">\r\n          <ion-img\r\n            [src]=\"photo\"\r\n            style=\"width: 70px; height: 70px; margin: auto; border-radius: 50%\"\r\n            class=\"userImg\"\r\n          ></ion-img>\r\n        </div>\r\n        <span>{{ user.firstName }} {{ user.lastName }}</span>\r\n\r\n        <ion-button id=\"details\" size=\"small\" (click)=\"show = true\"\r\n          >Show Details</ion-button\r\n        >\r\n      </div>\r\n    </section>\r\n\r\n    <section\r\n      style=\"\r\n        padding: 0 10px;\r\n        border-top-right-radius: 50px;\r\n        border-top-left-radius: 50px;\r\n        background-color: white;\r\n        padding-top: 60px;\r\n      \"\r\n    >\r\n      <div class=\"inBoth\" [routerLink]=\"['change-password']\">\r\n        <ion-icon name=\"lock-closed-sharp\" class=\"inner-icon\"></ion-icon>\r\n        <span class=\"items\">Change Password</span>\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <div class=\"inBoth\" [routerLink]=\"['limit']\">\r\n        <ion-icon name=\"wallet-sharp\" class=\"inner-icon\"></ion-icon>\r\n        <span class=\"items\">Increase Limit</span>\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <div class=\"inBoth\" [routerLink]=\"['request-card']\">\r\n        <ion-icon name=\"card\" class=\"inner-icon\"></ion-icon>\r\n        <span class=\"items\">Request For Card</span>\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <div class=\"inBoth\" [routerLink]=\"['reset-pin']\">\r\n        <ion-icon name=\"settings-sharp\" class=\"inner-icon\"></ion-icon>\r\n        <span class=\"items\">Reset/Change PIN</span>\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <div class=\"inBoth\" [routerLink]=\"['profile-image']\">\r\n        <ion-icon name=\"camera\" class=\"inner-icon\"></ion-icon>\r\n        <span class=\"items\">Change Profile Image</span>\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <div\r\n        class=\"inBoth\"\r\n        (click)=\"checkDoc()\"\r\n        *ngIf=\"user.accountType !== 'Royal Basic' && uploaded !== 'true'\"\r\n      >\r\n        <ion-icon name=\"document-attach\" class=\"inner-icon\"></ion-icon>\r\n        <span class=\"items\">Uploaded Documents</span>\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n    </section>\r\n  </section>\r\n  <div class=\"mod\" *ngIf=\"view\" (click)=\"viewDoc()\">\r\n    <div class=\"doc\">\r\n      <ion-icon\r\n        (click)=\"viewDoc()\"\r\n        style=\"\r\n          font-size: 30px;\r\n          position: absolute;\r\n          top: 10px;\r\n          right: 10px;\r\n          color: #25214f;\r\n        \"\r\n        name=\"close-circle-outline\"\r\n      ></ion-icon>\r\n      <div class=\"head\">Uploaded Documents</div>\r\n      <div class=\"document\" *ngFor=\"let doc of documents\">\r\n        <ion-icon name=\"document-attach\" class=\"icn\"></ion-icon>\r\n        <div style=\"display: flex; flex-direction: column; text-align: right\">\r\n          <div class=\"name\">{{doc.name}}</div>\r\n          <div class=\"name\" style=\"font-size: 14px\">{{doc.fileName}}</div>\r\n        </div>\r\n      </div>\r\n      <!-- <div class=\"document\">\r\n        <ion-icon name=\"document-attach\" class=\"icn\"></ion-icon>\r\n        <div class=\"name\">{{documentName}}</div>\r\n      </div> -->\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -10944,6 +11788,17 @@ module.exports = "<ion-content>\r\n  <section style=\"background-color: #25214f\
 
 /***/ }),
 
+/***/ 43762:
+/*!******************************************************************************************!*\
+  !*** ./src/app/modules/account-info/upload-image/upload-image.component.html?ngResource ***!
+  \******************************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = "<ion-content>\n  <app-loader *ngIf=\"loading\"></app-loader>\n  <div\n    style=\"\n      display: flex;\n      justify-content: space-between;\n      flex-direction: column;\n      height: 90vh;\n      padding-bottom: 40px;\n    \"\n    *ngIf=\"page === 'take'\"\n  >\n    <div\n      style=\"\n        height: 100vh;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n      \"\n    >\n      <section\n        style=\"\n          text-align: center;\n          margin-top: -80px;\n          display: flex;\n          flex-direction: column;\n          align-content: space-between;\n        \"\n      >\n        <div\n          style=\"\n            background: #f8f8f8;\n            border-radius: 8px;\n            padding: 25px;\n            margin-top: 20px;\n          \"\n        >\n          <div class=\"td\">Upload your picture</div>\n          <div class=\"bd\">Show us that wonderful face of yours</div>\n          <div class=\"bdp\">\n            Picture must be taken in a well lit and clear background\n          </div>\n        </div>\n      </section>\n    </div>\n    <section class=\"central-image row\">\n      <div class=\"form-group\">\n        <ion-button\n          class=\"btn\"\n          expand=\"block\"\n          style=\"margin-top: 1rem\"\n          (click)=\"takePhoto()\"\n          routerLinkActive=\"router-link-active\"\n        >\n          Take a Picture\n        </ion-button>\n      </div>\n    </section>\n  </div>\n\n  <div\n    style=\"\n      display: flex;\n      justify-content: space-between;\n      flex-direction: column;\n      height: 90vh;\n      padding-bottom: 40px;\n    \"\n    *ngIf=\"page === 'crop'\"\n  >\n    <div>\n      <!-- <section\n        style=\"\n          text-align: center;\n          margin-top: -80px;\n          display: flex;\n          flex-direction: column;\n          align-content: space-between;\n        \"\n      >\n        <section class=\"we\" style=\"margin-top: 4rem\">\n          All done {{ user.firstName }}\n        </section>\n        <section style=\"font-size: 14px; text-align: center; margin-top: 10px\">\n          Your information all checked out.\n        </section>\n        <div\n          style=\"\n            background: #f8f8f8;\n            border-radius: 8px;\n            padding: 25px;\n            margin-top: 20px;\n          \"\n        >\n          <div class=\"td\">Upload your picture</div>\n          <div class=\"bd\">Show us that beautiful</div>\n          <div class=\"bdp\">\n            Picture must be taken in a well lit and clear background\n          </div>\n        </div>\n      </section> -->\n    </div>\n    <div class=\"card-body\">\n      <div class=\"row\" style=\"margin-top: 15px\">\n        <div class=\"text-center col-md-8\" style=\"text-align: center\">\n          <h3>Crop Image</h3>\n          <h5>Make sure your face is visible</h5>\n          <image-cropper\n            [imageChangedEvent]=\"imageChangedEvent\"\n            [imageBase64]=\"baseImage\"\n            [maintainAspectRatio]=\"true\"\n            [aspectRatio]=\"4 / 4\"\n            [resizeToWidth]=\"256\"\n            format=\"png\"\n            (imageCropped)=\"imageCropped($event)\"\n            (imageLoaded)=\"imageLoaded()\"\n            (cropperReady)=\"cropperReady()\"\n            (loadImageFailed)=\"loadImageFailed()\"\n          ></image-cropper>\n        </div>\n      </div>\n    </div>\n    <section class=\"central-image row\">\n      <div class=\"form-group\">\n        <ion-button\n          (click)=\"crop()\"\n          class=\"btn\"\n          expand=\"block\"\n          style=\"margin-top: 0\"\n        >\n          Done\n        </ion-button>\n      </div>\n    </section>\n  </div>\n\n  <div\n    style=\"\n      display: flex;\n      justify-content: space-between;\n      flex-direction: column;\n      height: 90vh;\n      padding-bottom: 40px;\n    \"\n    *ngIf=\"page === 'success'\"\n  >\n    <div>\n      <section\n        class=\"central-image\"\n        style=\"\n          width: 291px;\n          margin: auto;\n          display: flex;\n          flex-direction: column;\n        \"\n      >\n        <ion-img\n          style=\"width: 140px; height: 140px; margin-top: 100px\"\n          class=\"img\"\n          src=\"assets/icon/good.png\"\n        ></ion-img>\n      </section>\n\n      <section\n        style=\"\n          text-align: center;\n          margin-top: -20px;\n          display: flex;\n          flex-direction: column;\n          align-content: space-between;\n        \"\n      >\n        <section class=\"we\" style=\"margin-top: 4rem\">\n          Image captured successfully\n        </section>\n      </section>\n    </div>\n    <section class=\"central-image row\">\n      <div class=\"form-group\">\n        <ion-button\n          class=\"btn\"\n          expand=\"block\"\n          style=\"margin-top: 1rem\"\n          (click)=\"next()\"\n          routerLinkActive=\"router-link-active\"\n        >\n          Continue\n        </ion-button>\n      </div>\n    </section>\n  </div>\n\n  <div\n    style=\"\n      display: flex;\n      justify-content: space-between;\n      flex-direction: column;\n      height: 100vh;\n      padding-bottom: 40px;\n    \"\n    *ngIf=\"page === 'fail'\"\n  >\n    <div>\n      <section\n        class=\"central-image\"\n        style=\"\n          width: 291px;\n          margin: auto;\n          display: flex;\n          flex-direction: column;\n        \"\n      >\n        <ion-img\n          style=\"width: 140px; height: 140px; margin-top: 100px\"\n          class=\"img\"\n          src=\"assets/icon/bad.png\"\n        ></ion-img>\n      </section>\n\n      <section\n        style=\"\n          text-align: center;\n          margin-top: -20px;\n          display: flex;\n          flex-direction: column;\n          align-content: space-between;\n        \"\n      >\n        <section class=\"we\" style=\"margin-top: 4rem\">\n          There was an error with your captured image\n        </section>\n      </section>\n    </div>\n    <section class=\"central-image row\">\n      <div class=\"form-group\">\n        <ion-button\n          class=\"btn\"\n          expand=\"block\"\n          style=\"margin-top: 1rem\"\n          (click)=\"retake()\"\n          routerLinkActive=\"router-link-active\"\n        >\n          Retake\n        </ion-button>\n      </div>\n    </section>\n  </div>\n</ion-content>\n";
+
+/***/ }),
+
 /***/ 53845:
 /*!*******************************************************************!*\
   !*** ./src/app/modules/airtime/airtime.component.html?ngResource ***!
@@ -10951,7 +11806,7 @@ module.exports = "<ion-content>\r\n  <section style=\"background-color: #25214f\
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <section style=\"background-color: #25214f\">\r\n    <div style=\"height: 70px\"></div>\r\n    <app-loader *ngIf=\"loading\"></app-loader>\r\n    <div\r\n      style=\"\r\n        padding: 20px;\r\n        width: 100%;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #25214f;\r\n        color: #fff;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          background-color: #d9ac0b;\r\n          padding: 20px 30px;\r\n          text-align: left;\r\n          width: 100%;\r\n          max-width: 400px;\r\n          margin: auto;\r\n          border-radius: 10px;\r\n          color: #25214f;\r\n        \"\r\n      >\r\n        <div style=\"font-size: 15px\">\r\n          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}\r\n        </div>\r\n        <div\r\n          style=\"\r\n            border: 1px solid #25214f;\r\n            padding: 10px;\r\n            width: 100%;\r\n            display: flex;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <div>Balance:</div>\r\n          <div style=\"font-size: 20px\">\r\n            {{ user?.accountNos[0]?.accountBalance | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <app-pin\r\n      (close)=\"close()\"\r\n      (loading)=\"load()\"\r\n      (done)=\"finish()\"\r\n      *ngIf=\"show\"\r\n    ></app-pin>\r\n    <section\r\n      *ngIf=\"transType === 0\"\r\n      style=\"\r\n        margin-top: 10px;\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 0 20px;\r\n        padding-top: 50px;\r\n      \"\r\n    >\r\n      <div\r\n        *ngIf=\"!loading\"\r\n        style=\"\r\n          font-size: 20px;\r\n          text-align: left;\r\n          color: #25214f;\r\n          margin-left: 10px;\r\n          font-weight: 700;\r\n        \"\r\n      >\r\n        Data\r\n      </div>\r\n      <div\r\n        *ngFor=\"let data of subs\"\r\n        style=\"\r\n          font-family: Mulish !important;\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n          align-items: center;\r\n          cursor: pointer;\r\n          margin: 1rem 0.5rem;\r\n          color: white;\r\n          background-color: #25214f;\r\n          border-radius: 10px;\r\n          padding: 10px;\r\n        \"\r\n        (click)=\"transactionType(2, data.code)\"\r\n      >\r\n        <!-- <div class=\"icon-container\"> -->\r\n        <!-- <ion-icon name=\"send\" class=\"inner-icon\"></ion-icon> -->\r\n        <ion-icon class=\"inner-icon\" name=\"sync-outline\"></ion-icon>\r\n        <!-- </div> -->\r\n        <span\r\n          style=\"\r\n            margin: auto;\r\n            text-align: left;\r\n            padding-left: 20px;\r\n            font-size: 16px;\r\n            width: 100%;\r\n          \"\r\n          >{{ data.name }}</span\r\n        >\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n      <div\r\n        *ngIf=\"!loading\"\r\n        style=\"\r\n          font-size: 20px;\r\n          text-align: left;\r\n          color: #25214f;\r\n          margin-left: 10px;\r\n          font-weight: 700;\r\n        \"\r\n      >\r\n        Airtime\r\n      </div>\r\n\r\n      <div\r\n        *ngFor=\"let data of vars\"\r\n        style=\"\r\n          font-family: Mulish !important;\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n          align-items: center;\r\n          cursor: pointer;\r\n          margin: 1rem 0.5rem;\r\n          color: white;\r\n          background-color: #25214f;\r\n          border-radius: 10px;\r\n          padding: 10px;\r\n        \"\r\n        (click)=\"transactionType(2, data.code)\"\r\n      >\r\n        <ion-icon name=\"call-outline\" class=\"inner-icon\"></ion-icon>\r\n        <span\r\n          style=\"\r\n            margin: auto;\r\n            text-align: left;\r\n            padding-left: 20px;\r\n            font-size: 16px;\r\n            width: 100%;\r\n          \"\r\n          >{{ data.name }}</span\r\n        >\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n    </section>\r\n    <section\r\n      *ngIf=\"transType === 2\"\r\n      style=\"\r\n        margin-top: 10px;\r\n        background-color: white;\r\n        border-top-left-radius: 10%;\r\n        border-top-right-radius: 10%;\r\n        padding: 0 20px;\r\n        padding-top: 50px;\r\n      \"\r\n    >\r\n      <div\r\n        class=\"row\"\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n          margin-top: 30px;\r\n        \"\r\n      >\r\n        <ion-button\r\n          (click)=\"toggleRequest(true)\"\r\n          [ngClass]=\"{ active: selectedBtn === true }\"\r\n          style=\"width: 100%; --border-radius: none\"\r\n        >\r\n          New\r\n        </ion-button>\r\n\r\n        <ion-button\r\n          (click)=\"toggleRequest(false)\"\r\n          size=\"medium\"\r\n          [ngClass]=\"{ active: selectedBtn1 === true }\"\r\n          style=\"width: 100%; --border-radius: none\"\r\n        >\r\n          Beneficiary\r\n        </ion-button>\r\n      </div>\r\n\r\n      <div *ngIf=\"newReq\">\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Select Account</label>\r\n          <select [(ngModel)]=\"accNum\" name=\"account\" id=\"\" class=\"input\">\r\n            <option\r\n              *ngFor=\"let data of user.accountNos\"\r\n              [value]=\"data.accountNo\"\r\n            >\r\n              {{ data.accountNo }} ({{\r\n                data.accountBalance | currency: \"&#8358;\"\r\n              }})\r\n            </option>\r\n          </select>\r\n        </div>\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Phone Number</label>\r\n          <input\r\n            [(ngModel)]=\"phoneNumber\"\r\n            type=\"text\"\r\n            name=\"mobile\"\r\n            class=\"input\"\r\n            placeholder=\"08079172267\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Select Bundle</label>\r\n          <select [(ngModel)]=\"productCode\" name=\"bank\" id=\"\" class=\"input\">\r\n            <!-- <option value=\"\">-- Select Type --</option> -->\r\n            <option *ngFor=\"let data of products\" [value]=\"data.productCode\">\r\n              {{ data.productTitle }} ({{\r\n                data.productPrice | currency: \"&#8358;\"\r\n              }})\r\n            </option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n          <ion-button\r\n            class=\"btn\"\r\n            expand=\"block\"\r\n            style=\"margin-top: 1rem\"\r\n            (click)=\"check()\"\r\n            style=\"color: white\"\r\n          >\r\n            Send\r\n          </ion-button>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"!newReq\">\r\n        <div\r\n          (click)=\"new()\"\r\n          style=\"\r\n            margin: 20px 0;\r\n            cursor: pointer;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n          \"\r\n        >\r\n          Add <ion-icon name=\"add\"></ion-icon>\r\n        </div>\r\n        <div *ngIf=\"add\">\r\n          <input\r\n            type=\"text\"\r\n            class=\"input\"\r\n            placeholder=\"name\"\r\n            name=\"name\"\r\n            style=\"margin-bottom: 10px\"\r\n            [(ngModel)]=\"name\"\r\n          />\r\n          <input\r\n            type=\"text\"\r\n            class=\"input\"\r\n            placeholder=\"Number\"\r\n            name=\"number\"\r\n            [(ngModel)]=\"benNum\"\r\n          />\r\n          <ion-button\r\n            class=\"btn\"\r\n            expand=\"block\"\r\n            style=\"margin-top: 1rem\"\r\n            (click)=\"adds()\"\r\n          >\r\n            Add\r\n          </ion-button>\r\n        </div>\r\n\r\n        <div class=\"row-one\">\r\n          <span style=\"text-align: left\" *ngIf=\"benes.length === 0\"\r\n            >No beneficiary found</span\r\n          >\r\n          <div\r\n            style=\"\r\n              background-color: #f8f8f8;\r\n              border-radius: 8px;\r\n              margin-top: 5px;\r\n            \"\r\n            *ngFor=\"let data of benes\"\r\n            (click)=\"use(data.phoneNumber)\"\r\n          >\r\n            <ion-card-content style=\"display: flex; flex-direction: row\">\r\n              <ion-icon\r\n                name=\"person\"\r\n                style=\"\r\n                  margin-right: 10px;\r\n                  font-size: 20px;\r\n                  color: #25214f;\r\n                  width: 10%;\r\n                \"\r\n              ></ion-icon>\r\n\r\n              <div\r\n                style=\"\r\n                  font-size: 13px;\r\n                  display: flex;\r\n                  flex-direction: column;\r\n                  width: 80%;\r\n                \"\r\n              >\r\n                <span style=\"text-align: left; font-weight: 800\"\r\n                  >{{ data.name }}\r\n                </span>\r\n                <span style=\"text-align: left\">{{ data.phoneNumber }} </span>\r\n              </div>\r\n              <ion-icon\r\n                name=\"trash\"\r\n                style=\"\r\n                  margin-right: 10px;\r\n                  font-size: 20px;\r\n                  color: #25214f;\r\n                  width: 10%;\r\n                \"\r\n                (click)=\"delete(data.phoneNumber)\"\r\n              ></ion-icon>\r\n            </ion-card-content>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </section>\r\n\r\n    <section *ngIf=\"transType === 9\">\r\n      <ion-card> </ion-card>\r\n    </section>\r\n  </section>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <section style=\"background-color: #25214f\">\r\n    <div style=\"height: 70px\"></div>\r\n    <app-loader *ngIf=\"loading\"></app-loader>\r\n    <div\r\n      style=\"\r\n        padding: 20px;\r\n        width: 100%;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #25214f;\r\n        color: #fff;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          background-color: #d9ac0b;\r\n          padding: 20px 30px;\r\n          text-align: left;\r\n          width: 100%;\r\n          max-width: 400px;\r\n          margin: auto;\r\n          border-radius: 10px;\r\n          color: #25214f;\r\n        \"\r\n      >\r\n        <div style=\"font-size: 15px\">\r\n          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}\r\n        </div>\r\n        <div\r\n          style=\"\r\n            border: 1px solid #25214f;\r\n            padding: 10px;\r\n            width: 100%;\r\n            display: flex;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <div>Balance:</div>\r\n          <div style=\"font-size: 20px\">\r\n            {{ user?.accountNos[0]?.accountBalance | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <app-pin\r\n      (close)=\"close()\"\r\n      (loading)=\"load()\"\r\n      (done)=\"finish()\"\r\n      *ngIf=\"show\"\r\n    ></app-pin>\r\n    <section\r\n      *ngIf=\"transType === 0\"\r\n      style=\"\r\n        margin-top: 10px;\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 0 20px;\r\n        padding-top: 50px;\r\n      \"\r\n    >\r\n      <div\r\n        *ngIf=\"!loading\"\r\n        style=\"\r\n          font-size: 20px;\r\n          text-align: left;\r\n          color: #25214f;\r\n          margin-left: 10px;\r\n          font-weight: 700;\r\n        \"\r\n      >\r\n        Data\r\n      </div>\r\n      <div\r\n        *ngFor=\"let data of subs\"\r\n        style=\"\r\n          font-family: Mulish !important;\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n          align-items: center;\r\n          cursor: pointer;\r\n          margin: 1rem 0.5rem;\r\n          color: white;\r\n          background-color: #25214f;\r\n          border-radius: 10px;\r\n          padding: 10px;\r\n        \"\r\n        (click)=\"transactionType(2, data.code)\"\r\n      >\r\n        <!-- <div class=\"icon-container\"> -->\r\n        <!-- <ion-icon name=\"send\" class=\"inner-icon\"></ion-icon> -->\r\n        <ion-icon class=\"inner-icon\" name=\"sync-outline\"></ion-icon>\r\n        <!-- </div> -->\r\n        <span\r\n          style=\"\r\n            margin: auto;\r\n            text-align: left;\r\n            padding-left: 20px;\r\n            font-size: 16px;\r\n            width: 100%;\r\n          \"\r\n          >{{ data.name }}</span\r\n        >\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n      <div\r\n        *ngIf=\"!loading\"\r\n        style=\"\r\n          font-size: 20px;\r\n          text-align: left;\r\n          color: #25214f;\r\n          margin-left: 10px;\r\n          font-weight: 700;\r\n        \"\r\n      >\r\n        Airtime\r\n      </div>\r\n\r\n      <div\r\n        *ngFor=\"let data of vars\"\r\n        style=\"\r\n          font-family: Mulish !important;\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n          align-items: center;\r\n          cursor: pointer;\r\n          margin: 1rem 0.5rem;\r\n          color: white;\r\n          background-color: #25214f;\r\n          border-radius: 10px;\r\n          padding: 10px;\r\n        \"\r\n        (click)=\"transactionType(2, data.code)\"\r\n      >\r\n        <ion-icon name=\"call-outline\" class=\"inner-icon\"></ion-icon>\r\n        <span\r\n          style=\"\r\n            margin: auto;\r\n            text-align: left;\r\n            padding-left: 20px;\r\n            font-size: 16px;\r\n            width: 100%;\r\n          \"\r\n          >{{ data.name }}</span\r\n        >\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n    </section>\r\n    <section\r\n      *ngIf=\"transType === 2\"\r\n      style=\"\r\n        margin-top: 10px;\r\n        background-color: white;\r\n        border-top-left-radius: 10%;\r\n        border-top-right-radius: 10%;\r\n        padding: 0 20px;\r\n        padding-top: 50px;\r\n      \"\r\n    >\r\n      <div\r\n        class=\"row\"\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n          margin-top: 30px;\r\n        \"\r\n      >\r\n        <ion-button\r\n          (click)=\"toggleRequest(true)\"\r\n          [ngClass]=\"{ active: selectedBtn === true }\"\r\n          style=\"width: 100%; --border-radius: none\"\r\n        >\r\n          New\r\n        </ion-button>\r\n\r\n        <ion-button\r\n          (click)=\"toggleRequest(false)\"\r\n          size=\"medium\"\r\n          [ngClass]=\"{ active: selectedBtn1 === true }\"\r\n          style=\"width: 100%; --border-radius: none\"\r\n        >\r\n          Beneficiary\r\n        </ion-button>\r\n      </div>\r\n\r\n      <div *ngIf=\"newReq\">\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Select Account</label>\r\n          <select [(ngModel)]=\"accNum\" name=\"account\" id=\"\" class=\"input\">\r\n            <option\r\n              *ngFor=\"let data of user.accountNos\"\r\n              [value]=\"data.accountNo\"\r\n            >\r\n              {{ data.accountNo }} ({{\r\n                data.accountBalance | currency: \"&#8358;\"\r\n              }})\r\n            </option>\r\n          </select>\r\n        </div>\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Phone Number</label>\r\n          <input\r\n            [(ngModel)]=\"phoneNumber\"\r\n            type=\"text\"\r\n            name=\"mobile\"\r\n            class=\"input\"\r\n            placeholder=\"08079172267\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Select Bundle</label>\r\n          <select [(ngModel)]=\"productCode\" name=\"bank\" id=\"\" class=\"input\">\r\n            <!-- <option value=\"\">-- Select Type --</option> -->\r\n            <option *ngFor=\"let data of products\" [value]=\"data.productCode\">\r\n              {{ data.productTitle }} ({{\r\n                data.productPrice | currency: \"&#8358;\"\r\n              }})\r\n            </option>\r\n          </select>\r\n        </div>\r\n\r\n        <div\r\n          class=\"form-group row\"\r\n          style=\"\r\n            display: flex;\r\n            flex-direction: row;\r\n            justify-content: space-between;\r\n            padding: 5px;\r\n          \"\r\n        >\r\n          <label>Save Beneficiary</label>\r\n          <ion-toggle\r\n            [ngModelOptions]=\"{ standalone: true }\"\r\n            [(ngModel)]=\"saveBene\"\r\n          ></ion-toggle>\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n          <ion-button\r\n            class=\"btn\"\r\n            expand=\"block\"\r\n            style=\"margin-top: 1rem\"\r\n            (click)=\"check()\"\r\n            style=\"color: white\"\r\n          >\r\n            Send\r\n          </ion-button>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"!newReq\">\r\n        <div class=\"row-one\">\r\n          <span style=\"text-align: left\" *ngIf=\"benes.length === 0\"\r\n            >No beneficiary found</span\r\n          >\r\n          <div\r\n            style=\"\r\n              background-color: #f8f8f8;\r\n              border-radius: 8px;\r\n              margin-top: 5px;\r\n            \"\r\n            *ngFor=\"let data of benes\"\r\n            (click)=\"use(data.accountNumber)\"\r\n          >\r\n            <ion-card-content style=\"display: flex; flex-direction: row\">\r\n              <ion-icon\r\n                name=\"person\"\r\n                style=\"\r\n                  margin-right: 10px;\r\n                  font-size: 20px;\r\n                  color: #25214f;\r\n                  width: 10%;\r\n                \"\r\n              ></ion-icon>\r\n\r\n              <div\r\n                style=\"\r\n                  font-size: 13px;\r\n                  display: flex;\r\n                  flex-direction: column;\r\n                  width: 80%;\r\n                \"\r\n              >\r\n                <span style=\"text-align: left; font-weight: 800\"\r\n                  >{{ data.name }}\r\n                </span>\r\n                <span style=\"text-align: left\">{{ data.accountNumber }} </span>\r\n              </div>\r\n              <ion-icon\r\n                name=\"trash\"\r\n                style=\"\r\n                  margin-right: 10px;\r\n                  font-size: 20px;\r\n                  color: #25214f;\r\n                  width: 10%;\r\n                \"\r\n                (click)=\"delete(data.id)\"\r\n              ></ion-icon>\r\n            </ion-card-content>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </section>\r\n\r\n    <section *ngIf=\"transType === 9\">\r\n      <ion-card> </ion-card>\r\n    </section>\r\n  </section>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -10984,7 +11839,7 @@ module.exports = "<!-- <ion-content>\r\n  <div style=\"padding: 50px;\"></div>\r
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <section style=\"background-color: #25214f\">\r\n    <div style=\"height: 50px\"></div>\r\n    <app-loader *ngIf=\"loading\"></app-loader>\r\n    <app-pin\r\n      (close)=\"close()\"\r\n      (loading)=\"load()\"\r\n      (done)=\"finish()\"\r\n      *ngIf=\"show\"\r\n    ></app-pin>\r\n    <div\r\n      style=\"\r\n        padding: 20px;\r\n        width: 100%;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #25214f;\r\n        color: #fff;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          background-color: #d9ac0b;\r\n          padding: 20px 30px;\r\n          text-align: left;\r\n          width: 100%;\r\n          max-width: 400px;\r\n          margin: auto;\r\n          border-radius: 10px;\r\n          color: #25214f;\r\n        \"\r\n      >\r\n        <div style=\"font-size: 15px\">\r\n          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}\r\n        </div>\r\n        <div\r\n          style=\"\r\n            border: 1px solid #25214f;\r\n            padding: 10px;\r\n            width: 100%;\r\n            display: flex;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <div>Balance:</div>\r\n          <div style=\"font-size: 20px\">\r\n            {{ user?.accountNos[0]?.accountBalance | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <section\r\n      *ngIf=\"transType === 0\"\r\n      style=\"\r\n        margin-top: 10px;\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 0 20px;\r\n        padding-top: 50px;\r\n      \"\r\n    >\r\n      <div\r\n        *ngFor=\"let data of vars\"\r\n        style=\"\r\n          font-family: Mulish !important;\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n          align-items: center;\r\n          cursor: pointer;\r\n          margin: 1rem 0.5rem;\r\n          color: white;\r\n          background-color: #25214f;\r\n          border-radius: 10px;\r\n          padding: 10px;\r\n        \"\r\n        (click)=\"transactionType(2, data.code)\"\r\n      >\r\n        <ion-icon name=\"snow-outline\" class=\"inner-icon\"></ion-icon>\r\n        <span\r\n          style=\"\r\n            margin: auto;\r\n            text-align: left;\r\n            padding-left: 20px;\r\n            font-size: 16px;\r\n            width: 100%;\r\n          \"\r\n          >{{ data.name }}</span\r\n        >\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n    </section>\r\n\r\n    <section\r\n      *ngIf=\"transType === 2\"\r\n      style=\"\r\n        margin-top: 10px;\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 0 20px;\r\n        padding-top: 50px;\r\n      \"\r\n    >\r\n      <div\r\n        *ngIf=\"typeCode === 2 || typeCode === 4\"\r\n        class=\"row\"\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n          margin-top: 30px;\r\n        \"\r\n      >\r\n        <ion-button\r\n          (click)=\"toggleRequest(true)\"\r\n          [ngClass]=\"{ active: selectedBtn === true }\"\r\n          style=\"width: 100%; --border-radius: none\"\r\n        >\r\n          New\r\n        </ion-button>\r\n\r\n        <ion-button\r\n          (click)=\"toggleRequest(false)\"\r\n          size=\"medium\"\r\n          [ngClass]=\"{ active: selectedBtn1 === true }\"\r\n          style=\"width: 100%; --border-radius: none\"\r\n        >\r\n          Beneficiary\r\n        </ion-button>\r\n      </div>\r\n\r\n      <div *ngIf=\"newReq\">\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Select Account</label>\r\n          <select [(ngModel)]=\"accNum\" name=\"account\" id=\"\" class=\"input\">\r\n            <option\r\n              *ngFor=\"let data of user.accountNos\"\r\n              [value]=\"data.accountNo\"\r\n            >\r\n              {{ data.accountNo }} ({{\r\n                data.accountBalance | currency: \"&#8358;\"\r\n              }})\r\n            </option>\r\n          </select>\r\n        </div>\r\n        <div class=\"row\" style=\"padding: 5px\">\r\n          <label *ngIf=\"typeCode === 1\" for=\"\">Decoder Number</label>\r\n          <label *ngIf=\"typeCode === 2 || typeCode === 4\" for=\"\"\r\n            >Phone Number</label\r\n          >\r\n          <label\r\n            *ngIf=\"\r\n              typeCode === 3 ||\r\n              typeCode === 5 ||\r\n              typeCode === 6 ||\r\n              typeCode === 7 ||\r\n              typeCode === 9\r\n            \"\r\n            for=\"\"\r\n            >Customer ID</label\r\n          >\r\n\r\n          <input\r\n            *ngIf=\"typeCode === 1\"\r\n            [(ngModel)]=\"phoneNumber\"\r\n            type=\"text\"\r\n            name=\"mobile\"\r\n            class=\"input\"\r\n            placeholder=\"Decoder Number\"\r\n          />\r\n          <input\r\n            *ngIf=\"typeCode === 2 || typeCode === 4\"\r\n            [(ngModel)]=\"phoneNumber\"\r\n            type=\"text\"\r\n            name=\"mobile\"\r\n            class=\"input\"\r\n            placeholder=\"08079172267\"\r\n          />\r\n\r\n          <input\r\n            *ngIf=\"\r\n              typeCode === 3 ||\r\n              typeCode === 5 ||\r\n              typeCode === 6 ||\r\n              typeCode === 7 ||\r\n              typeCode === 9\r\n            \"\r\n            [(ngModel)]=\"phoneNumber\"\r\n            type=\"text\"\r\n            name=\"mobile\"\r\n            class=\"input\"\r\n            placeholder=\"Customer ID\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"row\" style=\"padding: 5px\">\r\n          <label for=\"\">Select Bundle</label>\r\n          <select [(ngModel)]=\"productCode\" name=\"product\" id=\"\" class=\"input\">\r\n            <!-- <option value=\"\">-- Select Type --</option> -->\r\n            <option *ngFor=\"let data of products\" [value]=\"data.productCode\">\r\n              {{ data.productTitle }} ({{\r\n                data.productPrice | currency: \"&#8358;\"\r\n              }})\r\n            </option>\r\n          </select>\r\n        </div>\r\n\r\n        <div>\r\n          <ion-button\r\n            class=\"btn\"\r\n            expand=\"block\"\r\n            style=\"margin-top: 1rem\"\r\n            (click)=\"check()\"\r\n            style=\"color: white\"\r\n          >\r\n            Send\r\n          </ion-button>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"!newReq\">\r\n        <!-- <div class=\" row\" style=\"padding: 5px\">\r\n        <label for=\"\">Search Beneficiary</label>\r\n        <input type=\"text\" class=\"input\" placeholder=\"Search..\" name=\"search\" />\r\n        <ion-icon\r\n          name=\"search\"\r\n          style=\"margin-top: -34px; margin-left: 7px\"\r\n        ></ion-icon>\r\n      </div> -->\r\n        <div\r\n          (click)=\"new()\"\r\n          style=\"\r\n            margin: 20px 0;\r\n            cursor: pointer;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n          \"\r\n        >\r\n          Add <ion-icon name=\"add\" style=\"font-size: 20px\"></ion-icon>\r\n        </div>\r\n\r\n        <div *ngIf=\"add\">\r\n          <div class=\"row\" style=\"padding: 5px\">\r\n            <input\r\n              type=\"text\"\r\n              class=\"input\"\r\n              placeholder=\"Beneficiary Name\"\r\n              name=\"name\"\r\n              style=\"margin-bottom: 10px\"\r\n              [(ngModel)]=\"name\"\r\n            />\r\n          </div>\r\n          <div class=\"row\" style=\"padding: 5px\">\r\n            <input\r\n              type=\"text\"\r\n              class=\"input\"\r\n              placeholder=\"Beneficiary Number\"\r\n              name=\"number\"\r\n              [(ngModel)]=\"benNum\"\r\n            />\r\n          </div>\r\n          <div class=\"\">\r\n            <ion-button\r\n              class=\"btn\"\r\n              expand=\"block\"\r\n              style=\"margin-top: 1rem\"\r\n              (click)=\"adds()\"\r\n            >\r\n              Add\r\n            </ion-button>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"row-one\">\r\n          <span style=\"text-align: left\" *ngIf=\"benes.length === 0\"\r\n            >No beneficiary found</span\r\n          >\r\n          <div\r\n            style=\"\r\n              background-color: #f8f8f8;\r\n              border-radius: 8px;\r\n              margin-top: 5px;\r\n            \"\r\n            *ngFor=\"let data of benes\"\r\n            (click)=\"use(data.phoneNumber)\"\r\n          >\r\n            <ion-card-content style=\"display: flex; flex-direction: row\">\r\n              <ion-icon\r\n                name=\"person\"\r\n                style=\"\r\n                  margin-right: 10px;\r\n                  font-size: 20px;\r\n                  color: #25214f;\r\n                  width: 10%;\r\n                \"\r\n              ></ion-icon>\r\n\r\n              <div\r\n                style=\"\r\n                  font-size: 13px;\r\n                  display: flex;\r\n                  flex-direction: column;\r\n                  width: 80%;\r\n                \"\r\n              >\r\n                <span style=\"text-align: left; font-weight: 800\"\r\n                  >{{ data.name }}\r\n                </span>\r\n                <span style=\"text-align: left\">{{ data.phoneNumber }} </span>\r\n              </div>\r\n              <ion-icon\r\n                name=\"trash\"\r\n                style=\"\r\n                  margin-right: 10px;\r\n                  font-size: 25px;\r\n                  color: #25214f;\r\n                  width: 10%;\r\n                \"\r\n                (click)=\"delete(data.phoneNumber)\"\r\n              ></ion-icon>\r\n            </ion-card-content>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </section>\r\n\r\n    <section *ngIf=\"transType === 9\">\r\n      <ion-card> </ion-card>\r\n    </section>\r\n  </section>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <section style=\"background-color: #25214f\">\r\n    <div style=\"height: 50px\"></div>\r\n    <app-loader *ngIf=\"loading\"></app-loader>\r\n    <app-pin\r\n      (close)=\"close()\"\r\n      (loading)=\"load()\"\r\n      (done)=\"finish()\"\r\n      *ngIf=\"show\"\r\n    ></app-pin>\r\n    <div\r\n      style=\"\r\n        padding: 20px;\r\n        width: 100%;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #25214f;\r\n        color: #fff;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          background-color: #d9ac0b;\r\n          padding: 20px 30px;\r\n          text-align: left;\r\n          width: 100%;\r\n          max-width: 400px;\r\n          margin: auto;\r\n          border-radius: 10px;\r\n          color: #25214f;\r\n        \"\r\n      >\r\n        <div style=\"font-size: 15px\">\r\n          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}\r\n        </div>\r\n        <div\r\n          style=\"\r\n            border: 1px solid #25214f;\r\n            padding: 10px;\r\n            width: 100%;\r\n            display: flex;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <div>Balance:</div>\r\n          <div style=\"font-size: 20px\">\r\n            {{ user?.accountNos[0]?.accountBalance | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <section\r\n      *ngIf=\"transType === 0\"\r\n      style=\"\r\n        margin-top: 10px;\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 0 20px;\r\n        padding-top: 50px;\r\n      \"\r\n    >\r\n      <div\r\n        *ngFor=\"let data of vars\"\r\n        style=\"\r\n          font-family: Mulish !important;\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n          align-items: center;\r\n          cursor: pointer;\r\n          margin: 1rem 0.5rem;\r\n          color: white;\r\n          background-color: #25214f;\r\n          border-radius: 10px;\r\n          padding: 10px;\r\n        \"\r\n        (click)=\"transactionType(2, data.code)\"\r\n      >\r\n        <ion-icon name=\"snow-outline\" class=\"inner-icon\"></ion-icon>\r\n        <span\r\n          style=\"\r\n            margin: auto;\r\n            text-align: left;\r\n            padding-left: 20px;\r\n            font-size: 16px;\r\n            width: 100%;\r\n          \"\r\n          >{{ data.name }}</span\r\n        >\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n    </section>\r\n\r\n    <section\r\n      *ngIf=\"transType === 2\"\r\n      style=\"\r\n        margin-top: 10px;\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 0 20px;\r\n        padding-top: 50px;\r\n      \"\r\n    >\r\n      <div\r\n        *ngIf=\"typeCode === 2 || typeCode === 4\"\r\n        class=\"row\"\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n          margin-top: 30px;\r\n        \"\r\n      >\r\n        <ion-button\r\n          (click)=\"toggleRequest(true)\"\r\n          [ngClass]=\"{ active: selectedBtn === true }\"\r\n          style=\"width: 100%; --border-radius: none\"\r\n        >\r\n          New\r\n        </ion-button>\r\n\r\n        <ion-button\r\n          (click)=\"toggleRequest(false)\"\r\n          size=\"medium\"\r\n          [ngClass]=\"{ active: selectedBtn1 === true }\"\r\n          style=\"width: 100%; --border-radius: none\"\r\n        >\r\n          Beneficiary\r\n        </ion-button>\r\n      </div>\r\n\r\n      <div *ngIf=\"newReq\">\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Select Account</label>\r\n          <select [(ngModel)]=\"accNum\" name=\"account\" id=\"\" class=\"input\">\r\n            <option\r\n              *ngFor=\"let data of user.accountNos\"\r\n              [value]=\"data.accountNo\"\r\n            >\r\n              {{ data.accountNo }} ({{\r\n                data.accountBalance | currency: \"&#8358;\"\r\n              }})\r\n            </option>\r\n          </select>\r\n        </div>\r\n        <div class=\"row\" style=\"padding: 5px\">\r\n          <label *ngIf=\"typeCode === 1\" for=\"\">Decoder Number</label>\r\n          <label *ngIf=\"typeCode === 2 || typeCode === 4\" for=\"\"\r\n            >Phone Number</label\r\n          >\r\n          <label\r\n            *ngIf=\"\r\n              typeCode === 3 ||\r\n              typeCode === 5 ||\r\n              typeCode === 6 ||\r\n              typeCode === 7 ||\r\n              typeCode === 9\r\n            \"\r\n            for=\"\"\r\n            >Customer ID</label\r\n          >\r\n\r\n          <input\r\n            *ngIf=\"typeCode === 1\"\r\n            [(ngModel)]=\"phoneNumber\"\r\n            type=\"text\"\r\n            name=\"mobile\"\r\n            class=\"input\"\r\n            placeholder=\"Decoder Number\"\r\n          />\r\n          <input\r\n            *ngIf=\"typeCode === 2 || typeCode === 4\"\r\n            [(ngModel)]=\"phoneNumber\"\r\n            type=\"text\"\r\n            name=\"mobile\"\r\n            class=\"input\"\r\n            placeholder=\"08079172267\"\r\n          />\r\n\r\n          <input\r\n            *ngIf=\"\r\n              typeCode === 3 ||\r\n              typeCode === 5 ||\r\n              typeCode === 6 ||\r\n              typeCode === 7 ||\r\n              typeCode === 9\r\n            \"\r\n            [(ngModel)]=\"phoneNumber\"\r\n            type=\"text\"\r\n            name=\"mobile\"\r\n            class=\"input\"\r\n            placeholder=\"Customer ID\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"row\" style=\"padding: 5px\">\r\n          <label for=\"\">Select Bundle</label>\r\n          <select [(ngModel)]=\"productCode\" name=\"product\" id=\"\" class=\"input\">\r\n            <!-- <option value=\"\">-- Select Type --</option> -->\r\n            <option *ngFor=\"let data of products\" [value]=\"data.productCode\">\r\n              {{ data.productTitle }} ({{\r\n                data.productPrice | currency: \"&#8358;\"\r\n              }})\r\n            </option>\r\n          </select>\r\n        </div>\r\n\r\n        <div\r\n          class=\"form-group row\"\r\n          style=\"\r\n            display: flex;\r\n            flex-direction: row;\r\n            justify-content: space-between;\r\n            padding: 5px;\r\n          \"\r\n        >\r\n          <label>Save Beneficiary</label>\r\n          <ion-toggle\r\n            [ngModelOptions]=\"{ standalone: true }\"\r\n            [(ngModel)]=\"saveBene\"\r\n          ></ion-toggle>\r\n        </div>\r\n\r\n        <div>\r\n          <ion-button\r\n            class=\"btn\"\r\n            expand=\"block\"\r\n            style=\"margin-top: 1rem\"\r\n            (click)=\"check()\"\r\n            style=\"color: white\"\r\n          >\r\n            Send\r\n          </ion-button>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"!newReq\">\r\n        <!-- <div class=\" row\" style=\"padding: 5px\">\r\n        <label for=\"\">Search Beneficiary</label>\r\n        <input type=\"text\" class=\"input\" placeholder=\"Search..\" name=\"search\" />\r\n        <ion-icon\r\n          name=\"search\"\r\n          style=\"margin-top: -34px; margin-left: 7px\"\r\n        ></ion-icon>\r\n      </div> -->\r\n\r\n        <div class=\"row-one\">\r\n          <span style=\"text-align: left\" *ngIf=\"benes.length === 0\"\r\n            >No beneficiary found</span\r\n          >\r\n          <div\r\n            style=\"\r\n              background-color: #f8f8f8;\r\n              border-radius: 8px;\r\n              margin-top: 5px;\r\n            \"\r\n            *ngFor=\"let data of benes\"\r\n            (click)=\"use(data.accountNumber)\"\r\n          >\r\n            <ion-card-content style=\"display: flex; flex-direction: row\">\r\n              <ion-icon\r\n                name=\"person\"\r\n                style=\"\r\n                  margin-right: 10px;\r\n                  font-size: 20px;\r\n                  color: #25214f;\r\n                  width: 10%;\r\n                \"\r\n              ></ion-icon>\r\n\r\n              <div\r\n                style=\"\r\n                  font-size: 13px;\r\n                  display: flex;\r\n                  flex-direction: column;\r\n                  width: 80%;\r\n                \"\r\n              >\r\n                <span style=\"text-align: left; font-weight: 800\"\r\n                  >{{ data.name }}\r\n                </span>\r\n                <span style=\"text-align: left\">{{ data.accountNumber }} </span>\r\n              </div>\r\n              <ion-icon\r\n                name=\"trash\"\r\n                style=\"\r\n                  margin-right: 10px;\r\n                  font-size: 20px;\r\n                  color: #25214f;\r\n                  width: 10%;\r\n                \"\r\n                (click)=\"delete(data.id)\"\r\n              ></ion-icon>\r\n            </ion-card-content>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </section>\r\n\r\n    <section *ngIf=\"transType === 9\">\r\n      <ion-card> </ion-card>\r\n    </section>\r\n  </section>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -11006,7 +11861,7 @@ module.exports = "<ion-content class=\"content\">\r\n  <div style=\"height: 50px
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <div style=\"height: 70px\"></div>\r\n  <app-loader *ngIf=\"loading\"></app-loader>\r\n  <app-add-fund (exit)=\"close()\" *ngIf=\"show\"></app-add-fund>\r\n  <app-balance></app-balance>\r\n\r\n  <section\r\n    style=\"\r\n      display: flex;\r\n      flex-direction: row;\r\n      justify-content: space-evenly;\r\n      margin-top: 50px;\r\n    \"\r\n  >\r\n    <div\r\n      style=\"cursor: pointer\"\r\n      [routerLink]=\"['/action/transfer']\"\r\n      routerLinkActive=\"router-link-active\"\r\n    >\r\n      <ion-img\r\n        src=\"assets/icon/transfer.png\"\r\n        style=\"width: 55px; height: 55px\"\r\n      ></ion-img>\r\n      <div\r\n        style=\"\r\n          font-size: 13px;\r\n          padding-top: 5px;\r\n          text-align: center;\r\n          cursor: pointer;\r\n        \"\r\n      >\r\n        Transfer\r\n      </div>\r\n    </div>\r\n    <div\r\n      style=\"cursor: pointer\"\r\n      [routerLink]=\"['/action/loan']\"\r\n      routerLinkActive=\"router-link-active\"\r\n    >\r\n      <ion-img\r\n        src=\"assets/icon/save.png\"\r\n        style=\"width: 55px; height: 55px\"\r\n      ></ion-img>\r\n      <div\r\n        style=\"\r\n          font-size: 13px;\r\n          padding-top: 5px;\r\n          text-align: center;\r\n          cursor: pointer;\r\n        \"\r\n      >\r\n        Loan\r\n      </div>\r\n    </div>\r\n    <div\r\n      style=\"cursor: pointer\"\r\n      [routerLink]=\"['/action/bills-payment/products']\"\r\n      routerLinkActive=\"router-link-active\"\r\n    >\r\n      <ion-img\r\n        src=\"assets/icon/borrow.png\"\r\n        style=\"width: 55px; height: 55px\"\r\n      ></ion-img>\r\n      <div\r\n        style=\"\r\n          font-size: 13px;\r\n          padding-top: 5px;\r\n          text-align: center;\r\n          cursor: pointer;\r\n        \"\r\n      >\r\n        Utility\r\n      </div>\r\n    </div>\r\n    <div style=\"cursor: pointer\" (click)=\"show = true\">\r\n      <ion-img\r\n        src=\"assets/icon/money.png\"\r\n        style=\"width: 55px; height: 55px; margin: auto\"\r\n      ></ion-img>\r\n      <div\r\n        style=\"\r\n          font-size: 13px;\r\n          padding-top: 5px;\r\n          text-align: center;\r\n          cursor: pointer;\r\n        \"\r\n      >\r\n        Add Fund\r\n      </div>\r\n    </div>\r\n  </section>\r\n\r\n  <!-- <section style=\"margin-top: 50px\">\r\n    <div\r\n      style=\"\r\n        color: #FEE178 ;\r\n        font-size: 20px;\r\n        margin-top: 15px;\r\n        padding-bottom: 15px;\r\n        font-weight: 500;\r\n      \"\r\n    >\r\n      Your account is limied\r\n    </div>\r\n  </section> -->\r\n  <section\r\n    *ngIf=\"user.accountType !== 'Royal Basic' && upload !== 'true'\"\r\n    style=\"margin-top: 10px\"\r\n    [routerLink]=\"['/action/upload-document']\"\r\n  >\r\n    <div style=\"background-color: #f8f8f8; border-radius: 8px\">\r\n      <ion-card-header class=\"header\"\r\n        >Upload Documents for Verification</ion-card-header\r\n      >\r\n      <ion-card-content\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n        \"\r\n      >\r\n        <span style=\"font-size: 12px; width: 80%\"\r\n          >Upload you CAC document with a valid ID card\r\n        </span>\r\n        <ion-img\r\n          src=\"assets/icon/card.png\"\r\n          style=\"width: 34px; height: 34px; width: 18%\"\r\n        ></ion-img>\r\n      </ion-card-content>\r\n    </div>\r\n  </section>\r\n\r\n  <section style=\"margin-top: 10px\" *ngIf=\"!limit\">\r\n    <div\r\n      style=\"background-color: #f8f8f8; border-radius: 8px\"\r\n      [routerLink]=\"['/action/account-info/limit']\"\r\n    >\r\n      <ion-card-header class=\"header\">Increase your limit</ion-card-header>\r\n      <ion-card-content\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n        \"\r\n      >\r\n        <span\r\n          style=\"font-size: 13px; width: 80%\"\r\n          *ngIf=\"user.accountType === 'Royal Basic'\"\r\n          >This account is perfect for Individuals, Students, Freelancers,\r\n        </span>\r\n        <span\r\n          *ngIf=\"user.accountType !== 'Royal Basic'\"\r\n          style=\"font-size: 13px; width: 80%\"\r\n          >The account is perfect for business owners</span\r\n        >\r\n        <ion-img\r\n          src=\"assets/icon/upward-arrow.png\"\r\n          style=\"width: 34px; height: 34px; width: 18%\"\r\n        ></ion-img>\r\n      </ion-card-content>\r\n    </div>\r\n  </section>\r\n\r\n  <section\r\n    *ngIf=\"user.hasBVN === false || user.hasBVN === 'false'\"\r\n    style=\"margin-top: 10px\"\r\n    [routerLink]=\"['/action/profile']\"\r\n  >\r\n    <div style=\"background-color: #f8f8f8; border-radius: 8px\">\r\n      <ion-card-header class=\"header\">Add BVN</ion-card-header>\r\n      <ion-card-content\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n        \"\r\n      >\r\n        <span style=\"font-size: 12px; width: 80%\"\r\n          >Add your bank verification number\r\n        </span>\r\n        <ion-img\r\n          src=\"assets/icon/card.png\"\r\n          style=\"width: 34px; height: 34px; width: 18%\"\r\n        ></ion-img>\r\n      </ion-card-content>\r\n    </div>\r\n  </section>\r\n\r\n  <section\r\n    style=\"margin-top: 10px\"\r\n    [routerLink]=\"['/action/account-info/request-card']\"\r\n    *ngIf=\"!isCard\"\r\n  >\r\n    <div style=\"background-color: #f8f8f8; border-radius: 8px\">\r\n      <ion-card-header class=\"header\"\r\n        >Request a Royal Bank Card</ion-card-header\r\n      >\r\n      <ion-card-content\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n        \"\r\n      >\r\n        <span style=\"font-size: 12px; width: 80%\"\r\n          >We will send you your Royal Bank Card where ever you are for FREE\r\n        </span>\r\n        <ion-img\r\n          src=\"assets/icon/card.png\"\r\n          style=\"width: 34px; height: 34px; width: 18%\"\r\n        ></ion-img>\r\n      </ion-card-content>\r\n    </div>\r\n  </section>\r\n\r\n  <section>\r\n    <section style=\"margin-top: 10px\">\r\n      <div\r\n        style=\"\r\n          color: #25214f;\r\n          font-size: 18px;\r\n          padding-bottom: 15px;\r\n          font-weight: 700;\r\n        \"\r\n      >\r\n        Your transactions\r\n      </div>\r\n    </section>\r\n\r\n    <app-transaction-history></app-transaction-history>\r\n  </section>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <div style=\"height: 70px\"></div>\r\n  <app-loader *ngIf=\"loading\"></app-loader>\r\n  <app-add-fund (exit)=\"close()\" *ngIf=\"show\"></app-add-fund>\r\n  <app-balance></app-balance>\r\n\r\n  <section\r\n    style=\"\r\n      display: flex;\r\n      flex-direction: row;\r\n      justify-content: space-evenly;\r\n      margin-top: 50px;\r\n    \"\r\n  >\r\n    <div\r\n      style=\"cursor: pointer\"\r\n      [routerLink]=\"['/action/transfer']\"\r\n      routerLinkActive=\"router-link-active\"\r\n    >\r\n      <ion-img\r\n        src=\"assets/icon/transfer.png\"\r\n        style=\"width: 55px; height: 55px\"\r\n      ></ion-img>\r\n      <div\r\n        style=\"\r\n          font-size: 13px;\r\n          padding-top: 5px;\r\n          text-align: center;\r\n          cursor: pointer;\r\n        \"\r\n      >\r\n        Transfer\r\n      </div>\r\n    </div>\r\n    <div\r\n      style=\"cursor: pointer\"\r\n      [routerLink]=\"['/action/loan']\"\r\n      routerLinkActive=\"router-link-active\"\r\n    >\r\n      <ion-img\r\n        src=\"assets/icon/save.png\"\r\n        style=\"width: 55px; height: 55px\"\r\n      ></ion-img>\r\n      <div\r\n        style=\"\r\n          font-size: 13px;\r\n          padding-top: 5px;\r\n          text-align: center;\r\n          cursor: pointer;\r\n        \"\r\n      >\r\n        Loan\r\n      </div>\r\n    </div>\r\n    <div\r\n      style=\"cursor: pointer\"\r\n      [routerLink]=\"['/action/bills-payment/products']\"\r\n      routerLinkActive=\"router-link-active\"\r\n    >\r\n      <ion-img\r\n        src=\"assets/icon/borrow.png\"\r\n        style=\"width: 55px; height: 55px\"\r\n      ></ion-img>\r\n      <div\r\n        style=\"\r\n          font-size: 13px;\r\n          padding-top: 5px;\r\n          text-align: center;\r\n          cursor: pointer;\r\n        \"\r\n      >\r\n        Utility\r\n      </div>\r\n    </div>\r\n    <div style=\"cursor: pointer\" (click)=\"show = true\">\r\n      <ion-img\r\n        src=\"assets/icon/money.png\"\r\n        style=\"width: 55px; height: 55px; margin: auto\"\r\n      ></ion-img>\r\n      <div\r\n        style=\"\r\n          font-size: 13px;\r\n          padding-top: 5px;\r\n          text-align: center;\r\n          cursor: pointer;\r\n        \"\r\n      >\r\n        Add Fund\r\n      </div>\r\n    </div>\r\n  </section>\r\n\r\n  <!-- <section style=\"margin-top: 50px\">\r\n    <div\r\n      style=\"\r\n        color: #FEE178 ;\r\n        font-size: 20px;\r\n        margin-top: 15px;\r\n        padding-bottom: 15px;\r\n        font-weight: 500;\r\n      \"\r\n    >\r\n      Your account is limied\r\n    </div>\r\n  </section> -->\r\n  <section\r\n    *ngIf=\"user.accountType !== 'Royal Basic' && upload !== 'true'\"\r\n    style=\"margin-top: 10px\"\r\n    [routerLink]=\"['/action/upload-document']\"\r\n  >\r\n    <ng-container *ngIf=\"user.accountType !== 'ROYAL BASIC'\">\r\n      <div style=\"background-color: #f8f8f8; border-radius: 8px\">\r\n        <ion-card-header class=\"header\"\r\n          >Upload Documents for Verification</ion-card-header\r\n        >\r\n        <ion-card-content\r\n          style=\"\r\n            display: flex;\r\n            flex-direction: row;\r\n            justify-content: space-around;\r\n          \"\r\n        >\r\n          <span style=\"font-size: 12px; width: 80%\"\r\n            >Upload you CAC document with a valid ID card\r\n          </span>\r\n          <ion-img\r\n            src=\"assets/icon/card.png\"\r\n            style=\"width: 34px; height: 34px; width: 18%\"\r\n          ></ion-img>\r\n        </ion-card-content>\r\n      </div>\r\n    </ng-container>\r\n  </section>\r\n\r\n  <section style=\"margin-top: 10px\" *ngIf=\"!limit\">\r\n    <div\r\n      style=\"background-color: #f8f8f8; border-radius: 8px\"\r\n      [routerLink]=\"['/action/account-info/limit']\"\r\n    >\r\n      <ion-card-header class=\"header\">Increase your limit</ion-card-header>\r\n      <ion-card-content\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n        \"\r\n      >\r\n        <span\r\n          style=\"font-size: 13px; width: 80%\"\r\n          *ngIf=\"user.accountType === 'Royal Basic'\"\r\n          >This account is perfect for Individuals, Students, Freelancers,\r\n        </span>\r\n        <span\r\n          *ngIf=\"user.accountType !== 'Royal Basic'\"\r\n          style=\"font-size: 13px; width: 80%\"\r\n          >The account is perfect for business owners</span\r\n        >\r\n        <ion-img\r\n          src=\"assets/icon/upward-arrow.png\"\r\n          style=\"width: 34px; height: 34px; width: 18%\"\r\n        ></ion-img>\r\n      </ion-card-content>\r\n    </div>\r\n  </section>\r\n\r\n  <section\r\n    *ngIf=\"user.hasBVN === false || user.hasBVN === 'false'\"\r\n    style=\"margin-top: 10px\"\r\n    [routerLink]=\"['/action/profile']\"\r\n  >\r\n    <div style=\"background-color: #f8f8f8; border-radius: 8px\">\r\n      <ion-card-header class=\"header\">Add BVN</ion-card-header>\r\n      <ion-card-content\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n        \"\r\n      >\r\n        <span style=\"font-size: 12px; width: 80%\"\r\n          >Add your bank verification number\r\n        </span>\r\n        <ion-img\r\n          src=\"assets/icon/card.png\"\r\n          style=\"width: 34px; height: 34px; width: 18%\"\r\n        ></ion-img>\r\n      </ion-card-content>\r\n    </div>\r\n  </section>\r\n\r\n  <section\r\n    style=\"margin-top: 10px\"\r\n    [routerLink]=\"['/action/account-info/request-card']\"\r\n    *ngIf=\"!isCard\"\r\n  >\r\n    <div style=\"background-color: #f8f8f8; border-radius: 8px\">\r\n      <ion-card-header class=\"header\"\r\n        >Request a Royal Bank Card</ion-card-header\r\n      >\r\n      <ion-card-content\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n        \"\r\n      >\r\n        <span style=\"font-size: 12px; width: 80%\"\r\n          >We will send you your Royal Bank Card where ever you are for FREE\r\n        </span>\r\n        <ion-img\r\n          src=\"assets/icon/card.png\"\r\n          style=\"width: 34px; height: 34px; width: 18%\"\r\n        ></ion-img>\r\n      </ion-card-content>\r\n    </div>\r\n  </section>\r\n\r\n  <section>\r\n    <section style=\"margin-top: 10px\">\r\n      <div\r\n        style=\"\r\n          color: #25214f;\r\n          font-size: 18px;\r\n          padding-bottom: 15px;\r\n          font-weight: 700;\r\n        \"\r\n      >\r\n        Your transactions\r\n      </div>\r\n    </section>\r\n\r\n    <app-transaction-history></app-transaction-history>\r\n  </section>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -11017,7 +11872,7 @@ module.exports = "<ion-content>\r\n  <div style=\"height: 70px\"></div>\r\n  <ap
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\n  <div style=\"height: 40px\"></div>\n  <app-loader *ngIf=\"loading\"></app-loader>\n  <section style=\"background-color: #25214f\">\n    <div\n      style=\"\n        padding: 20px;\n        width: 100%;\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        justify-content: center;\n        background-color: #25214f;\n        color: #fff;\n        padding-top: 40px;\n      \"\n    >\n      <div\n        style=\"\n          background-color: #d9ac0b;\n          padding: 20px 30px;\n          text-align: left;\n          width: 100%;\n          max-width: 400px;\n          margin: auto;\n          border-radius: 10px;\n          color: #25214f;\n        \"\n      >\n        <div style=\"font-size: 15px\">\n          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}\n        </div>\n        <div\n          style=\"\n            border: 1px solid #25214f;\n            padding: 10px;\n            width: 100%;\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-top: 20px;\n          \"\n        >\n          <div>Balance:</div>\n          <div style=\"font-size: 20px\">\n            {{ user?.accountNos[0]?.accountBalance | currency: \"&#8358;\" }}\n          </div>\n        </div>\n      </div>\n    </div>\n  </section>\n\n  <div\n    style=\"\n      font-size: 20px;\n      text-align: center;\n      font-weight: 600;\n      margin-top: 30px;\n      color: #25214f;\n    \"\n  >\n    Upload Documents\n  </div>\n\n  <section class=\"upload\">\n    <div style=\"margin-bottom: 15px\">\n      <div class=\"groupAll\">\n        <fieldset class=\"group\">\n          <label>{{ fileName || \"Select CAC Document\" }}</label>\n\n          <div class=\"custom-file fileInputProfileWrap\">\n            <input\n              *ngIf=\"!isImageSaved\"\n              type=\"file\"\n              (change)=\"fileChangeEvent($event, 'CAC')\"\n              class=\"fileInputProfile\"\n            />\n          </div>\n        </fieldset>\n        <span *ngIf=\"imageError\" style=\"color: red\">{{ imageError }}</span>\n      </div>\n      <a class=\"btn btn-danger\" (click)=\"removeImage()\" *ngIf=\"isImageSaved\"\n        >Remove</a\n      >\n    </div>\n\n    <div\n      class=\"form-group row\"\n      style=\"padding: 5px; display: flex; flex-direction: column\"\n    >\n      <label style=\"margin-bottom: 10px\" for=\"\">Type of ID</label>\n      <select [(ngModel)]=\"type\" name=\"id\" id=\"\" class=\"input\">\n        <option *ngFor=\"let data of types\" [value]=\"data\">\n          {{ data }}\n        </option>\n      </select>\n    </div>\n\n    <div style=\"margin-top: 20px\">\n      <div class=\"groupAll\">\n        <fieldset class=\"group\">\n          <label>{{ fileName1 || \"Select Valid ID\" }}</label>\n          <div class=\"custom-file fileInputProfileWrap\">\n            <input\n              *ngIf=\"!isImageSaved1\"\n              type=\"file\"\n              (change)=\"fileChangeEvent($event, 'ID')\"\n              class=\"fileInputProfile\"\n            />\n          </div>\n        </fieldset>\n        <span *ngIf=\"imageError1\" style=\"color: red\">{{ imageError1 }}</span>\n      </div>\n      <a class=\"btn btn-danger\" (click)=\"removeImage1()\" *ngIf=\"isImageSaved1\"\n        >Remove</a\n      >\n    </div>\n  </section>\n\n  <div\n    class=\"form-group\"\n    style=\"width: 80vw; max-width: 400px; margin: auto; margin-bottom: 40px\"\n  >\n    <ion-button\n      class=\"btn\"\n      expand=\"block\"\n      style=\"margin-top: 1rem; font-family: Mulish !important\"\n      (click)=\"upload()\"\n    >\n      Upload\n    </ion-button>\n  </div>\n</ion-content>\n";
+module.exports = "<ion-content>\n  <div style=\"height: 40px\"></div>\n  <app-loader *ngIf=\"loading\"></app-loader>\n  <section style=\"background-color: #25214f\">\n    <div\n      style=\"\n        padding: 20px;\n        width: 100%;\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        justify-content: center;\n        background-color: #25214f;\n        color: #fff;\n        padding-top: 40px;\n      \"\n    >\n      <div\n        style=\"\n          background-color: #d9ac0b;\n          padding: 20px 30px;\n          text-align: left;\n          width: 100%;\n          max-width: 400px;\n          margin: auto;\n          border-radius: 10px;\n          color: #25214f;\n        \"\n      >\n        <div style=\"font-size: 15px\">\n          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}\n        </div>\n        <div\n          style=\"\n            border: 1px solid #25214f;\n            padding: 10px;\n            width: 100%;\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-top: 20px;\n          \"\n        >\n          <div>Balance:</div>\n          <div style=\"font-size: 20px\">\n            {{ user?.accountNos[0]?.accountBalance | currency: \"&#8358;\" }}\n          </div>\n        </div>\n      </div>\n    </div>\n  </section>\n\n  <div\n    style=\"\n      font-size: 20px;\n      text-align: center;\n      font-weight: 600;\n      margin-top: 30px;\n      color: #25214f;\n    \"\n  >\n    Upload Documents\n  </div>\n\n  <section class=\"upload\">\n    <div style=\"margin-bottom: 15px\">\n      <div class=\"groupAll\">\n        <fieldset class=\"group\">\n          <label>{{ fileName || \"Select CAC Document\" }}</label>\n\n          <div class=\"custom-file fileInputProfileWrap\">\n            <input\n              *ngIf=\"!isImageSaved\"\n              type=\"file\"\n              (change)=\"fileChangeEvent($event, 'CAC')\"\n              class=\"fileInputProfile\"\n            />\n          </div>\n        </fieldset>\n        <span *ngIf=\"imageError\" style=\"color: red\">{{ imageError }}</span>\n      </div>\n      <a class=\"btn btn-danger\" *ngIf=\"isCAC\">Uploaded</a>\n    </div>\n\n    <div\n      class=\"form-group row\"\n      style=\"padding: 5px; display: flex; flex-direction: column\"\n    >\n      <label style=\"margin-bottom: 10px\" for=\"\">Type of ID</label>\n      <select [(ngModel)]=\"type\" name=\"id\" id=\"\" class=\"input\">\n        <option *ngFor=\"let data of types\" [value]=\"data\">\n          {{ data }}\n        </option>\n      </select>\n    </div>\n\n    <div style=\"margin-top: 20px\">\n      <div class=\"groupAll\">\n        <fieldset class=\"group\">\n          <label>{{ fileName1 || \"Select Valid ID\" }}</label>\n          <div class=\"custom-file fileInputProfileWrap\">\n            <input\n              *ngIf=\"!isImageSaved1\"\n              type=\"file\"\n              (change)=\"fileChangeEvent($event, 'ID')\"\n              class=\"fileInputProfile\"\n            />\n          </div>\n        </fieldset>\n        <span *ngIf=\"imageError1\" style=\"color: red\">{{ imageError1 }}</span>\n      </div>\n      <a class=\"btn btn-danger\" *ngIf=\"isId\">Uploaded</a>\n    </div>\n  </section>\n\n  <div\n    class=\"form-group\"\n    style=\"width: 80vw; max-width: 400px; margin: auto; margin-bottom: 40px\"\n  >\n    <ion-button\n      class=\"btn\"\n      expand=\"block\"\n      style=\"margin-top: 1rem; font-family: Mulish !important\"\n      (click)=\"done()\"\n    >\n      Done\n    </ion-button>\n  </div>\n</ion-content>\n";
 
 /***/ }),
 
@@ -11028,7 +11883,7 @@ module.exports = "<ion-content>\n  <div style=\"height: 40px\"></div>\n  <app-lo
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <app-loader *ngIf=\"loading\"></app-loader>\r\n  <section style=\"background-color: #25214f\">\r\n    <div\r\n      style=\"\r\n        padding: 20px;\r\n        width: 100%;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #25214f;\r\n        color: #fff;\r\n        padding-top: 40px;\r\n        margin-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          background-color: #d9ac0b;\r\n          padding: 20px 30px;\r\n          text-align: left;\r\n          width: 100%;\r\n          max-width: 400px;\r\n          margin: auto;\r\n          border-radius: 10px;\r\n          color: #25214f;\r\n        \"\r\n      >\r\n        <div style=\"font-size: 15px\">\r\n          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}\r\n        </div>\r\n        <div\r\n          style=\"\r\n            border: 1px solid #25214f;\r\n            padding: 10px;\r\n            width: 100%;\r\n            display: flex;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <div>Balance:</div>\r\n          <div style=\"font-size: 20px\">\r\n            {{ user?.accountNos[0]?.accountBalance | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <section\r\n      style=\"\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 20px;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <form>\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Select Account</label>\r\n          <select [(ngModel)]=\"account\" name=\"account\" id=\"\" class=\"input\">\r\n            <option\r\n              *ngFor=\"let data of user.accountNos\"\r\n              [value]=\"data.accountNo\"\r\n            >\r\n              {{ data.accountNo }} ({{\r\n                data.accountBalance | currency: \"&#8358;\"\r\n              }})\r\n            </option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Start Date</label>\r\n          <input\r\n            type=\"date\"\r\n            name=\"startDate\"\r\n            class=\"input\"\r\n            placeholder=\"100000\"\r\n            [(ngModel)]=\"startDate\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">End Date</label>\r\n          <input\r\n            type=\"date\"\r\n            name=\"endDate\"\r\n            class=\"input\"\r\n            placeholder=\"100000\"\r\n            [(ngModel)]=\"endDate\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Transaction Type</label>\r\n          <select [(ngModel)]=\"typeId\" name=\"transactionType\" class=\"input\">\r\n            <option *ngFor=\"let data of types\" [value]=\"data.id\">\r\n              {{ data.name }}\r\n            </option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n          <ion-button\r\n            class=\"btn\"\r\n            expand=\"block\"\r\n            style=\"margin-top: 1rem\"\r\n            (click)=\"fetchHistory()\"\r\n            routerLinkActive=\"router-link-active\"\r\n          >\r\n            View History\r\n          </ion-button>\r\n        </div>\r\n      </form>\r\n    </section>\r\n\r\n    <section style=\"background-color: white; padding: 0 5%\">\r\n      <ion-card-header style=\"text-align: left\"\r\n        >Your transactions</ion-card-header\r\n      >\r\n\r\n      <div\r\n        *ngIf=\"data.length < 1\"\r\n        style=\"background-color: #f8f8f8; border-radius: 8px\"\r\n      >\r\n        <ion-card-content>\r\n          <span style=\"text-align: left; font-size: 13px\"\r\n            >No transactions found\r\n          </span>\r\n        </ion-card-content>\r\n      </div>\r\n      <div *ngFor=\"let trans of data\" (click)=\"setTrans(trans)\">\r\n        <div class=\"tra\" *ngIf=\"trans.transactionType !== 'Debit'\">\r\n          <div class=\"ico\">\r\n            <div class=\"im\"><img src=\"assets/icon/credict.png\" alt=\"\" /></div>\r\n            <div class=\"tex\">\r\n              <div class=\"ti\">\r\n                {{ trans?.narration }}\r\n              </div>\r\n              <div class=\"mod\">{{ trans?.submittedByUsername }}</div>\r\n              <div class=\"mod\">\r\n                {{ trans.date | date }}\r\n              </div>\r\n              <div class=\"mod\" style=\"font-size: 11px\">\r\n                {{ trans.date | date: \"shortTime\" }}\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"amount green\">\r\n            {{ trans.amount | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n        <div class=\"tra\" *ngIf=\"trans.transactionType === 'Debit'\">\r\n          <div class=\"ico\" style=\"text-align: left\">\r\n            <div class=\"im\"><img src=\"assets/icon/debit.png\" alt=\"\" /></div>\r\n            <div class=\"tex\">\r\n              <div class=\"ti\">\r\n                {{ trans?.receiverName }}\r\n              </div>\r\n              <div class=\"mod\">{{ trans?.submittedByUsername }}</div>\r\n              <div class=\"mod\">\r\n                {{ trans.date | date }}\r\n              </div>\r\n              <div class=\"mod\" style=\"font-size: 11px\">\r\n                {{ trans.date | date: \"shortTime\" }}\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"amount red\">\r\n            -{{ trans.amount | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </section>\r\n  </section>\r\n</ion-content>\r\n<ion-content *ngIf=\"visible\">\r\n  <div\r\n    class=\"mas\"\r\n    style=\"\r\n      display: flex;\r\n      justify-content: center;\r\n      align-items: center;\r\n      flex-direction: column;\r\n    \"\r\n  >\r\n    <div class=\"overlay\" (click)=\"setVissible()\" [@slideInOut]></div>\r\n    <div\r\n      style=\"\r\n        background-color: white;\r\n        width: 100vw;\r\n        height: 100vh;\r\n        z-index: 1000;\r\n        display: flex;\r\n        flex-direction: column;\r\n      \"\r\n      [@slideInOut]\r\n    >\r\n      <div class=\"head\">\r\n        <div\r\n          (click)=\"setVissible()\"\r\n          style=\"\r\n            color: white;\r\n            font-size: 30px;\r\n            position: absolute;\r\n            left: 20px;\r\n            top: 70px;\r\n          \"\r\n        >\r\n          <ion-icon name=\"close-circle-outline\"></ion-icon>\r\n        </div>\r\n        <div class=\"date\">\r\n          {{ details?.transferDate | date }}\r\n          {{ details?.transferDate | date: \"shortTime\" }}\r\n        </div>\r\n        <div class=\"card\"><ion-icon name=\"card\"></ion-icon></div>\r\n        <div\r\n          style=\"font-size: 12px; padding-top: 10px\"\r\n          *ngIf=\"details?.isRoyalTransfer\"\r\n        >\r\n          Royal Transfer\r\n        </div>\r\n        <div\r\n          style=\"font-size: 12px; padding-top: 10px\"\r\n          *ngIf=\"!details?.isRoyalTransfer\"\r\n        >\r\n          Others\r\n        </div>\r\n        <div class=\"date\">\r\n          <span *ngIf=\"tranType !== 'Credit'\">-</span\r\n          >{{ tran?.amount | currency: \"&#8358;\" }}\r\n        </div>\r\n      </div>\r\n      <div class=\"bod\">\r\n        <table>\r\n          <tbody>\r\n            <tr>\r\n              <th style=\"padding: 10px\">From</th>\r\n              <td style=\"padding: 10px\">{{ details?.senderAcctName }}</td>\r\n            </tr>\r\n            <tr>\r\n              <th style=\"padding: 10px\">To</th>\r\n              <td style=\"padding: 10px\">{{ details?.receiverAcctName }}</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <th style=\"padding: 10px\">Account No.</th>\r\n              <td style=\"padding: 10px\">{{ details?.receiverAcctNo }}</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <th style=\"padding: 10px\">Bank Name</th>\r\n              <td style=\"padding: 10px\">{{ details?.bankName }}</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <th style=\"padding: 10px\">Naration</th>\r\n              <td style=\"padding: 10px\">\r\n                {{ details?.transferDescription }}\r\n              </td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <th style=\"padding: 10px\">Transaction Type</th>\r\n              <td style=\"padding: 10px\">{{ tranType }}</td>\r\n            </tr>\r\n            <!-- <tr>\r\n              <th style=\"padding: 10px\">Refrence</th>\r\n              <td style=\"padding: 10px\">{{ tran?.paymentDetailData.receiptNumber }}</td>\r\n            </tr> -->\r\n            <!-- <tr>\r\n              <th style=\"padding: 10px\">Receipt Number</th>\r\n              <td style=\"padding: 10px\">\r\n                {{ tran?.paymentDetailData?.receiptNumber }}\r\n              </td>\r\n            </tr> -->\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <app-loader *ngIf=\"loading\"></app-loader>\r\n  <section style=\"background-color: #25214f\">\r\n    <div\r\n      style=\"\r\n        padding: 20px;\r\n        width: 100%;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #25214f;\r\n        color: #fff;\r\n        padding-top: 40px;\r\n        margin-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          background-color: #d9ac0b;\r\n          padding: 20px 30px;\r\n          text-align: left;\r\n          width: 100%;\r\n          max-width: 400px;\r\n          margin: auto;\r\n          border-radius: 10px;\r\n          color: #25214f;\r\n        \"\r\n      >\r\n        <div style=\"font-size: 15px\">\r\n          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}\r\n        </div>\r\n        <div\r\n          style=\"\r\n            border: 1px solid #25214f;\r\n            padding: 10px;\r\n            width: 100%;\r\n            display: flex;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <div>Balance:</div>\r\n          <div style=\"font-size: 20px\">\r\n            {{ user?.accountNos[0]?.accountBalance | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <section\r\n      style=\"\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 20px;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <form>\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Select Account</label>\r\n          <select [(ngModel)]=\"account\" name=\"account\" id=\"\" class=\"input\">\r\n            <option\r\n              *ngFor=\"let data of user.accountNos\"\r\n              [value]=\"data.accountNo\"\r\n            >\r\n              {{ data.accountNo }} ({{\r\n                data.accountBalance | currency: \"&#8358;\"\r\n              }})\r\n            </option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Start Date</label>\r\n          <input\r\n            type=\"date\"\r\n            name=\"startDate\"\r\n            class=\"input\"\r\n            placeholder=\"100000\"\r\n            [(ngModel)]=\"startDate\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">End Date</label>\r\n          <input\r\n            type=\"date\"\r\n            name=\"endDate\"\r\n            class=\"input\"\r\n            placeholder=\"100000\"\r\n            [(ngModel)]=\"endDate\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Transaction Type</label>\r\n          <select [(ngModel)]=\"typeId\" name=\"transactionType\" class=\"input\">\r\n            <option *ngFor=\"let data of types\" [value]=\"data.id\">\r\n              {{ data.name }}\r\n            </option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n          <ion-button\r\n            class=\"btn\"\r\n            expand=\"block\"\r\n            style=\"margin-top: 1rem\"\r\n            (click)=\"fetchHistory()\"\r\n            routerLinkActive=\"router-link-active\"\r\n          >\r\n            View History\r\n          </ion-button>\r\n        </div>\r\n      </form>\r\n    </section>\r\n\r\n    <section style=\"background-color: white; padding: 0 5%\">\r\n      <ion-card-header style=\"text-align: left\"\r\n        >Your transactions</ion-card-header\r\n      >\r\n\r\n      <div\r\n        *ngIf=\"data.length < 1\"\r\n        style=\"background-color: #f8f8f8; border-radius: 8px\"\r\n      >\r\n        <ion-card-content>\r\n          <span style=\"text-align: left; font-size: 13px\"\r\n            >No transactions found\r\n          </span>\r\n        </ion-card-content>\r\n      </div>\r\n      <div *ngFor=\"let trans of data\" (click)=\"setTrans(trans)\">\r\n        <div class=\"tra\" *ngIf=\"trans.transactionType !== 'Debit'\">\r\n          <div class=\"ico\">\r\n            <div class=\"im\"><img src=\"assets/icon/credict.png\" alt=\"\" /></div>\r\n            <div class=\"tex\">\r\n              <div class=\"ti\">\r\n                {{ trans?.narration }}\r\n              </div>\r\n              <div class=\"mod\">{{ trans?.submittedByUsername }}</div>\r\n              <div class=\"mod\">\r\n                {{ trans.date | date }}\r\n              </div>\r\n              <div class=\"mod\" style=\"font-size: 11px\">\r\n                {{ trans.date | date: \"shortTime\" }}\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"amount green\">\r\n            {{ trans.amount | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n        <div class=\"tra\" *ngIf=\"trans.transactionType === 'Debit'\">\r\n          <div class=\"ico\" style=\"text-align: left\">\r\n            <div class=\"im\"><img src=\"assets/icon/debit.png\" alt=\"\" /></div>\r\n            <div class=\"tex\">\r\n              <div class=\"ti\">\r\n                {{ trans?.receiverName }}\r\n              </div>\r\n              <div class=\"mod\">{{ trans?.submittedByUsername }}</div>\r\n              <div class=\"mod\">\r\n                {{ trans.date | date }}\r\n              </div>\r\n              <div class=\"mod\" style=\"font-size: 11px\">\r\n                {{ trans.date | date: \"shortTime\" }}\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"amount red\">\r\n            -{{ trans.amount | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </section>\r\n  </section>\r\n</ion-content>\r\n<ion-content *ngIf=\"visible\">\r\n  <div\r\n    class=\"mas\"\r\n    style=\"\r\n      display: flex;\r\n      justify-content: center;\r\n      align-items: center;\r\n      flex-direction: column;\r\n    \"\r\n  >\r\n    <div class=\"overlay\" (click)=\"setVissible()\" [@slideInOut]></div>\r\n    <div\r\n      style=\"\r\n        background-color: white;\r\n        width: 100vw;\r\n        height: 100vh;\r\n        z-index: 1000;\r\n        display: flex;\r\n        flex-direction: column;\r\n      \"\r\n      id=\"recipt\"\r\n      #recipt\r\n      [@slideInOut]\r\n    >\r\n      <div class=\"head\">\r\n        <div\r\n          (click)=\"setVissible()\"\r\n          style=\"\r\n            color: white;\r\n            font-size: 30px;\r\n            position: absolute;\r\n            left: 20px;\r\n            top: 70px;\r\n          \"\r\n        >\r\n          <ion-icon name=\"close-circle-outline\"></ion-icon>\r\n        </div>\r\n        <div\r\n          (click)=\"getReciept()\"\r\n          style=\"\r\n            color: white;\r\n            font-size: 30px;\r\n            position: absolute;\r\n            left: 60px;\r\n            top: 70px;\r\n          \"\r\n          *ngIf=\"transType !== 'Credit'\"\r\n        >\r\n          <ion-icon name=\"cloud-download-outline\"></ion-icon>\r\n        </div>\r\n        <div class=\"date\">\r\n          {{ details?.transferDate | date }}\r\n          {{ details?.transferDate | date: \"shortTime\" }}\r\n        </div>\r\n        <div class=\"card\"><ion-icon name=\"card\"></ion-icon></div>\r\n        <div\r\n          style=\"font-size: 12px; padding-top: 10px\"\r\n          *ngIf=\"details?.isRoyalTransfer\"\r\n        >\r\n          Royal Transfer\r\n        </div>\r\n        <div\r\n          style=\"font-size: 12px; padding-top: 10px\"\r\n          *ngIf=\"!details?.isRoyalTransfer\"\r\n        >\r\n          Others\r\n        </div>\r\n        <div class=\"date\">\r\n          <span *ngIf=\"tranType !== 'Credit'\">-</span\r\n          >{{ tran?.amount | currency: \"&#8358;\" }}\r\n        </div>\r\n      </div>\r\n      <div class=\"bod\">\r\n        <table>\r\n          <tbody>\r\n            <tr>\r\n              <th style=\"padding: 10px\">From</th>\r\n              <td style=\"padding: 10px\">{{ details?.senderAcctName }}</td>\r\n            </tr>\r\n            <tr>\r\n              <th style=\"padding: 10px\">To</th>\r\n              <td style=\"padding: 10px\">{{ details?.receiverAcctName }}</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <th style=\"padding: 10px\">Account No.</th>\r\n              <td style=\"padding: 10px\">{{ details?.receiverAcctNo }}</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <th style=\"padding: 10px\">Bank Name</th>\r\n              <td style=\"padding: 10px\">{{ details?.bankName }}</td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <th style=\"padding: 10px\">Naration</th>\r\n              <td style=\"padding: 10px\">\r\n                {{ details?.transferDescription }}\r\n              </td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <th style=\"padding: 10px\">Transaction Type</th>\r\n              <td style=\"padding: 10px\">{{ tranType }}</td>\r\n            </tr>\r\n            <!-- <tr>\r\n              <th style=\"padding: 10px\">Refrence</th>\r\n              <td style=\"padding: 10px\">{{ tran?.paymentDetailData.receiptNumber }}</td>\r\n            </tr> -->\r\n            <!-- <tr>\r\n              <th style=\"padding: 10px\">Receipt Number</th>\r\n              <td style=\"padding: 10px\">\r\n                {{ tran?.paymentDetailData?.receiptNumber }}\r\n              </td>\r\n            </tr> -->\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -11039,7 +11894,7 @@ module.exports = "<ion-content>\r\n  <app-loader *ngIf=\"loading\"></app-loader>
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <div style=\"padding: 20px\"></div>\r\n  <app-loader *ngIf=\"loading\"></app-loader>\r\n  <app-pin\r\n    (close)=\"close()\"\r\n    (loading)=\"load()\"\r\n    (done)=\"finish()\"\r\n    *ngIf=\"show\"\r\n  ></app-pin>\r\n  <section style=\"background-color: #25214f\">\r\n    <div\r\n      style=\"\r\n        padding: 20px;\r\n        width: 100%;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #25214f;\r\n        color: #fff;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          background-color: #d9ac0b;\r\n          padding: 20px 30px;\r\n          text-align: left;\r\n          width: 100%;\r\n          max-width: 400px;\r\n          margin: auto;\r\n          border-radius: 10px;\r\n          color: #25214f;\r\n        \"\r\n      >\r\n        <div style=\"font-size: 15px\">\r\n          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}\r\n        </div>\r\n        <div\r\n          style=\"\r\n            border: 1px solid #25214f;\r\n            padding: 10px;\r\n            width: 100%;\r\n            display: flex;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <div>Balance:</div>\r\n          <div style=\"font-size: 20px\">\r\n            {{ user?.accountNos[0]?.accountBalance | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <section\r\n      *ngIf=\"transType ===0\"\r\n      style=\"\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 20px;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        class=\"row\"\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n        \"\r\n      >\r\n        <ion-button\r\n          (click)=\"toggleRequest(true)\"\r\n          [ngClass]=\"{active: selectedBtn === true}\"\r\n          style=\"width: 100%; --border-radius: none\"\r\n        >\r\n          New\r\n        </ion-button>\r\n\r\n        <ion-button\r\n          (click)=\"toggleRequest(false)\"\r\n          [ngClass]=\"{active: selectedBtn1 === true}\"\r\n          style=\"width: 100%; --border-radius: none\"\r\n        >\r\n          History\r\n        </ion-button>\r\n      </div>\r\n      <form *ngIf=\"newReq\">\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Select Account</label>\r\n          <select [(ngModel)]=\"account\" name=\"account\" id=\"\" class=\"input\">\r\n            <option\r\n              *ngFor=\"let data of user.accountNos\"\r\n              [value]=\"data.accountNo\"\r\n            >\r\n              {{data.accountNo}} ({{data.accountBalance | currency: \"&#8358;\"}})\r\n            </option>\r\n          </select>\r\n          <label for=\"\">Loan Type</label>\r\n          <select\r\n            [(ngModel)]=\"productCode\"\r\n            name=\"productCode\"\r\n            id=\"\"\r\n            class=\"input\"\r\n          >\r\n            <option\r\n              *ngFor=\"let loan of loadTypes\"\r\n              [value]=\"loan.loanProductKey\"\r\n            >\r\n              {{loan.loanProductName}}\r\n            </option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Loan Tenure</label>\r\n          <select [(ngModel)]=\"tenure\" name=\"tenure\" id=\"\" class=\"input\">\r\n            <option *ngFor=\"let ten of tenures\" [value]=\"ten.value\">\r\n              {{ten.name}}\r\n            </option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Amount</label>\r\n          <input\r\n            [(ngModel)]=\"formattedAmount\"\r\n            type=\"text\"\r\n            name=\"principal\"\r\n            class=\"input\"\r\n            placeholder=\"100000\"\r\n            CurrencyPipe\r\n            (blur)=\"transformAmount($event)\"\r\n          />\r\n        </div>\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Start Date</label>\r\n          <input\r\n            [(ngModel)]=\"date\"\r\n            type=\"date\"\r\n            name=\"date\"\r\n            style=\"width: 100%\"\r\n            class=\"input\"\r\n          />\r\n        </div>\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Comment</label>\r\n          <input\r\n            [(ngModel)]=\"comment\"\r\n            type=\"text\"\r\n            name=\"comment\"\r\n            class=\"input\"\r\n            placeholder=\"\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n          <ion-button\r\n            class=\"btn\"\r\n            expand=\"block\"\r\n            style=\"margin-top: 1rem\"\r\n            (click)=\"next()\"\r\n            routerLinkActive=\"router-link-active\"\r\n          >\r\n            Apply\r\n          </ion-button>\r\n        </div>\r\n      </form>\r\n\r\n      <div *ngIf=\"!newReq\" class=\"row\">\r\n        <section *ngIf=\"history.length === 0\">\r\n          <div\r\n            style=\"\r\n              background-color: #f8f8f8;\r\n              border-radius: 8px;\r\n              text-align: left;\r\n              padding: 20px;\r\n            \"\r\n          >\r\n            No Record Available\r\n          </div>\r\n        </section>\r\n        <section *ngIf=\"history.length > 0\">\r\n          <div\r\n            style=\"\r\n              background-color: #f8f8f8;\r\n              border-radius: 8px;\r\n              text-align: left;\r\n              padding: 20px;\r\n              margin-top: 20px;\r\n            \"\r\n            *ngFor=\"let data of history\"\r\n          >\r\n            <table>\r\n              <tr>\r\n                <th>Status</th>\r\n                <td>\r\n                  <ion-button\r\n                    *ngIf=\"data.state === 'Pending Approval'\"\r\n                    size=\"small\"\r\n                    style=\"--background: #ff5a5a; --color: #fff\"\r\n                    >{{data?.state}}</ion-button\r\n                  ><ion-button\r\n                    *ngIf=\"data.state !== 'Pending Approval'\"\r\n                    size=\"small\"\r\n                    style=\"--background: #46ae6a; --color: #fff\"\r\n                    >{{data?.state}}</ion-button\r\n                  >\r\n                </td>\r\n              </tr>\r\n              <tr>\r\n                <th>Loan Type</th>\r\n                <td>{{data.type}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Amount</th>\r\n                <td>{{data.amount | currency : \"N\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Balance</th>\r\n                <td>{{data.balance | currency : \"N\"}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Account ID</th>\r\n                <td>{{data.loanAccountId}}</td>\r\n              </tr>\r\n\r\n              <!-- <tr>\r\n                <th>Outstanding Intrest</th>\r\n                <td>{{data.interestOutstanding | currency: \"&#8358;\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Intrest Paid</th>\r\n                <td>{{data.interestPaid | currency: \"&#8358;\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Total Amount</th>\r\n                <td>{{data.totalAmount | currency: \"&#8358;\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Total Outstanding</th>\r\n                <td>{{data.totalOutstanding | currency: \"&#8358;\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Total Paid</th>\r\n                <td>{{data.totalPaid | currency: \"&#8358;\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Next Repayment Amount</th>\r\n                <td>{{data.nextRepaymentAmount | currency: \"&#8358;\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Next Repayment Date</th>\r\n                <td>{{data.nextRepaymentDate | date}}</td>\r\n              </tr> -->\r\n            </table>\r\n            <!-- <ion-button\r\n              *ngIf=\"data.status\"\r\n              size=\"small\"\r\n              style=\"--background: #fee178; --color: #25214f\"\r\n              (click)=\"repay(data.loanKey)\"\r\n              >View Repayment Schedule</ion-button\r\n            > -->\r\n          </div>\r\n        </section>\r\n      </div>\r\n    </section>\r\n    <section *ngIf=\"transType === 1\" style=\"background-color: white\">\r\n      <div class=\"header\" style=\"padding: 20px 0\">Repayment Schedule</div>\r\n\r\n      <div\r\n        style=\"\r\n          background-color: #f8f8f8;\r\n          border-radius: 8px;\r\n          text-align: left;\r\n          padding: 20px;\r\n          margin: 10px;\r\n        \"\r\n        *ngFor=\"let data of schedules\"\r\n      >\r\n        <table>\r\n          <tr>\r\n            <th>Repayment Date</th>\r\n            <td>{{data.repaymentDate | date}}</td>\r\n          </tr>\r\n          <tr>\r\n            <th>Principal Repayment</th>\r\n            <td>{{data.principalRepayment | currency: \"&#8358;\"}}</td>\r\n          </tr>\r\n          <tr>\r\n            <th>Intrest Repayment</th>\r\n            <td>{{data.interestRepayment | currency: \"&#8358;\"}}</td>\r\n          </tr>\r\n          <tr>\r\n            <th>Total Repayment</th>\r\n            <td>{{data.totalRepayment | currency: \"&#8358;\"}}</td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <ion-button\r\n          class=\"btn\"\r\n          expand=\"block\"\r\n          style=\"width: 300px; margin: 20px auto\"\r\n          (click)=\"show = true\"\r\n          routerLinkActive=\"router-link-active\"\r\n        >\r\n          Apply\r\n        </ion-button>\r\n      </div>\r\n    </section>\r\n\r\n    <section *ngIf=\"transType === 3\" style=\"background-color: white\">\r\n      <div class=\"header\" style=\"padding: 20px 0\">Repayment Schedule</div>\r\n\r\n      <div\r\n        style=\"\r\n          background-color: #f8f8f8;\r\n          border-radius: 8px;\r\n          text-align: left;\r\n          padding: 20px;\r\n          margin: 10px;\r\n        \"\r\n        *ngFor=\"let data of repaySchedules\"\r\n      >\r\n        <table>\r\n          <tr>\r\n            <th>Paid</th>\r\n            <td>\r\n              <span *ngIf=\"data.isPaid === true\">Yes</span>\r\n              <span *ngIf=\"data.isPaid === false\">No</span>\r\n            </td>\r\n          </tr>\r\n          <tr>\r\n            <th>Repayment Date</th>\r\n            <td>{{data.repaymentDate | date}}</td>\r\n          </tr>\r\n          <tr>\r\n            <th>Principal Repayment</th>\r\n            <td>{{data.principalRepayment | currency: \"&#8358;\"}}</td>\r\n          </tr>\r\n          <tr>\r\n            <th>Intrest Repayment</th>\r\n            <td>{{data.interestRepayment | currency: \"&#8358;\"}}</td>\r\n          </tr>\r\n          <tr>\r\n            <th>Total Repayment</th>\r\n            <td>{{data.totalRepayment | currency: \"&#8358;\"}}</td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <ion-button\r\n          class=\"btn\"\r\n          expand=\"block\"\r\n          style=\"width: 300px; margin: 20px auto\"\r\n          (click)=\"transType = 0\"\r\n          routerLinkActive=\"router-link-active\"\r\n        >\r\n          Back\r\n        </ion-button>\r\n      </div>\r\n    </section>\r\n\r\n    <section\r\n      *ngIf=\"transType ===7\"\r\n      style=\"\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 20px;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <form>\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Document</label>\r\n          <input type=\"file\" name=\"document\" class=\"custom-file-input\" />\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Comment</label>\r\n          <textarea name=\"comment\" class=\"input\" cols=\"30\" rows=\"10\"></textarea>\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n          <ion-button\r\n            class=\"btn\"\r\n            expand=\"block\"\r\n            style=\"margin-top: 1rem\"\r\n            (click)=\"transactionType(1)\"\r\n            routerLinkActive=\"router-link-active\"\r\n          >\r\n            Apply\r\n          </ion-button>\r\n        </div>\r\n      </form>\r\n    </section>\r\n  </section>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <div style=\"padding: 20px\"></div>\r\n  <app-loader *ngIf=\"loading\"></app-loader>\r\n  <app-pin\r\n    (close)=\"close()\"\r\n    (loading)=\"load()\"\r\n    (done)=\"finish()\"\r\n    *ngIf=\"show\"\r\n  ></app-pin>\r\n  <section style=\"background-color: #25214f\">\r\n    <div\r\n      style=\"\r\n        padding: 20px;\r\n        width: 100%;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #25214f;\r\n        color: #fff;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          background-color: #d9ac0b;\r\n          padding: 20px 30px;\r\n          text-align: left;\r\n          width: 100%;\r\n          max-width: 400px;\r\n          margin: auto;\r\n          border-radius: 10px;\r\n          color: #25214f;\r\n        \"\r\n      >\r\n        <div style=\"font-size: 15px\">\r\n          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}\r\n        </div>\r\n        <div\r\n          style=\"\r\n            border: 1px solid #25214f;\r\n            padding: 10px;\r\n            width: 100%;\r\n            display: flex;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <div>Balance:</div>\r\n          <div style=\"font-size: 20px\">\r\n            {{ user?.accountNos[0]?.accountBalance | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <section\r\n      *ngIf=\"transType ===0\"\r\n      style=\"\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 20px;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        class=\"row\"\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n        \"\r\n      >\r\n        <ion-button\r\n          (click)=\"toggleRequest(true)\"\r\n          [ngClass]=\"{active: selectedBtn === true}\"\r\n          style=\"width: 100%; --border-radius: none\"\r\n        >\r\n          New\r\n        </ion-button>\r\n\r\n        <ion-button\r\n          (click)=\"toggleRequest(false)\"\r\n          [ngClass]=\"{active: selectedBtn1 === true}\"\r\n          style=\"width: 100%; --border-radius: none\"\r\n        >\r\n          History\r\n        </ion-button>\r\n      </div>\r\n      <form *ngIf=\"newReq\">\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Select Account</label>\r\n          <select [(ngModel)]=\"account\" name=\"account\" id=\"\" class=\"input\">\r\n            <option\r\n              *ngFor=\"let data of user.accountNos\"\r\n              [value]=\"data.accountNo\"\r\n            >\r\n              {{data.accountNo}} ({{data.accountBalance | currency: \"&#8358;\"}})\r\n            </option>\r\n          </select>\r\n          <label for=\"\">Loan Type</label>\r\n          <select\r\n            [(ngModel)]=\"productCode\"\r\n            name=\"productCode\"\r\n            id=\"\"\r\n            class=\"input\"\r\n          >\r\n            <option\r\n              *ngFor=\"let loan of loadTypes\"\r\n              [value]=\"loan.loanProductKey\"\r\n            >\r\n              {{loan.loanProductName}}\r\n            </option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Loan Tenure</label>\r\n          <select\r\n            [(ngModel)]=\"tenure\"\r\n            name=\"tenure\"\r\n            id=\"\"\r\n            class=\"input\"\r\n            (change)=\"dateTenure($event)\"\r\n          >\r\n            <option *ngFor=\"let ten of tenures\" [value]=\"ten.value\">\r\n              {{ten.name}}\r\n            </option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Amount</label>\r\n          <input\r\n            [(ngModel)]=\"formattedAmount\"\r\n            type=\"text\"\r\n            name=\"principal\"\r\n            class=\"input\"\r\n            placeholder=\"100000\"\r\n            CurrencyPipe\r\n            (blur)=\"transformAmount($event)\"\r\n          />\r\n        </div>\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Start Date</label>\r\n          <input\r\n            [(ngModel)]=\"date\"\r\n            type=\"date\"\r\n            name=\"date\"\r\n            style=\"width: 100%\"\r\n            class=\"input\"\r\n            (change)=\"dateChange($event)\"\r\n          />\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Comment</label>\r\n          <input\r\n            [(ngModel)]=\"comment\"\r\n            type=\"text\"\r\n            name=\"comment\"\r\n            class=\"input\"\r\n            placeholder=\"\"\r\n          />\r\n        </div>\r\n\r\n        <div\r\n          class=\"form-group row\"\r\n          style=\"\r\n            padding: 5px;\r\n            border: 1px dotted grey;\r\n            background-color: white;\r\n            padding: 15px 25px;\r\n            display: flex;\r\n            justify-content: space-between;\r\n            flex-direction: row;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <span for=\"\">End Date : </span>\r\n          <span>{{ endDate | date }}</span>\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n          <ion-button\r\n            class=\"btn\"\r\n            expand=\"block\"\r\n            style=\"margin-top: 1rem\"\r\n            (click)=\"next()\"\r\n            routerLinkActive=\"router-link-active\"\r\n          >\r\n            Apply\r\n          </ion-button>\r\n        </div>\r\n      </form>\r\n\r\n      <div *ngIf=\"!newReq\" class=\"row\">\r\n        <section *ngIf=\"history.length === 0\">\r\n          <div\r\n            style=\"\r\n              background-color: #f8f8f8;\r\n              border-radius: 8px;\r\n              text-align: left;\r\n              padding: 20px;\r\n            \"\r\n          >\r\n            No Record Available\r\n          </div>\r\n        </section>\r\n        <section *ngIf=\"history.length > 0\">\r\n          <div\r\n            style=\"\r\n              background-color: #f8f8f8;\r\n              border-radius: 8px;\r\n              text-align: left;\r\n              padding: 20px;\r\n              margin-top: 20px;\r\n            \"\r\n            *ngFor=\"let data of history\"\r\n          >\r\n            <table>\r\n              <tr>\r\n                <th>Status</th>\r\n                <td>\r\n                  <ion-button\r\n                    *ngIf=\"data.state === 'Pending Approval'\"\r\n                    size=\"small\"\r\n                    style=\"--background: #ff5a5a; --color: #fff\"\r\n                    >{{data?.state}}</ion-button\r\n                  ><ion-button\r\n                    *ngIf=\"data.state !== 'Pending Approval'\"\r\n                    size=\"small\"\r\n                    style=\"--background: #46ae6a; --color: #fff\"\r\n                    >{{data?.state}}</ion-button\r\n                  >\r\n                </td>\r\n              </tr>\r\n              <tr>\r\n                <th>Loan Type</th>\r\n                <td>{{data.type}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Amount</th>\r\n                <td>{{data.amount | currency : \"N\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Balance</th>\r\n                <td>{{data.balance | currency : \"N\"}}</td>\r\n              </tr>\r\n\r\n              <tr>\r\n                <th>Account ID</th>\r\n                <td>{{data.loanAccountId}}</td>\r\n              </tr>\r\n\r\n              <!-- <tr>\r\n                <th>Outstanding Interest</th>\r\n                <td>{{data.interestOutstanding | currency: \"&#8358;\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Interest Paid</th>\r\n                <td>{{data.interestPaid | currency: \"&#8358;\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Total Amount</th>\r\n                <td>{{data.totalAmount | currency: \"&#8358;\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Total Outstanding</th>\r\n                <td>{{data.totalOutstanding | currency: \"&#8358;\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Total Paid</th>\r\n                <td>{{data.totalPaid | currency: \"&#8358;\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Next Repayment Amount</th>\r\n                <td>{{data.nextRepaymentAmount | currency: \"&#8358;\"}}</td>\r\n              </tr>\r\n              <tr>\r\n                <th>Next Repayment Date</th>\r\n                <td>{{data.nextRepaymentDate | date}}</td>\r\n              </tr> -->\r\n            </table>\r\n            <!-- <ion-button\r\n              *ngIf=\"data.status\"\r\n              size=\"small\"\r\n              style=\"--background: #fee178; --color: #25214f\"\r\n              (click)=\"repay(data.loanKey)\"\r\n              >View Repayment Schedule</ion-button\r\n            > -->\r\n          </div>\r\n        </section>\r\n      </div>\r\n    </section>\r\n    <section *ngIf=\"transType === 1\" style=\"background-color: white\">\r\n      <div class=\"header\" style=\"padding: 20px 0\">Repayment Schedule</div>\r\n\r\n      <div\r\n        style=\"\r\n          background-color: #f8f8f8;\r\n          border-radius: 8px;\r\n          text-align: left;\r\n          padding: 20px;\r\n          margin: 10px;\r\n        \"\r\n        *ngFor=\"let data of schedules\"\r\n      >\r\n        <table>\r\n          <tr>\r\n            <th>Repayment Date</th>\r\n            <td>{{data.repaymentDate | date}}</td>\r\n          </tr>\r\n          <tr>\r\n            <th>Principal Repayment</th>\r\n            <td>{{data.principalRepayment | currency: \"&#8358;\"}}</td>\r\n          </tr>\r\n          <tr>\r\n            <th>Interest Repayment</th>\r\n            <td>{{data.interestRepayment | currency: \"&#8358;\"}}</td>\r\n          </tr>\r\n          <tr>\r\n            <th>Total Repayment</th>\r\n            <td>{{data.totalRepayment | currency: \"&#8358;\"}}</td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <ion-button\r\n          class=\"btn\"\r\n          expand=\"block\"\r\n          style=\"width: 300px; margin: 20px auto\"\r\n          (click)=\"show = true\"\r\n          routerLinkActive=\"router-link-active\"\r\n        >\r\n          Apply\r\n        </ion-button>\r\n      </div>\r\n    </section>\r\n\r\n    <section *ngIf=\"transType === 3\" style=\"background-color: white\">\r\n      <div class=\"header\" style=\"padding: 20px 0\">Repayment Schedule</div>\r\n\r\n      <div\r\n        style=\"\r\n          background-color: #f8f8f8;\r\n          border-radius: 8px;\r\n          text-align: left;\r\n          padding: 20px;\r\n          margin: 10px;\r\n        \"\r\n        *ngFor=\"let data of repaySchedules\"\r\n      >\r\n        <table>\r\n          <tr>\r\n            <th>Paid</th>\r\n            <td>\r\n              <span *ngIf=\"data.isPaid === true\">Yes</span>\r\n              <span *ngIf=\"data.isPaid === false\">No</span>\r\n            </td>\r\n          </tr>\r\n          <tr>\r\n            <th>Repayment Date</th>\r\n            <td>{{data.repaymentDate | date}}</td>\r\n          </tr>\r\n          <tr>\r\n            <th>Principal Repayment</th>\r\n            <td>{{data.principalRepayment | currency: \"&#8358;\"}}</td>\r\n          </tr>\r\n          <tr>\r\n            <th>Interest Repayment</th>\r\n            <td>{{data.interestRepayment | currency: \"&#8358;\"}}</td>\r\n          </tr>\r\n          <tr>\r\n            <th>Total Repayment</th>\r\n            <td>{{data.totalRepayment | currency: \"&#8358;\"}}</td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <ion-button\r\n          class=\"btn\"\r\n          expand=\"block\"\r\n          style=\"width: 300px; margin: 20px auto\"\r\n          (click)=\"transType = 0\"\r\n          routerLinkActive=\"router-link-active\"\r\n        >\r\n          Back\r\n        </ion-button>\r\n      </div>\r\n    </section>\r\n\r\n    <section\r\n      *ngIf=\"transType ===7\"\r\n      style=\"\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 20px;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <form>\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Document</label>\r\n          <input type=\"file\" name=\"document\" class=\"custom-file-input\" />\r\n        </div>\r\n\r\n        <div class=\"form-group row\" style=\"padding: 5px\">\r\n          <label for=\"\">Comment</label>\r\n          <textarea name=\"comment\" class=\"input\" cols=\"30\" rows=\"10\"></textarea>\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n          <ion-button\r\n            class=\"btn\"\r\n            expand=\"block\"\r\n            style=\"margin-top: 1rem\"\r\n            (click)=\"transactionType(1)\"\r\n            routerLinkActive=\"router-link-active\"\r\n          >\r\n            Apply\r\n          </ion-button>\r\n        </div>\r\n      </form>\r\n    </section>\r\n  </section>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -11149,7 +12004,7 @@ module.exports = "<ion-content>\n  <div\n    style=\"\n      display: flex;\n   
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\n  <app-loader *ngIf=\"loading\"></app-loader>\n  <div\n    style=\"\n      display: flex;\n      justify-content: space-between;\n      flex-direction: column;\n      height: 90vh;\n      padding-bottom: 40px;\n    \"\n    *ngIf=\"page === 'take'\"\n  >\n    <div>\n      <section\n        class=\"central-image\"\n        style=\"position: relative; width: 291px; margin: auto\"\n      >\n        <ion-img [src]=\"imageSrc\" class=\"img\"></ion-img>\n        <ion-img\n          src=\"assets/icon/check.png\"\n          style=\"width: 30px; position: absolute; right: 35px; top: 80px\"\n        ></ion-img>\n      </section>\n\n      <section\n        style=\"\n          text-align: center;\n          margin-top: -80px;\n          display: flex;\n          flex-direction: column;\n          align-content: space-between;\n        \"\n      >\n        <section class=\"we\" style=\"margin-top: 4rem\">\n          All done {{ user.firstName }}\n        </section>\n        <section style=\"font-size: 14px; text-align: center; margin-top: 10px\">\n          Your information all checked out.\n        </section>\n        <div\n          style=\"\n            background: #f8f8f8;\n            border-radius: 8px;\n            padding: 25px;\n            margin-top: 20px;\n          \"\n        >\n          <div class=\"td\">Upload your picture</div>\n          <div class=\"bd\">Show us that beautiful</div>\n          <div class=\"bdp\">\n            Picture must be taken in a well lit and clear background\n          </div>\n        </div>\n      </section>\n    </div>\n    <section class=\"central-image row\">\n      <div class=\"form-group\">\n        <ion-button\n          class=\"btn\"\n          expand=\"block\"\n          style=\"margin-top: 1rem\"\n          (click)=\"takePhoto()\"\n          routerLinkActive=\"router-link-active\"\n        >\n          Take a Picture\n        </ion-button>\n      </div>\n    </section>\n  </div>\n\n  <div\n    style=\"\n      display: flex;\n      justify-content: space-between;\n      flex-direction: column;\n      height: 90vh;\n      padding-bottom: 40px;\n    \"\n    *ngIf=\"page === 'crop'\"\n  >\n    <div>\n      <!-- <section\n        style=\"\n          text-align: center;\n          margin-top: -80px;\n          display: flex;\n          flex-direction: column;\n          align-content: space-between;\n        \"\n      >\n        <section class=\"we\" style=\"margin-top: 4rem\">\n          All done {{ user.firstName }}\n        </section>\n        <section style=\"font-size: 14px; text-align: center; margin-top: 10px\">\n          Your information all checked out.\n        </section>\n        <div\n          style=\"\n            background: #f8f8f8;\n            border-radius: 8px;\n            padding: 25px;\n            margin-top: 20px;\n          \"\n        >\n          <div class=\"td\">Upload your picture</div>\n          <div class=\"bd\">Show us that beautiful</div>\n          <div class=\"bdp\">\n            Picture must be taken in a well lit and clear background\n          </div>\n        </div>\n      </section> -->\n    </div>\n    <div class=\"card-body\">\n      <div class=\"row\" style=\"margin-top: 15px\">\n        <div class=\"text-center col-md-8\" style=\"text-align: center\">\n          <h3>Crop Image</h3>\n          <h5>Make sure your face is vissible</h5>\n          <image-cropper\n            [imageChangedEvent]=\"imageChangedEvent\"\n            [imageBase64]=\"baseImage\"\n            [maintainAspectRatio]=\"true\"\n            [aspectRatio]=\"4 / 4\"\n            [resizeToWidth]=\"256\"\n            format=\"png\"\n            (imageCropped)=\"imageCropped($event)\"\n            (imageLoaded)=\"imageLoaded()\"\n            (cropperReady)=\"cropperReady()\"\n            (loadImageFailed)=\"loadImageFailed()\"\n          ></image-cropper>\n        </div>\n      </div>\n    </div>\n    <section class=\"central-image row\">\n      <div class=\"form-group\">\n        <ion-button\n          (click)=\"crop()\"\n          class=\"btn\"\n          expand=\"block\"\n          style=\"margin-top: 0\"\n        >\n          Done\n        </ion-button>\n      </div>\n    </section>\n  </div>\n\n  <div\n    style=\"\n      display: flex;\n      justify-content: space-between;\n      flex-direction: column;\n      height: 90vh;\n      padding-bottom: 40px;\n    \"\n    *ngIf=\"page === 'success'\"\n  >\n    <div>\n      <section\n        class=\"central-image\"\n        style=\"\n          width: 291px;\n          margin: auto;\n          display: flex;\n          flex-direction: column;\n        \"\n      >\n        <ion-img\n          style=\"width: 140px; height: 140px; margin-top: 100px\"\n          class=\"img\"\n          src=\"assets/icon/good.png\"\n        ></ion-img>\n      </section>\n\n      <section\n        style=\"\n          text-align: center;\n          margin-top: -20px;\n          display: flex;\n          flex-direction: column;\n          align-content: space-between;\n        \"\n      >\n        <section class=\"we\" style=\"margin-top: 4rem\">\n          Image captured successfully\n        </section>\n      </section>\n    </div>\n    <section class=\"central-image row\">\n      <div class=\"form-group\">\n        <ion-button\n          class=\"btn\"\n          expand=\"block\"\n          style=\"margin-top: 1rem\"\n          (click)=\"next()\"\n          routerLinkActive=\"router-link-active\"\n        >\n          Continue\n        </ion-button>\n      </div>\n    </section>\n  </div>\n\n  <div\n    style=\"\n      display: flex;\n      justify-content: space-between;\n      flex-direction: column;\n      height: 100vh;\n      padding-bottom: 40px;\n    \"\n    *ngIf=\"page === 'fail'\"\n  >\n    <div>\n      <section\n        class=\"central-image\"\n        style=\"\n          width: 291px;\n          margin: auto;\n          display: flex;\n          flex-direction: column;\n        \"\n      >\n        <ion-img\n          style=\"width: 140px; height: 140px; margin-top: 100px\"\n          class=\"img\"\n          src=\"assets/icon/bad.png\"\n        ></ion-img>\n      </section>\n\n      <section\n        style=\"\n          text-align: center;\n          margin-top: -20px;\n          display: flex;\n          flex-direction: column;\n          align-content: space-between;\n        \"\n      >\n        <section class=\"we\" style=\"margin-top: 4rem\">\n          There was an error with your captured image\n        </section>\n      </section>\n    </div>\n    <section class=\"central-image row\">\n      <div class=\"form-group\">\n        <ion-button\n          class=\"btn\"\n          expand=\"block\"\n          style=\"margin-top: 1rem\"\n          (click)=\"retake()\"\n          routerLinkActive=\"router-link-active\"\n        >\n          Retake\n        </ion-button>\n      </div>\n    </section>\n  </div>\n</ion-content>\n";
+module.exports = "<ion-content>\n  <app-loader *ngIf=\"loading\"></app-loader>\n  <div\n    style=\"\n      display: flex;\n      justify-content: space-between;\n      flex-direction: column;\n      height: 90vh;\n      padding-bottom: 40px;\n    \"\n    *ngIf=\"page === 'take'\"\n  >\n    <div>\n      <section\n        class=\"central-image\"\n        style=\"position: relative; width: 291px; margin: auto\"\n      >\n        <ion-img [src]=\"imageSrc\" class=\"img\"></ion-img>\n        <ion-img\n          src=\"assets/icon/check.png\"\n          style=\"width: 30px; position: absolute; right: 35px; top: 80px\"\n        ></ion-img>\n      </section>\n\n      <section\n        style=\"\n          text-align: center;\n          margin-top: -80px;\n          display: flex;\n          flex-direction: column;\n          align-content: space-between;\n        \"\n      >\n        <section class=\"we\" style=\"margin-top: 4rem\">\n          All done {{ user.firstName }}\n        </section>\n        <section style=\"font-size: 14px; text-align: center; margin-top: 10px\">\n          Your information all checked out.\n        </section>\n        <div\n          style=\"\n            background: #f8f8f8;\n            border-radius: 8px;\n            padding: 25px;\n            margin-top: 20px;\n          \"\n        >\n          <div class=\"td\">Upload your picture</div>\n          <div class=\"bd\">Show us that wonderful face of yours</div>\n          <div class=\"bdp\">\n            Picture must be taken in a well lit and clear background\n          </div>\n        </div>\n      </section>\n    </div>\n    <section class=\"central-image row\">\n      <div class=\"form-group\">\n        <ion-button\n          class=\"btn\"\n          expand=\"block\"\n          style=\"margin-top: 1rem\"\n          (click)=\"takePhoto()\"\n          routerLinkActive=\"router-link-active\"\n        >\n          Take a Picture\n        </ion-button>\n      </div>\n    </section>\n  </div>\n\n  <div\n    style=\"\n      display: flex;\n      justify-content: space-between;\n      flex-direction: column;\n      height: 90vh;\n      padding-bottom: 40px;\n    \"\n    *ngIf=\"page === 'crop'\"\n  >\n    <div>\n      <!-- <section\n        style=\"\n          text-align: center;\n          margin-top: -80px;\n          display: flex;\n          flex-direction: column;\n          align-content: space-between;\n        \"\n      >\n        <section class=\"we\" style=\"margin-top: 4rem\">\n          All done {{ user.firstName }}\n        </section>\n        <section style=\"font-size: 14px; text-align: center; margin-top: 10px\">\n          Your information all checked out.\n        </section>\n        <div\n          style=\"\n            background: #f8f8f8;\n            border-radius: 8px;\n            padding: 25px;\n            margin-top: 20px;\n          \"\n        >\n          <div class=\"td\">Upload your picture</div>\n          <div class=\"bd\">Show us that beautiful</div>\n          <div class=\"bdp\">\n            Picture must be taken in a well lit and clear background\n          </div>\n        </div>\n      </section> -->\n    </div>\n    <div class=\"card-body\">\n      <div class=\"row\" style=\"margin-top: 15px\">\n        <div class=\"text-center col-md-8\" style=\"text-align: center\">\n          <h3>Crop Image</h3>\n          <h5>Make sure your face is visible</h5>\n          <image-cropper\n            [imageChangedEvent]=\"imageChangedEvent\"\n            [imageBase64]=\"baseImage\"\n            [maintainAspectRatio]=\"true\"\n            [aspectRatio]=\"4 / 4\"\n            [resizeToWidth]=\"256\"\n            format=\"png\"\n            (imageCropped)=\"imageCropped($event)\"\n            (imageLoaded)=\"imageLoaded()\"\n            (cropperReady)=\"cropperReady()\"\n            (loadImageFailed)=\"loadImageFailed()\"\n          ></image-cropper>\n        </div>\n      </div>\n    </div>\n    <section class=\"central-image row\">\n      <div class=\"form-group\">\n        <ion-button\n          (click)=\"crop()\"\n          class=\"btn\"\n          expand=\"block\"\n          style=\"margin-top: 0\"\n        >\n          Done\n        </ion-button>\n      </div>\n    </section>\n  </div>\n\n  <div\n    style=\"\n      display: flex;\n      justify-content: space-between;\n      flex-direction: column;\n      height: 90vh;\n      padding-bottom: 40px;\n    \"\n    *ngIf=\"page === 'success'\"\n  >\n    <div>\n      <section\n        class=\"central-image\"\n        style=\"\n          width: 291px;\n          margin: auto;\n          display: flex;\n          flex-direction: column;\n        \"\n      >\n        <ion-img\n          style=\"width: 140px; height: 140px; margin-top: 100px\"\n          class=\"img\"\n          src=\"assets/icon/good.png\"\n        ></ion-img>\n      </section>\n\n      <section\n        style=\"\n          text-align: center;\n          margin-top: -20px;\n          display: flex;\n          flex-direction: column;\n          align-content: space-between;\n        \"\n      >\n        <section class=\"we\" style=\"margin-top: 4rem\">\n          Image captured successfully\n        </section>\n      </section>\n    </div>\n    <section class=\"central-image row\">\n      <div class=\"form-group\">\n        <ion-button\n          class=\"btn\"\n          expand=\"block\"\n          style=\"margin-top: 1rem\"\n          (click)=\"next()\"\n          routerLinkActive=\"router-link-active\"\n        >\n          Continue\n        </ion-button>\n      </div>\n    </section>\n  </div>\n\n  <div\n    style=\"\n      display: flex;\n      justify-content: space-between;\n      flex-direction: column;\n      height: 100vh;\n      padding-bottom: 40px;\n    \"\n    *ngIf=\"page === 'fail'\"\n  >\n    <div>\n      <section\n        class=\"central-image\"\n        style=\"\n          width: 291px;\n          margin: auto;\n          display: flex;\n          flex-direction: column;\n        \"\n      >\n        <ion-img\n          style=\"width: 140px; height: 140px; margin-top: 100px\"\n          class=\"img\"\n          src=\"assets/icon/bad.png\"\n        ></ion-img>\n      </section>\n\n      <section\n        style=\"\n          text-align: center;\n          margin-top: -20px;\n          display: flex;\n          flex-direction: column;\n          align-content: space-between;\n        \"\n      >\n        <section class=\"we\" style=\"margin-top: 4rem\">\n          There was an error with your captured image\n        </section>\n      </section>\n    </div>\n    <section class=\"central-image row\">\n      <div class=\"form-group\">\n        <ion-button\n          class=\"btn\"\n          expand=\"block\"\n          style=\"margin-top: 1rem\"\n          (click)=\"retake()\"\n          routerLinkActive=\"router-link-active\"\n        >\n          Retake\n        </ion-button>\n      </div>\n    </section>\n  </div>\n</ion-content>\n";
 
 /***/ }),
 
@@ -11160,7 +12015,7 @@ module.exports = "<ion-content>\n  <app-loader *ngIf=\"loading\"></app-loader>\n
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\n  <app-loader *ngIf=\"loading\"></app-loader>\n\n  <section\n    style=\"\n      display: flex;\n      justify-content: center;\n      flex-direction: column;\n      height: 100vh;\n    \"\n    *ngIf=\"page === 'account'\"\n  >\n    <section class=\"row\">\n      <div style=\"border-radius: 8px; margin: 10px 4px\">\n        <div class=\"has\">Welcome Back,</div>\n      </div>\n    </section>\n\n    <section class=\"row\">\n      <h5 style=\"text-align: left; color: black\">\n        Enter your account number to continue\n      </h5>\n      <form>\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Account Number</label>\n          <input\n            type=\"text\"\n            name=\"account\"\n            class=\"input\"\n            placeholder=\"0000000314\"\n            [(ngModel)]=\"account\"\n            (ngModelChange)=\"fetchUser($event)\"\n          />\n        </div>\n      </form>\n    </section>\n  </section>\n\n  <section\n    style=\"display: flex; justify-content: center; flex-direction: column\"\n    *ngIf=\"page === 'details'\"\n  >\n    <section class=\"row\">\n      <h5 style=\"text-align: left; color: black\">\n        Enter your details to continue\n      </h5>\n      <form [formGroup]=\"onboardingForm\">\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">First Name</label>\n          <div class=\"input\" style=\"text-align: left; padding: 15px 25px\">\n            {{ onboardingForm?.value?.FirstName }}\n          </div>\n        </div>\n\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Middle Name</label>\n          <input\n            formControlName=\"MiddleName\"\n            type=\"text\"\n            name=\"ref\"\n            class=\"input\"\n            placeholder=\"Ade\"\n          />\n        </div>\n\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Last Name </label>\n          <div class=\"input\" style=\"text-align: left; padding: 15px 25px\">\n            {{ onboardingForm?.value?.LastName }}\n          </div>\n        </div>\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Email</label>\n          <div class=\"input\" style=\"text-align: left; padding: 15px 25px\">\n            {{ onboardingForm?.value?.Email }}\n          </div>\n        </div>\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Phone Number</label>\n          <div class=\"input\" style=\"text-align: left; padding: 15px 25px\">\n            {{ onboardingForm?.value?.Phone }}\n          </div>\n        </div>\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label class=\"label\">Password</label>\n          <div\n            style=\"\n              border: 0.800000011920929px solid #ced4da;\n              border-radius: 3px;\n              background-color: #ced4da;\n              position: relative;\n            \"\n          >\n            <input\n              [type]=\"show ? 'text' : 'password'\"\n              formControlName=\"Password\"\n              placeholder=\"Password\"\n              id=\"password\"\n              name=\"password\"\n              required\n              style=\"border: none\"\n              class=\"input\"\n              (ngModelChange)=\"checkStrength($event)\"\n            />\n            <ion-icon\n              (click)=\"viewpassword()\"\n              *ngIf=\"!show\"\n              icon=\"eye-off-outline\"\n              style=\"\n                font-size: 32px;\n                color: #676767;\n                cursor: pointer;\n                background-color: transparent;\n                position: absolute;\n                right: 20px;\n                top: 10px;\n              \"\n            ></ion-icon>\n            <ion-icon\n              (click)=\"viewpassword()\"\n              *ngIf=\"show\"\n              icon=\"eye-outline\"\n              style=\"\n                font-size: 32px;\n                color: #676767;\n                cursor: pointer;\n                background-color: transparent;\n                position: absolute;\n                right: 20px;\n                top: 10px;\n              \"\n            ></ion-icon>\n          </div>\n          <div style=\"font-size: 13px; text-align: left\">\n            password should contain lowercase, uppercase, number and minimum of\n            6 characters\n          </div>\n          <div\n            style=\"\n              display: flex;\n              flex-direction: row;\n              margin-top: 10px;\n              background-color: red;\n            \"\n          >\n            <div\n              style=\"width: 25%; height: 3px\"\n              [style.background-color]=\"check[0] ? 'green' : 'red'\"\n            ></div>\n            <div\n              style=\"width: 25%; height: 3px\"\n              [style.background-color]=\"check[1] ? 'green' : 'red'\"\n            ></div>\n            <div\n              style=\"width: 25%; height: 3px\"\n              [style.background-color]=\"\n                check[2] ? 'green' : check[1] ? 'rgb(217, 217, 12)' : 'red'\n              \"\n            ></div>\n            <div\n              style=\"width: 25%; height: 3px\"\n              [style.background-color]=\"\n                check[3]\n                  ? 'green'\n                  : check[1] || check[2]\n                  ? 'rgb(217, 217, 12)'\n                  : 'red'\n              \"\n            ></div>\n          </div>\n        </div>\n\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label class=\"label\">Confirm Password</label>\n          <div\n            style=\"\n              border: 0.800000011920929px solid #ced4da;\n              border-radius: 3px;\n              background-color: #ced4da;\n              position: relative;\n            \"\n          >\n            <input\n              [type]=\"show ? 'text' : 'password'\"\n              placeholder=\"Password\"\n              id=\"password\"\n              name=\"password\"\n              required\n              style=\"border: none\"\n              [ngModelOptions]=\"{ standalone: true }\"\n              [(ngModel)]=\"confirmPass\"\n              class=\"input\"\n            />\n            <ion-icon\n              (click)=\"viewpassword()\"\n              *ngIf=\"!show\"\n              icon=\"eye-off-outline\"\n              style=\"\n                font-size: 32px;\n                color: #676767;\n                cursor: pointer;\n                background-color: transparent;\n                position: absolute;\n                right: 20px;\n                top: 10px;\n              \"\n            ></ion-icon>\n            <ion-icon\n              (click)=\"viewpassword()\"\n              *ngIf=\"show\"\n              icon=\"eye-outline\"\n              style=\"\n                font-size: 32px;\n                color: #676767;\n                cursor: pointer;\n                background-color: transparent;\n                position: absolute;\n                right: 20px;\n                top: 10px;\n              \"\n            ></ion-icon>\n          </div>\n        </div>\n\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Gender</label>\n          <select formControlName=\"Gender\" name=\"Gender\" id=\"\" class=\"input\">\n            <option value=\"Male\">Male</option>\n            <option value=\"Female\">Female</option>\n          </select>\n        </div>\n\n        <div\n          class=\"form-group row\"\n          style=\"padding: 5px\"\n          *ngIf=\"whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'\"\n        >\n          <label for=\"\">Company Type</label>\n          <input\n            formControlName=\"CompanyType\"\n            type=\"text\"\n            name=\"ref\"\n            class=\"input\"\n            placeholder=\"IT\"\n          />\n        </div>\n\n        <div\n          class=\"form-group row\"\n          style=\"padding: 5px\"\n          *ngIf=\"whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'\"\n        >\n          <label for=\"\">Company Name</label>\n          <input\n            formControlName=\"CompanyName\"\n            type=\"text\"\n            name=\"ref\"\n            class=\"input\"\n            placeholder=\"Abys LTD\"\n          />\n        </div>\n\n        <div\n          class=\"form-group row\"\n          style=\"padding: 5px\"\n          *ngIf=\"whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'\"\n        >\n          <label for=\"\">RC Number</label>\n          <input\n            formControlName=\"RCNumber\"\n            type=\"text\"\n            name=\"ref\"\n            class=\"input\"\n            placeholder=\"22333223\"\n          />\n        </div>\n\n        <div\n          class=\"form-group row\"\n          style=\"padding: 5px\"\n          *ngIf=\"whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'\"\n        >\n          <label for=\"\">Tax Identification Number</label>\n          <input\n            formControlName=\"TinNumber\"\n            type=\"text\"\n            name=\"ref\"\n            class=\"input\"\n            placeholder=\"65764566\"\n          />\n        </div>\n\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Referal Code (optional)</label>\n          <input\n            formControlName=\"RefCode\"\n            type=\"text\"\n            name=\"ref\"\n            class=\"input\"\n            placeholder=\"22333223\"\n          />\n        </div>\n\n        <div\n          class=\"form-group row\"\n          style=\"\n            padding: 5px;\n            display: flex;\n            flex-direction: row;\n            align-items: center;\n          \"\n        >\n          <ion-checkbox slot=\"end\" formControlName=\"terms\"></ion-checkbox>\n          <ion-label style=\"margin-left: 10px\"\n            >I accept terms of service and privacy policy</ion-label\n          >\n        </div>\n\n        <div class=\"form-group\">\n          <ion-button\n            class=\"btn\"\n            expand=\"block\"\n            style=\"margin-top: 1rem\"\n            (click)=\"presentAlertPrompt()\"\n            routerLinkActive=\"router-link-active\"\n          >\n            Next\n          </ion-button>\n        </div>\n      </form>\n    </section>\n  </section>\n</ion-content>\n";
+module.exports = "<ion-content>\n  <app-loader *ngIf=\"loading\"></app-loader>\n\n  <section\n    style=\"\n      display: flex;\n      justify-content: center;\n      flex-direction: column;\n      height: 100vh;\n    \"\n    *ngIf=\"page === 'account'\"\n  >\n    <section class=\"row\">\n      <div style=\"border-radius: 8px; margin: 10px 4px\">\n        <div class=\"has\">Welcome Back,</div>\n      </div>\n    </section>\n\n    <section class=\"row\">\n      <h5 style=\"text-align: left; color: black\">\n        Enter your account number to continue\n      </h5>\n      <form>\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Account Number</label>\n          <input\n            type=\"text\"\n            name=\"account\"\n            class=\"input\"\n            placeholder=\"0000000314\"\n            [(ngModel)]=\"account\"\n            (ngModelChange)=\"fetchUser($event)\"\n          />\n        </div>\n      </form>\n    </section>\n  </section>\n\n  <section\n    style=\"display: flex; justify-content: center; flex-direction: column\"\n    *ngIf=\"page === 'details'\"\n  >\n    <section class=\"row\">\n      <h5 style=\"text-align: left; color: black\">\n        Enter your details to continue\n      </h5>\n      <form [formGroup]=\"onboardingForm\">\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">First Name</label>\n          <div class=\"input\" style=\"text-align: left; padding: 15px 25px\">\n            {{ onboardingForm?.value?.FirstName }}\n          </div>\n        </div>\n\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Middle Name</label>\n          <input\n            formControlName=\"MiddleName\"\n            type=\"text\"\n            name=\"ref\"\n            class=\"input\"\n            placeholder=\"Ade\"\n          />\n        </div>\n\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Last Name </label>\n          <div class=\"input\" style=\"text-align: left; padding: 15px 25px\">\n            {{ onboardingForm?.value?.LastName }}\n          </div>\n        </div>\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Email</label>\n          <div class=\"input\" style=\"text-align: left; padding: 15px 25px\">\n            {{ onboardingForm?.value?.Email }}\n          </div>\n        </div>\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Phone Number</label>\n          <div class=\"input\" style=\"text-align: left; padding: 15px 25px\">\n            {{ onboardingForm?.value?.Phone }}\n          </div>\n        </div>\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label class=\"label\">Password</label>\n          <div\n            style=\"\n              border: 0.800000011920929px solid #ced4da;\n              border-radius: 3px;\n              background-color: #ced4da;\n              position: relative;\n            \"\n          >\n            <input\n              [type]=\"show ? 'text' : 'password'\"\n              formControlName=\"Password\"\n              placeholder=\"Password\"\n              id=\"password\"\n              name=\"password\"\n              required\n              style=\"border: none\"\n              class=\"input\"\n              (ngModelChange)=\"checkStrength($event)\"\n            />\n            <ion-icon\n              (click)=\"viewpassword()\"\n              *ngIf=\"!show\"\n              icon=\"eye-off-outline\"\n              style=\"\n                font-size: 32px;\n                color: #676767;\n                cursor: pointer;\n                background-color: transparent;\n                position: absolute;\n                right: 20px;\n                top: 10px;\n              \"\n            ></ion-icon>\n            <ion-icon\n              (click)=\"viewpassword()\"\n              *ngIf=\"show\"\n              icon=\"eye-outline\"\n              style=\"\n                font-size: 32px;\n                color: #676767;\n                cursor: pointer;\n                background-color: transparent;\n                position: absolute;\n                right: 20px;\n                top: 10px;\n              \"\n            ></ion-icon>\n          </div>\n          <div style=\"font-size: 13px; text-align: left\">\n            password should contain lowercase, uppercase, number and minimum of\n            6 characters\n          </div>\n          <div\n            style=\"\n              display: flex;\n              flex-direction: row;\n              margin-top: 10px;\n              background-color: red;\n            \"\n          >\n            <div\n              style=\"width: 25%; height: 3px\"\n              [style.background-color]=\"check[0] ? 'green' : 'red'\"\n            ></div>\n            <div\n              style=\"width: 25%; height: 3px\"\n              [style.background-color]=\"check[1] ? 'green' : 'red'\"\n            ></div>\n            <div\n              style=\"width: 25%; height: 3px\"\n              [style.background-color]=\"\n                check[2] ? 'green' : check[1] ? 'rgb(217, 217, 12)' : 'red'\n              \"\n            ></div>\n            <div\n              style=\"width: 25%; height: 3px\"\n              [style.background-color]=\"\n                check[3]\n                  ? 'green'\n                  : check[1] || check[2]\n                  ? 'rgb(217, 217, 12)'\n                  : 'red'\n              \"\n            ></div>\n          </div>\n        </div>\n\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label class=\"label\">Confirm Password</label>\n          <div\n            style=\"\n              border: 0.800000011920929px solid #ced4da;\n              border-radius: 3px;\n              background-color: #ced4da;\n              position: relative;\n            \"\n          >\n            <input\n              [type]=\"show ? 'text' : 'password'\"\n              placeholder=\"confirm Password\"\n              id=\"password\"\n              name=\"password\"\n              required\n              style=\"border: none\"\n              [ngModelOptions]=\"{ standalone: true }\"\n              [(ngModel)]=\"confirmPass\"\n              class=\"input\"\n            />\n            <ion-icon\n              (click)=\"viewpassword()\"\n              *ngIf=\"!show\"\n              icon=\"eye-off-outline\"\n              style=\"\n                font-size: 32px;\n                color: #676767;\n                cursor: pointer;\n                background-color: transparent;\n                position: absolute;\n                right: 20px;\n                top: 10px;\n              \"\n            ></ion-icon>\n            <ion-icon\n              (click)=\"viewpassword()\"\n              *ngIf=\"show\"\n              icon=\"eye-outline\"\n              style=\"\n                font-size: 32px;\n                color: #676767;\n                cursor: pointer;\n                background-color: transparent;\n                position: absolute;\n                right: 20px;\n                top: 10px;\n              \"\n            ></ion-icon>\n          </div>\n        </div>\n\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Gender</label>\n          <select formControlName=\"Gender\" name=\"Gender\" id=\"\" class=\"input\">\n            <option value=\"Male\">Male</option>\n            <option value=\"Female\">Female</option>\n          </select>\n        </div>\n\n        <div\n          class=\"form-group row\"\n          style=\"padding: 5px\"\n          *ngIf=\"whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'\"\n        >\n          <label for=\"\">Company Type</label>\n          <select\n            formControlName=\"CompanyType\"\n            name=\"companyType\"\n            id=\"\"\n            class=\"input\"\n          >\n            <option *ngFor=\"let data of companyType\" [value]=\"data\">\n              {{ data }}\n            </option>\n          </select>\n        </div>\n\n        <div\n          class=\"form-group row\"\n          style=\"padding: 5px\"\n          *ngIf=\"whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'\"\n        >\n          <label for=\"\">Company Name</label>\n          <input\n            formControlName=\"CompanyName\"\n            type=\"text\"\n            name=\"ref\"\n            class=\"input\"\n            placeholder=\"Abys LTD\"\n          />\n        </div>\n\n        <div\n          class=\"form-group row\"\n          style=\"padding: 5px\"\n          *ngIf=\"whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'\"\n        >\n          <label for=\"\">RC Number</label>\n          <input\n            formControlName=\"RCNumber\"\n            type=\"text\"\n            name=\"ref\"\n            class=\"input\"\n            placeholder=\"22333223\"\n          />\n        </div>\n\n        <div\n          class=\"form-group row\"\n          style=\"padding: 5px\"\n          *ngIf=\"whatIs === 'ROYAL CORPORATE' || whatIs === 'Royal Corporate'\"\n        >\n          <label for=\"\">Tax Identification Number</label>\n          <input\n            formControlName=\"TinNumber\"\n            type=\"text\"\n            name=\"ref\"\n            class=\"input\"\n            placeholder=\"65764566\"\n          />\n        </div>\n\n        <div class=\"form-group row\" style=\"padding: 5px\">\n          <label for=\"\">Referal Code (optional)</label>\n          <input\n            formControlName=\"RefCode\"\n            type=\"text\"\n            name=\"ref\"\n            class=\"input\"\n            placeholder=\"22333223\"\n          />\n        </div>\n\n        <div\n          class=\"form-group row\"\n          style=\"\n            padding: 5px;\n            display: flex;\n            flex-direction: row;\n            align-items: center;\n          \"\n        >\n          <ion-checkbox slot=\"end\" formControlName=\"terms\"></ion-checkbox>\n          <ion-label style=\"margin-left: 10px\"\n            >I accept terms of service and privacy policy</ion-label\n          >\n        </div>\n\n        <div class=\"form-group\">\n          <ion-button\n            class=\"btn\"\n            expand=\"block\"\n            style=\"margin-top: 1rem\"\n            (click)=\"presentAlertPrompt()\"\n            routerLinkActive=\"router-link-active\"\n          >\n            Next\n          </ion-button>\n        </div>\n      </form>\n    </section>\n  </section>\n</ion-content>\n";
 
 /***/ }),
 
@@ -11248,7 +12103,7 @@ module.exports = "<app-loader *ngIf=\"loading\"></app-loader>\r\n<ion-content>\r
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\n  <section class=\"central-image\">\n    <ion-img [src]=\"imageSrc\" class=\"img\"></ion-img>\n  </section>\n\n  <section style=\"text-align: center; margin-top: -80px\">\n    <section section style=\"padding-top: 2rem\">\n      <h2 class=\"title\" style=\"font-family: Mulish !important\">\n        Hey, Welcome back\n      </h2>\n    </section>\n\n    <section class=\"row\">\n      <p class=\"sub-title\" style=\"font-family: Mulish !important\">\n        Reset your password\n      </p>\n    </section>\n  </section>\n  <form *ngIf=\"change\">\n    <div class=\"form-group row\">\n      <label class=\"label\" style=\"font-family: Mulish !important\"\n        >Email address</label\n      >\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        placeholder=\"Email\"\n        name=\"email\"\n        id=\"email\"\n        required\n        [(ngModel)]=\"email\"\n      />\n    </div>\n\n    <div class=\"form-group\">\n      <ion-button\n        class=\"btn\"\n        expand=\"block\"\n        style=\"margin-top: 1rem\"\n        (click)=\"sendOtp()\"\n        style=\"font-family: Mulish !important\"\n      >\n        Send OTP\n      </ion-button>\n      <app-loader *ngIf=\"loading\"></app-loader>\n    </div>\n    <div\n      style=\"\n        margin: 15px 0;\n        font-size: 14px;\n        color: #676767;\n        display: flex;\n        justify-content: space-between;\n        flex-direction: column;\n      \"\n    >\n      <span>\n        Alreadt have an account?\n        <span\n          style=\"color: #fee178; font-weight: 700; margin-top: 20px\"\n          (click)=\"loginNow()\"\n          >Login</span\n        ></span\n      >\n      <span\n        style=\"color: #25214f; font-weight: 700; margin-top: 10px\"\n        (click)=\"register()\"\n        >Sign Up</span\n      >\n    </div>\n  </form>\n\n  <form *ngIf=\"!change\">\n    <div class=\"form-group row\">\n      <label class=\"label\" style=\"font-family: Mulish !important\"\n        >Enter OTP</label\n      >\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        placeholder=\"2223762\"\n        name=\"otp\"\n        id=\"otp\"\n        required\n        [(ngModel)]=\"otp\"\n      />\n    </div>\n\n    <div class=\"form-group row\">\n      <label class=\"label\" style=\"font-family: Mulish !important\"\n        >Password</label\n      >\n      <div\n        style=\"\n          border: 0.800000011920929px solid #ced4da;\n          border-radius: 3px;\n          background-color: #b6b6b6;\n          position: relative;\n        \"\n      >\n        <input\n          [type]=\"show ? 'text' : 'password'\"\n          placeholder=\"Password\"\n          id=\"password\"\n          name=\"password\"\n          required\n          style=\"border: none\"\n          [(ngModel)]=\"password\"\n          (ngModelChange)=\"checkStrength($event)\"\n        />\n        <ion-icon\n          (click)=\"viewpassword()\"\n          *ngIf=\"!show\"\n          icon=\"eye-off-outline\"\n          style=\"\n            font-size: 32px;\n            color: #676767;\n            cursor: pointer;\n            background-color: transparent;\n            position: absolute;\n            right: 20px;\n            top: 10px;\n          \"\n        ></ion-icon>\n        <ion-icon\n          (click)=\"viewpassword()\"\n          *ngIf=\"show\"\n          icon=\"eye-outline\"\n          style=\"\n            font-size: 32px;\n            color: #676767;\n            cursor: pointer;\n            background-color: transparent;\n            position: absolute;\n            right: 20px;\n            top: 10px;\n          \"\n        ></ion-icon>\n      </div>\n      <div style=\"font-size: 13px; text-align: left\">\n        password should contain lowercase, uppercase, number and minimum of 6\n        characters\n      </div>\n      <div\n        style=\"\n          display: flex;\n          flex-direction: row;\n          margin-top: 10px;\n          background-color: red;\n        \"\n      >\n        <div\n          style=\"width: 25%; height: 3px\"\n          [style.background-color]=\"check[0] ? 'green' : 'red'\"\n        ></div>\n        <div\n          style=\"width: 25%; height: 3px\"\n          [style.background-color]=\"check[1] ? 'green' : 'red'\"\n        ></div>\n        <div\n          style=\"width: 25%; height: 3px\"\n          [style.background-color]=\"\n            check[2] ? 'green' : check[1] ? 'rgb(217, 217, 12)' : 'red'\n          \"\n        ></div>\n        <div\n          style=\"width: 25%; height: 3px\"\n          [style.background-color]=\"\n            check[3]\n              ? 'green'\n              : check[1] || check[2]\n              ? 'rgb(217, 217, 12)'\n              : 'red'\n          \"\n        ></div>\n      </div>\n    </div>\n\n    <div class=\"form-group row\">\n      <label class=\"label\" style=\"font-family: Mulish !important\"\n        >Confirm Password</label\n      >\n      <div\n        style=\"\n          border: 0.800000011920929px solid #ced4da;\n          border-radius: 3px;\n          background-color: #b6b6b6;\n          position: relative;\n        \"\n      >\n        <input\n          [type]=\"show ? 'text' : 'password'\"\n          placeholder=\"Password\"\n          id=\"password\"\n          name=\"password\"\n          required\n          style=\"border: none\"\n          [(ngModel)]=\"confirmPassword\"\n        />\n        <ion-icon\n          (click)=\"viewpassword()\"\n          *ngIf=\"!show\"\n          icon=\"eye-off-outline\"\n          style=\"\n            font-size: 32px;\n            color: #676767;\n            cursor: pointer;\n            background-color: transparent;\n            position: absolute;\n            right: 20px;\n            top: 10px;\n          \"\n        ></ion-icon>\n        <ion-icon\n          (click)=\"viewpassword()\"\n          *ngIf=\"show\"\n          icon=\"eye-outline\"\n          style=\"\n            font-size: 32px;\n            color: #676767;\n            cursor: pointer;\n            background-color: transparent;\n            position: absolute;\n            right: 20px;\n            top: 10px;\n          \"\n        ></ion-icon>\n      </div>\n    </div>\n    <!-- <div class=\"form-group row\">\n      <app-show-hide-password>\n        <input type=\"password\" placeholder=\"Password\" formControlName=\"password\">\n    </app-show-hide-password>\n    </div> -->\n    <div class=\"form-group\">\n      <ion-button\n        class=\"btn\"\n        expand=\"block\"\n        style=\"margin-top: 1rem\"\n        (click)=\"resetPassword()\"\n        style=\"font-family: Mulish !important\"\n      >\n        Reset Password\n      </ion-button>\n      <app-loader *ngIf=\"loading\"></app-loader>\n    </div>\n    <div\n      style=\"\n        margin: 15px 0;\n        font-size: 14px;\n        color: #676767;\n        display: flex;\n        justify-content: space-between;\n        flex-direction: column;\n      \"\n    >\n      <span>\n        Already have an account?\n        <span\n          style=\"color: #fee178; font-weight: 700; margin-top: 20px\"\n          (click)=\"loginNow()\"\n          >Login</span\n        ></span\n      >\n      <span\n        style=\"color: #25214f; font-weight: 700; margin-top: 10px\"\n        (click)=\"register()\"\n        >Sign Up</span\n      >\n    </div>\n  </form>\n</ion-content>\n";
+module.exports = "<ion-content>\n  <section class=\"central-image\">\n    <ion-img [src]=\"imageSrc\" class=\"img\"></ion-img>\n  </section>\n\n  <section style=\"text-align: center; margin-top: -80px\">\n    <section section style=\"padding-top: 2rem\">\n      <h2 class=\"title\" style=\"font-family: Mulish !important\">\n        Hey, Welcome back\n      </h2>\n    </section>\n\n    <section class=\"row\">\n      <p class=\"sub-title\" style=\"font-family: Mulish !important\">\n        Reset your password\n      </p>\n    </section>\n  </section>\n  <form *ngIf=\"change\">\n    <div class=\"form-group row\">\n      <label class=\"label\" style=\"font-family: Mulish !important\"\n        >Email address</label\n      >\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        placeholder=\"Email\"\n        name=\"email\"\n        id=\"email\"\n        required\n        [(ngModel)]=\"email\"\n      />\n    </div>\n\n    <div class=\"form-group\">\n      <ion-button\n        class=\"btn\"\n        expand=\"block\"\n        style=\"margin-top: 1rem\"\n        (click)=\"sendOtp()\"\n        style=\"font-family: Mulish !important\"\n      >\n        Send OTP\n      </ion-button>\n      <app-loader *ngIf=\"loading\"></app-loader>\n    </div>\n    <div\n      style=\"\n        margin: 15px 0;\n        font-size: 14px;\n        color: #676767;\n        display: flex;\n        justify-content: space-between;\n        flex-direction: column;\n      \"\n    >\n      <span>\n        Already have an account?\n        <span\n          style=\"color: #fee178; font-weight: 700; margin-top: 20px\"\n          (click)=\"loginNow()\"\n          >Login</span\n        ></span\n      >\n      <span\n        style=\"color: #25214f; font-weight: 700; margin-top: 10px\"\n        (click)=\"register()\"\n        >Sign Up</span\n      >\n    </div>\n  </form>\n\n  <form *ngIf=\"!change\">\n    <div class=\"form-group row\">\n      <label class=\"label\" style=\"font-family: Mulish !important\"\n        >Enter OTP</label\n      >\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        placeholder=\"2223762\"\n        name=\"otp\"\n        id=\"otp\"\n        required\n        [(ngModel)]=\"otp\"\n      />\n    </div>\n\n    <div class=\"form-group row\">\n      <label class=\"label\" style=\"font-family: Mulish !important\"\n        >Password</label\n      >\n      <div\n        style=\"\n          border: 0.800000011920929px solid #ced4da;\n          border-radius: 3px;\n          background-color: #b6b6b6;\n          position: relative;\n        \"\n      >\n        <input\n          [type]=\"show ? 'text' : 'password'\"\n          placeholder=\"Password\"\n          id=\"password\"\n          name=\"password\"\n          required\n          style=\"border: none\"\n          [(ngModel)]=\"password\"\n          (ngModelChange)=\"checkStrength($event)\"\n        />\n        <ion-icon\n          (click)=\"viewpassword()\"\n          *ngIf=\"!show\"\n          icon=\"eye-off-outline\"\n          style=\"\n            font-size: 32px;\n            color: #676767;\n            cursor: pointer;\n            background-color: transparent;\n            position: absolute;\n            right: 20px;\n            top: 10px;\n          \"\n        ></ion-icon>\n        <ion-icon\n          (click)=\"viewpassword()\"\n          *ngIf=\"show\"\n          icon=\"eye-outline\"\n          style=\"\n            font-size: 32px;\n            color: #676767;\n            cursor: pointer;\n            background-color: transparent;\n            position: absolute;\n            right: 20px;\n            top: 10px;\n          \"\n        ></ion-icon>\n      </div>\n      <div style=\"font-size: 13px; text-align: left\">\n        password should contain lowercase, uppercase, number and minimum of 6\n        characters\n      </div>\n      <div\n        style=\"\n          display: flex;\n          flex-direction: row;\n          margin-top: 10px;\n          background-color: red;\n        \"\n      >\n        <div\n          style=\"width: 25%; height: 3px\"\n          [style.background-color]=\"check[0] ? 'green' : 'red'\"\n        ></div>\n        <div\n          style=\"width: 25%; height: 3px\"\n          [style.background-color]=\"check[1] ? 'green' : 'red'\"\n        ></div>\n        <div\n          style=\"width: 25%; height: 3px\"\n          [style.background-color]=\"\n            check[2] ? 'green' : check[1] ? 'rgb(217, 217, 12)' : 'red'\n          \"\n        ></div>\n        <div\n          style=\"width: 25%; height: 3px\"\n          [style.background-color]=\"\n            check[3]\n              ? 'green'\n              : check[1] || check[2]\n              ? 'rgb(217, 217, 12)'\n              : 'red'\n          \"\n        ></div>\n      </div>\n    </div>\n\n    <div class=\"form-group row\">\n      <label class=\"label\" style=\"font-family: Mulish !important\"\n        >Confirm Password</label\n      >\n      <div\n        style=\"\n          border: 0.800000011920929px solid #ced4da;\n          border-radius: 3px;\n          background-color: #b6b6b6;\n          position: relative;\n        \"\n      >\n        <input\n          [type]=\"show ? 'text' : 'password'\"\n          placeholder=\"Password\"\n          id=\"password\"\n          name=\"password\"\n          required\n          style=\"border: none\"\n          [(ngModel)]=\"confirmPassword\"\n        />\n        <ion-icon\n          (click)=\"viewpassword()\"\n          *ngIf=\"!show\"\n          icon=\"eye-off-outline\"\n          style=\"\n            font-size: 32px;\n            color: #676767;\n            cursor: pointer;\n            background-color: transparent;\n            position: absolute;\n            right: 20px;\n            top: 10px;\n          \"\n        ></ion-icon>\n        <ion-icon\n          (click)=\"viewpassword()\"\n          *ngIf=\"show\"\n          icon=\"eye-outline\"\n          style=\"\n            font-size: 32px;\n            color: #676767;\n            cursor: pointer;\n            background-color: transparent;\n            position: absolute;\n            right: 20px;\n            top: 10px;\n          \"\n        ></ion-icon>\n      </div>\n    </div>\n    <!-- <div class=\"form-group row\">\n      <app-show-hide-password>\n        <input type=\"password\" placeholder=\"Password\" formControlName=\"password\">\n    </app-show-hide-password>\n    </div> -->\n    <div class=\"form-group\">\n      <ion-button\n        class=\"btn\"\n        expand=\"block\"\n        style=\"margin-top: 1rem\"\n        (click)=\"resetPassword()\"\n        style=\"font-family: Mulish !important\"\n      >\n        Reset Password\n      </ion-button>\n      <app-loader *ngIf=\"loading\"></app-loader>\n    </div>\n    <div\n      style=\"\n        margin: 15px 0;\n        font-size: 14px;\n        color: #676767;\n        display: flex;\n        justify-content: space-between;\n        flex-direction: column;\n      \"\n    >\n      <span>\n        Already have an account?\n        <span\n          style=\"color: #fee178; font-weight: 700; margin-top: 20px\"\n          (click)=\"loginNow()\"\n          >Login</span\n        ></span\n      >\n      <span\n        style=\"color: #25214f; font-weight: 700; margin-top: 10px\"\n        (click)=\"register()\"\n        >Sign Up</span\n      >\n    </div>\n  </form>\n</ion-content>\n";
 
 /***/ }),
 
@@ -11259,7 +12114,7 @@ module.exports = "<ion-content>\n  <section class=\"central-image\">\n    <ion-i
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\n  <div style=\"height: 70px\"></div>\n  <div class=\"all\">\n    <div class=\"phone\">\n      <div class=\"head\">\n        <span>Telephone</span>\n        <ion-icon\n          name=\"call\"\n          style=\"font-size: 20px; color: #25214f\"\n        ></ion-icon>\n      </div>\n      <div class=\"line\"></div>\n      <div class=\"subs\">09178765565</div>\n      <div class=\"subs\">08083627262</div>\n      <div class=\"subs\">07027281727</div>\n      <div class=\"subs\">091787655656</div>\n    </div>\n\n    <div class=\"phone\">\n      <div class=\"head\">\n        <span>Email</span>\n        <ion-icon\n          name=\"mail\"\n          style=\"font-size: 20px; color: #25214f\"\n        ></ion-icon>\n      </div>\n      <div class=\"line\"></div>\n      <div class=\"subs\">contact@royalbank.com</div>\n      <div class=\"subs\">info@royalbank.com</div>\n    </div>\n\n    <div class=\"phone\">\n      <div class=\"head\">\n        <span>Social Media</span>\n        <ion-icon\n          style=\"font-size: 20px; color: #25214f\"\n          name=\"share\"\n        ></ion-icon>\n      </div>\n      <div class=\"line\"></div>\n      <div>\n        <table>\n          <tbody>\n            <tr>\n              <th>Twitter</th>\n              <td>@royalbank</td>\n            </tr>\n            <tr>\n              <th>Instagram</th>\n              <td>@royalbank</td>\n            </tr>\n            <tr>\n              <th>Facebook</th>\n              <td>@royalbank</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n</ion-content>\n";
+module.exports = "<ion-content>\n  <div style=\"height: 70px\"></div>\n  <div class=\"all\">\n    <div class=\"phone\">\n      <div class=\"head\">\n        <span>Telephone</span>\n        <ion-icon\n          name=\"call\"\n          style=\"font-size: 20px; color: #25214f\"\n        ></ion-icon>\n      </div>\n      <div class=\"line\"></div>\n      <div class=\"subs\">+23413427293</div>\n      <div class=\"subs\">+2349152690402</div>\n    </div>\n\n    <div class=\"phone\">\n      <div class=\"head\">\n        <span>Email</span>\n        <ion-icon\n          name=\"mail\"\n          style=\"font-size: 20px; color: #25214f\"\n        ></ion-icon>\n      </div>\n      <div class=\"line\"></div>\n      <div class=\"subs\">hello@royalbankng.com</div>\n    </div>\n\n    <div class=\"phone\">\n      <div class=\"head\">\n        <span>Social Media</span>\n        <ion-icon\n          style=\"font-size: 20px; color: #25214f\"\n          name=\"share\"\n        ></ion-icon>\n      </div>\n      <div class=\"line\"></div>\n      <div>\n        <table>\n          <tbody>\n            <tr>\n              <th>Twitter</th>\n              <td>@royalbankng</td>\n            </tr>\n            <tr>\n              <th>Instagram</th>\n              <td>@royalbankng</td>\n            </tr>\n            <tr>\n              <th>Facebook</th>\n              <td>@royalbankng</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n</ion-content>\n";
 
 /***/ }),
 
@@ -11270,7 +12125,7 @@ module.exports = "<ion-content>\n  <div style=\"height: 70px\"></div>\n  <div cl
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <div style=\"height: 40px\"></div>\r\n  <app-loader *ngIf=\"loading\"></app-loader>\r\n  <app-pin\r\n    (close)=\"close()\"\r\n    (loading)=\"load()\"\r\n    (done)=\"finish()\"\r\n    *ngIf=\"show\"\r\n  ></app-pin>\r\n  <section style=\"background-color: #25214f\">\r\n    <div\r\n      style=\"\r\n        padding: 20px;\r\n        width: 100%;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #25214f;\r\n        color: #fff;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          background-color: #d9ac0b;\r\n          padding: 20px 30px;\r\n          text-align: left;\r\n          width: 100%;\r\n          max-width: 400px;\r\n          margin: auto;\r\n          border-radius: 10px;\r\n          color: #25214f;\r\n        \"\r\n      >\r\n        <div style=\"font-size: 15px\">\r\n          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}\r\n        </div>\r\n        <div\r\n          style=\"\r\n            border: 1px solid #25214f;\r\n            padding: 10px;\r\n            width: 100%;\r\n            display: flex;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <div>Balance:</div>\r\n          <div style=\"font-size: 20px\">\r\n            {{ user?.accountNos[0]?.accountBalance | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <section\r\n      *ngIf=\"transType === 0\"\r\n      style=\"\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 20px;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          font-family: Mulish !important;\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n          align-items: center;\r\n          cursor: pointer;\r\n          margin: 1.5rem 0.5rem;\r\n          background-color: #25214f;\r\n          color: white;\r\n          padding: 15px 10px;\r\n          border-radius: 30px;\r\n        \"\r\n        (click)=\"transactionType(1)\"\r\n      >\r\n        <div\r\n          style=\"\r\n            display: flex;\r\n            flex-direction: row;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n          \"\r\n        >\r\n          <div class=\"icon-container\">\r\n            <img\r\n              style=\"width: 50px; height: 50px\"\r\n              src=\"assets/icon/royalT.png\"\r\n              alt=\"\"\r\n            />\r\n          </div>\r\n          <div style=\"margin-left: 15px\">\r\n            <div style=\"margin: auto; font-size: 16px; margin-bottom: 10px\">\r\n              Make a new transfer\r\n            </div>\r\n            <div style=\"margin: auto; font-size: 11px\">\r\n              Send money to Royal account\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <div\r\n        style=\"\r\n          font-family: Mulish !important;\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n          align-items: center;\r\n          cursor: pointer;\r\n          margin: 1.5rem 0.5rem;\r\n          background-color: #d9ac0b;\r\n          color: #25214f;\r\n          padding: 15px 10px;\r\n          border-radius: 30px;\r\n        \"\r\n        (click)=\"transactionType(2)\"\r\n      >\r\n        <div\r\n          style=\"\r\n            display: flex;\r\n            flex-direction: row;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n          \"\r\n        >\r\n          <div class=\"icon-container\" style=\"border-radius: 50%\">\r\n            <img\r\n              style=\"width: 50px; height: 50px; border-radius: 50%\"\r\n              src=\"assets/icon/otherT.png\"\r\n              alt=\"\"\r\n            />\r\n          </div>\r\n          <div style=\"margin-left: 15px\">\r\n            <div style=\"margin: auto; font-size: 16px; margin-bottom: 10px\">\r\n              Make a new transfer\r\n            </div>\r\n            <div style=\"margin: auto; font-size: 11px\">\r\n              Send money to Other Banks\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/otherArrow.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <!-- <div\r\n        style=\"\r\n          font-family: Mulish !important;\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n          cursor: pointer;\r\n          margin: 1.5rem 0.5rem;\r\n        \"\r\n        (click)=\"transactionType(2)\"\r\n      >\r\n        <div class=\"icon-container\">\r\n          <ion-icon name=\"people\" class=\"inner-icon\"></ion-icon>\r\n        </div>\r\n        <span style=\"margin: auto; font-size: 20px\">Send to other Banks</span>\r\n        <ion-icon\r\n          name=\"caret-forward\"\r\n          style=\"margin: auto; font-size: 20px; color: #25214f\"\r\n        ></ion-icon>\r\n      </div> -->\r\n    </section>\r\n\r\n    <section *ngIf=\"transType === 1 || transType === 2\">\r\n      <section\r\n        *ngIf=\"transType === 2 || transType === 1\"\r\n        style=\"\r\n          background-color: white;\r\n          border-top-left-radius: 10%;\r\n          border-top-right-radius: 10%;\r\n          padding: 20px;\r\n          padding-top: 40px;\r\n        \"\r\n      >\r\n        <div\r\n          class=\"row\"\r\n          style=\"\r\n            display: flex;\r\n            flex-direction: row;\r\n            justify-content: space-between;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <ion-button\r\n            (click)=\"toggleRequest(true)\"\r\n            [ngClass]=\"{active: selectedBtn === true}\"\r\n            style=\"width: 100%; --border-radius: none\"\r\n          >\r\n            New\r\n          </ion-button>\r\n\r\n          <ion-button\r\n            (click)=\"toggleRequest(false)\"\r\n            size=\"medium\"\r\n            [ngClass]=\"{active: selectedBtn1 === true}\"\r\n            style=\"width: 100%; --border-radius: none\"\r\n          >\r\n            Beneficiary\r\n          </ion-button>\r\n        </div>\r\n        <form *ngIf=\"newReq\">\r\n          <div class=\"form-group row\" style=\"padding: 5px\">\r\n            <label for=\"\">Select Account</label>\r\n            <select [(ngModel)]=\"accNum\" name=\"account\" id=\"\" class=\"input\">\r\n              <option\r\n                *ngFor=\"let data of user.accountNos\"\r\n                [value]=\"data.accountNo\"\r\n              >\r\n                {{data.accountNo}} ({{data.accountBalance | currency:\r\n                \"&#8358;\"}})\r\n              </option>\r\n            </select>\r\n          </div>\r\n\r\n          <div\r\n            class=\"form-group row\"\r\n            style=\"padding: 5px\"\r\n            *ngIf=\"transType === 2\"\r\n          >\r\n            <label for=\"\">Bank</label>\r\n            <select\r\n              [(ngModel)]=\"bankCode\"\r\n              (change)=\"chnageBank($event)\"\r\n              name=\"bank\"\r\n              id=\"\"\r\n              class=\"input\"\r\n            >\r\n              <option *ngFor=\"let data of banks\" [value]=\"data.code\">\r\n                {{data.name}}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <div class=\"form-group row\" style=\"padding: 5px; position: relative\">\r\n            <label for=\"\">Beneficiary Account </label>\r\n            <input\r\n              type=\"text\"\r\n              name=\"beneficiary\"\r\n              class=\"input\"\r\n              placeholder=\"009283726\"\r\n              [(ngModel)]=\"benAcc\"\r\n              (ngModelChange)=\"debounce($event)\"\r\n            />\r\n            <div\r\n              *ngIf=\"name\"\r\n              style=\"position: absolute; bottom: -15px; right: 20px\"\r\n              [style.color]=\"showName ? 'red' : 'green'\"\r\n            >\r\n              {{name}}\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"form-group row\" style=\"padding: 5px\">\r\n            <label for=\"\">Amount</label>\r\n            <input\r\n              type=\"text\"\r\n              [(ngModel)]=\"formattedAmount\"\r\n              name=\"amount\"\r\n              class=\"input\"\r\n              placeholder=\"100000\"\r\n              CurrencyPipe\r\n              (blur)=\"transformAmount($event)\"\r\n            />\r\n          </div>\r\n\r\n          <div class=\"form-group row\" style=\"padding: 5px\">\r\n            <label for=\"\">Narration</label>\r\n            <input\r\n              type=\"text\"\r\n              name=\"narration\"\r\n              class=\"input\"\r\n              [(ngModel)]=\"narration\"\r\n              placeholder=\"\"\r\n            />\r\n          </div>\r\n          <div\r\n            class=\"form-group row\"\r\n            style=\"\r\n              display: flex;\r\n              flex-direction: row;\r\n              justify-content: space-between;\r\n              padding: 5px;\r\n            \"\r\n          >\r\n            <label>Save Beneficiary</label>\r\n            <ion-toggle\r\n              [ngModelOptions]=\"{standalone: true}\"\r\n              [(ngModel)]=\"saveBene\"\r\n            ></ion-toggle>\r\n          </div>\r\n\r\n          <div class=\"form-group\">\r\n            <ion-button\r\n              class=\"btn\"\r\n              expand=\"block\"\r\n              style=\"margin-top: 1rem; font-family: Mulish !important\"\r\n              (click)=\"next()\"\r\n              routerLinkActive=\"router-link-active\"\r\n            >\r\n              Transfer\r\n            </ion-button>\r\n          </div>\r\n        </form>\r\n\r\n        <form *ngIf=\"!newReq\">\r\n          <div class=\"row-one\" *ngIf=\"benes.length === 0\">\r\n            <span style=\"text-align: left\">No beneficiary found</span>\r\n          </div>\r\n\r\n          <div class=\"row\" style=\"margin-top: 5px\">\r\n            <span\r\n              class=\"header\"\r\n              style=\"text-align: left\"\r\n              *ngIf=\"benes.length > 0\"\r\n              >Beneficiaries</span\r\n            >\r\n\r\n            <div\r\n              style=\"\r\n                background-color: #f8f8f8;\r\n                border-radius: 8px;\r\n                margin-top: 5px;\r\n              \"\r\n              *ngFor=\"let data of benes\"\r\n            >\r\n              <ion-card-content\r\n                style=\"display: flex; flex-direction: row; align-items: center\"\r\n                (click)=\"use(data)\"\r\n              >\r\n                <ion-icon\r\n                  name=\"person\"\r\n                  style=\"\r\n                    margin-right: 10px;\r\n                    font-size: 20px;\r\n                    color: #25214f;\r\n                    width: 10%;\r\n                  \"\r\n                ></ion-icon>\r\n                <div\r\n                  style=\"\r\n                    font-size: 13px;\r\n                    display: flex;\r\n                    flex-direction: column;\r\n                    width: 80%;\r\n                  \"\r\n                >\r\n                  <span style=\"text-align: left; font-weight: 800\"\r\n                    >{{ data.name }} ({{data.bankName}})\r\n                  </span>\r\n                  <span style=\"text-align: left\">{{ data.accNumber }} </span>\r\n                </div>\r\n                <ion-icon\r\n                  (click)=\"delete(data.accNumber)\"\r\n                  name=\"trash\"\r\n                  style=\"\r\n                    margin: auto;\r\n                    font-size: 20px;\r\n                    color: #25214f;\r\n                    width: 10%;\r\n                  \"\r\n                ></ion-icon>\r\n              </ion-card-content>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </section>\r\n    </section>\r\n\r\n    <section\r\n      *ngIf=\"transType === 4\"\r\n      style=\"\r\n        background-color: white;\r\n        border-top-left-radius: 10%;\r\n        border-top-right-radius: 10%;\r\n        padding: 20px;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n          text-align: left;\r\n        \"\r\n      >\r\n        <div style=\"width: 30vw\">\r\n          <div style=\"font-size: 11px\">From</div>\r\n          <div style=\"font-size: 14px\">{{accNum}}</div>\r\n          <div style=\"font-size: 14px\">your account</div>\r\n        </div>\r\n        <div style=\"width: 30vw\">\r\n          <div style=\"text-align: center; font-size: 15\">\r\n            {{amount | currency: \"&#8358;\" }}\r\n          </div>\r\n          <div style=\"display: flex; flex-direction: row; align-items: center\">\r\n            <div\r\n              style=\"\r\n                height: 10px;\r\n                width: 10px;\r\n                border-radius: 50%;\r\n                background-color: rgb(126, 121, 121);\r\n              \"\r\n            ></div>\r\n            <div\r\n              style=\"\r\n                width: 90%;\r\n                height: 4px;\r\n                background-color: rgb(126, 121, 121);\r\n              \"\r\n            ></div>\r\n            <div\r\n              style=\"\r\n                height: 10px;\r\n                width: 10px;\r\n                border-radius: 50%;\r\n                background-color: rgb(126, 121, 121);\r\n              \"\r\n            ></div>\r\n          </div>\r\n        </div>\r\n        <div style=\"width: 30vw; text-align: right\">\r\n          <div style=\"font-size: 11px\">To</div>\r\n          <div style=\"font-size: 14px\">{{benAcc}}</div>\r\n          <div style=\"font-size: 14px\">{{name}}</div>\r\n          <!-- <div>From</div> -->\r\n        </div>\r\n      </div>\r\n      <div\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n          background-color: rgb(246, 238, 238);\r\n          padding: 20px 10px;\r\n          margin-top: 40px;\r\n          font-size: 14px;\r\n          border-radius: 5px;\r\n        \"\r\n      >\r\n        <span style=\"width: 30%; text-align: left\">Narration</span>\r\n        <span style=\"width: 70%; text-align: right; font-size: 12px\"\r\n          >{{narration}}</span\r\n        >\r\n      </div>\r\n      <ion-button\r\n        style=\"margin-top: 30px; background-color: #fee178\"\r\n        class=\"btn2\"\r\n        expand=\"block\"\r\n        (click)=\"show = true\"\r\n      >\r\n        Pay\r\n      </ion-button>\r\n      <ion-button\r\n        style=\"margin-top: 30px\"\r\n        class=\"btn\"\r\n        expand=\"block\"\r\n        (click)=\"back()\"\r\n      >\r\n        Back\r\n      </ion-button>\r\n    </section>\r\n\r\n    <section\r\n      *ngIf=\"transType ===3\"\r\n      style=\"\r\n        background-color: white;\r\n        border-top-left-radius: 10%;\r\n        border-top-right-radius: 10%;\r\n        padding: 20px;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: column;\r\n          justify-content: space-evenly;\r\n          height: 70vh;\r\n        \"\r\n      >\r\n        <div>\r\n          <div>\r\n            <!-- <div\r\n            style=\"\r\n              text-align: center;\r\n              font-size: 25px;\r\n              font-weight: 500;\r\n              border-bottom: 2px solid #25214f;\r\n              width: 130px;\r\n              margin: auto;\r\n            \"\r\n          >\r\n            Successful\r\n          </div> -->\r\n          </div>\r\n          <div\r\n            style=\"\r\n              display: flex;\r\n              justify-content: center;\r\n              align-items: center;\r\n              margin: auto;\r\n            \"\r\n          >\r\n            <ion-img\r\n              [src]=\"imageSrc\"\r\n              style=\"width: 200px; margin: auto; height: 200px\"\r\n              class=\"img\"\r\n            ></ion-img>\r\n          </div>\r\n          <section\r\n            style=\"\r\n              font-size: 16px;\r\n              margin-top: 20px;\r\n              text-align: left;\r\n              width: 300px;\r\n              margin: 20px auto;\r\n            \"\r\n          >\r\n            You have successfully transfered {{amount | currency: \"&#8358;\"}} to\r\n            {{name}} <br />\r\n            Bank Name : {{bankName}}, <br />\r\n            Account Number: {{benAcc}}\r\n          </section>\r\n        </div>\r\n        <section\r\n          style=\"\r\n            display: flex;\r\n            flex-direction: column;\r\n            align-content: space-between;\r\n          \"\r\n        >\r\n          <ion-button\r\n            style=\"background-color: #fee178\"\r\n            class=\"btn\"\r\n            expand=\"block\"\r\n            (click)=\"create()\"\r\n          >\r\n            Go To Dashboard\r\n          </ion-button>\r\n        </section>\r\n      </div>\r\n    </section>\r\n  </section>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <div style=\"height: 40px\"></div>\r\n  <app-loader *ngIf=\"loading\"></app-loader>\r\n  <app-pin\r\n    (close)=\"close()\"\r\n    (loading)=\"load()\"\r\n    (done)=\"finish()\"\r\n    *ngIf=\"show\"\r\n  ></app-pin>\r\n  <section style=\"background-color: #25214f\">\r\n    <div\r\n      style=\"\r\n        padding: 20px;\r\n        width: 100%;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #25214f;\r\n        color: #fff;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          background-color: #d9ac0b;\r\n          padding: 20px 30px;\r\n          text-align: left;\r\n          width: 100%;\r\n          max-width: 400px;\r\n          margin: auto;\r\n          border-radius: 10px;\r\n          color: #25214f;\r\n        \"\r\n      >\r\n        <div style=\"font-size: 15px\">\r\n          {{ user.accountType }} {{ user?.accountNos[0]?.accountNo }}\r\n        </div>\r\n        <div\r\n          style=\"\r\n            border: 1px solid #25214f;\r\n            padding: 10px;\r\n            width: 100%;\r\n            display: flex;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <div>Balance:</div>\r\n          <div style=\"font-size: 20px\">\r\n            {{ user?.accountNos[0]?.accountBalance | currency: \"&#8358;\" }}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <section\r\n      *ngIf=\"transType === 0\"\r\n      style=\"\r\n        background-color: white;\r\n        border-top-left-radius: 50px;\r\n        border-top-right-radius: 50px;\r\n        padding: 20px;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          font-family: Mulish !important;\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n          align-items: center;\r\n          cursor: pointer;\r\n          margin: 1.5rem 0.5rem;\r\n          background-color: #25214f;\r\n          color: white;\r\n          padding: 15px 10px;\r\n          border-radius: 30px;\r\n        \"\r\n        (click)=\"transactionType(1)\"\r\n      >\r\n        <div\r\n          style=\"\r\n            display: flex;\r\n            flex-direction: row;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n          \"\r\n        >\r\n          <div class=\"icon-container\">\r\n            <img\r\n              style=\"width: 50px; height: 50px\"\r\n              src=\"assets/icon/royalT.png\"\r\n              alt=\"\"\r\n            />\r\n          </div>\r\n          <div style=\"margin-left: 15px\">\r\n            <div style=\"margin: auto; font-size: 16px; margin-bottom: 10px\">\r\n              Make a new transfer\r\n            </div>\r\n            <div style=\"margin: auto; font-size: 11px\">\r\n              Send money to Royal account\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/ar.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <div\r\n        style=\"\r\n          font-family: Mulish !important;\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n          align-items: center;\r\n          cursor: pointer;\r\n          margin: 1.5rem 0.5rem;\r\n          background-color: #d9ac0b;\r\n          color: #25214f;\r\n          padding: 15px 10px;\r\n          border-radius: 30px;\r\n        \"\r\n        (click)=\"transactionType(2)\"\r\n      >\r\n        <div\r\n          style=\"\r\n            display: flex;\r\n            flex-direction: row;\r\n            justify-content: space-between;\r\n            align-items: center;\r\n          \"\r\n        >\r\n          <div class=\"icon-container\" style=\"border-radius: 50%\">\r\n            <img\r\n              style=\"width: 50px; height: 50px; border-radius: 50%\"\r\n              src=\"assets/icon/otherT.png\"\r\n              alt=\"\"\r\n            />\r\n          </div>\r\n          <div style=\"margin-left: 15px\">\r\n            <div style=\"margin: auto; font-size: 16px; margin-bottom: 10px\">\r\n              Make a new transfer\r\n            </div>\r\n            <div style=\"margin: auto; font-size: 11px\">\r\n              Send money to Other Banks\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <img\r\n          style=\"width: 30px; height: 30px\"\r\n          src=\"assets/icon/otherArrow.png\"\r\n          alt=\"\"\r\n        />\r\n      </div>\r\n\r\n      <!-- <div\r\n        style=\"\r\n          font-family: Mulish !important;\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-around;\r\n          cursor: pointer;\r\n          margin: 1.5rem 0.5rem;\r\n        \"\r\n        (click)=\"transactionType(2)\"\r\n      >\r\n        <div class=\"icon-container\">\r\n          <ion-icon name=\"people\" class=\"inner-icon\"></ion-icon>\r\n        </div>\r\n        <span style=\"margin: auto; font-size: 20px\">Send to other Banks</span>\r\n        <ion-icon\r\n          name=\"caret-forward\"\r\n          style=\"margin: auto; font-size: 20px; color: #25214f\"\r\n        ></ion-icon>\r\n      </div> -->\r\n    </section>\r\n\r\n    <section *ngIf=\"transType === 1 || transType === 2\">\r\n      <section\r\n        *ngIf=\"transType === 2 || transType === 1\"\r\n        style=\"\r\n          background-color: white;\r\n          border-top-left-radius: 10%;\r\n          border-top-right-radius: 10%;\r\n          padding: 20px;\r\n          padding-top: 40px;\r\n        \"\r\n      >\r\n        <div\r\n          class=\"row\"\r\n          style=\"\r\n            display: flex;\r\n            flex-direction: row;\r\n            justify-content: space-between;\r\n            margin-top: 20px;\r\n          \"\r\n        >\r\n          <ion-button\r\n            (click)=\"toggleRequest(true)\"\r\n            [ngClass]=\"{active: selectedBtn === true}\"\r\n            style=\"width: 100%; --border-radius: none\"\r\n          >\r\n            New\r\n          </ion-button>\r\n\r\n          <ion-button\r\n            (click)=\"toggleRequest(false)\"\r\n            size=\"medium\"\r\n            [ngClass]=\"{active: selectedBtn1 === true}\"\r\n            style=\"width: 100%; --border-radius: none\"\r\n          >\r\n            Beneficiary\r\n          </ion-button>\r\n        </div>\r\n        <form *ngIf=\"newReq\">\r\n          <div class=\"form-group row\" style=\"padding: 5px\">\r\n            <label for=\"\">Select Account</label>\r\n            <select [(ngModel)]=\"accNum\" name=\"account\" id=\"\" class=\"input\">\r\n              <option\r\n                *ngFor=\"let data of user.accountNos\"\r\n                [value]=\"data.accountNo\"\r\n              >\r\n                {{data.accountNo}} ({{data.accountBalance | currency:\r\n                \"&#8358;\"}})\r\n              </option>\r\n            </select>\r\n          </div>\r\n\r\n          <div\r\n            class=\"form-group row\"\r\n            style=\"padding: 5px\"\r\n            *ngIf=\"transType === 2\"\r\n          >\r\n            <label for=\"\">Bank</label>\r\n            <div\r\n              class=\"input\"\r\n              style=\"text-align: left; padding: 15px 25px\"\r\n              (click)=\"setVissible()\"\r\n            >\r\n              {{bankName ? bankName : \"Select Bank\"}}\r\n            </div>\r\n          </div>\r\n\r\n          <!-- <div\r\n            class=\"form-group row\"\r\n            style=\"padding: 5px\"\r\n            *ngIf=\"transType === 2\"\r\n          >\r\n            <label for=\"\">Bank</label>\r\n            <select\r\n              [(ngModel)]=\"bankCode\"\r\n              (change)=\"chnageBank($event)\"\r\n              name=\"bank\"\r\n              id=\"\"\r\n              class=\"input\"\r\n            >\r\n              <option *ngFor=\"let data of banks\" [value]=\"data.code\">\r\n                {{data.name}}\r\n              </option>\r\n            </select>\r\n          </div> -->\r\n          <div class=\"form-group row\" style=\"padding: 5px; position: relative\">\r\n            <label for=\"\">Beneficiary Account </label>\r\n            <input\r\n              type=\"text\"\r\n              name=\"beneficiary\"\r\n              class=\"input\"\r\n              placeholder=\"009283726\"\r\n              [(ngModel)]=\"benAcc\"\r\n              (ngModelChange)=\"debounce($event)\"\r\n            />\r\n            <div\r\n              *ngIf=\"name\"\r\n              style=\"position: absolute; bottom: -15px; right: 20px\"\r\n              [style.color]=\"showName ? 'red' : 'green'\"\r\n            >\r\n              {{name}}\r\n            </div>\r\n            <div\r\n              style=\"position: absolute; bottom: -15px; right: 20px\"\r\n              *ngIf=\"nameLoading\"\r\n            >\r\n              loading...\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"form-group row\" style=\"padding: 5px\">\r\n            <label for=\"\">Amount</label>\r\n            <input\r\n              type=\"text\"\r\n              [(ngModel)]=\"formattedAmount\"\r\n              name=\"amount\"\r\n              class=\"input\"\r\n              placeholder=\"100000\"\r\n              CurrencyPipe\r\n              (blur)=\"transformAmount($event)\"\r\n            />\r\n          </div>\r\n\r\n          <div class=\"form-group row\" style=\"padding: 5px\">\r\n            <label for=\"\">Narration</label>\r\n            <input\r\n              type=\"text\"\r\n              name=\"narration\"\r\n              class=\"input\"\r\n              [(ngModel)]=\"narration\"\r\n              placeholder=\"\"\r\n            />\r\n          </div>\r\n          <div\r\n            class=\"form-group row\"\r\n            style=\"\r\n              display: flex;\r\n              flex-direction: row;\r\n              justify-content: space-between;\r\n              padding: 5px;\r\n            \"\r\n          >\r\n            <label>Save Beneficiary</label>\r\n            <ion-toggle\r\n              [ngModelOptions]=\"{standalone: true}\"\r\n              [(ngModel)]=\"saveBene\"\r\n            ></ion-toggle>\r\n          </div>\r\n\r\n          <div class=\"form-group\">\r\n            <ion-button\r\n              class=\"btn\"\r\n              expand=\"block\"\r\n              style=\"margin-top: 1rem; font-family: Mulish !important\"\r\n              (click)=\"next()\"\r\n              routerLinkActive=\"router-link-active\"\r\n            >\r\n              Transfer\r\n            </ion-button>\r\n          </div>\r\n        </form>\r\n\r\n        <form *ngIf=\"!newReq\">\r\n          <div class=\"row-one\" *ngIf=\"benes.length === 0\">\r\n            <span style=\"text-align: left\">No beneficiary found</span>\r\n          </div>\r\n\r\n          <div class=\"row\" style=\"margin-top: 5px\">\r\n            <span\r\n              class=\"header\"\r\n              style=\"text-align: left\"\r\n              *ngIf=\"benes.length > 0\"\r\n              >Beneficiaries</span\r\n            >\r\n\r\n            <div\r\n              style=\"\r\n                background-color: #f8f8f8;\r\n                border-radius: 8px;\r\n                margin-top: 5px;\r\n              \"\r\n              *ngFor=\"let data of benes\"\r\n            >\r\n              <ion-card-content\r\n                style=\"display: flex; flex-direction: row; align-items: center\"\r\n                (click)=\"use(data)\"\r\n              >\r\n                <ion-icon\r\n                  name=\"person\"\r\n                  style=\"\r\n                    margin-right: 10px;\r\n                    font-size: 20px;\r\n                    color: #25214f;\r\n                    width: 10%;\r\n                  \"\r\n                ></ion-icon>\r\n                <div\r\n                  style=\"\r\n                    font-size: 13px;\r\n                    display: flex;\r\n                    flex-direction: column;\r\n                    width: 80%;\r\n                  \"\r\n                >\r\n                  <span style=\"text-align: left; font-weight: 800\"\r\n                    >{{ data.accountName }} ({{data.company}})\r\n                  </span>\r\n                  <span style=\"text-align: left\"\r\n                    >{{ data.accountNumber }}\r\n                  </span>\r\n                </div>\r\n                <ion-icon\r\n                  (click)=\"delete(data.id)\"\r\n                  name=\"trash\"\r\n                  style=\"\r\n                    margin: auto;\r\n                    font-size: 20px;\r\n                    color: #25214f;\r\n                    width: 10%;\r\n                  \"\r\n                ></ion-icon>\r\n              </ion-card-content>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </section>\r\n    </section>\r\n\r\n    <section\r\n      *ngIf=\"transType === 4\"\r\n      style=\"\r\n        background-color: white;\r\n        border-top-left-radius: 10%;\r\n        border-top-right-radius: 10%;\r\n        padding: 20px;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n          text-align: left;\r\n        \"\r\n      >\r\n        <div style=\"width: 30vw\">\r\n          <div style=\"font-size: 11px\">From</div>\r\n          <div style=\"font-size: 14px\">{{accNum}}</div>\r\n          <div style=\"font-size: 14px\">your account</div>\r\n        </div>\r\n        <div style=\"width: 30vw\">\r\n          <div style=\"text-align: center; font-size: 15\">\r\n            {{amount | currency: \"&#8358;\" }}\r\n          </div>\r\n          <div style=\"display: flex; flex-direction: row; align-items: center\">\r\n            <div\r\n              style=\"\r\n                height: 10px;\r\n                width: 10px;\r\n                border-radius: 50%;\r\n                background-color: rgb(126, 121, 121);\r\n              \"\r\n            ></div>\r\n            <div\r\n              style=\"\r\n                width: 90%;\r\n                height: 4px;\r\n                background-color: rgb(126, 121, 121);\r\n              \"\r\n            ></div>\r\n            <div\r\n              style=\"\r\n                height: 10px;\r\n                width: 10px;\r\n                border-radius: 50%;\r\n                background-color: rgb(126, 121, 121);\r\n              \"\r\n            ></div>\r\n          </div>\r\n        </div>\r\n        <div style=\"width: 30vw; text-align: right\">\r\n          <div style=\"font-size: 11px\">To</div>\r\n          <div style=\"font-size: 14px\">{{benAcc}}</div>\r\n          <div style=\"font-size: 14px\">{{name}}</div>\r\n          <!-- <div>From</div> -->\r\n        </div>\r\n      </div>\r\n      <div\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: row;\r\n          justify-content: space-between;\r\n          background-color: rgb(246, 238, 238);\r\n          padding: 20px 10px;\r\n          margin-top: 40px;\r\n          font-size: 14px;\r\n          border-radius: 5px;\r\n        \"\r\n      >\r\n        <span style=\"width: 30%; text-align: left\">Narration</span>\r\n        <span style=\"width: 70%; text-align: right; font-size: 12px\"\r\n          >{{narration}}</span\r\n        >\r\n      </div>\r\n      <ion-button\r\n        style=\"margin-top: 30px; background-color: #fee178\"\r\n        class=\"btn2\"\r\n        expand=\"block\"\r\n        (click)=\"show = true\"\r\n      >\r\n        Pay\r\n      </ion-button>\r\n      <ion-button\r\n        style=\"margin-top: 30px\"\r\n        class=\"btn\"\r\n        expand=\"block\"\r\n        (click)=\"back()\"\r\n      >\r\n        Back\r\n      </ion-button>\r\n    </section>\r\n\r\n    <section\r\n      *ngIf=\"transType ===3\"\r\n      style=\"\r\n        background-color: white;\r\n        border-top-left-radius: 10%;\r\n        border-top-right-radius: 10%;\r\n        padding: 20px;\r\n        padding-top: 40px;\r\n      \"\r\n    >\r\n      <div\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: column;\r\n          justify-content: space-evenly;\r\n          width: 300px;\r\n          height: 400px;\r\n          background-color: white;\r\n          margin: auto;\r\n        \"\r\n        id=\"recipt\"\r\n        #recipt\r\n      >\r\n        <div>\r\n          <div></div>\r\n          <div\r\n            style=\"\r\n              display: flex;\r\n              justify-content: center;\r\n              align-items: center;\r\n              margin: auto;\r\n              padding: 30px;\r\n              background-color: white;\r\n            \"\r\n          >\r\n            <div\r\n              style=\"\r\n                width: 100vw;\r\n                display: flex;\r\n                justify-content: center;\r\n                align-items: center;\r\n                margin-left: -20px;\r\n              \"\r\n            >\r\n              <img\r\n                [src]=\"imageSrc\"\r\n                style=\"width: 230px; margin: auto; height: 200px\"\r\n              />\r\n            </div>\r\n          </div>\r\n          <section\r\n            style=\"\r\n              font-size: 16px;\r\n              margin-top: 20px;\r\n              text-align: left;\r\n              width: 300px;\r\n              margin: 20px auto;\r\n              background-color: white;\r\n              color: black;\r\n            \"\r\n          >\r\n            You have successfully transfered {{amount | currency: \"&#8358;\"}} to\r\n            {{name}} <br />\r\n            Bank Name : {{bankName}}, <br />\r\n            Account Number: {{benAcc}}\r\n          </section>\r\n        </div>\r\n      </div>\r\n      <section\r\n        style=\"\r\n          display: flex;\r\n          flex-direction: column;\r\n          align-content: space-between;\r\n        \"\r\n      >\r\n        <ion-button\r\n          style=\"background-color: #25214f\"\r\n          class=\"btn\"\r\n          expand=\"block\"\r\n          (click)=\"getReciept()\"\r\n        >\r\n          Share\r\n        </ion-button>\r\n        <ion-button\r\n          style=\"background-color: #d9ac0b\"\r\n          class=\"btn2\"\r\n          expand=\"block\"\r\n          (click)=\"create()\"\r\n        >\r\n          Go To Dashboard\r\n        </ion-button>\r\n        <!-- <img [src]=\"url\" style=\"width: 500px\" /> -->\r\n      </section>\r\n    </section>\r\n  </section>\r\n</ion-content>\r\n\r\n<ion-content class=\"mas\" *ngIf=\"visible\">\r\n  <div\r\n    style=\"\r\n      display: flex;\r\n      justify-content: center;\r\n      align-items: center;\r\n      flex-direction: column;\r\n    \"\r\n  >\r\n    <div class=\"overlay\" (click)=\"setVissible()\" [@slideInOut]></div>\r\n    <div\r\n      style=\"\r\n        background-color: white;\r\n        width: 100vw;\r\n        height: 100vh;\r\n        z-index: 1000;\r\n        display: flex;\r\n        flex-direction: column;\r\n        padding-top: 50px;\r\n      \"\r\n      [@slideInOut]\r\n    >\r\n      <div class=\"head\">\r\n        <div\r\n          (click)=\"setVissible()\"\r\n          style=\"\r\n            color: #25214f;\r\n            font-size: 30px;\r\n            position: absolute;\r\n            left: 10px;\r\n            top: 60px;\r\n          \"\r\n        >\r\n          <ion-icon name=\"close-circle-outline\"></ion-icon>\r\n        </div>\r\n        <div\r\n          class=\"form-group row\"\r\n          style=\"padding: 5px; margin: 20px; margin-top: 40px\"\r\n        >\r\n          <input\r\n            type=\"text\"\r\n            name=\"bankName\"\r\n            class=\"input\"\r\n            [(ngModel)]=\"searchBank\"\r\n            placeholder=\"Bank Name\"\r\n            (ngModelChange)=\"refchg($event)\"\r\n          />\r\n        </div>\r\n        <div class=\"bankNames\">\r\n          <div\r\n            class=\"bank\"\r\n            *ngFor=\"let bank of searchBankTemp\"\r\n            (click)=\"setBank(bank)\"\r\n          >\r\n            <span style=\"font-size: 14px\">{{bank.name}}</span>\r\n            <img\r\n              style=\"width: 30px; height: 30px\"\r\n              src=\"assets/icon/otherArrow.png\"\r\n              alt=\"\"\r\n            />\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 

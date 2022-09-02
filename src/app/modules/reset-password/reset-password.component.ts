@@ -117,8 +117,6 @@ export class ResetPasswordComponent implements OnInit {
           this.toast.success('Password reset Successful', 'Success');
           this.data = res.data;
           console.log(res.data);
-
-          localStorage.setItem('token', res.data.token);
           this.router.navigate(['/login']);
         } else {
           this.toast.error(res.data.responseMessage, 'Error');

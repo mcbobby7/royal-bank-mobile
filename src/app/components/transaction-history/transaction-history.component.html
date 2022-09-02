@@ -34,7 +34,7 @@
         <div class="img"><img src="assets/icon/debit.png" alt="" /></div>
         <div class="text">
           <div class="tit">
-            {{ trans?.bankName }}
+            {{ trans?.narration }}
           </div>
           <!-- <div class="mode">{{ trans?.submittedByUsername }}</div> -->
           <div class="mode">
@@ -69,6 +69,8 @@
         display: flex;
         flex-direction: column;
       "
+      id="recipt"
+      #recipt
       [@slideInOut]
     >
       <div class="head">
@@ -83,6 +85,19 @@
           "
         >
           <ion-icon name="close-circle-outline"></ion-icon>
+        </div>
+        <div
+          (click)="getReciept()"
+          style="
+            color: white;
+            font-size: 30px;
+            position: absolute;
+            left: 60px;
+            top: 20px;
+          "
+          *ngIf="transType !== 'Credit'"
+        >
+          <ion-icon name="cloud-download-outline"></ion-icon>
         </div>
         <div class="date">
           {{ details?.transferDate | date }}

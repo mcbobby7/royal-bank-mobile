@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ElementRef,
+  ViewChild,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { AuthService } from '../../core/http/services/auth.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -15,6 +22,10 @@ import {
   stagger,
   keyframes,
 } from '@angular/animations';
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+import { FileSharer } from '@byteowls/capacitor-filesharer';
+
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
@@ -32,6 +43,8 @@ import {
   ],
 })
 export class HistoryComponent implements OnInit {
+  @ViewChild('recipt', { static: false }) recipt: ElementRef;
+
   user = JSON.parse(localStorage.getItem('user'));
   account;
   loading = true;
@@ -51,16 +64,60 @@ export class HistoryComponent implements OnInit {
     endDate: new FormControl(''),
     transType: new FormControl(''),
   });
+  url = '';
   constructor(
     private auth: AuthService,
     public toast: ToastrService,
-    private router: Router
+    private router: Router,
+    private change: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     // let   user = JSON.parse(localStorage.getItem('user'));
     this.account = this.user.accountNos[0].accountNo;
     this.fetchTransTypes();
+  }
+
+  downloadButtonClick(url) {
+    const photo = url;
+    const first = photo.split(',');
+    const mainImage = first[1];
+    const extension = first[0].split('image/');
+    const mainExtension = extension[1].split(';')[0];
+
+    FileSharer.share({
+      filename: 'royal-receipt.png',
+      base64Data: mainImage,
+      contentType: `image/${mainExtension}`,
+    })
+      .then(() => {
+        // do sth
+        console.log('done');
+      })
+      .catch((error) => {
+        console.error('File sharing failed', error.message);
+      });
+  }
+
+  getReciept() {
+    this.change.detectChanges();
+    console.log('node', this.recipt.nativeElement);
+    // console.log('node', this.recipt.nativeElement);
+
+    htmlToImage
+      .toPng(this.recipt.nativeElement)
+      .then((dataUrl) => {
+        this.change.detectChanges();
+        this.url = dataUrl;
+        console.log('url', dataUrl);
+        this.downloadButtonClick(dataUrl);
+        // const img = new Image();
+        // img.src = dataUrl;
+        // document.body.appendChild(img);
+      })
+      .catch((error) => {
+        console.error('oops, something went wrong!', error);
+      });
   }
 
   setTrans(transaction) {
