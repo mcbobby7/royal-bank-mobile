@@ -18,6 +18,7 @@ export class AccountInfoPage implements OnInit {
   documents;
   loading = false;
   uploaded;
+  useBio = false;
 
   constructor(public toast: ToastrService, private auth: AuthService) {}
 
@@ -27,6 +28,12 @@ export class AccountInfoPage implements OnInit {
     setInterval(() => {
       this.uploaded = localStorage.getItem('upload');
     }, 500);
+    this.useBio = localStorage.getItem('useBio')
+      ? JSON.parse(localStorage.getItem('useBio'))
+      : false;
+  }
+  update(value: any) {
+    localStorage.setItem('useBio', this.useBio.toString());
   }
 
   selectedOption(e) {

@@ -15,11 +15,11 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl = 'https://bankingsandboxapi.azurewebsites.net/api/v1/proxy';
-  fileUrl = 'https://fileservice01.azurewebsites.net/api/Files/Upload';
+  baseLink = 'http://51.81.213.140:89/';
+  baseUrl = 'http://51.81.213.140:89/api/v1/proxy';
+  fileUrl = 'http://51.81.213.140:81/api/Files/Upload';
   notificationBaseUrl = 'https://notificationservice01.azurewebsites.net';
-  documentUrl =
-    'https://fileservice01.azurewebsites.net/api/Files/RoyalDocumentUpload';
+  documentUrl = 'http://51.81.213.140:81/api/Files/RoyalDocumentUpload';
   imei;
   headers = {
     headers: new HttpHeaders({
@@ -27,6 +27,9 @@ export class AuthService {
       'Content-type': 'application/json',
       Tenant: 'REX',
       Authorization: !localStorage.getItem('token')
+        ? 'NotAvailable'
+        : localStorage.getItem('token'),
+      Auth: !localStorage.getItem('token')
         ? 'NotAvailable'
         : localStorage.getItem('token'),
     }),
@@ -71,6 +74,19 @@ export class AuthService {
 
   // login service
   post(data: any, action: string): Observable<void> {
+    const headers = {
+      headers: new HttpHeaders({
+        /* eslint-disable camelcase */
+        'Content-type': 'application/json',
+        Tenant: 'REX',
+        Authorization: !localStorage.getItem('token')
+          ? 'NotAvailable'
+          : localStorage.getItem('token'),
+        Auth: !localStorage.getItem('token')
+          ? 'NotAvailable'
+          : localStorage.getItem('token'),
+      }),
+    };
     const payload = {
       tenant: 'REX',
       channel: 'MobileApp',
@@ -82,7 +98,7 @@ export class AuthService {
     console.log('return', this.uid.IMEI);
     console.log('state', this.imei);
     return this.httpClient
-      .post<void>(this.baseUrl, payload, this.headers)
+      .post<void>(this.baseUrl, payload, headers)
       .pipe(catchError(this.handleError));
   }
 

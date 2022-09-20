@@ -75,6 +75,7 @@ export class TransferPage implements OnInit {
   searchBank = '';
   searchBankTemp = [];
   url = '';
+  interData: any;
 
   constructor(
     private auth: AuthService,
@@ -370,6 +371,8 @@ export class TransferPage implements OnInit {
                     this.nameLoading = false;
                   } else {
                     this.name = res.data.data.accountNameField;
+                    this.interData = res.data.data;
+                    console.log(this.interData);
                     this.nameLoading = false;
                   }
                 }
@@ -523,16 +526,27 @@ export class TransferPage implements OnInit {
                     }
                   );
               } else {
+                const data = {
+                  Amount: +this.amount,
+                  SessionID: this.interData.sessionIDField,
+                  DestinationInstitutionCode:
+                    this.interData.destinationInstitutionCodeField,
+                  ChannelCode: '2',
+                  BeneficiaryAccountName: this.interData.accountNameField,
+                  BeneficiaryAccountNumber: this.interData.accountNumberField,
+                  BeneficiaryBankVerificationNumber:
+                    this.interData.bankVerificationNumberField,
+                  BeneficiaryKYCLevel: this.interData.kYCLevelField,
+                  OriginatorAccountName:
+                    this.user.firstName + ' ' + this.user.lastName,
+                  OriginatorAccountNumber: this.accNum,
+                  OriginatorBankVerificationNumber: this.user.bvn,
+                  OriginatorKYCLevel: '1',
+                  TransactionLocation: '6.4300747,3.4110715',
+                  Narration: this.narration,
+                };
                 this.auth
-                  .post(
-                    {
-                      bankName: this.bankName ? this.bankName : 'Royal Bank',
-                      accountNumber: this.benAcc,
-                      Amount: +this.amount,
-                      Narration: this.narration,
-                    },
-                    'Nibss.NipService.InterFundsTransfer'
-                  )
+                  .post(data, 'Nibss.NipService.InterFundTransfer')
                   .subscribe(
                     (res: any) => {
                       this.loading = false;

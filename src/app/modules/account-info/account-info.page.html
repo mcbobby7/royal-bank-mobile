@@ -133,4 +133,20 @@
       </div> -->
     </div>
   </div>
+  <div
+    class="form-group row"
+    style="
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 10px 20px;
+    "
+  >
+    <label>Login with Biometrics</label>
+    <ion-toggle
+      (ionChange)="update($event)"
+      [ngModelOptions]="{standalone: true}"
+      [(ngModel)]="useBio"
+    ></ion-toggle>
+  </div>
 </ion-content>

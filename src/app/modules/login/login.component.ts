@@ -18,6 +18,13 @@ import { AlertController } from '@ionic/angular';
 export class LoginComponent implements OnInit {
   loading = false;
   show = false;
+  isAvailable = false;
+  useBio = localStorage.getItem('useBio')
+    ? JSON.parse(localStorage.getItem('useBio'))
+    : false;
+  firstTime = localStorage.getItem('firstTime')
+    ? JSON.parse(localStorage.getItem('firstTime'))
+    : true;
   // signinForm = new FormGroup({
   //   username: new FormControl(''),
   //   password: new FormControl(''),
@@ -69,7 +76,11 @@ export class LoginComponent implements OnInit {
             this.loginForm.value.email,
             this.loginForm.value.password
           );
-
+          if (this.firstTime) {
+            this.presentFirstAlert();
+          }
+          localStorage.setItem('firstTime', 'false');
+          this.firstTime = false;
           localStorage.setItem('token', res.data.token);
           this.loginForm.reset();
           this.router.navigate(['/dashboard']);
@@ -93,7 +104,9 @@ export class LoginComponent implements OnInit {
       email: new FormControl(''),
       password: new FormControl(''),
     });
-    this.checkCredential();
+    if (this.useBio) {
+      this.checkCredential();
+    }
   }
   register() {
     this.router.navigate(['/register']);
@@ -120,6 +133,7 @@ export class LoginComponent implements OnInit {
       console.log('resuklt', result);
 
       if (isAvailable) {
+        this.isAvailable = true;
         NativeBiometric.getCredentials({
           server: 'www.royalbankng.com',
         })
@@ -149,10 +163,10 @@ export class LoginComponent implements OnInit {
               });
           })
           .catch((err) => {
-            this.presentAlertPromptFirst();
+            // this.presentAlertPromptFirst();
           });
       } else {
-        this.presentAlertPromptFirst();
+        // this.presentAlertPromptFirst();
         return false;
       }
     });
@@ -169,6 +183,33 @@ export class LoginComponent implements OnInit {
         {
           text: 'Close',
           handler: () => {},
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async presentFirstAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Biometrics',
+      // subHeader: 'Subtitle',
+      message: 'Do you want to enable Biometrics for login?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            localStorage.setItem('useBio', 'false');
+            this.useBio = false;
+          },
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            localStorage.setItem('useBio', 'true');
+            this.useBio = true;
+          },
         },
       ],
     });
