@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../core/http/services/auth.service';
+import {
+  AvailableResult,
+  BiometryType,
+  NativeBiometric,
+} from 'capacitor-native-biometric';
+
 @Component({
   selector: 'app-account-info',
   templateUrl: './account-info.page.html',
@@ -19,6 +25,7 @@ export class AccountInfoPage implements OnInit {
   loading = false;
   uploaded;
   useBio = false;
+  isAvailable = false;
 
   constructor(public toast: ToastrService, private auth: AuthService) {}
 
@@ -72,5 +79,20 @@ export class AccountInfoPage implements OnInit {
           this.loading = false;
         }
       );
+  }
+
+  checkCredential() {
+    NativeBiometric.isAvailable().then((result: AvailableResult) => {
+      const isAvailable = result.isAvailable;
+      // alert('RESULT ' + JSON.stringify(result));
+      console.log('resuklt', result);
+
+      if (isAvailable) {
+        this.isAvailable = true;
+      } else {
+        // this.presentAlertPromptFirst();
+        return false;
+      }
+    });
   }
 }

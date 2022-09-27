@@ -16,8 +16,11 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 import { Uid } from '@ionic-native/uid/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+
 import { NgIdleModule } from '@ng-idle/core';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { AuthGuard } from './core/guards/auth.guard';
@@ -45,6 +48,7 @@ import { UnAuthGuard } from './core/guards/UnAuth.guard';
   providers: [
     AuthGuard,
     UnAuthGuard,
+    UniqueDeviceID,
     Uid,
     AndroidPermissions,
     SplashScreen,

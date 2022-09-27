@@ -8,6 +8,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 import { Uid } from '@ionic-native/uid/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
@@ -15,6 +16,12 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
   providedIn: 'root',
 })
 export class AuthService {
+  // baseUrl = 'https://bankingsandboxapi.azurewebsites.net/api/v1/proxy';
+  // fileUrl = 'https://fileservice01.azurewebsites.net/api/Files/Upload';
+  // notificationBaseUrl = 'https://notificationservice01.azurewebsites.net';
+  // documentUrl =
+  //   'https://fileservice01.azurewebsites.net/api/Files/RoyalDocumentUpload';
+
   baseLink = 'http://51.81.213.140:89/';
   baseUrl = 'http://51.81.213.140:89/api/v1/proxy';
   fileUrl = 'http://51.81.213.140:81/api/Files/Upload';
@@ -35,6 +42,7 @@ export class AuthService {
     }),
   };
   constructor(
+    private uniqueDeviceID: UniqueDeviceID,
     private uid: Uid,
     private androidPermissions: AndroidPermissions,
     private httpClient: HttpClient
@@ -116,24 +124,43 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
   async getImei() {
-    const { hasPermission } = await this.androidPermissions.checkPermission(
-      this.androidPermissions.PERMISSION.READ_PHONE_STATE
-    );
+    await this.getPermission();
+    this.getUniqueDeviceID();
+  }
 
-    if (!hasPermission) {
-      const result = await this.androidPermissions.requestPermission(
-        this.androidPermissions.PERMISSION.READ_PHONE_STATE
-      );
+  getUniqueDeviceID() {
+    this.uniqueDeviceID
+      .get()
+      .then((uuid: any) => {
+        console.log(uuid);
+        this.imei = uuid;
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  }
 
-      if (!result.hasPermission) {
-        throw new Error('Permissions required');
-      }
-
-      // ok, a user gave us permission, we can get him identifiers after restart app
-      return;
-    }
-
-    this.imei = this.uid.IMEI;
-    return this.uid.IMEI;
+  getPermission() {
+    this.androidPermissions
+      .checkPermission(this.androidPermissions.PERMISSION.READ_PHONE_STATE)
+      .then((res) => {
+        if (res.hasPermission) {
+          this.getUniqueDeviceID();
+        } else {
+          this.androidPermissions
+            .requestPermission(
+              this.androidPermissions.PERMISSION.READ_PHONE_STATE
+            )
+            .then((res) => {
+              alert('Persmission Granted Please Restart App!');
+            })
+            .catch((error) => {
+              alert('Error! ' + error);
+            });
+        }
+      })
+      .catch((error) => {
+        alert('Error! ' + error);
+      });
   }
 }
